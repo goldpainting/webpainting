@@ -10,6 +10,11 @@ type EstimateRequestFormProps = {
 
 const emailTarget = "goldlionpainting@gmail.com";
 
+function getFormValue(formData: FormData, key: string) {
+  const value = formData.get(key);
+  return typeof value === "string" ? value.trim() : "";
+}
+
 export default function EstimateRequestForm({
   buttonLabel = "Send Request",
   className,
@@ -23,11 +28,11 @@ export default function EstimateRequestForm({
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const service = String(formData.get("service") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
+    const name = getFormValue(formData, "name");
+    const email = getFormValue(formData, "email");
+    const phone = getFormValue(formData, "phone");
+    const service = getFormValue(formData, "service");
+    const message = getFormValue(formData, "message");
 
     const subject = `Free estimate request from ${name || "website visitor"}`;
     const body = [

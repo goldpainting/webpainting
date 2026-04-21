@@ -4,6 +4,11 @@ import { type FormEvent, useState } from "react";
 
 const emailTarget = "goldlionpainting@gmail.com";
 
+function getFormValue(formData: FormData, key: string) {
+  const value = formData.get(key);
+  return typeof value === "string" ? value.trim() : "";
+}
+
 export default function ColorConsultationForm() {
   const [status, setStatus] = useState<"idle" | "opening">("idle");
 
@@ -13,11 +18,11 @@ export default function ColorConsultationForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const roomType = String(formData.get("roomType") ?? "").trim();
-    const styleGoals = String(formData.get("styleGoals") ?? "").trim();
+    const name = getFormValue(formData, "name");
+    const email = getFormValue(formData, "email");
+    const phone = getFormValue(formData, "phone");
+    const roomType = getFormValue(formData, "roomType");
+    const styleGoals = getFormValue(formData, "styleGoals");
 
     const subject = `Color consultation request from ${name || "website visitor"}`;
     const body = [
