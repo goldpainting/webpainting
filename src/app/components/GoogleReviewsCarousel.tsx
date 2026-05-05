@@ -34,6 +34,67 @@ type GoogleReviewsCarouselProps = {
   areaName?: string;
 };
 
+const areaReviewTerms: Record<string, string[]> = {
+  "Anna Maria Island": ["anna maria", "anna maria island", "island"],
+  Bradenton: ["bradenton", "manatee"],
+  Ellenton: ["ellenton"],
+  "Holmes Beach": ["holmes beach"],
+  "Lakewood Ranch": ["lakewood ranch", "lwr"],
+  Palmetto: ["palmetto"],
+  Parrish: ["parrish"],
+  Sarasota: ["sarasota"],
+  "Siesta Key": ["siesta key"],
+  Venice: ["venice"],
+};
+
+function normalizeReviewText(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
+}
+
+function getAreaOffset(areaName: string, total: number) {
+  if (total === 0) return 0;
+
+  return (
+    areaName.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) %
+    total
+  );
+}
+
+function rotateReviews(reviews: Review[], areaName: string) {
+  const offset = getAreaOffset(areaName, reviews.length);
+  return [...reviews.slice(offset), ...reviews.slice(0, offset)];
+}
+
+function getAreaReviews(reviews: Review[], areaName?: string) {
+  const sorted = [...reviews].sort((a, b) => {
+    if (b.rating !== a.rating) return b.rating - a.rating;
+    return (
+      new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
+    );
+  });
+
+  if (!areaName) {
+    return sorted.slice(0, 3);
+  }
+
+  const terms = areaReviewTerms[areaName] ?? [areaName.toLowerCase()];
+  const matchingReviews = sorted.filter((review) => {
+    const text = normalizeReviewText(
+      `${review.originalText || review.text} ${review.authorName}`,
+    );
+
+    return terms.some((term) => text.includes(normalizeReviewText(term)));
+  });
+  const remainingReviews = sorted.filter(
+    (review) => !matchingReviews.includes(review),
+  );
+
+  return [
+    ...matchingReviews,
+    ...rotateReviews(remainingReviews, areaName),
+  ].slice(0, 3);
+}
+
 function AvatarWithFallback({
   photoUri,
   name,
@@ -45,7 +106,7 @@ function AvatarWithFallback({
 
   if (!photoUri || imgError) {
     return (
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1f5fec] text-sm font-bold text-white shrink-0">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1f5fec] text-sm font-bold text-white">
         {name.charAt(0).toUpperCase()}
       </div>
     );
@@ -55,7 +116,7 @@ function AvatarWithFallback({
     <img
       src={`/api/photo-proxy?url=${encodeURIComponent(photoUri)}`}
       alt={name}
-      className="h-10 w-10 rounded-full object-cover shrink-0"
+      className="h-10 w-10 shrink-0 rounded-full object-cover"
       onError={() => setImgError(true)}
     />
   );
@@ -75,18 +136,23 @@ export default function GoogleReviewsCarousel({
       try {
         const res = await fetch("/api/google-reviews");
         if (!res.ok) {
-          const body = await res.json().catch(() => null);
-          throw new Error(body?.error || "Failed to fetch reviews");
+          const body = (await res.json().catch(() => null)) as unknown;
+          const message =
+            typeof body === "object" &&
+            body !== null &&
+            "error" in body &&
+            typeof body.error === "string"
+              ? body.error
+              : "Failed to fetch reviews";
+
+          throw new Error(message);
         }
-        const json = await res.json();
+        const json = (await res.json()) as unknown as GoogleReviewsData;
         if (!cancelled) {
-          const sorted = (json.reviews ?? [])
-            .sort((a: Review, b: Review) => {
-              if (b.rating !== a.rating) return b.rating - a.rating;
-              return new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime();
-            })
-            .slice(0, 3);
-          setData({ ...json, reviews: sorted });
+          setData({
+            ...json,
+            reviews: getAreaReviews(json.reviews ?? [], areaName),
+          });
           setError(null);
         }
       } catch (e) {
@@ -104,7 +170,7 @@ export default function GoogleReviewsCarousel({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [areaName]);
 
   const displayRating = data?.rating ?? Number(googleRatingValue);
   const displayReviewCount = data?.reviewCount ?? Number(googleReviewCount);
@@ -190,7 +256,7 @@ export default function GoogleReviewsCarousel({
               </a>
             </div>
           ) : reviews.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {reviews.map((review, index) => (
                 <article
                   key={`${review.authorName}-${review.publishTime}-${index}`}
@@ -201,8 +267,8 @@ export default function GoogleReviewsCarousel({
                       photoUri={review.authorPhotoUri}
                       name={review.authorName}
                     />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-[#0c0d0e] truncate">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-semibold text-[#0c0d0e]">
                         {review.authorName}
                       </p>
                       <p className="text-xs text-[#5d646b]">
@@ -210,7 +276,7 @@ export default function GoogleReviewsCarousel({
                       </p>
                     </div>
                     <FaGoogle
-                      className="h-5 w-5 text-[#4285f4] flex-shrink-0"
+                      className="h-5 w-5 flex-shrink-0 text-[#4285f4]"
                       aria-hidden="true"
                     />
                   </div>
@@ -228,7 +294,7 @@ export default function GoogleReviewsCarousel({
                     </span>
                   </div>
 
-                  <p className="mt-3 text-sm leading-6 text-[#343b43] line-clamp-5">
+                  <p className="mt-3 line-clamp-5 text-sm leading-6 text-[#343b43]">
                     {review.originalText || review.text}
                   </p>
 

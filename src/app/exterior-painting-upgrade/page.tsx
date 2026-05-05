@@ -64,6 +64,38 @@ export default function ExteriorPaintingUpgradePage() {
         "Close-up placeholder for stucco, trim, fascia, or soffit finish quality.",
         "Before/after exterior transformation placeholder.",
       ]}
+      imageGalleryTitle="Exterior Painting Project Gallery"
+      imageGalleryDescription="See exterior repaint examples focused on curb appeal, stucco protection, clean lines, and durable coating systems built for Florida sun, rain, humidity, and daily exposure."
+      imageGallery={[
+        {
+          src: "/ellenton/ellenton-exterior-painting.jpg",
+          alt: "Exterior painting project in Ellenton Florida",
+          title: "Ellenton Exterior Repaint",
+          description:
+            "A clean exterior repaint planned around Florida humidity, sun exposure, and a polished residential finish.",
+        },
+        {
+          src: "/services/home-exterior-painting-manatee-county.jpg.jpg",
+          alt: "Home exterior painting in Manatee County",
+          title: "Full Home Exterior",
+          description:
+            "A full exterior painting system designed to improve curb appeal while protecting stucco, trim, and visible details.",
+        },
+        {
+          src: "/parrish/exterior-painting-parrish.jpg",
+          alt: "Exterior painting project in Parrish Florida",
+          title: "Parrish Exterior Finish",
+          description:
+            "Exterior work focused on even coverage, clean transitions, and a durable finish for Florida residential conditions.",
+        },
+        {
+          src: "/services/house-exterior-painting-manatee-county.jpg",
+          alt: "House exterior painting in Manatee County",
+          title: "Curb Appeal Upgrade",
+          description:
+            "A completed exterior repaint with stronger presentation, clean color balance, and weather-aware coating application.",
+        },
+      ]}
       serviceAreas={[
         "Bradenton",
         "Lakewood Ranch",
