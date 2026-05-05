@@ -1,4 +1,7 @@
-import { buildAreaMetadata, getAreaLandingData } from "../components/areaLandingData";
+import {
+  buildAreaMetadata,
+  getAreaLandingData,
+} from "../components/areaLandingData";
 import AreaLandingPage from "../components/AreaLandingPage";
 
 const area = getAreaLandingData("holmes-beach");

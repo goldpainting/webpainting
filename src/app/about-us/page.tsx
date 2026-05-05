@@ -3,294 +3,339 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import {
+  FaCheckCircle,
+  FaMapMarkedAlt,
+  FaPaintRoller,
+  FaPhone,
+  FaShieldAlt,
+  FaStar,
+} from "react-icons/fa";
 import Lightbox from "yet-another-react-lightbox";
 
 import EstimateRequestForm from "../components/EstimateRequestForm";
+import { areaLinks, serviceLinks } from "../components/navigationData";
+import {
+  businessName,
+  googleRatingValue,
+  googleReviewCount,
+  googleReviewsHref,
+} from "../siteConfig";
 
 import "yet-another-react-lightbox/styles.css";
 
 const trustPoints = [
-  "Residential, commercial, and cabinet painting expertise",
-  "Insured crews with detail-focused prep and cleanup",
-  "Premium materials selected for Florida homes and weather",
-  "Straightforward communication from estimate to final walkthrough",
+  "Detailed preparation before every finish coat",
+  "Clean job sites and careful surface protection",
+  "Interior, exterior, and cabinet painting specialists",
+  "Clear communication from estimate to walkthrough",
 ];
 
 const companyStats = [
-  { value: "10+", label: "Years across our painting team" },
+  { value: "10+", label: "Years serving local painting clients" },
   { value: "5-Year", label: "Workmanship warranty coverage" },
-  { value: "7", label: "Local service areas across Manatee County" },
+  { value: "4.9", label: "Google rating from verified reviews" },
 ];
 
 const principles = [
   {
-    title: "Clean, organized job sites",
-    description: "We protect surfaces carefully and keep projects orderly from prep through final touch-ups.",
+    title: "Prep First",
+    description:
+      "Every project starts with surface inspection, protection, repairs, sanding, cleaning, and the right coating plan.",
+    icon: FaShieldAlt,
   },
   {
-    title: "Premium paint systems",
-    description: "We use durable products and application methods built for everyday wear and Florida conditions.",
+    title: "Built For Florida",
+    description:
+      "We plan paint systems around sun exposure, humidity, stucco movement, rain cycles, and daily wear.",
+    icon: FaCheckCircle,
   },
   {
-    title: "Detailed written estimates",
-    description: "Every proposal is clear about scope, expectations, and the steps needed for a lasting finish.",
-  },
-  {
-    title: "A team that communicates",
-    description: "Homeowners and property managers always know what is happening, when we are arriving, and what comes next.",
+    title: "Clean Finish",
+    description:
+      "Our crews keep the work area organized and complete a final walkthrough before calling the job finished.",
+    icon: FaPaintRoller,
   },
 ];
 
-const serviceLinks = [
-  { name: "Interior Painting", href: "/interior-painting-upgrade" },
-  { name: "Exterior Painting", href: "/exterior-painting-upgrade" },
-  { name: "Cabinet Painting", href: "/cabinet-painting-mejor" },
-];
-
-const areaLinks = [
-  { name: "Ellenton", href: "/ellenton" },
-  { name: "Bradenton", href: "/bradenton" },
-  { name: "Lakewood Ranch", href: "/lakewood-ranch" },
-  { name: "Parrish", href: "/parrish" },
-  { name: "Palmetto", href: "/palmetto" },
-  { name: "Anna Maria Island", href: "/ana-maria" },
-  { name: "Holmes Beach", href: "/holmes-beach" },
+const galleryImages = [
+  {
+    src: "/services/house-exterior-painting-manatee-county.jpg",
+    alt: "Gold Lion Painting exterior residential project",
+  },
+  {
+    src: "/services/living-room-painting-manatee-county.jpg",
+    alt: "Gold Lion Painting interior ceiling project",
+  },
+  {
+    src: "/services/kitchen-cabinet-painting-manatee-county-fl.jpg",
+    alt: "Gold Lion Painting cabinet refinishing project",
+  },
 ];
 
 export default function AboutUsPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxSlide, setLightboxSlide] = useState(0);
 
-  const teamImages = [
-    {
-      src: "/anamaria/professional-exterior-painters-anna-maria-03.jpg",
-      alt: "Gold Lion Painting team at a project site",
-      title: "Our team on site at a recent project",
-    },
-  ];
-
   return (
     <>
-      <main className="min-h-screen bg-[#f6f1e7] font-sans text-[#2f2a24]">
-        <section className="relative overflow-hidden border-b border-[#dfcfb5] bg-[radial-gradient(circle_at_top_left,_rgba(212,160,56,0.18),_transparent_30%),linear-gradient(180deg,_#fffaf2_0%,_#f5ecde_100%)]">
-          <div className="absolute inset-x-0 top-0 h-40 bg-[linear-gradient(90deg,rgba(212,160,56,0.08),transparent_35%,rgba(143,98,32,0.08))]" />
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[minmax(0,1.1fr)_24rem] md:items-start md:px-10 lg:grid-cols-[minmax(0,1.1fr)_27rem]">
+      <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
+        <section className="relative overflow-hidden bg-[#0c0d0e] px-4 py-20 text-white sm:px-6 lg:px-8">
+          <Image
+            src="/services/house-exterior-painting-manatee-county.jpg"
+            alt="Gold Lion Painting completed exterior project"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-35"
+          />
+          <div className="absolute inset-0 bg-linear-to-r from-[#0c0d0e] via-[#0c0d0e]/82 to-[#0c0d0e]/42" />
+          <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_360px] lg:items-center">
             <div>
-              <p className="mb-4 inline-flex rounded-full border border-[#d8c39f] bg-[#fffaf2]/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#8f6220] shadow-sm">
-                About Gold Lion Painting Inc
+              <p className="font-display text-lg font-bold text-[#e4ad42]">
+                About {businessName}
               </p>
-              <h1 className="max-w-4xl text-5xl font-bold leading-tight text-[#8f6220] md:text-6xl">
-                Local painters focused on craftsmanship, communication, and long-term value.
+              <h1 className="font-heading mt-4 max-w-4xl text-5xl leading-tight font-black md:text-7xl">
+                Professional painting with sharp prep, clean work, and durable
+                finishes.
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-[#615447] md:text-xl">
-                We help homeowners and businesses across Manatee County refresh interiors, protect exteriors,
-                and upgrade cabinets with clean execution and durable finishes.
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-[#dddddd]">
+                Gold Lion Painting Inc helps Florida homeowners improve curb
+                appeal, refresh interiors, and modernize cabinets with a
+                process built around communication, protection, and lasting
+                results.
               </p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {trustPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-2xl border border-[#e3d3b7] bg-[#fffaf2]/90 px-4 py-4 text-sm font-medium text-[#4d4135] shadow-sm"
-                  >
-                    <span className="mr-2 text-[#a36a14]">+</span>
-                    {point}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="tel:9414625894"
-                  className="rounded-2xl bg-[#d4a038] px-6 py-3 text-base font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                  className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
                 >
+                  <FaPhone aria-hidden="true" />
                   Call 941-462-5894
                 </a>
                 <Link
                   href="/contact-us"
-                  className="rounded-2xl border border-[#d8c39f] bg-[#fffaf2] px-6 py-3 text-base font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                  className="inline-flex items-center rounded-full border border-[#e4ad42] px-6 py-4 font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
                 >
                   Request A Free Estimate
                 </Link>
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2]/95 p-7 shadow-[0_22px_50px_rgba(120,94,52,0.14)]">
-              <h2 className="text-center text-3xl font-bold text-[#8f6220]">Start Your Project</h2>
-              <p className="mt-2 text-center text-sm leading-6 text-[#64584c]">
-                Tell us about the space and we will prepare a ready-to-send estimate request for your email app.
+            <a
+              href={googleReviewsHref}
+              target="_blank"
+              rel="noreferrer"
+              className="border-t-4 border-[#e4ad42] bg-white p-7 text-[#0c0d0e] shadow-[0_20px_45px_rgba(0,0,0,0.32)] transition hover:-translate-y-1"
+            >
+              <p className="font-heading text-6xl font-black">
+                {googleRatingValue}
               </p>
-              <EstimateRequestForm
-                className="mt-6 flex flex-col gap-4"
-                buttonLabel="Prepare Estimate Email"
-                helperText="Fastest path to a detailed estimate request for interior, exterior, or cabinet painting."
-              />
-            </div>
+              <div className="mt-3 flex gap-1 text-2xl text-[#f5aa00]">
+                {[0, 1, 2, 3, 4].map((star) => (
+                  <FaStar key={star} aria-hidden="true" />
+                ))}
+              </div>
+              <p className="mt-4 text-lg font-black">
+                Google rating from {googleReviewCount} reviews
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[#5d646b]">
+                Read client feedback from the Google profile connected to
+                lionpaintingservicesfl.com.
+              </p>
+            </a>
           </div>
         </section>
 
-        <section className="border-b border-[#e2d5bf] bg-[#fffaf2] py-16">
-          <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-3 md:px-10">
+        <section className="bg-[#f3f3f3] px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
             {companyStats.map((stat) => (
               <article
                 key={stat.label}
-                className="rounded-3xl border border-[#dfcfb5] bg-[#fff7eb] p-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_35px_rgba(120,94,52,0.10)]"
+                className="border-t-4 border-[#e4ad42] bg-white p-6 text-center shadow-[1px_1px_16px_rgba(0,0,0,0.14)]"
               >
-                <p className="text-4xl font-bold text-[#8f6220]">{stat.value}</p>
-                <p className="mt-2 text-sm uppercase tracking-[0.18em] text-[#8f7d6a]">{stat.label}</p>
+                <p className="font-heading text-5xl font-black text-[#d90000]">
+                  {stat.value}
+                </p>
+                <p className="mt-3 text-sm font-black tracking-[0.16em] text-[#1f2124] uppercase">
+                  {stat.label}
+                </p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="py-16">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_30rem]">
+        <section className="px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.58fr_0.42fr] lg:items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#a36a14]">Who We Are</p>
-              <h2 className="mt-3 text-4xl font-bold text-[#8f6220]">A painting company built around trust and follow-through.</h2>
-              <div className="mt-6 space-y-5 text-lg leading-8 text-[#615447]">
+              <p className="font-display text-lg font-bold text-[#e4ad42]">
+                Who We Are
+              </p>
+              <h2 className="font-heading mt-3 text-5xl font-black text-[#0c0d0e]">
+                A local painting team built around trust and follow-through.
+              </h2>
+              <div className="mt-6 space-y-5 text-lg leading-8 text-[#343b43]">
                 <p>
-                  Gold Lion Painting Inc has earned its reputation by treating each project with the same care we
-                  would expect in our own homes. From prep and protection to the final walkthrough, we focus on
-                  delivering work that feels polished, reliable, and worth the investment.
+                  We focus on the parts of painting that homeowners notice long
+                  after the crew leaves: smooth prep, clean edges, protected
+                  spaces, balanced color, and finishes that hold up in Florida
+                  conditions.
                 </p>
                 <p>
-                  Our team works across residential and commercial spaces, helping clients improve curb appeal,
-                  brighten interiors, and modernize cabinets with finishes designed to last. We value preparation,
-                  product selection, and communication just as much as the final coat of paint.
-                </p>
-                <p>
-                  That approach matters in Florida, where humidity, sunlight, and weather can test any finish.
-                  We tailor our process to the space, use durable materials, and keep our clients informed so the
-                  experience feels as professional as the results look.
+                  Our team handles interior painting, exterior painting, cabinet
+                  painting, and refinishing with a clear process from estimate
+                  to final walkthrough.
                 </p>
               </div>
 
-              <div className="mt-10">
-                <h3 className="text-2xl font-bold text-[#8f6220]">What Clients Can Expect</h3>
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
-                  {principles.map((principle) => (
-                    <article
-                      key={principle.title}
-                      className="rounded-3xl border border-[#dfcfb5] bg-[#fff7eb] p-5 shadow-sm"
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {trustPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="flex items-start gap-3 border-l-4 border-[#e4ad42] bg-[#f3f3f3] p-4 text-sm font-bold text-[#1f2124]"
+                  >
+                    <FaCheckCircle
+                      aria-hidden="true"
+                      className="mt-1 shrink-0 text-[#d90000]"
+                    />
+                    {point}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t-4 border-[#d90000] bg-[#0c0d0e] p-7 text-white shadow-[1px_1px_18px_rgba(0,0,0,0.25)]">
+              <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+                Start Your Project
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-[#dddddd]">
+                Send the details and the request goes directly to the painting
+                team.
+              </p>
+              <EstimateRequestForm
+                className="mt-6 flex flex-col gap-4"
+                buttonLabel="Send"
+                helperText={null}
+                showContactLinks={false}
+                source="About page estimate form"
+                tone="dark"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#0c0d0e] px-4 py-16 text-white sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-5 md:grid-cols-3">
+              {principles.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <article
+                    key={item.title}
+                    className="border border-[#e4ad42]/35 bg-[#1f2124] p-6"
+                  >
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e4ad42] text-[#0c0d0e]">
+                      <Icon aria-hidden="true" />
+                    </span>
+                    <h3 className="font-heading mt-5 text-2xl font-black text-[#e4ad42]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 leading-7 text-[#dddddd]">
+                      {item.description}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.42fr_0.58fr]">
+            <div className="space-y-8">
+              <div className="border-t-4 border-[#e4ad42] bg-white p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+                <h2 className="font-heading text-3xl font-black">
+                  Our Services
+                </h2>
+                <div className="mt-6 grid gap-3">
+                  {serviceLinks.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="flex items-center gap-3 border border-[#e4ad42]/40 px-4 py-3 font-black transition hover:bg-[#e4ad42]"
                     >
-                      <p className="text-lg font-semibold text-[#2f2a24]">{principle.title}</p>
-                      <p className="mt-2 text-sm leading-6 text-[#64584c]">{principle.description}</p>
-                    </article>
+                      <FaPaintRoller
+                        aria-hidden="true"
+                        className="text-[#d90000]"
+                      />
+                      {service.label}
+                    </Link>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-10 grid gap-6 lg:grid-cols-2">
-                <div className="rounded-3xl border border-[#dfcfb5] bg-[#fff7eb] p-6 shadow-sm">
-                  <h3 className="text-2xl font-bold text-[#8f6220]">Our Services</h3>
-                  <div className="mt-5 grid gap-3">
-                    {serviceLinks.map((service) => (
-                      <Link
-                        key={service.href}
-                        href={service.href}
-                        className="rounded-2xl border border-[#dfcfb5] bg-[#fffaf2] px-4 py-4 font-semibold text-[#8f6220] transition hover:border-[#c7942f] hover:bg-[#f4ecdf]"
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-3xl border border-[#dfcfb5] bg-[#fff7eb] p-6 shadow-sm">
-                  <h3 className="text-2xl font-bold text-[#8f6220]">Service Areas</h3>
-                  <div className="mt-5 grid grid-cols-2 gap-3">
-                    {areaLinks.map((area) => (
-                      <Link
-                        key={area.href}
-                        href={area.href}
-                        className="rounded-2xl border border-[#dfcfb5] bg-[#fffaf2] px-3 py-3 text-center text-sm font-medium text-[#615447] transition hover:border-[#c7942f] hover:bg-[#f4ecdf] hover:text-[#8f6220]"
-                      >
-                        {area.name}
-                      </Link>
-                    ))}
-                  </div>
+              <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.12)]">
+                <h2 className="font-heading text-3xl font-black">
+                  Service Areas
+                </h2>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {areaLinks.map((area) => (
+                    <Link
+                      key={area.href}
+                      href={area.href}
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-bold transition hover:bg-[#e4ad42]"
+                    >
+                      <FaMapMarkedAlt
+                        aria-hidden="true"
+                        className="text-[#d90000]"
+                      />
+                      {area.label}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fff7eb] shadow-[0_18px_40px_rgba(120,94,52,0.14)]">
-                <Image src="/logo.jpg" alt="Gold Lion Painting Inc logo" width={900} height={900} className="w-full object-cover" />
-              </div>
-
-              <div className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_18px_40px_rgba(120,94,52,0.14)]">
-                <Image
-                  src="/anamaria/professional-exterior-painters-anna-maria-03.jpg"
-                  alt="Gold Lion Painting team at a project site"
-                  width={1024}
-                  height={768}
-                  className="w-full cursor-pointer object-cover transition duration-300 hover:scale-[1.02]"
+            <div className="grid gap-5 sm:grid-cols-2">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={image.src}
+                  type="button"
                   onClick={() => {
-                    setLightboxSlide(0);
+                    setLightboxSlide(index);
                     setLightboxOpen(true);
                   }}
-                />
-                <div className="border-t border-[#eadfcf] px-5 py-4">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8f7d6a]">On The Job</p>
-                  <p className="mt-1 text-sm leading-6 text-[#64584c]">
-                    Our crew at a recent project, showing the kind of coordination and site presence clients can expect.
-                  </p>
-                </div>
-              </div>
-
-              <div className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fff7eb] shadow-[0_20px_48px_rgba(120,94,52,0.15)]">
-                <Image
-                  src="/services/exterior-painting-manatee-county.jpg"
-                  alt="Gold Lion Painting exterior painting project in Manatee County"
-                  width={1365}
-                  height={768}
-                  className="h-[22rem] w-full object-cover md:h-[28rem]"
-                />
-                <div className="grid gap-3 border-t border-[#eadfcf] bg-[#fffaf2] px-5 py-5 sm:grid-cols-2">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8f7d6a]">Project Focus</p>
-                    <p className="mt-1 text-sm leading-6 text-[#64584c]">
-                      Exterior work planned for durability, curb appeal, and a cleaner finish from the street.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8f7d6a]">Next Step</p>
-                    <p className="mt-1 text-sm leading-6 text-[#64584c]">
-                      We can review your project goals and help you choose the right service path for the property.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-[2rem] border border-[#d8c39f] bg-linear-to-br from-[#fffaf2] to-[#f3e4c4] p-7 shadow-[0_20px_45px_rgba(120,94,52,0.14)]">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8f7d6a]">Ready To Talk?</p>
-                <h3 className="mt-2 text-3xl font-bold text-[#8f6220]">Book a free estimate and get a clear next step.</h3>
-                <p className="mt-3 text-sm leading-6 text-[#64584c]">
-                  Whether you are planning one room or a full exterior, we can help you scope the project and move it forward with confidence.
-                </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="tel:9414625894"
-                    className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
-                  >
-                    Call 941-462-5894
-                  </a>
-                  <Link
-                    href="/contact-us"
-                    className="rounded-2xl border border-[#d8c39f] bg-[#fffaf2] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
-                  >
-                    Visit Contact Page
-                  </Link>
-                </div>
-              </div>
+                  className={
+                    index === 0
+                      ? "group relative min-h-[360px] overflow-hidden bg-[#0c0d0e] text-left shadow-[1px_1px_18px_rgba(0,0,0,0.18)] sm:col-span-2"
+                      : "group relative min-h-[260px] overflow-hidden bg-[#0c0d0e] text-left shadow-[1px_1px_18px_rgba(0,0,0,0.18)]"
+                  }
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes={index === 0 ? "720px" : "360px"}
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute inset-0 bg-linear-to-t from-[#0c0d0e]/75 to-transparent" />
+                  <span className="absolute bottom-5 left-5 right-5 font-heading text-2xl font-black text-white">
+                    Recent Painting Work
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
         </section>
       </main>
 
-      <Lightbox open={lightboxOpen} close={() => setLightboxOpen(false)} slides={teamImages} index={lightboxSlide} />
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={galleryImages}
+        index={lightboxSlide}
+      />
     </>
   );
 }
-

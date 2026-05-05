@@ -1,147 +1,254 @@
+import Image from "next/image";
 import { type Metadata } from "next";
 import Link from "next/link";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import {
+  FaClock,
+  FaEnvelope,
+  FaHome,
+  FaMapMarkedAlt,
+  FaMapMarkerAlt,
+  FaPaintRoller,
+  FaPhone,
+} from "react-icons/fa";
 
 import EstimateRequestForm from "../components/EstimateRequestForm";
-import { siteUrl } from "../siteConfig";
+import { areaLinks, serviceLinks } from "../components/navigationData";
+import {
+  businessEmail,
+  businessHours,
+  businessName,
+  googleDirectionsHref,
+  googleMapsHref,
+  googleReviewsHref,
+  siteUrl,
+} from "../siteConfig";
 
 export const metadata: Metadata = {
   title: "Contact Us | Gold Lion Painting Inc",
   description:
-    "Contact Gold Lion Painting Inc for interior painting, exterior painting, cabinet refinishing, and free estimates in Manatee County, Florida.",
+    "Schedule an estimate with Gold Lion Painting Inc for interior painting, exterior painting, cabinet painting, and cabinet refinishing across Bradenton, Tampa, St. Petersburg, Sarasota, Venice, Parrish, Ellenton, Lakewood Ranch, Anna Maria, and nearby Florida areas.",
   alternates: {
     canonical: "/contact-us",
   },
   openGraph: {
     title: "Contact Us | Gold Lion Painting Inc",
     description:
-      "Contact Gold Lion Painting Inc for interior painting, exterior painting, cabinet refinishing, and free estimates in Manatee County, Florida.",
+      "Schedule an estimate with Gold Lion Painting Inc for residential interior painting, exterior painting, and cabinet refinishing.",
     url: `${siteUrl}/contact-us`,
     images: [
       {
-        url: "/logo.jpg",
-        width: 900,
-        height: 900,
-        alt: "Gold Lion Painting Inc logo",
+        url: "/services/house-exterior-painting-manatee-county.jpg",
+        width: 1200,
+        height: 800,
+        alt: "Gold Lion Painting Inc contact page",
       },
     ],
   },
 };
 
-export default function ContactUsPage() {
-  const areas = [
-    { name: "Ellenton", href: "/ellenton" },
-    { name: "Bradenton", href: "/bradenton" },
-    { name: "Lakewood Ranch", href: "/lakewood-ranch" },
-    { name: "Parrish", href: "/parrish" },
-    { name: "Palmetto", href: "/palmetto" },
-    { name: "Anna Maria Island", href: "/ana-maria" },
-    { name: "Holmes Beach", href: "/holmes-beach" },
-  ];
+const contactItems = [
+  {
+    icon: FaPhone,
+    label: "Phone",
+    value: "941-462-5894",
+    href: "tel:9414625894",
+  },
+  {
+    icon: FaEnvelope,
+    label: "Email",
+    value: businessEmail,
+    href: `mailto:${businessEmail}`,
+  },
+  {
+    icon: FaMapMarkerAlt,
+    label: "Service Area",
+    value: "Bradenton, Tampa Bay, Sarasota & nearby Florida areas",
+    href: googleMapsHref,
+  },
+  {
+    icon: FaClock,
+    label: "Hours Of Operation",
+    value: businessHours,
+  },
+];
 
+export default function ContactUsPage() {
   return (
-    <main className="min-h-screen bg-[#f6f1e7] font-sans text-[#2f2a24]">
-      <section className="relative flex w-full flex-col items-center justify-center border-b border-[#dfcfb5] bg-linear-to-b from-[#fffaf2] to-[#f4ecdf] py-20 text-center">
-        <h1 className="mb-4 text-5xl font-bold text-[#8f6220] md:text-6xl">
-          Contact Us For A Free Estimate
-        </h1>
-        <p className="text-xl text-[#64584c] md:text-2xl">
-          Direct contact for interior, exterior, and cabinet painting projects
-        </p>
+    <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
+      <section className="relative min-h-[380px] overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+        <Image
+          src="/services/house-exterior-painting-manatee-county.jpg"
+          alt="Gold Lion Painting exterior painting project"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[#0c0d0e]/72" />
+        <div className="relative mx-auto flex min-h-[240px] max-w-6xl flex-col justify-center">
+          <div className="mb-5 flex flex-wrap items-center gap-2 text-sm font-bold text-[#dddddd]">
+            <Link href="/" className="transition hover:text-[#e4ad42]">
+              Home
+            </Link>
+            <span>-</span>
+            <span className="text-[#e4ad42]">Contact Us</span>
+          </div>
+          <p className="font-display text-lg font-bold text-[#e4ad42]">
+            {businessName}
+          </p>
+          <h1 className="font-heading mt-3 text-5xl leading-tight font-black md:text-7xl">
+            Schedule an Estimate
+          </h1>
+          <a
+            href="tel:9414625894"
+            className="mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 text-xl font-black text-white shadow-[0_14px_28px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+          >
+            <FaPhone aria-hidden="true" />
+            (941) 462-5894
+          </a>
+        </div>
       </section>
 
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-14 md:flex-row md:px-16">
-        <div className="flex flex-1 flex-col gap-8">
-          <p className="text-lg leading-relaxed text-[#615447]">
-            Whether you&apos;re ready to book an estimate or just want to talk through the scope,
-            <span className="font-bold text-[#2f2a24]"> Gold Lion Painting Inc</span> makes it easy to
-            get in touch.
-          </p>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-              <h2 className="mb-4 border-b border-[#dfcfb5] pb-2 text-2xl font-bold text-[#8f6220]">
-                Contact Us
-              </h2>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-4">
-                  <span className="rounded-full bg-[#d4a038] p-3 text-[#2f2a24]">
-                    <FaPhone size={18} />
-                  </span>
-                  <div>
-                    <p className="mb-0.5 text-xs uppercase tracking-wide text-[#8f7d6a]">Phone</p>
-                    <a
-                      href="tel:941-462-5894"
-                      className="text-lg font-bold text-[#2f2a24] transition hover:text-[#8f6220]"
-                    >
-                      941-462-5894
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span className="rounded-full bg-[#d4a038] p-3 text-[#2f2a24]">
-                    <FaEnvelope size={18} />
-                  </span>
-                  <div>
-                    <p className="mb-0.5 text-xs uppercase tracking-wide text-[#8f7d6a]">Email</p>
-                    <a
-                      href="mailto:goldlionpainting@gmail.com"
-                      className="text-lg font-bold text-[#2f2a24] transition hover:text-[#8f6220]"
-                    >
-                      goldlionpainting@gmail.com
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span className="rounded-full bg-[#d4a038] p-3 text-[#2f2a24]">
-                    <FaMapMarkerAlt size={18} />
-                  </span>
-                  <div>
-                    <p className="mb-0.5 text-xs uppercase tracking-wide text-[#8f7d6a]">Service Area</p>
-                    <p className="text-lg font-bold text-[#2f2a24]">Manatee County, FL</p>
-                  </div>
-                </li>
-              </ul>
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.56fr_0.44fr] lg:items-start">
+          <div>
+            <h2 className="font-heading text-5xl font-black text-[#d90000]">
+              Schedule an Estimate!
+            </h2>
+            <h3 className="font-heading mt-6 text-3xl font-black text-[#0c0d0e]">
+              Leave us a Message
+            </h3>
+            <div className="mt-8 bg-white">
+              <EstimateRequestForm
+                className="flex flex-col gap-4"
+                buttonLabel="Send"
+                helperText={null}
+                showContactLinks={false}
+                source="Contact page estimate form"
+              />
             </div>
+          </div>
 
-            <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-              <h2 className="mb-4 border-b border-[#dfcfb5] pb-2 text-2xl font-bold text-[#8f6220]">
-                Hours Of Operation
+          <aside className="space-y-8">
+            <div className="border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-7 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.28)]">
+              <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+                Contact Information
               </h2>
-              <div className="flex h-32 flex-col items-center justify-center gap-2">
-                <p className="text-xl font-bold text-[#2f2a24]">Monday - Sunday</p>
-                <p className="text-3xl font-bold text-[#8f6220]">6:00 am - 10:00 pm</p>
+              <ul className="mt-7 space-y-5">
+                {contactItems.map((item) => {
+                  const Icon = item.icon;
+                  const content = (
+                    <>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e4ad42] text-[#0c0d0e]">
+                        <Icon aria-hidden="true" />
+                      </span>
+                      <span>
+                        <span className="block text-xs font-black tracking-[0.16em] text-[#e4ad42] uppercase">
+                          {item.label}
+                        </span>
+                        <span className="mt-1 block text-base leading-6 font-semibold">
+                          {item.value}
+                        </span>
+                      </span>
+                    </>
+                  );
+
+                  return (
+                    <li key={item.label}>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="flex items-center gap-4 transition hover:text-[#e4ad42]"
+                        >
+                          {content}
+                        </a>
+                      ) : (
+                        <div className="flex items-center gap-4">{content}</div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                <a
+                  href={googleMapsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#e4ad42] px-4 py-3 text-sm font-black text-[#0c0d0e] transition hover:bg-white"
+                >
+                  <FaMapMarkedAlt aria-hidden="true" />
+                  Open Google Maps
+                </a>
+                <a
+                  href={googleDirectionsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border border-[#e4ad42] px-4 py-3 text-sm font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                >
+                  <FaMapMarkerAlt aria-hidden="true" />
+                  Get Directions
+                </a>
+                <a
+                  href={googleReviewsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border border-[#e4ad42] px-4 py-3 text-sm font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:col-span-2"
+                >
+                  Read Google Reviews
+                </a>
               </div>
             </div>
-          </div>
 
-          <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-            <h2 className="mb-4 border-b border-[#dfcfb5] pb-2 text-center text-2xl font-bold text-[#8f6220]">
-              Areas Of Service
-            </h2>
-            <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
-              {areas.map((area) => (
-                <Link
-                  key={area.href}
-                  href={area.href}
-                  className="group flex items-center gap-2 rounded-2xl border border-[#dfcfb5] bg-[#fff7eb] p-3 text-[#615447] transition hover:border-[#c7942f] hover:bg-[#f4ecdf] hover:text-[#8f6220]"
-                >
-                  <span className="text-xs font-semibold uppercase tracking-wide text-[#8f6220]">Area</span>
-                  <span className="font-medium">{area.name}</span>
-                </Link>
-              ))}
+            <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+              <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+                Area Of Services
+              </h2>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {areaLinks.map((area) => (
+                  <Link
+                    key={area.href}
+                    href={area.href}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-bold text-[#0c0d0e] shadow-sm transition hover:bg-[#e4ad42]"
+                  >
+                    <FaMapMarkedAlt
+                      aria-hidden="true"
+                      className="text-[#d90000]"
+                    />
+                    {area.label}
+                  </Link>
+                ))}
+              </div>
+              <p className="mt-6 leading-7 text-[#1f2124]">
+                We plan painting systems around Florida heat, humidity, rain
+                cycles, stucco movement, and the finish expectations of each
+                home.
+              </p>
             </div>
-          </div>
-        </div>
 
-        <div className="w-full shrink-0 md:w-96">
-          <div className="sticky top-24 rounded-3xl border border-[#d8c39f] bg-linear-to-b from-[#fffaf2] to-[#fff7eb] p-8 shadow-[0_18px_40px_rgba(120,94,52,0.12)]">
-            <h2 className="mb-1 text-center text-3xl font-bold text-[#8f6220]">Get A Free Estimate!</h2>
-            <p className="mb-6 text-center text-sm text-[#64584c]">
-              Fill out the form and we will open your email app with a ready-to-send estimate request.
-            </p>
-            <EstimateRequestForm className="flex flex-col gap-4" buttonLabel="Prepare Estimate Email" />
-          </div>
+            <div className="border-t-4 border-[#e4ad42] bg-white p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+              <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+                Our Services
+              </h2>
+              <div className="mt-6 grid gap-3">
+                {serviceLinks.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className="flex items-center justify-between gap-4 border border-[#e4ad42]/40 px-4 py-3 font-bold text-[#0c0d0e] transition hover:bg-[#e4ad42]"
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <FaPaintRoller
+                        aria-hidden="true"
+                        className="text-[#d90000]"
+                      />
+                      {service.label}
+                    </span>
+                    <FaHome aria-hidden="true" className="text-[#a97a36]" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
     </main>

@@ -2,38 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { type ReactNode, useState } from "react";
+import {
+  FaBars,
+  FaCalendarAlt,
+  FaChevronDown,
+  FaFacebookF,
+  FaTimes,
+  FaWhatsapp,
+} from "react-icons/fa";
 
-import { googleReviewsHref } from "../siteConfig";
-
-const serviceLinks = [
-  { href: "/interior-painting-upgrade", label: "Interior Painting" },
-  { href: "/exterior-painting-upgrade", label: "Exterior Painting" },
-  { href: "/cabinet-painting-mejor", label: "Cabinet Painting" },
-];
-
-const areaLinks = [
-  { href: "/ellenton", label: "Ellenton" },
-  { href: "/bradenton", label: "Bradenton" },
-  { href: "/lakewood-ranch", label: "Lakewood Ranch" },
-  { href: "/parrish", label: "Parrish" },
-  { href: "/palmetto", label: "Palmetto" },
-  { href: "/ana-maria", label: "Anna Maria Island" },
-  { href: "/holmes-beach", label: "Holmes Beach" },
-];
-
-const companyLinks = [
-  { href: "/about-us", label: "About Us" },
-  { href: "/color-consultation", label: "Color Consultation" },
-  { href: "/warranty-service", label: "Warranty Service" },
-  { href: "/contact-us", label: "Contact Us" },
-];
+import {
+  areaLinks,
+  companyLinks,
+  contactLinks,
+  serviceLinks,
+} from "./navigationData";
+import { businessName } from "../siteConfig";
 
 function DesktopDropdown({
+  active,
   label,
   links,
 }: {
+  active: boolean;
   label: string;
   links: { href: string; label: string }[];
 }) {
@@ -41,17 +34,19 @@ function DesktopDropdown({
     <li className="group relative">
       <button
         type="button"
-        className="flex items-center gap-2 transition hover:text-[#a36a14] group-focus-within:text-[#a36a14]"
+        className={`font-heading flex items-center gap-2 text-sm font-black whitespace-nowrap transition group-focus-within:text-[#e4ad42] hover:text-[#e4ad42] ${
+          active ? "text-[#e4ad42]" : "text-[#dddddd]"
+        }`}
       >
         {label}
-        <FaChevronDown className="text-xs" />
+        <FaChevronDown aria-hidden="true" className="text-xs" />
       </button>
-      <div className="invisible absolute left-0 z-50 mt-3 min-w-64 rounded-2xl border border-[#dfcfb5] bg-[#fffaf2] p-2 opacity-0 shadow-[0_16px_40px_rgba(120,94,52,0.14)] transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+      <div className="invisible absolute left-0 z-50 mt-5 min-w-64 border-t-2 border-[#e4ad42] bg-[#0c0d0e] p-2 opacity-0 shadow-[0_18px_45px_rgba(0,0,0,0.32)] transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
         {links.map((link) => (
           <Link
-            key={link.href}
+            key={`${link.label}-${link.href}`}
             href={link.href}
-            className="block rounded-xl px-4 py-3 transition hover:bg-[#f4ecdf] hover:text-[#8f6220]"
+            className="block px-4 py-3 text-sm font-semibold text-[#dddddd] transition hover:bg-[#1f2124] hover:text-[#e4ad42]"
           >
             {link.label}
           </Link>
@@ -62,152 +57,260 @@ function DesktopDropdown({
 }
 
 export default function Topbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isHomeActive = pathname === "/";
+  const isServiceActive = serviceLinks.some((link) => pathname === link.href);
+  const isAreaActive = areaLinks.some((link) => pathname === link.href);
+  const isCompanyActive = companyLinks.some((link) => pathname === link.href);
+  const isContactActive = contactLinks.some((link) => pathname === link.href);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[#dfcfb5] bg-[#f6f1e7]/95 text-[#2f2a24] shadow-[0_10px_30px_rgba(120,94,52,0.08)] backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex min-w-0 items-center gap-3">
-          <Image
-            src="/logo.jpg"
-            alt="Gold Lion Painting Logo"
-            width={56}
-            height={56}
-            className="rounded-full bg-white"
-          />
-          <div className="min-w-0">
-            <p className="truncate text-lg font-bold tracking-wide text-[#8f6220] sm:text-xl">
-              Gold Lion Painting Inc.
-            </p>
-            <p className="hidden text-sm text-[#6e604f] sm:block">
-              Interior, exterior, and cabinet painting in Manatee County
-            </p>
-          </div>
-        </Link>
-
-        <ul className="hidden items-center gap-8 text-base font-medium lg:flex">
-          <li>
-            <Link href="/" className="transition hover:text-[#a36a14]">
-              Home
-            </Link>
-          </li>
-          <DesktopDropdown label="Services" links={serviceLinks} />
-          <DesktopDropdown label="Areas" links={areaLinks} />
-          <DesktopDropdown label="Company" links={companyLinks} />
-          <li>
+    <header className="sticky top-0 z-50 bg-[#0c0d0e] text-[#dddddd] shadow-[0_12px_32px_rgba(0,0,0,0.35)]">
+      <div className="hidden border-b border-white/10 bg-[#1f2124] px-6 py-2 lg:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <p className="text-sm">Serving Clients Since 2014</p>
+          <div className="flex items-center gap-4 text-[#e4ad42]">
             <a
-              href={googleReviewsHref}
+              href="https://www.facebook.com/p/Gold-Lion-Painting-Inc-100094745400171/"
               target="_blank"
               rel="noreferrer"
-              className="transition hover:text-[#a36a14]"
+              aria-label="Facebook"
+              className="transition hover:text-[#dddddd]"
             >
-              Reviews
+              <FaFacebookF aria-hidden="true" />
             </a>
-          </li>
-        </ul>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="mailto:goldlionpainting@gmail.com"
-            className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] px-4 py-2 font-semibold transition hover:bg-[#f4ecdf] hover:text-[#8f6220]"
-          >
-            Email Us
-          </a>
-          <a
-            href="tel:9414625894"
-            className="rounded-xl bg-[#d4a038] px-4 py-2 font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
-          >
-            941-462-5894
-          </a>
+            <a
+              href="https://wa.me/19414625894"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Whatsapp"
+              className="transition hover:text-[#dddddd]"
+            >
+              <FaWhatsapp aria-hidden="true" />
+            </a>
+          </div>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#8f6220] transition hover:bg-[#f4ecdf] lg:hidden"
-          aria-expanded={mobileOpen}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileOpen((value) => !value)}
-        >
-          {mobileOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
-        </button>
       </div>
 
-      {mobileOpen ? (
-        <div className="border-t border-[#dfcfb5] bg-[#fffaf2] px-4 py-5 sm:px-6 lg:hidden">
-          <div className="mx-auto max-w-7xl space-y-5">
-            <div className="grid gap-3">
-              <Link href="/" className="rounded-xl bg-[#f7efe2] px-4 py-3 font-semibold" onClick={() => setMobileOpen(false)}>
+      <nav className="px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
+          <Link
+            href="/"
+            className="flex w-[190px] shrink-0 items-center gap-2 xl:w-[230px]"
+          >
+            <Image
+              src="/logo.jpg"
+              alt="Gold Lion Painting Inc logo"
+              width={96}
+              height={96}
+              priority
+              className="h-12 w-12 rounded-full object-cover xl:h-14 xl:w-14"
+            />
+            <span className="font-heading text-xs leading-tight font-black text-[#e4ad42] uppercase xl:text-sm">
+              {businessName}
+            </span>
+          </Link>
+
+          <ul className="hidden items-center gap-5 lg:flex xl:gap-7">
+            <li>
+              <Link
+                href="/"
+                className={`font-heading text-sm font-black transition hover:text-[#e4ad42] ${
+                  isHomeActive ? "text-[#e4ad42]" : "text-[#dddddd]"
+                }`}
+              >
                 Home
               </Link>
-              <Link href="/contact-us" className="rounded-xl bg-[#f7efe2] px-4 py-3 font-semibold" onClick={() => setMobileOpen(false)}>
-                Contact Us
-              </Link>
-              <Link href="/about-us" className="rounded-xl bg-[#f7efe2] px-4 py-3 font-semibold" onClick={() => setMobileOpen(false)}>
-                About Us
-              </Link>
-              <Link href="/color-consultation" className="rounded-xl bg-[#f7efe2] px-4 py-3 font-semibold" onClick={() => setMobileOpen(false)}>
-                Color Consultation
-              </Link>
-              <Link href="/warranty-service" className="rounded-xl bg-[#f7efe2] px-4 py-3 font-semibold" onClick={() => setMobileOpen(false)}>
-                Warranty Service
-              </Link>
-            </div>
+            </li>
+            <DesktopDropdown
+              active={isServiceActive}
+              label="Services"
+              links={serviceLinks}
+            />
+            <DesktopDropdown
+              active={isAreaActive}
+              label="Areas"
+              links={areaLinks}
+            />
+            <DesktopDropdown
+              active={isCompanyActive}
+              label="Company"
+              links={companyLinks}
+            />
+            <DesktopDropdown
+              active={isContactActive}
+              label="Contact"
+              links={contactLinks}
+            />
+          </ul>
 
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#8f6220]">
-                Services
-              </p>
-              <div className="grid gap-2">
-                {serviceLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="rounded-xl border border-[#dfcfb5] px-4 py-3"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <div className="hidden items-center gap-3 lg:flex xl:gap-4">
+            <Link
+              href="/#bbb-accredited"
+              aria-label="Go to BBB Accredited section"
+              className="inline-flex shrink-0 items-center rounded-full border border-white/15 bg-white px-3 py-1.5 transition hover:border-[#e4ad42] hover:bg-[#f3f3f3]"
+            >
+              <Image
+                src="/bbb_logo.png"
+                alt="BBB Accredited Business"
+                width={96}
+                height={96}
+                className="h-10 w-10 object-contain"
+              />
+            </Link>
+            <Link
+              href="/contact-us"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#d90000] px-4 py-3 text-sm font-bold whitespace-nowrap text-[#dddddd] shadow-[0_0_18px_rgba(0,0,0,0.45)] transition hover:bg-[#1f2124] xl:px-5"
+            >
+              <FaCalendarAlt aria-hidden="true" />
+              Schedule an Estimate
+            </Link>
+            <a
+              href="tel:9414625894"
+              className="font-heading shrink-0 text-base font-black whitespace-nowrap text-[#dddddd] transition hover:text-[#e4ad42] xl:text-lg"
+            >
+              (941) 462-5894
+            </a>
+          </div>
 
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#8f6220]">
-                Service Areas
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {areaLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="rounded-xl border border-[#dfcfb5] px-4 py-3"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-full border border-[#e4ad42]/45 p-3 text-[#dddddd] transition hover:bg-[#1f2124] lg:hidden"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((value) => !value)}
+          >
+            {mobileOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+          </button>
+        </div>
+      </nav>
 
-            <div className="grid gap-3">
-              <a
-                href={googleReviewsHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] px-4 py-3 font-semibold"
-              >
-                Read Google Reviews
-              </a>
-              <a href="mailto:goldlionpainting@gmail.com" className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] px-4 py-3 font-semibold">
-                goldlionpainting@gmail.com
-              </a>
-              <a href="tel:9414625894" className="rounded-xl bg-[#d4a038] px-4 py-3 text-center font-bold text-[#2f2a24]">
-                Call 941-462-5894
-              </a>
-            </div>
+      {mobileOpen ? (
+        <div className="border-t border-white/10 bg-[#0c0d0e] px-4 py-5 sm:px-6 lg:hidden">
+          <div className="mx-auto max-w-6xl space-y-6">
+            <MobileSection title="Menu">
+              <MobileLink
+                href="/"
+                label="Home"
+                active={isHomeActive}
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileLink
+                href="/about-us"
+                label="About Us"
+                active={pathname === "/about-us"}
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileLink
+                href="/blog"
+                label="Blog"
+                active={pathname.startsWith("/blog")}
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileLink
+                href="/warranty-service"
+                label="Warranty"
+                active={pathname === "/warranty-service"}
+                onClick={() => setMobileOpen(false)}
+              />
+            </MobileSection>
+
+            <MobileSection title="Contact">
+              <MobileLink
+                href="/contact-us"
+                label="Contact Us"
+                active={pathname === "/contact-us"}
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileLink
+                href="/color-consultation"
+                label="Color Consultation"
+                active={pathname === "/color-consultation"}
+                onClick={() => setMobileOpen(false)}
+              />
+              <MobileLink
+                href="/#bbb-accredited"
+                label="BBB Accredited"
+                active={false}
+                onClick={() => setMobileOpen(false)}
+              />
+            </MobileSection>
+
+            <MobileSection title="Services">
+              {serviceLinks.map((link) => (
+                <MobileLink
+                  key={`${link.label}-${link.href}`}
+                  href={link.href}
+                  label={link.label}
+                  active={pathname === link.href}
+                  onClick={() => setMobileOpen(false)}
+                />
+              ))}
+            </MobileSection>
+
+            <MobileSection title="Areas">
+              {areaLinks.map((link) => (
+                <MobileLink
+                  key={`${link.label}-${link.href}`}
+                  href={link.href}
+                  label={link.label}
+                  active={pathname === link.href}
+                  onClick={() => setMobileOpen(false)}
+                />
+              ))}
+            </MobileSection>
+
+            <a
+              href="tel:9414625894"
+              className="block rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-[#dddddd]"
+            >
+              Call (941) 462-5894
+            </a>
           </div>
         </div>
       ) : null}
-    </nav>
+    </header>
+  );
+}
+
+function MobileSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div>
+      <p className="mb-3 text-xs font-bold text-[#e4ad42] uppercase">{title}</p>
+      <div className="grid gap-2">{children}</div>
+    </div>
+  );
+}
+
+function MobileLink({
+  active = false,
+  href,
+  label,
+  onClick,
+}: {
+  active?: boolean;
+  href: string;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={`border bg-[#1f2124] px-4 py-3 text-sm font-semibold transition hover:border-[#e4ad42] hover:text-[#e4ad42] ${
+        active
+          ? "border-[#e4ad42] text-[#e4ad42]"
+          : "border-white/10 text-[#dddddd]"
+      }`}
+    >
+      {label}
+    </Link>
   );
 }

@@ -3,16 +3,16 @@ import { type Metadata } from "next";
 import { siteUrl } from "../siteConfig";
 
 export const metadata: Metadata = {
-  title: "Interior Painting Services in Manatee County | Gold Lion Painting Inc",
+  title: "Interior Painting Services in Bradenton, Sarasota & Tampa Bay | Gold Lion Painting Inc",
   description:
-    "Interior house painting in Manatee County with drywall repair, trim painting, Sherwin-Williams systems, and a prep-first process for cleaner finishes.",
+    "Interior house painting in Bradenton, Sarasota, Tampa Bay, and nearby Florida service areas with drywall repair, trim painting, Sherwin-Williams systems, and a prep-first process.",
   alternates: {
     canonical: "/interior-painting-upgrade",
   },
   openGraph: {
-    title: "Interior Painting Services in Manatee County | Gold Lion Painting Inc",
+    title: "Interior Painting Services in Bradenton, Sarasota & Tampa Bay | Gold Lion Painting Inc",
     description:
-      "Interior house painting in Manatee County with drywall repair, trim painting, Sherwin-Williams systems, and a prep-first process for cleaner finishes.",
+      "Interior house painting in Bradenton, Sarasota, Tampa Bay, and nearby Florida service areas with drywall repair, trim painting, Sherwin-Williams systems, and a prep-first process.",
     url: `${siteUrl}/interior-painting-upgrade`,
     images: [
       {

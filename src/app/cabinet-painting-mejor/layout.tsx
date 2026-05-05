@@ -3,16 +3,16 @@ import { type Metadata } from "next";
 import { siteUrl } from "../siteConfig";
 
 export const metadata: Metadata = {
-  title: "Cabinet Refinishing in Manatee County | Gold Lion Painting Inc",
+  title: "Cabinet Refinishing in Bradenton, Sarasota & Tampa Bay | Gold Lion Painting Inc",
   description:
-    "Cabinet painting and refinishing in Manatee County for kitchens, vanities, and built-ins using controlled prep and cabinet-grade finishes.",
+    "Cabinet painting and refinishing in Bradenton, Sarasota, Tampa Bay, and nearby Florida service areas for kitchens, vanities, and built-ins using controlled prep.",
   alternates: {
     canonical: "/cabinet-painting-mejor",
   },
   openGraph: {
-    title: "Cabinet Refinishing in Manatee County | Gold Lion Painting Inc",
+    title: "Cabinet Refinishing in Bradenton, Sarasota & Tampa Bay | Gold Lion Painting Inc",
     description:
-      "Cabinet painting and refinishing in Manatee County for kitchens, vanities, and built-ins using controlled prep and cabinet-grade finishes.",
+      "Cabinet painting and refinishing in Bradenton, Sarasota, Tampa Bay, and nearby Florida service areas for kitchens, vanities, and built-ins using controlled prep.",
     url: `${siteUrl}/cabinet-painting-mejor`,
     images: [
       {
