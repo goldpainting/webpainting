@@ -85,9 +85,9 @@ const areaCards = [
     alt: "Exterior painting project in Parrish",
   },
   {
-    href: "/palmetto",
+    href: "/palmeto",
     label: "Palmetto",
-    image: "/palmetto/house-exterior-painting-palmetto.jpg.jpg",
+    image: "/palmeto/house-exterior-painting-palmetto.jpg",
     alt: "Exterior house painting in Palmetto",
   },
   {
@@ -105,7 +105,7 @@ const areaCards = [
   {
     href: "/holmes-beach",
     label: "Holmes Beach",
-    image: "/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg.jpg",
+    image: "/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg",
     alt: "Luxury exterior painting in Holmes Beach",
   },
   {
