@@ -1,24 +1,56 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/next/tsconfig.json",
+  "display": "Next.js",
   "compilerOptions": {
-    "target": "ES2022",
-    "checkJs": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "noUncheckedIndexedAccess": true,
-    "moduleDetection": "force",
-    "verbatimModuleSyntax": true,
+    "incremental": true,
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
+    "**/*",
+    ".*/**/*",
+    "./**/.*",
     "next-env.d.ts",
+    "src/types/**/*.d.ts",
+    "src/types/**/*.ts",
     ".next/types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx"
+    ".next/dev/types/**/*.ts",
+    "new-types.d.ts"
   ],
-  "exclude": ["node_modules", "generated"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "build",
+    "dist",
+    ".vercel",
+    "coverage",
+    ".agents",
+    ".github",
+    ".agents/**",
+    ".github/**",
+    "**/.agents/**",
+    "**/.github/**"
+  ]
 }
