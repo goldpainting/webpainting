@@ -1,13 +1,31 @@
+import MarkdownLandingPage from "../components/MarkdownLandingPage";
+import { serviceInterlinkCards } from "../content/landingCards";
 import {
-  buildAreaMetadata,
-  getAreaLandingData,
-} from "../components/areaLandingData";
-import AreaLandingPage from "../components/AreaLandingPage";
+  buildMarkdownMetadata,
+  readMarkdownContent,
+} from "../content/markdownContent";
 
-const area = getAreaLandingData("sarasota");
+const raw = readMarkdownContent("doc/info-areas/SARASOTA.md");
+const heroImage = "/sarasota/sarasota_home.jpeg";
+const heroAlt = "Exterior house painting project in Sarasota";
 
-export const metadata = buildAreaMetadata(area);
+export const metadata = buildMarkdownMetadata({
+  raw,
+  canonical: "/sarasota",
+  image: heroImage,
+  imageAlt: heroAlt,
+});
 
 export default function SarasotaPage() {
-  return <AreaLandingPage area={area} />;
+  return (
+    <MarkdownLandingPage
+      raw={raw}
+      eyebrow="Sarasota Painting"
+      heroImage={heroImage}
+      heroAlt={heroAlt}
+      interlinkTitle="Residential Painting Services"
+      interlinks={serviceInterlinkCards}
+      interlinkType="services"
+    />
+  );
 }

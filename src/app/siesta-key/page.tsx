@@ -1,13 +1,31 @@
+import MarkdownLandingPage from "../components/MarkdownLandingPage";
+import { serviceInterlinkCards } from "../content/landingCards";
 import {
-  buildAreaMetadata,
-  getAreaLandingData,
-} from "../components/areaLandingData";
-import AreaLandingPage from "../components/AreaLandingPage";
+  buildMarkdownMetadata,
+  readMarkdownContent,
+} from "../content/markdownContent";
 
-const area = getAreaLandingData("siesta-key");
+const raw = readMarkdownContent("doc/info-areas/SIESTA-KEY.md");
+const heroImage = "/siesta/siesta_key_home.jpeg";
+const heroAlt = "Exterior house painting project in Siesta Key";
 
-export const metadata = buildAreaMetadata(area);
+export const metadata = buildMarkdownMetadata({
+  raw,
+  canonical: "/siesta-key",
+  image: heroImage,
+  imageAlt: heroAlt,
+});
 
 export default function SiestaKeyPage() {
-  return <AreaLandingPage area={area} />;
+  return (
+    <MarkdownLandingPage
+      raw={raw}
+      eyebrow="Siesta Key Painting"
+      heroImage={heroImage}
+      heroAlt={heroAlt}
+      interlinkTitle="Residential Painting Services"
+      interlinks={serviceInterlinkCards}
+      interlinkType="services"
+    />
+  );
 }

@@ -1,13 +1,31 @@
+import MarkdownLandingPage from "../components/MarkdownLandingPage";
+import { serviceInterlinkCards } from "../content/landingCards";
 import {
-  buildAreaMetadata,
-  getAreaLandingData,
-} from "../components/areaLandingData";
-import AreaLandingPage from "../components/AreaLandingPage";
+  buildMarkdownMetadata,
+  readMarkdownContent,
+} from "../content/markdownContent";
 
-const area = getAreaLandingData("holmes-beach");
+const raw = readMarkdownContent("doc/info-areas/HOLMES-BEACH.md");
+const heroImage = "/holmesbeach/exterior-house-painting-holmes-beach-01.jpg";
+const heroAlt = "Exterior house painting project in Holmes Beach";
 
-export const metadata = buildAreaMetadata(area);
+export const metadata = buildMarkdownMetadata({
+  raw,
+  canonical: "/holmes-beach",
+  image: heroImage,
+  imageAlt: heroAlt,
+});
 
 export default function HolmesBeachPage() {
-  return <AreaLandingPage area={area} />;
+  return (
+    <MarkdownLandingPage
+      raw={raw}
+      eyebrow="Holmes Beach Painting"
+      heroImage={heroImage}
+      heroAlt={heroAlt}
+      interlinkTitle="Residential Painting Services"
+      interlinks={serviceInterlinkCards}
+      interlinkType="services"
+    />
+  );
 }

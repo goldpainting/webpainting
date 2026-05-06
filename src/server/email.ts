@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 
 import { env } from "~/env";
 
+const contactEmailTo = "arley75480@gmail.com";
+
 type EmailError = {
   code: string;
   command: string;
@@ -46,18 +48,20 @@ function escapeHtml(value: string) {
 }
 
 function getTransporter() {
-  if (!env.SMTP_USER || !env.SMTP_PASS) {
+  if (!env.SMTP_USER || !env.PASS) {
     return null;
   }
 
   return nodemailer.createTransport({
-    service: env.SMTP_SERVICE,
+    host: env.SMTP_HOST,
+    port: env.SMTP_PORT,
+    secure: env.SMTP_PORT === 465,
     auth: {
       user: env.SMTP_USER,
-      pass: env.SMTP_PASS,
+      pass: env.PASS,
     },
     tls: {
-      rejectUnauthorized: env.SMTP_REJECT_UNAUTHORIZED,
+      rejectUnauthorized: false,
     },
   });
 }
@@ -133,17 +137,16 @@ export async function sendEstimateEmail(
         error: {
           code: "MISSING_SMTP_CONFIG",
           command: "",
-          response: "SMTP_USER and SMTP_PASS are required to send email.",
+          response: "SMTP_USER and PASS are required to send email.",
         },
       };
     }
 
     const subject = `New estimate request from ${data.name || "website visitor"}`;
-    const from = env.CONTACT_EMAIL_FROM ?? env.SMTP_USER;
 
     await transporter.sendMail({
-      from: `"Gold Lion Painting Inc" <${from}>`,
-      to: env.CONTACT_EMAIL_TO,
+      from: `"Gold Lion Painting Inc" <${env.SMTP_USER}>`,
+      to: contactEmailTo,
       replyTo: data.email,
       subject,
       html: getEstimateRequestEmail(data),

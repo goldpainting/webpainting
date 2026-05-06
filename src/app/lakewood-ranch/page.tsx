@@ -1,10 +1,31 @@
-import { buildAreaMetadata, getAreaLandingData } from "../components/areaLandingData";
-import AreaLandingPage from "../components/AreaLandingPage";
+import MarkdownLandingPage from "../components/MarkdownLandingPage";
+import { serviceInterlinkCards } from "../content/landingCards";
+import {
+  buildMarkdownMetadata,
+  readMarkdownContent,
+} from "../content/markdownContent";
 
-const area = getAreaLandingData("lakewood-ranch");
+const raw = readMarkdownContent("doc/info-areas/LAKEWOOD-RANCH.md");
+const heroImage = "/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg";
+const heroAlt = "Exterior house painting project in Lakewood Ranch";
 
-export const metadata = buildAreaMetadata(area);
+export const metadata = buildMarkdownMetadata({
+  raw,
+  canonical: "/lakewood-ranch",
+  image: heroImage,
+  imageAlt: heroAlt,
+});
 
 export default function LakewoodRanchPage() {
-  return <AreaLandingPage area={area} />;
+  return (
+    <MarkdownLandingPage
+      raw={raw}
+      eyebrow="Lakewood Ranch Painting"
+      heroImage={heroImage}
+      heroAlt={heroAlt}
+      interlinkTitle="Residential Painting Services"
+      interlinks={serviceInterlinkCards}
+      interlinkType="services"
+    />
+  );
 }

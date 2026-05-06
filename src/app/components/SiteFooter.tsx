@@ -18,7 +18,7 @@ import {
   googleReviewCount,
   googleReviewsHref,
 } from "../siteConfig";
-import { companyLinks, serviceAreaNames, serviceLinks } from "./navigationData";
+import { areaLinks, companyLinks, serviceLinks } from "./navigationData";
 
 const socialLinks = [
   {
@@ -47,7 +47,7 @@ export default function SiteFooter() {
                 height={96}
                 className="h-16 w-16 rounded-full object-cover"
               />
-              <span className="font-heading text-sm font-black uppercase leading-tight text-[#e4ad42]">
+              <span className="font-heading text-sm leading-tight font-black text-[#e4ad42] uppercase">
                 {businessName}
               </span>
             </span>
@@ -91,10 +91,14 @@ export default function SiteFooter() {
             <span className="font-heading block text-3xl font-black text-[#e4ad42]">
               {googleRatingValue}
             </span>
-            <span className="block text-sm">Google rating from {googleReviewCount} reviews</span>
+            <span className="block text-sm">
+              Google rating from {googleReviewCount} reviews
+            </span>
           </a>
           <div className="text-sm leading-7">
-            <p className="font-display font-bold text-[#e4ad42]">Hours Of Operation</p>
+            <p className="font-display font-bold text-[#e4ad42]">
+              Hours Of Operation
+            </p>
             <p>{businessHours}</p>
           </div>
         </div>
@@ -116,17 +120,25 @@ export default function SiteFooter() {
             Homepage
           </FooterLink>
           {companyLinks.map((link) => (
-            <FooterLink key={`${link.label}-${link.href}`} href={link.href} icon={FaCheckCircle}>
+            <FooterLink
+              key={`${link.label}-${link.href}`}
+              href={link.href}
+              icon={FaCheckCircle}
+            >
               {link.label}
             </FooterLink>
           ))}
         </FooterColumn>
 
         <FooterColumn title="Locations">
-          {serviceAreaNames.map((area) => (
-            <FooterItem key={area} icon={FaMapMarkedAlt}>
-              {area}
-            </FooterItem>
+          {areaLinks.map((link) => (
+            <FooterLink
+              key={`${link.label}-${link.href}`}
+              href={link.href}
+              icon={FaMapMarkedAlt}
+            >
+              {link.label}
+            </FooterLink>
           ))}
         </FooterColumn>
       </div>
@@ -170,21 +182,6 @@ function FooterLink({
         <Icon aria-hidden="true" className="shrink-0 text-[#e4ad42]" />
         <span>{children}</span>
       </Link>
-    </li>
-  );
-}
-
-function FooterItem({
-  icon: Icon,
-  children,
-}: {
-  icon: IconType;
-  children: ReactNode;
-}) {
-  return (
-    <li className="flex items-center justify-center gap-3 text-sm lg:justify-start">
-      <Icon aria-hidden="true" className="shrink-0 text-[#e4ad42]" />
-      <span>{children}</span>
     </li>
   );
 }
