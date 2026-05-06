@@ -75,7 +75,7 @@ const areaCards = [
   {
     href: "/lakewood-ranch",
     label: "Lakewood Ranch",
-    image: "/LakewoodRanch/kitchen-cabinet-painting-lakewood-ranch.jpg",
+    image: "/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg",
     alt: "Exterior house painting in Lakewood Ranch",
   },
   {
@@ -115,16 +115,16 @@ const areaCards = [
     alt: "Exterior house painting in Venice",
   },
   {
-    href: "/siesta-key",
-    label: "Siesta Key",
-    image: "/siesta-key/house-exterior-painting-siesta-key.jpg",
-    alt: "Exterior painting project in Siesta Key",
-  },
-  {
     href: "/sarasota",
     label: "Sarasota",
-    image: "/sarasota/exterior-painting-sarasota.jpeg",
+    image: "/sarasota/sarasota_home.jpeg",
     alt: "Exterior house painting in Sarasota",
+  },
+  {
+    href: "/siesta",
+    label: "Siesta Key",
+    image: "/siesta/siesta_key_home.jpeg",
+    alt: "Exterior house painting in Siesta Key",
   },
 ];
 

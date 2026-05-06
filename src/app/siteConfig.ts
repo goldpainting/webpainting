@@ -58,6 +58,6 @@ export const indexedRoutes = [
   "/parrish",
   "/holmes-beach",
   "/venice",
-  "/siesta-key",
+  "/siesta",
   "/sarasota",
 ];
