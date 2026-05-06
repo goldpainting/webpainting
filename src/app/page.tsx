@@ -15,6 +15,7 @@ import { type IconType } from "react-icons";
 import EstimateRequestForm from "./components/EstimateRequestForm";
 import FaqSchema from "./components/FaqSchema";
 import GoogleReviewsCarousel from "./components/GoogleReviewsCarousel";
+import ProcessStepImage from "./components/ProcessStepImage";
 import { areaLinks, serviceAreaNames } from "./components/navigationData";
 import {
   Carousel,
@@ -192,6 +193,13 @@ const processSteps = [
     panels: [],
   },
 ];
+
+const processGalleryImages = processSteps.map((step) => ({
+  src: step.image,
+  alt: `${step.title} painting process`,
+  title: step.title,
+  description: step.description,
+}));
 
 const faqs = [
   {
@@ -461,22 +469,12 @@ export default function HomePage() {
                     className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
                     style={{ animationDelay: `${index * 90}ms` }}
                   >
-                    <div className="relative h-56 overflow-hidden">
-                      <Image
-                        src={step.image}
-                        alt={`${step.title} painting process`}
-                        fill
-                        sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0c0d0e]/78 via-[#0c0d0e]/16 to-transparent opacity-90" />
-                      <div className="font-heading absolute top-4 left-4 border border-[#e4ad42]/60 bg-[#0c0d0e]/88 px-3 py-1 text-sm font-black text-[#e4ad42] shadow-[0_10px_28px_rgba(0,0,0,0.35)] backdrop-blur-sm">
-                        {String(index + 1).padStart(2, "0")}
-                      </div>
-                      <h3 className="font-heading absolute right-4 bottom-4 left-4 text-3xl leading-tight font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.65)]">
-                        {step.title}
-                      </h3>
-                    </div>
+                    <ProcessStepImage
+                      images={processGalleryImages}
+                      index={index}
+                      number={String(index + 1).padStart(2, "0")}
+                      title={step.title}
+                    />
                     <div className="flex flex-1 flex-col p-5">
                       <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
                         {step.description}

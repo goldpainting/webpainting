@@ -3,9 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaExpandAlt } from "react-icons/fa";
-import Lightbox from "yet-another-react-lightbox";
 
-import "yet-another-react-lightbox/styles.css";
+import ImageLightbox from "./ImageLightbox";
 
 export type ServiceGalleryImage = {
   src: string;
@@ -64,41 +63,11 @@ export default function ServiceImageGallery({
         ))}
       </div>
 
-      <Lightbox
+      <ImageLightbox
         open={open}
-        close={() => setOpen(false)}
+        onClose={() => setOpen(false)}
         index={index}
-        carousel={{ finite: true }}
-        styles={{
-          container: { backgroundColor: "rgba(12, 13, 14, 0.72)" },
-          slide: { padding: "clamp(24px, 8vw, 96px)" },
-          toolbar: { padding: "18px" },
-          navigationPrev: {
-            left: "calc(50% - min(42vw, 470px))",
-          },
-          navigationNext: {
-            right: "calc(50% - min(42vw, 470px))",
-          },
-        }}
-        render={{
-          slide: ({ slide }) => (
-            <div className="relative max-h-[72vh] w-[min(82vw,860px)]">
-              <Image
-                src={slide.src}
-                alt={slide.alt ?? ""}
-                width={1200}
-                height={900}
-                className="max-h-[72vh] w-full rounded-2xl object-contain shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
-              />
-            </div>
-          ),
-        }}
-        slides={images.map((image) => ({
-          src: image.src,
-          alt: image.alt,
-          title: image.title,
-          description: image.description,
-        }))}
+        images={images}
       />
     </>
   );
