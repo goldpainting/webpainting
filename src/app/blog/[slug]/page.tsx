@@ -1,18 +1,21 @@
-import Image from "next/image";
-import { type Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import Image from 'next/image';
+import { type Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { type ReactNode } from 'react';
 import {
+  FaArrowLeft,
+  FaArrowRight,
   FaCalendarAlt,
   FaCheckCircle,
   FaClock,
   FaHome,
   FaPaintRoller,
   FaPhone,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
-import { blogPosts, getBlogPost } from "../blogData";
-import { siteUrl } from "../../siteConfig";
+import { type BlogPost, blogPosts, getBlogPost } from '../blogData';
+import { siteUrl } from '../../siteConfig';
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
@@ -65,32 +68,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const relatedPosts = blogPosts.filter(
-    (relatedPost) => relatedPost.slug !== post.slug,
+    (relatedPost) => relatedPost.slug !== post.slug
   );
+  const currentPostIndex = blogPosts.findIndex(
+    (blogPost) => blogPost.slug === post.slug
+  );
+  const previousPost =
+    currentPostIndex > 0 ? blogPosts[currentPostIndex - 1] : null;
+  const nextPost =
+    currentPostIndex < blogPosts.length - 1
+      ? blogPosts[currentPostIndex + 1]
+      : null;
   const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
     image: `${siteUrl}${post.image}`,
     datePublished: post.dateTime,
     dateModified: post.dateTime,
     author: {
-      "@type": "Organization",
-      name: "Gold Lion Painting Inc",
+      '@type': 'Organization',
+      name: 'Gold Lion Painting Inc',
       url: siteUrl,
     },
     publisher: {
-      "@type": "Organization",
-      name: "Gold Lion Painting Inc",
+      '@type': 'Organization',
+      name: 'Gold Lion Painting Inc',
       logo: {
-        "@type": "ImageObject",
+        '@type': 'ImageObject',
         url: `${siteUrl}/gold-lion-painting-logo-512.png`,
       },
     },
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${siteUrl}/blog/${post.slug}`,
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/blog/${post.slug}`,
     },
   };
 
@@ -116,12 +128,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="relative mx-auto max-w-5xl">
             <Link
               href="/blog"
-              className="font-heading inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e] transition hover:bg-white"
+              className="inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 font-heading text-sm font-black text-[#0c0d0e] transition hover:bg-white"
             >
               <FaPaintRoller aria-hidden="true" />
               Blog
             </Link>
-            <h1 className="font-heading mt-7 text-4xl leading-tight font-black md:text-6xl">
+            <h1 className="mt-7 font-heading text-4xl leading-tight font-black md:text-6xl">
               {post.title}
             </h1>
             <div className="mt-6 flex flex-wrap gap-4 text-sm font-bold text-[#dddddd]">
@@ -139,12 +151,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <section className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.68fr)_0.32fr]">
-            {post.slug ===
-            "exterior-painting-lakewood-ranch-specialized-approach" ? (
-              <LakewoodRanchExteriorArticle />
-            ) : (
-              <FloridaPrepGuideArticle />
-            )}
+            <div>
+              {post.slug ===
+              'exterior-painting-lakewood-ranch-specialized-approach' ? (
+                <LakewoodRanchExteriorArticle />
+              ) : (
+                <FloridaPrepGuideArticle />
+              )}
+
+              <BlogPostPagination
+                previousPost={previousPost}
+                nextPost={nextPost}
+              />
+            </div>
 
             <aside className="space-y-6">
               <div className="sticky top-28 space-y-6">
@@ -172,16 +191,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <div className="mt-5 grid gap-3">
                     {[
                       {
-                        href: "/interior-painting",
-                        label: "Interior Painting",
+                        href: '/interior-painting',
+                        label: 'Interior Painting',
                       },
                       {
-                        href: "/exterior-painting",
-                        label: "Exterior Painting",
+                        href: '/exterior-painting',
+                        label: 'Exterior Painting',
                       },
                       {
-                        href: "/cabinet-painting",
-                        label: "Cabinet Painting",
+                        href: '/cabinet-painting',
+                        label: 'Cabinet Painting',
                       },
                     ].map((service) => (
                       <Link
@@ -211,7 +230,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           <p className="text-xs font-black text-[#a97a36] uppercase">
                             {relatedPost.category}
                           </p>
-                          <h3 className="font-heading mt-2 text-lg leading-tight font-black text-[#0c0d0e] group-hover:text-[#d90000]">
+                          <h3 className="mt-2 font-heading text-lg leading-tight font-black text-[#0c0d0e] group-hover:text-[#d90000]">
                             {relatedPost.title}
                           </h3>
                         </Link>
@@ -225,6 +244,72 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
       </article>
     </main>
+  );
+}
+
+function BlogPostPagination({
+  previousPost,
+  nextPost,
+}: {
+  previousPost: BlogPost | null;
+  nextPost: BlogPost | null;
+}) {
+  if (!previousPost && !nextPost) return null;
+
+  return (
+    <nav
+      aria-label="Blog article pagination"
+      className="mt-12 grid gap-4 border-t border-[#0c0d0e]/12 pt-8 md:grid-cols-2"
+    >
+      {previousPost ? (
+        <Link
+          href={`/blog/${previousPost.slug}`}
+          className="group rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5 transition hover:border-[#d90000] hover:bg-white"
+        >
+          <span className="inline-flex items-center gap-2 text-sm font-black text-[#a97a36] uppercase">
+            <FaArrowLeft aria-hidden="true" />
+            Previous article
+          </span>
+          <p className="mt-3 font-heading text-xl leading-tight font-black text-[#0c0d0e] group-hover:text-[#d90000]">
+            {previousPost.title}
+          </p>
+        </Link>
+      ) : (
+        <div />
+      )}
+
+      {nextPost ? (
+        <Link
+          href={`/blog/${nextPost.slug}`}
+          className="group rounded-2xl border border-[#e4ad42]/35 bg-[#0c0d0e] p-5 text-right transition hover:border-[#d90000] hover:bg-[#1f2124]"
+        >
+          <span className="inline-flex items-center justify-end gap-2 text-sm font-black text-[#e4ad42] uppercase">
+            Next article
+            <FaArrowRight aria-hidden="true" />
+          </span>
+          <p className="mt-3 font-heading text-xl leading-tight font-black text-white group-hover:text-[#e4ad42]">
+            {nextPost.title}
+          </p>
+        </Link>
+      ) : null}
+    </nav>
+  );
+}
+
+function InlineBlogLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+    >
+      {children}
+    </Link>
   );
 }
 
@@ -247,28 +332,11 @@ function LakewoodRanchExteriorArticle() {
           long-lasting materials that perform in Florida&apos;s challenging
           climate.
         </p>
-        <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7">
-          For the surface-prep side of this topic, read our{" "}
-          <Link
-            href="/blog/florida-painting-prep-guide"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
+        <p>
+          For the surface-prep side of this topic, read our{' '}
+          <InlineBlogLink href="/blog/florida-painting-prep-guide">
             Florida painting prep guide
-          </Link>
-          , then compare our{" "}
-          <Link
-            href="/exterior-painting"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
-            exterior painting service
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="/lakewood-ranch"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
-            Lakewood Ranch painting page
-          </Link>
+          </InlineBlogLink>
           .
         </p>
       </section>
@@ -288,14 +356,21 @@ function LakewoodRanchExteriorArticle() {
           just a few years. That is why choosing the correct exterior painting
           system is critical.
         </p>
+        <p>
+          You can compare the full service approach on our{' '}
+          <InlineBlogLink href="/exterior-painting">
+            exterior painting service
+          </InlineBlogLink>{' '}
+          page.
+        </p>
       </section>
 
       <section className="grid gap-5 md:grid-cols-2">
         {[
-          "Intense UV rays that fade colors quickly",
-          "High humidity that can lead to mold and mildew",
-          "Heavy rains that test coating durability",
-          "Heat movement that affects stucco, trim, and siding",
+          'Intense UV rays that fade colors quickly',
+          'High humidity that can lead to mold and mildew',
+          'Heavy rains that test coating durability',
+          'Heat movement that affects stucco, trim, and siding',
         ].map((item) => (
           <div
             key={item}
@@ -322,6 +397,13 @@ function LakewoodRanchExteriorArticle() {
           homeowners manage color approvals, keep finishes uniform, and stay
           aligned with community standards.
         </p>
+        <p>
+          For location-specific details, review our{' '}
+          <InlineBlogLink href="/lakewood-ranch">
+            Lakewood Ranch painting page
+          </InlineBlogLink>
+          .
+        </p>
       </section>
 
       <section className="bg-[#1f2124] p-7 text-[#dddddd]">
@@ -335,28 +417,28 @@ function LakewoodRanchExteriorArticle() {
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {[
             {
-              title: "Pressure Washing",
-              text: "We clean exterior surfaces to remove dirt, mold, mildew, and contaminants before coatings are applied.",
+              title: 'Pressure Washing',
+              text: 'We clean exterior surfaces to remove dirt, mold, mildew, and contaminants before coatings are applied.',
             },
             {
-              title: "Surface Preparation",
-              text: "We seal cracks with elastomeric caulking and repair stucco as needed before painting.",
+              title: 'Surface Preparation',
+              text: 'We seal cracks with elastomeric caulking and repair stucco as needed before painting.',
             },
             {
-              title: "Priming When Needed",
-              text: "High-quality primers, including Loxon conditioner where appropriate, help support adhesion.",
+              title: 'Priming When Needed',
+              text: 'High-quality primers, including Loxon conditioner where appropriate, help support adhesion.',
             },
             {
-              title: "Protection and Masking",
-              text: "Windows, floors, landscaping, fixtures, and exterior details are carefully protected.",
+              title: 'Protection and Masking',
+              text: 'Windows, floors, landscaping, fixtures, and exterior details are carefully protected.',
             },
             {
-              title: "Spray and Back-Roll Application",
-              text: "This technique helps create even coverage and stronger adhesion on exterior surfaces.",
+              title: 'Spray and Back-Roll Application',
+              text: 'This technique helps create even coverage and stronger adhesion on exterior surfaces.',
             },
             {
-              title: "Premium Paints",
-              text: "We use top-tier products such as Sherwin-Williams Duration and Emerald Rain Refresh.",
+              title: 'Premium Paints',
+              text: 'We use top-tier products such as Sherwin-Williams Duration and Emerald Rain Refresh.',
             },
           ].map((step) => (
             <article
@@ -470,28 +552,11 @@ function FloridaPrepGuideArticle() {
           whether the finish bonds like a professional coating or chips like a
           quick touch-up.
         </p>
-        <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7">
-          If you are comparing prep standards by project type, review our{" "}
-          <Link
-            href="/blog/exterior-painting-lakewood-ranch-specialized-approach"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
+        <p>
+          If you are comparing prep standards by location, review our{' '}
+          <InlineBlogLink href="/blog/exterior-painting-lakewood-ranch-specialized-approach">
             Lakewood Ranch exterior painting article
-          </Link>
-          , our{" "}
-          <Link
-            href="/interior-painting"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
-            interior painting service
-          </Link>
-          , and our{" "}
-          <Link
-            href="/cabinet-painting"
-            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-          >
-            cabinet painting service
-          </Link>
+          </InlineBlogLink>
           .
         </p>
       </section>
@@ -511,13 +576,20 @@ function FloridaPrepGuideArticle() {
           flexible sealants, substrate-specific primer where needed, and a
           coating system selected for the home&apos;s exposure.
         </p>
+        <p>
+          For full exterior repaint scopes, compare our{' '}
+          <InlineBlogLink href="/exterior-painting">
+            exterior painting service
+          </InlineBlogLink>
+          .
+        </p>
       </section>
 
       <section className="grid gap-5 md:grid-cols-3">
         {[
-          "Wash and remove chalky residue before coating.",
-          "Seal cracks and joints before finish coats.",
-          "Use durable products suited for Florida exposure.",
+          'Wash and remove chalky residue before coating.',
+          'Seal cracks and joints before finish coats.',
+          'Use durable products suited for Florida exposure.',
         ].map((item) => (
           <div
             key={item}
@@ -559,6 +631,13 @@ function FloridaPrepGuideArticle() {
           degreasing, sanding or deglossing, bonding primer, sprayed finish
           coats, curing time, and careful reinstallation.
         </p>
+        <p>
+          For kitchens and high-use surfaces, see our{' '}
+          <InlineBlogLink href="/cabinet-painting">
+            cabinet painting service
+          </InlineBlogLink>
+          .
+        </p>
       </section>
 
       <section className="bg-[#1f2124] p-7 text-[#dddddd]">
@@ -567,11 +646,11 @@ function FloridaPrepGuideArticle() {
         </h2>
         <ul className="mt-6 grid gap-4">
           {[
-            "Ask what prep is included, not just how many coats will be applied.",
-            "Confirm whether repairs, caulking, masking, and cleanup are part of the scope.",
-            "Discuss product options based on the surface and exposure.",
-            "Ask how occupied spaces, pets, furniture, and landscaping will be protected.",
-            "Request a clear estimate with the exact areas being painted.",
+            'Ask what prep is included, not just how many coats will be applied.',
+            'Confirm whether repairs, caulking, masking, and cleanup are part of the scope.',
+            'Discuss product options based on the surface and exposure.',
+            'Ask how occupied spaces, pets, furniture, and landscaping will be protected.',
+            'Request a clear estimate with the exact areas being painted.',
           ].map((item) => (
             <li key={item} className="flex items-start gap-3">
               <FaCheckCircle

@@ -7,6 +7,7 @@ import {
   FaExternalLinkAlt,
   FaFileContract,
   FaMapMarkedAlt,
+  FaMapMarkerAlt,
   FaPaintRoller,
   FaStar,
 } from 'react-icons/fa';
@@ -22,6 +23,7 @@ import {
   bbbProfileHref,
   businessHours,
   businessName,
+  googleMapsHref,
   googleRatingValue,
   googleReviewCount,
   googleReviewsHref,
@@ -58,6 +60,10 @@ const trustPoints = [
   `${googleRatingValue} Google rating from ${googleReviewCount} reviews`,
   businessHours,
 ];
+
+const homeMapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
+  'Gold Lion Painting Inc Sarasota Bradenton Florida'
+)}&output=embed`;
 
 const areaCards = [
   {
@@ -111,13 +117,13 @@ const areaCards = [
   {
     href: '/sarasota',
     label: 'Sarasota',
-    image: '/sarasota/sarasota_home.jpeg',
+    image: '/sarasota/house-exterior-painting-sarasota.jpeg',
     alt: 'Exterior house painting in Sarasota',
   },
   {
     href: '/siesta-key',
     label: 'Siesta Key',
-    image: '/siesta/siesta_key_home.jpeg',
+    image: '/siesta/siesta-exterior-home.jpeg',
     alt: 'Exterior house painting in Siesta Key',
   },
 ];
@@ -237,7 +243,7 @@ const serviceHighlights = [
   {
     title: 'Cabinet Refinishing',
     href: '/cabinet-painting',
-    image: '/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg',
+    image: '/home_refinishin.png',
     alt: 'Kitchen cabinet painting and refinishing project',
     text: 'Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.',
   },
@@ -450,43 +456,91 @@ export default function HomePage() {
       <SectionTitle title="House Painting Areas" />
       <CardGrid items={areaCards} icon={FaMapMarkedAlt} />
 
+      <section className="bg-white px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-center">
+          <div>
+            <p className="font-display text-sm font-black tracking-[0.16em] text-[#d39620] uppercase">
+              Local Coverage
+            </p>
+            <h2 className="mt-2 font-heading text-4xl leading-tight font-black text-[#d39620] md:text-5xl">
+              Areas We Serve
+            </h2>
+            <div className="mt-6 grid gap-2">
+              {areaLinks.map((area) => (
+                <Link
+                  key={area.href}
+                  href={area.href}
+                  className="group inline-flex items-center gap-3 text-base font-semibold text-[#0c0d0e] transition hover:text-[#d90000]"
+                >
+                  <FaMapMarkerAlt
+                    aria-hidden="true"
+                    className="shrink-0 text-[#d39620] transition group-hover:text-[#d90000]"
+                  />
+                  {area.label}, FL
+                </Link>
+              ))}
+            </div>
+            <p className="mt-6 max-w-sm font-heading text-lg leading-6 font-black text-[#d39620]">
+              Our familiarity with regional architecture allows us to adjust
+              coatings and finishes based on environmental exposure and
+              structural materials.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-[#0c0d0e] p-3 shadow-[0_22px_55px_rgba(0,0,0,0.18)]">
+            <iframe
+              title="Gold Lion Painting service area map"
+              src={homeMapEmbedUrl}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-[360px] w-full rounded-xl border-0"
+            />
+            <div className="flex flex-wrap items-center justify-between gap-3 px-2 py-3">
+              <p className="text-sm font-semibold text-[#dddddd]">
+                Gold Lion Painting Inc service area in Southwest Florida.
+              </p>
+              <a
+                href={googleMapsHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e] transition hover:bg-white"
+              >
+                Open Map
+                <FaExternalLinkAlt aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <SectionTitle title="More Services In Our Florida Service Area" />
       <CardGrid items={services} icon={FaPaintRoller} />
 
-      <section className="relative overflow-hidden bg-[#111214] px-4 py-16 text-[#dddddd] sm:px-6 lg:px-8">
-        <div className="texture-grid absolute inset-0 opacity-45" />
+      <section className="relative overflow-hidden bg-[#f1f1f1] px-4 py-14 text-[#0c0d0e] sm:px-6 lg:px-8">
         <div className="relative mx-auto max-w-6xl">
-          <div className="scroll-reveal grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-end">
-            <div>
-              <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
-                Step By Step
-              </p>
-              <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-white md:text-5xl">
-                Our Painting Process
-              </h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#dddddd]">
+          <div className="scroll-reveal mx-auto max-w-4xl text-center">
+            <p className="font-display text-sm font-black tracking-[0.16em] text-[#d39620] uppercase">
+              Step By Step
+            </p>
+            <h2 className="mt-2 font-heading text-3xl leading-tight font-black text-[#0c0d0e] md:text-4xl">
+              Our Painting Process
+            </h2>
+            <p className="mx-auto mt-3 max-w-3xl text-sm leading-6 text-[#343b43] md:text-base">
               At Gold Lion Painting Inc, every project follows a streamlined,
               detail-oriented process designed to deliver exceptional results
               with minimal disruption.
             </p>
           </div>
 
-          <div className="scroll-reveal mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+          <div className="scroll-reveal mx-auto mt-8 grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
             {processSteps.map((step, index) => (
               <article
                 key={step.title}
-                className="process-card group flex h-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f8f5ed] text-[#0c0d0e] shadow-[0_18px_34px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:border-[#e4ad42] hover:shadow-[0_24px_48px_rgba(0,0,0,0.42)]"
+                className={`process-card group flex h-full flex-col overflow-hidden bg-[#d9d9d9] text-[#0c0d0e] shadow-[0_12px_28px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(0,0,0,0.18)] ${
+                  index >= 3 ? 'lg:translate-x-[54%]' : ''
+                }`}
                 style={{ animationDelay: `${index * 90}ms` }}
               >
-                <div className="flex items-center gap-3 bg-[#0c0d0e] px-4 py-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#e4ad42]/55 bg-[#1f2124] font-heading text-sm font-black text-[#e4ad42]">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="font-heading text-lg leading-tight font-black text-white">
-                    {step.title.replace(/^\d+\.\s*/, '')}
-                  </h3>
-                </div>
                 <ProcessStepImage
                   images={processGalleryImages}
                   index={index}
@@ -494,23 +548,26 @@ export default function HomePage() {
                   compact
                 />
                 <div className="flex flex-1 flex-col p-4">
-                  <p className="border-l-4 border-[#e4ad42] pl-3 text-sm leading-6 font-semibold text-[#1f2124]">
+                  <h3 className="font-heading text-2xl leading-tight font-black text-[#1f2124]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#1f2124]">
                     {step.description}
                   </p>
 
                   {step.panels.length > 0 ? (
-                    <div className="mt-4 grid gap-2">
+                    <div className="mt-4 grid gap-0 overflow-hidden border border-[#0c0d0e]/10">
                       {step.panels.map((panel, panelIndex) => (
                         <details
                           key={panel.label}
                           open={panelIndex === 0}
-                          className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+                          className="process-accordion group/accordion overflow-hidden border-b border-[#0c0d0e]/10 bg-white last:border-b-0"
                         >
                           <summary className="flex cursor-pointer list-none items-center gap-2 bg-[#0c0d0e] px-3 py-2 text-sm font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
                             <span className="process-toggle text-lg font-black text-[#e4ad42]" />
                             {panel.label}:
                           </summary>
-                          <p className="bg-white px-4 py-4 text-sm leading-6 text-[#1f2124]">
+                          <p className="bg-[#efefef] px-4 py-3 text-sm leading-6 text-[#1f2124]">
                             {panel.text}
                           </p>
                         </details>
@@ -639,7 +696,7 @@ export default function HomePage() {
             </Link>
           </div>
           <Image
-            src="/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg"
+            src="/home_refinishin.png"
             alt="Cabinet painting and kitchen modernization in Bradenton"
             width={800}
             height={800}
@@ -675,8 +732,8 @@ export default function HomePage() {
           <div className="flex items-center justify-center p-6 lg:p-10">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:max-w-lg">
               <Image
-                src="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
-                alt="Exterior painting consultation for a Florida home"
+                src="/consultation/color_consulation.png"
+                alt="Gold Lion Painting color consultation design preview"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

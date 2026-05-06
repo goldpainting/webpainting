@@ -4,8 +4,6 @@ import { type ReactNode } from 'react';
 import {
   FaArrowRight,
   FaCheckCircle,
-  FaChevronRight,
-  FaMapMarkedAlt,
   FaPaintRoller,
 } from 'react-icons/fa';
 
@@ -18,6 +16,7 @@ import { type PageImage } from '../content/pageImages';
 import { businessPhone } from '../siteConfig';
 import FaqSchema from './FaqSchema';
 import MarkdownFaqAccordion from './MarkdownFaqAccordion';
+import TrustSections from './TrustSections';
 
 type InterlinkCard = {
   href: string;
@@ -65,16 +64,12 @@ export default function MarkdownLandingPage({
   eyebrow,
   heroImage,
   heroAlt,
-  interlinkTitle,
-  interlinks,
-  interlinkType,
   pageImages = [],
 }: MarkdownLandingPageProps) {
   const blocks = parseMarkdownContent(raw);
   const faqs = extractMarkdownFaqs(raw);
   const { title, heroBlocks, contentBlocks } = getHeroAndContent(blocks);
   const schemaId = `${eyebrow.toLowerCase().replaceAll(/\s+/g, '-')}-faq-schema`;
-  const relatedInterlinks = interlinks.slice(0, 3);
 
   return (
     <main className="bg-white text-[#0c0d0e]">
@@ -132,54 +127,7 @@ export default function MarkdownLandingPage({
 
       <MarkdownFaqAccordion faqs={faqs} />
 
-      <section className="bg-[#f3f3f3] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center">
-            <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
-              {interlinkTitle}
-            </h2>
-            <div className="mx-auto mt-5 h-1.5 w-2/3 max-w-xl bg-[#e4ad42]" />
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {relatedInterlinks.map((card) => (
-              <Link
-                key={`${card.title}-${card.href}`}
-                href={card.href}
-                className="hover-lift group relative bg-[#e4ad42] p-4 shadow-[1px_1px_10px_rgba(0,0,0,0.5)]"
-              >
-                <Image
-                  src={card.image}
-                  alt={card.alt}
-                  width={700}
-                  height={500}
-                  className="h-56 w-full rounded-xl object-cover"
-                />
-                <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
-                  {card.title}
-                </h3>
-                <span className="mt-5 inline-flex items-center gap-2 text-base font-black text-[#0c0d0e]">
-                  More
-                  <FaChevronRight
-                    aria-hidden="true"
-                    className="transition group-hover:translate-x-1"
-                  />
-                </span>
-                {interlinkType === 'areas' ? (
-                  <FaMapMarkedAlt
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-[-10px] bottom-[-14px] hidden h-20 w-20 rounded-full bg-[#0c0d0e] p-4 text-[#e4ad42] opacity-90 md:block"
-                  />
-                ) : (
-                  <FaPaintRoller
-                    aria-hidden="true"
-                    className="pointer-events-none absolute right-[-10px] bottom-[-14px] hidden h-20 w-20 rounded-full bg-[#0c0d0e] p-4 text-[#e4ad42] opacity-90 md:block"
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TrustSections />
 
       <section className="bg-[#d39620] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">

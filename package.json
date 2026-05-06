@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "dev":"next dev",
     "check": "npm run lint && tsc --noEmit",
     "start": "next start",
     "lint": "eslint . --cache",
