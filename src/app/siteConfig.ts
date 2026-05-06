@@ -21,11 +21,11 @@ export const serviceAreaNames = [
   "Ellenton",
   "Lakewood Ranch",
   "Anna Maria Island",
-  "Holmes Beach",
-  "Sarasota",
-  "Siesta Key",
-  "Venice",
   "Palmetto",
+  "Holmes Beach",
+  "Venice",
+  "Siesta Key",
+  "Sarasota",
 ];
 
 export const businessAddress = {

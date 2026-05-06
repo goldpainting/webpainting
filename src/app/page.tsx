@@ -102,6 +102,30 @@ const areaCards = [
     image: "/anamaria/luxury-exterior-painting-anna-maria-02.jpg.jpg",
     alt: "Luxury exterior painting in Anna Maria Island",
   },
+  {
+    href: "/holmes-beach",
+    label: "Holmes Beach",
+    image: "/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg.jpg",
+    alt: "Luxury exterior painting in Holmes Beach",
+  },
+  {
+    href: "/venice",
+    label: "Venice",
+    image: "/venice/house-exterior-painting-venice.jpg",
+    alt: "Exterior house painting in Venice",
+  },
+  {
+    href: "/siesta-key",
+    label: "Siesta Key",
+    image: "/siesta-key/house-exterior-painting-siesta-key.jpg",
+    alt: "Exterior painting project in Siesta Key",
+  },
+  {
+    href: "/sarasota",
+    label: "Sarasota",
+    image: "/sarasota/house-exterior-painting-sarasota.jpg",
+    alt: "Exterior house painting in Sarasota",
+  },
 ];
 
 const services = [
