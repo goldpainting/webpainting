@@ -32,6 +32,8 @@ type GoogleReviewsData = {
 
 type GoogleReviewsCarouselProps = {
   areaName?: string;
+  maxReviews?: number;
+  showDates?: boolean;
 };
 
 const VISIBLE_CARDS = 3;
@@ -65,6 +67,8 @@ function AvatarWithFallback({
 
 export default function GoogleReviewsCarousel({
   areaName,
+  maxReviews = 3,
+  showDates = true,
 }: GoogleReviewsCarouselProps) {
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -89,7 +93,18 @@ export default function GoogleReviewsCarousel({
         }
         const json = await res.json();
         if (!cancelled) {
-          const sorted = (json.reviews ?? [])
+          const reviewsFromApi = (json.reviews ?? []) as Review[];
+          const reviewsWithRealAuthorAndText = reviewsFromApi.filter(
+            (review) =>
+              review.authorName &&
+              review.authorName !== "Anonymous" &&
+              Boolean(review.originalText || review.text),
+          );
+          const selectedReviews =
+            reviewsWithRealAuthorAndText.length >= maxReviews
+              ? reviewsWithRealAuthorAndText
+              : reviewsFromApi;
+          const sorted = selectedReviews
             .sort((a: Review, b: Review) => {
               if (b.rating !== a.rating) return b.rating - a.rating;
               return (
@@ -97,7 +112,7 @@ export default function GoogleReviewsCarousel({
                 new Date(a.publishTime).getTime()
               );
             })
-            .slice(0, 3);
+            .slice(0, maxReviews);
           setData({ ...json, reviews: sorted });
           setError(null);
         }
@@ -116,7 +131,7 @@ export default function GoogleReviewsCarousel({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [maxReviews]);
 
   const navigate = useCallback((direction: "left" | "right") => {
     if (totalPages <= 1) return;
@@ -249,9 +264,11 @@ export default function GoogleReviewsCarousel({
                           <p className="truncate font-semibold text-[#0c0d0e]">
                             {review.authorName}
                           </p>
-                          <p className="text-xs text-[#5d646b]">
-                            {review.relativeTime}
-                          </p>
+                          {showDates && review.relativeTime ? (
+                            <p className="text-xs text-[#5d646b]">
+                              {review.relativeTime}
+                            </p>
+                          ) : null}
                         </div>
                         <FaGoogle
                           className="h-5 w-5 shrink-0 text-[#4285f4]"

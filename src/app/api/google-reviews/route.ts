@@ -14,7 +14,7 @@ export async function GET() {
 
   try {
     const response = await fetch(
-      `https://places.googleapis.com/v1/places/${googlePlaceId}`,
+      `https://places.googleapis.com/v1/places/${googlePlaceId}?languageCode=en`,
       {
         method: "GET",
         headers: {

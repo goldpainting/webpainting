@@ -322,7 +322,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <GoogleReviewsCarousel />
+      <GoogleReviewsCarousel maxReviews={3} showDates={false} />
 
       <section
         id="bbb-accredited"
