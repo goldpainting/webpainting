@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   FaChevronLeft,
   FaChevronRight,
   FaGoogle,
   FaStar,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 import {
   googleRatingValue,
   googleReviewCount,
   googleReviewsHref,
   googleWriteReviewHref,
-} from "../siteConfig";
+} from '../siteConfig';
 
 export type Review = {
   text: string;
@@ -39,6 +39,7 @@ type GoogleReviewsData = {
 type GoogleReviewsCarouselProps = {
   areaName?: string;
   maxReviews?: number;
+  randomizeOnLoad?: boolean;
   showDates?: boolean;
   featuredReviews?: Review[];
 };
@@ -75,9 +76,30 @@ function AvatarWithFallback({
   );
 }
 
+function pickReviews(
+  reviews: Review[],
+  maxReviews: number,
+  randomizeOnLoad: boolean
+) {
+  if (randomizeOnLoad) {
+    return [...reviews].sort(() => Math.random() - 0.5).slice(0, maxReviews);
+  }
+
+  return [...reviews]
+    .sort((a: Review, b: Review) => {
+      if (b.rating !== a.rating) return b.rating - a.rating;
+
+      return (
+        new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
+      );
+    })
+    .slice(0, maxReviews);
+}
+
 export default function GoogleReviewsCarousel({
   areaName,
   maxReviews = 3,
+  randomizeOnLoad = false,
   showDates = true,
   featuredReviews,
 }: GoogleReviewsCarouselProps) {
@@ -95,17 +117,21 @@ export default function GoogleReviewsCarousel({
 
     async function fetchReviews() {
       try {
-        const res = await fetch("/api/google-reviews");
+        const res = await fetch('/api/google-reviews');
         if (!res.ok) {
           const body = await res.json().catch(() => null);
-          throw new Error(body?.error || "Failed to fetch reviews");
+          throw new Error(body?.error || 'Failed to fetch reviews');
         }
         const json = await res.json();
         if (!cancelled) {
           if (featuredReviews?.length) {
             setData({
               ...json,
-              reviews: featuredReviews.slice(0, maxReviews),
+              reviews: pickReviews(
+                featuredReviews,
+                maxReviews,
+                randomizeOnLoad
+              ),
             });
             setError(null);
             return;
@@ -115,22 +141,18 @@ export default function GoogleReviewsCarousel({
           const reviewsWithRealAuthorAndText = reviewsFromApi.filter(
             (review) =>
               review.authorName &&
-              review.authorName !== "Anonymous" &&
-              Boolean(review.originalText || review.text),
+              review.authorName !== 'Anonymous' &&
+              Boolean(review.originalText || review.text)
           );
           const selectedReviews =
             reviewsWithRealAuthorAndText.length >= maxReviews
               ? reviewsWithRealAuthorAndText
               : reviewsFromApi;
-          const sorted = selectedReviews
-            .sort((a: Review, b: Review) => {
-              if (b.rating !== a.rating) return b.rating - a.rating;
-              return (
-                new Date(b.publishTime).getTime() -
-                new Date(a.publishTime).getTime()
-              );
-            })
-            .slice(0, maxReviews);
+          const sorted = pickReviews(
+            selectedReviews,
+            maxReviews,
+            randomizeOnLoad
+          );
           setData({ ...json, reviews: sorted });
           setError(null);
         }
@@ -138,14 +160,18 @@ export default function GoogleReviewsCarousel({
         if (!cancelled) {
           if (featuredReviews?.length) {
             setData({
-              placeId: "",
+              placeId: '',
               rating: Number(googleRatingValue),
               reviewCount: Number(googleReviewCount),
-              reviews: featuredReviews.slice(0, maxReviews),
+              reviews: pickReviews(
+                featuredReviews,
+                maxReviews,
+                randomizeOnLoad
+              ),
             });
             setError(null);
           } else {
-            setError(e instanceof Error ? e.message : "Unknown error");
+            setError(e instanceof Error ? e.message : 'Unknown error');
           }
         }
       } finally {
@@ -159,10 +185,10 @@ export default function GoogleReviewsCarousel({
     return () => {
       cancelled = true;
     };
-  }, [featuredReviews, maxReviews]);
+  }, [featuredReviews, maxReviews, randomizeOnLoad]);
 
   const navigate = useCallback(
-    (direction: "left" | "right") => {
+    (direction: 'left' | 'right') => {
       if (totalPages <= 1) return;
       if (isZoomedOut) return; // prevent double-clicks
 
@@ -171,17 +197,17 @@ export default function GoogleReviewsCarousel({
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setCurrentIndex((prev) => {
-          if (direction === "left") return (prev - 1 + totalPages) % totalPages;
+          if (direction === 'left') return (prev - 1 + totalPages) % totalPages;
           return (prev + 1) % totalPages;
         });
         setIsZoomedOut(false);
       }, 300);
     },
-    [totalPages, isZoomedOut],
+    [totalPages, isZoomedOut]
   );
 
-  const scrollLeft = useCallback(() => navigate("left"), [navigate]);
-  const scrollRight = useCallback(() => navigate("right"), [navigate]);
+  const scrollLeft = useCallback(() => navigate('left'), [navigate]);
+  const scrollRight = useCallback(() => navigate('right'), [navigate]);
 
   const displayRating = data?.rating ?? Number(googleRatingValue);
   const displayReviewCount = data?.reviewCount ?? Number(googleReviewCount);
@@ -189,7 +215,7 @@ export default function GoogleReviewsCarousel({
 
   const visibleReviews = reviews.slice(
     currentIndex * VISIBLE_CARDS,
-    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS,
+    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS
   );
 
   return (
@@ -200,7 +226,7 @@ export default function GoogleReviewsCarousel({
             <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
               {areaName
                 ? `Real Google reviews from clients near ${areaName}`
-                : "Real Google reviews from our clients"}
+                : 'Real Google reviews from our clients'}
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-[#5d646b]">
               These reviews load directly from the Google Business Profile
@@ -252,14 +278,14 @@ export default function GoogleReviewsCarousel({
                 aria-hidden="true"
                 className="mx-auto text-4xl text-[#4285f4]"
               />
-              <h3 className="font-heading mt-4 text-2xl font-black text-[#0c0d0e]">
+              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
                 Google Reviews not available
               </h3>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-6">
-                Configure{" "}
+                Configure{' '}
                 <code className="mx-1 rounded bg-white px-2 py-1">
                   GOOGLE_PLACES_API_KEY
-                </code>{" "}
+                </code>{' '}
                 in your environment variables to display real reviews.
               </p>
               <a
@@ -276,7 +302,7 @@ export default function GoogleReviewsCarousel({
               <div
                 className="transition-transform duration-300 ease-out"
                 style={{
-                  transform: isZoomedOut ? "scale(0.85)" : "scale(1)",
+                  transform: isZoomedOut ? 'scale(0.85)' : 'scale(1)',
                   opacity: isZoomedOut ? 0.5 : 1,
                 }}
               >
@@ -311,7 +337,7 @@ export default function GoogleReviewsCarousel({
                         {[1, 2, 3, 4, 5].map((star) => (
                           <FaStar
                             key={star}
-                            className={`h-3.5 w-3.5 ${star <= review.rating ? "text-[#f5aa00]" : "text-[#d1d5db]"}`}
+                            className={`h-3.5 w-3.5 ${star <= review.rating ? 'text-[#f5aa00]' : 'text-[#d1d5db]'}`}
                             aria-hidden="true"
                           />
                         ))}
@@ -384,8 +410,8 @@ export default function GoogleReviewsCarousel({
                         }}
                         className={`h-2.5 w-2.5 rounded-full transition-all ${
                           index === currentIndex
-                            ? "scale-125 bg-[#1f5fec]"
-                            : "bg-[#d1d5db] hover:bg-[#9ca3af]"
+                            ? 'scale-125 bg-[#1f5fec]'
+                            : 'bg-[#d1d5db] hover:bg-[#9ca3af]'
                         }`}
                         aria-label={`Go to reviews page ${index + 1}`}
                       />
@@ -400,7 +426,7 @@ export default function GoogleReviewsCarousel({
                 aria-hidden="true"
                 className="mx-auto text-4xl text-[#4285f4]"
               />
-              <h3 className="font-heading mt-4 text-2xl font-black text-[#0c0d0e]">
+              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
                 No reviews available
               </h3>
               <p className="mx-auto mt-3 max-w-2xl text-sm leading-6">

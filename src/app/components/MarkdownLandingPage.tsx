@@ -7,12 +7,14 @@ import {
   FaChevronRight,
   FaMapMarkedAlt,
   FaPaintRoller,
+  FaPlus,
 } from 'react-icons/fa';
 
 import {
   extractMarkdownFaqs,
   parseMarkdownContent,
   type MarkdownBlock,
+  type MarkdownFaq,
 } from '../content/markdownContent';
 import { type PageImage } from '../content/pageImages';
 import { businessPhone } from '../siteConfig';
@@ -128,6 +130,8 @@ export default function MarkdownLandingPage({
           </div>
         </div>
       </section>
+
+      <MarkdownFaqSection faqs={faqs} />
 
       <section className="bg-[#f3f3f3] px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -245,9 +249,10 @@ function renderContentSections(
     }
   }
 
-  const imageGroups = assignImagesToSections(sections, pageImages);
+  const visibleSections = sections.filter(isNotFaqSection);
+  const imageGroups = assignImagesToSections(visibleSections, pageImages);
 
-  return sections.map((section, index) => {
+  return visibleSections.map((section, index) => {
     const sectionImages = imageGroups[index] ?? [];
 
     return (
@@ -281,6 +286,10 @@ function renderContentSections(
       </article>
     );
   });
+}
+
+function isNotFaqSection(section: { heading: string }) {
+  return !/frequently asked questions/i.test(section.heading);
 }
 
 function ContentBlock({ block }: { block: MarkdownBlock }) {
@@ -353,6 +362,45 @@ function renderInlineLinks(text: string) {
   }
 
   return parts.length > 0 ? parts : text;
+}
+
+function MarkdownFaqSection({ faqs }: { faqs: MarkdownFaq[] }) {
+  if (faqs.length === 0) return null;
+
+  return (
+    <section className="bg-[#f5f5f5] px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl rounded-[2rem] border border-[#e4ad42]/25 bg-white p-5 shadow-[0_24px_70px_rgba(0,0,0,0.12)] sm:p-8 lg:p-10">
+        <div className="mb-9 max-w-3xl">
+          <p className="font-display text-xs font-black tracking-[0.2em] text-[#e4ad42] uppercase">
+            Help Center
+          </p>
+          <h2 className="mt-2 font-heading text-4xl leading-tight font-black text-[#0c0d0e] sm:text-5xl">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div className="space-y-5">
+          {faqs.map((faq, index) => (
+            <details
+              key={faq.q}
+              className="group rounded-[1.35rem] border border-[#0c0d0e]/12 bg-[#f9f9f9] shadow-[0_14px_35px_rgba(0,0,0,0.06)] transition open:border-[#e4ad42] open:bg-white"
+              open={index === 0}
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 font-heading text-lg font-black text-[#0c0d0e] transition hover:text-[#a97a36] sm:px-7 sm:py-6 sm:text-xl [&::-webkit-details-marker]:hidden">
+                <span>{renderInlineLinks(faq.q)}</span>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#0c0d0e] text-[#e4ad42] shadow-[0_10px_24px_rgba(0,0,0,0.24)] transition group-open:rotate-45 group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                  <FaPlus aria-hidden="true" />
+                </span>
+              </summary>
+              <div className="border-t border-[#0c0d0e]/10 px-5 pb-6 text-base leading-8 text-[#1f2124] sm:px-7 sm:text-lg">
+                {renderInlineLinks(faq.a)}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function SectionImageGrid({

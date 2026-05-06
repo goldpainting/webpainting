@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import { type Metadata } from "next";
+import Image from 'next/image';
+import Link from 'next/link';
+import { type Metadata } from 'next';
 import {
   FaCheckCircle,
   FaChevronRight,
@@ -9,14 +9,14 @@ import {
   FaMapMarkedAlt,
   FaPaintRoller,
   FaStar,
-} from "react-icons/fa";
-import { type IconType } from "react-icons";
+} from 'react-icons/fa';
+import { type IconType } from 'react-icons';
 
-import EstimateRequestForm from "./components/EstimateRequestForm";
-import FaqSchema from "./components/FaqSchema";
-import GoogleReviewsCarousel from "./components/GoogleReviewsCarousel";
-import ProcessStepImage from "./components/ProcessStepImage";
-import { areaLinks, serviceAreaNames } from "./components/navigationData";
+import EstimateRequestForm from './components/EstimateRequestForm';
+import FaqSchema from './components/FaqSchema';
+import GoogleReviewsCarousel from './components/GoogleReviewsCarousel';
+import ProcessStepImage from './components/ProcessStepImage';
+import { areaLinks, serviceAreaNames } from './components/navigationData';
 
 import {
   bbbProfileHref,
@@ -26,188 +26,188 @@ import {
   googleReviewCount,
   googleReviewsHref,
   siteUrl,
-} from "./siteConfig";
+} from './siteConfig';
 
 export const metadata: Metadata = {
-  title: "Gold Lion Painting Inc | Interior, Exterior & Cabinet Painters",
+  title: 'Gold Lion Painting Inc | Interior, Exterior & Cabinet Painters',
   description:
-    "Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, cabinet refinishing, and color consultation across Bradenton, Sarasota, Tampa, St. Petersburg, and nearby Florida service areas.",
+    'Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, cabinet refinishing, and color consultation across Bradenton, Sarasota, Tampa, St. Petersburg, and nearby Florida service areas.',
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
   openGraph: {
-    title: "Gold Lion Painting Inc | Interior, Exterior & Cabinet Painters",
+    title: 'Gold Lion Painting Inc | Interior, Exterior & Cabinet Painters',
     description:
-      "Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, cabinet refinishing, and color consultation across Bradenton, Sarasota, Tampa, St. Petersburg, and nearby Florida service areas.",
+      'Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, cabinet refinishing, and color consultation across Bradenton, Sarasota, Tampa, St. Petersburg, and nearby Florida service areas.',
     url: siteUrl,
     images: [
       {
-        url: "/home/luxury-exterior-painting-anna-maria.jpg",
+        url: '/home/luxury-exterior-painting-anna-maria.jpg',
         width: 1200,
         height: 900,
-        alt: "Gold Lion Painting exterior painting project in Bradenton, Sarasota",
+        alt: 'Gold Lion Painting exterior painting project in Bradenton, Sarasota',
       },
     ],
   },
 };
 
 const trustPoints = [
-  "Fully insured residential painting company",
-  "Experienced painters with 10+ years in the trade",
-  "5-Year Limited Workmanship Warranty",
+  'Fully insured residential painting company',
+  'Experienced painters with 10+ years in the trade',
+  '5-Year Limited Workmanship Warranty',
   `${googleRatingValue} Google rating from ${googleReviewCount} reviews`,
   businessHours,
 ];
 
 const areaCards = [
   {
-    href: "/bradenton",
-    label: "Bradenton",
-    image: "/bradenton/luxury-exterior-painting-bradenton-02.jpg.jpg",
-    alt: "Luxury exterior painting project in Bradenton",
+    href: '/bradenton',
+    label: 'Bradenton',
+    image: '/bradenton/luxury-exterior-painting-bradenton-02.jpg.jpg',
+    alt: 'Luxury exterior painting project in Bradenton',
   },
   {
-    href: "/lakewood-ranch",
-    label: "Lakewood Ranch",
-    image: "/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg",
-    alt: "Exterior house painting in Lakewood Ranch",
+    href: '/lakewood-ranch',
+    label: 'Lakewood Ranch',
+    image: '/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg',
+    alt: 'Exterior house painting in Lakewood Ranch',
   },
   {
-    href: "/parrish",
-    label: "Parrish",
-    image: "/parrish/house-exterior-painting-parrish.jpg",
-    alt: "Exterior painting project in Parrish",
+    href: '/parrish',
+    label: 'Parrish',
+    image: '/parrish/house-exterior-painting-parrish.jpg',
+    alt: 'Exterior painting project in Parrish',
   },
   {
-    href: "/palmetto",
-    label: "Palmetto",
-    image: "/palmeto/house-exterior-painting-palmetto.jpg",
-    alt: "Exterior house painting in Palmetto",
+    href: '/palmetto',
+    label: 'Palmetto',
+    image: '/palmeto/house-exterior-painting-palmetto.jpg',
+    alt: 'Exterior house painting in Palmetto',
   },
   {
-    href: "/ellenton",
-    label: "Ellenton",
-    image: "/ellenton/professional-exterior-painter-ellenton.jpg",
-    alt: "Professional exterior painting in Ellenton",
+    href: '/ellenton',
+    label: 'Ellenton',
+    image: '/ellenton/professional-exterior-painter-ellenton.jpg',
+    alt: 'Professional exterior painting in Ellenton',
   },
   {
-    href: "/ana-maria",
-    label: "Anna Maria Island",
-    image: "/anamaria/luxury-exterior-painting-anna-maria-02.jpg.jpg",
-    alt: "Luxury exterior painting in Anna Maria Island",
+    href: '/ana-maria',
+    label: 'Anna Maria Island',
+    image: '/anamaria/luxury-exterior-painting-anna-maria-02.jpg.jpg',
+    alt: 'Luxury exterior painting in Anna Maria Island',
   },
   {
-    href: "/holmes-beach",
-    label: "Holmes Beach",
-    image: "/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg",
-    alt: "Luxury exterior painting in Holmes Beach",
+    href: '/holmes-beach',
+    label: 'Holmes Beach',
+    image: '/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg',
+    alt: 'Luxury exterior painting in Holmes Beach',
   },
   {
-    href: "/venice",
-    label: "Venice",
-    image: "/venice/exterior-painting-venice.jpeg",
-    alt: "Exterior house painting in Venice",
+    href: '/venice',
+    label: 'Venice',
+    image: '/venice/exterior-painting-venice.jpeg',
+    alt: 'Exterior house painting in Venice',
   },
   {
-    href: "/sarasota",
-    label: "Sarasota",
-    image: "/sarasota/sarasota_home.jpeg",
-    alt: "Exterior house painting in Sarasota",
+    href: '/sarasota',
+    label: 'Sarasota',
+    image: '/sarasota/sarasota_home.jpeg',
+    alt: 'Exterior house painting in Sarasota',
   },
   {
-    href: "/siesta-key",
-    label: "Siesta Key",
-    image: "/siesta/siesta_key_home.jpeg",
-    alt: "Exterior house painting in Siesta Key",
+    href: '/siesta-key',
+    label: 'Siesta Key',
+    image: '/siesta/siesta_key_home.jpeg',
+    alt: 'Exterior house painting in Siesta Key',
   },
 ];
 
 const services = [
   {
-    title: "Interior Painting",
-    href: "/interior-painting",
-    image: "/home/interior-house-painting-anna-maria-.jpg",
-    alt: "Interior painting project by Gold Lion Painting Inc",
+    title: 'Interior Painting',
+    href: '/interior-painting',
+    image: '/home/interior-house-painting-anna-maria-.jpg',
+    alt: 'Interior painting project by Gold Lion Painting Inc',
     description:
-      "Full interior repainting for walls, ceilings, trim, doors, crown molding, accent walls, and occupied homes that need cleaner finishes.",
+      'Full interior repainting for walls, ceilings, trim, doors, crown molding, accent walls, and occupied homes that need cleaner finishes.',
   },
   {
-    title: "Exterior Painting",
-    href: "/exterior-painting",
-    image: "/home/luxury-exterior-painting-anna-maria.jpg",
-    alt: "Exterior house painting project by Gold Lion Painting Inc",
+    title: 'Exterior Painting',
+    href: '/exterior-painting',
+    image: '/home/luxury-exterior-painting-anna-maria.jpg',
+    alt: 'Exterior house painting project by Gold Lion Painting Inc',
     description:
-      "Exterior repaint systems built for Florida sun, humidity, rain cycles, stucco movement, caulking, crack repair, and durable curb appeal.",
+      'Exterior repaint systems built for Florida sun, humidity, rain cycles, stucco movement, caulking, crack repair, and durable curb appeal.',
   },
   {
-    title: "Cabinet Painting",
-    href: "/cabinet-painting",
-    image: "/home/kitchen-cabinet-painting.jpg",
-    alt: "Kitchen cabinet painting project by Gold Lion Painting Inc",
+    title: 'Cabinet Painting',
+    href: '/cabinet-painting',
+    image: '/home/kitchen-cabinet-painting.jpg',
+    alt: 'Kitchen cabinet painting project by Gold Lion Painting Inc',
     description:
-      "Cabinet refinishing and kitchen modernization using degreasing, sanding, bonding primers, and controlled cabinet-grade finishes.",
+      'Cabinet refinishing and kitchen modernization using degreasing, sanding, bonding primers, and controlled cabinet-grade finishes.',
   },
 ];
 
 const processSteps = [
   {
-    title: "1. Setup",
-    image: "/process/1..png",
+    title: '1. Setup',
+    image: '/process/1..png',
     description:
-      "We begin by preparing your space to ensure full protection and efficiency.",
+      'We begin by preparing your space to ensure full protection and efficiency.',
     panels: [
       {
-        label: "Interior",
-        text: "Furniture and decor are carefully moved or covered. Floors and surfaces are fully protected using clean drop cloths and plastic coverings.",
+        label: 'Interior',
+        text: 'Furniture and decor are carefully moved or covered. Floors and surfaces are fully protected using clean drop cloths and plastic coverings.',
       },
       {
-        label: "Exterior",
-        text: "All surfaces are thoroughly cleaned using power washing or hand washing to remove dirt, mildew, and debris, ensuring proper paint adhesion.",
+        label: 'Exterior',
+        text: 'All surfaces are thoroughly cleaned using power washing or hand washing to remove dirt, mildew, and debris, ensuring proper paint adhesion.',
       },
     ],
   },
   {
-    title: "2. Preparation",
-    image: "/process/2.png",
-    description: "Proper prep is the foundation of a long-lasting finish.",
+    title: '2. Preparation',
+    image: '/process/2.png',
+    description: 'Proper prep is the foundation of a long-lasting finish.',
     panels: [
       {
-        label: "Interior",
-        text: "We repair minor imperfections, including cracks and holes, and smooth all surfaces. Stains are sealed to prevent bleed-through.",
+        label: 'Interior',
+        text: 'We repair minor imperfections, including cracks and holes, and smooth all surfaces. Stains are sealed to prevent bleed-through.',
       },
       {
-        label: "Exterior",
-        text: "Loose or peeling paint is removed, surfaces are sanded, and gaps are sealed with high-quality caulk to prevent moisture intrusion.",
+        label: 'Exterior',
+        text: 'Loose or peeling paint is removed, surfaces are sanded, and gaps are sealed with high-quality caulk to prevent moisture intrusion.',
       },
     ],
   },
   {
-    title: "3. Painting",
-    image: "/process/3.png",
-    description: "This is where your vision comes to life.",
+    title: '3. Painting',
+    image: '/process/3.png',
+    description: 'This is where your vision comes to life.',
     panels: [
       {
-        label: "Interior",
-        text: "Repaired areas are primed, and premium-quality paint is applied evenly to achieve a smooth, consistent finish.",
+        label: 'Interior',
+        text: 'Repaired areas are primed, and premium-quality paint is applied evenly to achieve a smooth, consistent finish.',
       },
       {
-        label: "Exterior",
+        label: 'Exterior',
         text: "We apply high-performance coatings designed to withstand Florida's climate, ensuring durability and a flawless appearance.",
       },
     ],
   },
   {
-    title: "4. Clean-Up",
-    image: "/process/4.png",
+    title: '4. Clean-Up',
+    image: '/process/4.png',
     description:
-      "We maintain a clean, organized workspace throughout the project. Once the job is complete, we remove all materials, coverings, and debris, leaving your space spotless and ready to enjoy.",
+      'We maintain a clean, organized workspace throughout the project. Once the job is complete, we remove all materials, coverings, and debris, leaving your space spotless and ready to enjoy.',
     panels: [],
   },
   {
-    title: "Final Inspection",
-    image: "/process/5.png",
+    title: 'Final Inspection',
+    image: '/process/5.png',
     description:
-      "Your satisfaction is our priority. We conduct a detailed walkthrough with you to ensure every detail meets your expectations. Any final touch-ups are addressed promptly to guarantee a flawless result.",
+      'Your satisfaction is our priority. We conduct a detailed walkthrough with you to ensure every detail meets your expectations. Any final touch-ups are addressed promptly to guarantee a flawless result.',
     panels: [],
   },
 ];
@@ -221,48 +221,48 @@ const processGalleryImages = processSteps.map((step) => ({
 
 const serviceHighlights = [
   {
-    title: "Exterior Systems",
-    href: "/exterior-painting",
-    image: "/services/house-exterior-painting-manatee-county.jpg",
-    alt: "Exterior painting system for a Florida home",
-    text: "Weather-aware exterior repainting for stucco, trim, doors, soffits, fascia, and coastal Florida exposure.",
+    title: 'Exterior Systems',
+    href: '/exterior-painting',
+    image: '/services/house-exterior-painting-manatee-county.jpg',
+    alt: 'Exterior painting system for a Florida home',
+    text: 'Weather-aware exterior repainting for stucco, trim, doors, soffits, fascia, and coastal Florida exposure.',
   },
   {
-    title: "Interior Finishes",
-    href: "/interior-painting",
-    image: "/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg",
-    alt: "Luxury interior painting finish in Bradenton",
-    text: "Clean interior painting for walls, ceilings, trim, doors, occupied homes, and high-visibility living spaces.",
+    title: 'Interior Finishes',
+    href: '/interior-painting',
+    image: '/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg',
+    alt: 'Luxury interior painting finish in Bradenton',
+    text: 'Clean interior painting for walls, ceilings, trim, doors, occupied homes, and high-visibility living spaces.',
   },
   {
-    title: "Cabinet Refinishing",
-    href: "/cabinet-painting",
-    image: "/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg",
-    alt: "Kitchen cabinet painting and refinishing project",
-    text: "Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.",
+    title: 'Cabinet Refinishing',
+    href: '/cabinet-painting',
+    image: '/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg',
+    alt: 'Kitchen cabinet painting and refinishing project',
+    text: 'Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.',
   },
 ];
 
 const faqs = [
   {
-    q: "Why choose a professional painting contractor in Manatee & Sarasota County?",
-    a: "Professional preparation, product selection, protection, and application help Florida homes handle UV exposure, humidity, rain cycles, and daily use better than rushed repainting.",
+    q: 'Why choose a professional painting contractor in Manatee & Sarasota County?',
+    a: 'Professional preparation, product selection, protection, and application help Florida homes handle UV exposure, humidity, rain cycles, and daily use better than rushed repainting.',
   },
   {
-    q: "How often should I repaint my house in Florida?",
-    a: "Exterior repaint timing depends on sun exposure, moisture, substrate condition, and prep quality. Interior repainting depends on room use, cleaning needs, color changes, and finish wear.",
+    q: 'How often should I repaint my house in Florida?',
+    a: 'Exterior repaint timing depends on sun exposure, moisture, substrate condition, and prep quality. Interior repainting depends on room use, cleaning needs, color changes, and finish wear.',
   },
   {
-    q: "Do you offer interior, exterior, and cabinet painting?",
-    a: "Yes. Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, and cabinet refinishing for residential properties.",
+    q: 'Do you offer interior, exterior, and cabinet painting?',
+    a: 'Yes. Gold Lion Painting Inc provides interior painting, exterior house painting, cabinet painting, and cabinet refinishing for residential properties.',
   },
   {
-    q: "Do you offer a warranty?",
-    a: "Yes. Qualifying projects are backed by a 5-Year Limited Workmanship Warranty.",
+    q: 'Do you offer a warranty?',
+    a: 'Yes. Qualifying projects are backed by a 5-Year Limited Workmanship Warranty.',
   },
   {
-    q: "How do I get started?",
-    a: "Call 941-462-5894 or send an estimate request through the contact form. We will review the project scope and next steps.",
+    q: 'How do I get started?',
+    a: 'Call 941-462-5894 or send an estimate request through the contact form. We will review the project scope and next steps.',
   },
 ];
 
@@ -289,7 +289,7 @@ export default function HomePage() {
             <p className="font-display text-base font-bold text-[#e4ad42] drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)]">
               {businessName}
             </p>
-            <h1 className="font-heading mt-2 text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
+            <h1 className="mt-2 font-heading text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
               Expert House Painters in Manatee & Sarasota County
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
@@ -325,11 +325,11 @@ export default function HomePage() {
             ))}
           </div>
           <p className="mx-auto mt-5 max-w-4xl text-lg leading-8">
-            Homeowners across{" "}
+            Homeowners across{' '}
             <strong>
               Bradenton, Sarasota, Lakewood Ranch, Anna Maria Island, and nearby
               service areas
-            </strong>{" "}
+            </strong>{' '}
             rely on Gold Lion Painting Inc for structured execution, clean job
             sites, and refined finishes. Our projects focus on residential
             properties where quality, presentation, and longevity matter most.
@@ -338,14 +338,14 @@ export default function HomePage() {
             href={googleReviewsHref}
             target="_blank"
             rel="noreferrer"
-            className="font-heading mt-5 inline-flex text-2xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42]"
+            className="mt-5 inline-flex font-heading text-2xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42]"
           >
             {googleRatingValue} Google Rating From {googleReviewCount} Reviews
           </a>
         </div>
       </section>
 
-      <GoogleReviewsCarousel maxReviews={3} showDates={false} />
+      <GoogleReviewsCarousel maxReviews={3} randomizeOnLoad showDates={false} />
 
       <section
         id="bbb-accredited"
@@ -381,10 +381,10 @@ export default function HomePage() {
               />
             </a>
 
-            <p className="font-heading mt-6 text-base font-black tracking-[0.2em] text-[#e4ad42] uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
+            <p className="mt-6 font-heading text-base font-black tracking-[0.2em] text-[#e4ad42] uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
               Accredited Trust Signal
             </p>
-            <h2 className="font-heading mt-3 text-5xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] md:text-7xl">
+            <h2 className="mt-3 font-heading text-5xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] md:text-7xl">
               BBB Accredited Business
             </h2>
             <p className="mt-5 max-w-xl text-xl leading-8 font-semibold text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.78)]">
@@ -412,7 +412,7 @@ export default function HomePage() {
               <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                 Warranty Snapshot
               </p>
-              <h2 className="font-heading mt-2 text-4xl font-black text-white">
+              <h2 className="mt-2 font-heading text-4xl font-black text-white">
                 Gold Lion Painting Inc. 5-Year Limited Warranty
               </h2>
               <p className="mt-3 leading-7 text-[#dddddd]">
@@ -461,7 +461,7 @@ export default function HomePage() {
               <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
                 Step By Step
               </p>
-              <h2 className="font-heading mt-3 text-4xl leading-tight font-black text-white md:text-5xl">
+              <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-white md:text-5xl">
                 Our Painting Process
               </h2>
             </div>
@@ -480,11 +480,11 @@ export default function HomePage() {
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <div className="flex items-center gap-3 bg-[#0c0d0e] px-4 py-3">
-                  <span className="font-heading flex h-10 w-10 shrink-0 items-center justify-center border border-[#e4ad42]/55 bg-[#1f2124] text-sm font-black text-[#e4ad42]">
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#e4ad42]/55 bg-[#1f2124] font-heading text-sm font-black text-[#e4ad42]">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                   <h3 className="font-heading text-lg leading-tight font-black text-white">
-                    {step.title.replace(/^\d+\.\s*/, "")}
+                    {step.title.replace(/^\d+\.\s*/, '')}
                   </h3>
                 </div>
                 <ProcessStepImage
@@ -531,7 +531,7 @@ export default function HomePage() {
               <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
                 Service Focus
               </p>
-              <h2 className="font-heading mt-3 text-4xl leading-tight font-black text-[#0c0d0e] md:text-5xl">
+              <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-[#0c0d0e] md:text-5xl">
                 Painting Services Built For Florida Homes
               </h2>
             </div>
@@ -590,7 +590,7 @@ export default function HomePage() {
             <p className="font-display text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               Exterior Protection
             </p>
-            <h2 className="font-heading mt-3 text-4xl leading-tight font-black md:text-6xl">
+            <h2 className="mt-3 font-heading text-4xl leading-tight font-black md:text-6xl">
               Built For Sun, Humidity, Rain, And Curb Appeal
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-[#dddddd]">
@@ -624,8 +624,8 @@ export default function HomePage() {
             <p className="text-lg leading-8">
               Without proper preparation and the right system, finishes can:
               Peel, Chip, Feel sticky, Wear down quickly. At Gold Lion Painting,
-              we don&apos;t just paint cabinets — we refinish them using a system
-              designed for durability and a true factory-like finish. We
+              we don&apos;t just paint cabinets — we refinish them using a
+              system designed for durability and a true factory-like finish. We
               provide: Kitchen cabinet painting, Bathroom vanity refinishing,
               Cabinet color updates, Surface preparation and repairs,
               Professional spray-applied finishes.
@@ -708,7 +708,7 @@ export default function HomePage() {
             properties, and luxury estates with the same preparation standards
             and finish expectations.
           </p>
-          <h2 className="font-heading mt-5 text-4xl font-black text-[#e4ad42]">
+          <h2 className="mt-5 font-heading text-4xl font-black text-[#e4ad42]">
             Luxury & Standard Residential Projects
           </h2>
         </div>
@@ -740,7 +740,7 @@ export default function HomePage() {
                   key={faq.q}
                   className="group overflow-hidden rounded-xl border border-[#0c0d0e]/12 bg-[#f7f7f7] transition open:border-[#e4ad42] open:bg-white open:shadow-[0_14px_28px_rgba(0,0,0,0.08)]"
                 >
-                  <summary className="font-heading flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-base font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-[#e4ad42]">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-heading text-base font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-[#e4ad42]">
                     <span>{faq.q}</span>
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0c0d0e] text-lg text-[#e4ad42] transition group-open:rotate-45 group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
                       +
@@ -758,7 +758,7 @@ export default function HomePage() {
 
       <section className="bg-[#dddddd] px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-heading text-center text-4xl font-black text-[#0c0d0e]">
+          <h2 className="text-center font-heading text-4xl font-black text-[#0c0d0e]">
             Area Of Services
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -768,7 +768,7 @@ export default function HomePage() {
               return (
                 <Link
                   key={area}
-                  href={areaLink?.href ?? "/contact-us"}
+                  href={areaLink?.href ?? '/contact-us'}
                   className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-[#0c0d0e] shadow-sm transition hover:bg-[#e4ad42]"
                 >
                   <FaMapMarkedAlt aria-hidden="true" />
@@ -777,7 +777,7 @@ export default function HomePage() {
               );
             })}
           </div>
-          <h3 className="font-heading mt-10 text-center text-2xl font-black">
+          <h3 className="mt-10 text-center font-heading text-2xl font-black">
             Residential Projects We Handle
           </h3>
           <ul className="mx-auto mt-6 grid max-w-2xl gap-3 text-base leading-7">
@@ -855,7 +855,7 @@ function CardGrid({
                 loading="eager"
                 className="h-56 w-full rounded-xl object-cover"
               />
-              <h3 className="font-heading mt-4 text-2xl font-black text-[#0c0d0e]">
+              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
                 {item.title ?? item.label}
               </h3>
               {item.description ? (
