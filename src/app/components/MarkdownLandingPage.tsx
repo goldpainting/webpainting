@@ -84,12 +84,12 @@ export default function MarkdownLandingPage({
           src={heroImage}
           alt={heroAlt}
           fill
-          priority
+          loading="eager"
           sizes="100vw"
           className="object-cover"
         />
         <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[330px]">
-          <div className="reveal-up max-w-4xl">
+          <div className="reveal-up max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {eyebrow}
             </p>

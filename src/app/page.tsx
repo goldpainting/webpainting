@@ -23,7 +23,6 @@ import {
   bbbProfileHref,
   businessHours,
   businessName,
-  googleMapsHref,
   googleRatingValue,
   googleReviewCount,
   googleReviewsHref,
@@ -69,9 +68,13 @@ const heroProofPoints = [
   'Built for Florida Weather',
 ];
 
+const serviceCoverageMapQuery = 'Manatee County and Sarasota County Florida';
 const homeMapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
-  'Gold Lion Painting Inc Sarasota Bradenton Florida'
+  serviceCoverageMapQuery
 )}&output=embed`;
+const serviceCoverageMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  serviceCoverageMapQuery
+)}`;
 
 const areaCards = [
   {
@@ -298,7 +301,7 @@ export default function HomePage() {
           <source src="/video_lading.mp4" type="video/mp4" />
         </video>
         <div className="relative mx-auto max-w-6xl pt-6 lg:pt-10">
-          <div className="reveal-up max-w-3xl">
+          <div className="reveal-up max-w-3xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <p className="font-display text-base font-bold text-[#e4ad42] drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)]">
               {businessName}
             </p>
@@ -406,7 +409,7 @@ export default function HomePage() {
           <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
         </video>
         <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <a
               href={bbbProfileHref}
               target="_blank"
@@ -524,19 +527,41 @@ export default function HomePage() {
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-[#0c0d0e] p-3 shadow-[0_22px_55px_rgba(0,0,0,0.18)]">
-            <iframe
-              title="Gold Lion Painting service area map"
-              src={homeMapEmbedUrl}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-[360px] w-full rounded-xl border-0"
-            />
+            <div className="relative overflow-hidden rounded-xl">
+              <iframe
+                title="Gold Lion Painting service area map"
+                src={homeMapEmbedUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[360px] w-full border-0"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-[#e4ad42]/8" />
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute inset-0 h-full w-full"
+              >
+                <path
+                  d="M14 18 C28 6 55 5 76 15 C94 25 96 52 87 70 C76 91 45 95 22 82 C5 72 4 36 14 18 Z"
+                  fill="rgba(228, 173, 66, 0.13)"
+                  stroke="#d90000"
+                  strokeWidth="1.4"
+                  strokeDasharray="3 2.4"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+              <span className="pointer-events-none absolute top-4 left-4 rounded-full bg-[#0c0d0e]/82 px-4 py-2 text-xs font-black tracking-[0.14em] text-[#e4ad42] uppercase shadow-[0_10px_24px_rgba(0,0,0,0.28)]">
+                Service Coverage Area
+              </span>
+            </div>
             <div className="flex flex-wrap items-center justify-between gap-3 px-2 py-3">
               <p className="text-sm font-semibold text-[#dddddd]">
-                Gold Lion Painting Inc service area in Southwest Florida.
+                Gold Lion Painting Inc service area across Manatee and Sarasota
+                County.
               </p>
               <a
-                href={googleMapsHref}
+                href={serviceCoverageMapHref}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e] transition hover:bg-white"
@@ -677,9 +702,8 @@ export default function HomePage() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#0c0d0e]/72" />
         <div className="relative mx-auto max-w-6xl">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <p className="font-display text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               Exterior Protection
             </p>
@@ -787,8 +811,7 @@ export default function HomePage() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#0c0d0e]/70" />
-        <div className="relative mx-auto max-w-4xl">
+        <div className="relative mx-auto max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
           <Link
             href="/contact-us"
             className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"

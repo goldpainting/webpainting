@@ -49,12 +49,12 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
           src={area.heroImage}
           alt={area.heroImageAlt}
           fill
-          priority
+          loading="eager"
           sizes="100vw"
           className="object-cover"
         />
         <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[310px]">
-          <div className="reveal-up max-w-4xl">
+          <div className="reveal-up max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {area.county} Residential Painting
             </p>
@@ -210,9 +210,8 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#0c0d0e]/82" />
         <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.42fr_0.58fr]">
-          <div>
+          <div className="rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <h2 className="font-heading text-4xl font-black text-[#e4ad42]">
               Process Standards For {area.city} Homes
             </h2>

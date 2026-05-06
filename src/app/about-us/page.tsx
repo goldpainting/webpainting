@@ -85,13 +85,12 @@ export default function AboutUsPage() {
             src="/services/house-exterior-painting-manatee-county.jpg"
             alt="Gold Lion Painting completed exterior project"
             fill
-            priority
+            loading="eager"
             sizes="100vw"
-            className="object-cover opacity-35"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-linear-to-r from-[#0c0d0e] via-[#0c0d0e]/82 to-[#0c0d0e]/42" />
           <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_360px] lg:items-center">
-            <div>
+            <div className="rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
               <p className="font-display text-lg font-bold text-[#e4ad42]">
                 About {businessName}
               </p>

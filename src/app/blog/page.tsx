@@ -42,12 +42,11 @@ export default function BlogPage() {
           src="/services/house-exterior-painting-manatee-county.jpg"
           alt="Gold Lion Painting blog hero"
           fill
-          priority
+          loading="eager"
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#0c0d0e]/76" />
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative mx-auto max-w-6xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
           <p className="font-heading inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e]">
             <FaPaintRoller aria-hidden="true" />
             Painting Blog
