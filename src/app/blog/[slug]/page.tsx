@@ -64,6 +64,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const relatedPosts = blogPosts.filter(
+    (relatedPost) => relatedPost.slug !== post.slug,
+  );
+
   return (
     <main className="bg-white text-[#0c0d0e]">
       <article>
@@ -159,6 +163,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     ))}
                   </div>
                 </div>
+
+                {relatedPosts.length > 0 ? (
+                  <div className="border-t-4 border-[#e4ad42] bg-[#f3f3f3] p-6">
+                    <h2 className="font-heading text-2xl font-black text-[#0c0d0e]">
+                      Related Blog Articles
+                    </h2>
+                    <div className="mt-5 grid gap-4">
+                      {relatedPosts.map((relatedPost) => (
+                        <Link
+                          key={relatedPost.slug}
+                          href={`/blog/${relatedPost.slug}`}
+                          className="group block border-l-4 border-[#e4ad42] bg-white p-4 transition hover:border-[#d90000]"
+                        >
+                          <p className="text-xs font-black text-[#a97a36] uppercase">
+                            {relatedPost.category}
+                          </p>
+                          <h3 className="font-heading mt-2 text-lg leading-tight font-black text-[#0c0d0e] group-hover:text-[#d90000]">
+                            {relatedPost.title}
+                          </h3>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </aside>
           </div>
@@ -186,6 +214,30 @@ function LakewoodRanchExteriorArticle() {
           projects. These properties demand precision, proper preparation, and
           long-lasting materials that perform in Florida&apos;s challenging
           climate.
+        </p>
+        <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7">
+          For the surface-prep side of this topic, read our{" "}
+          <Link
+            href="/blog/florida-painting-prep-guide"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            Florida painting prep guide
+          </Link>
+          , then compare our{" "}
+          <Link
+            href="/exterior-painting-upgrade"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            exterior painting service
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="/lakewood-ranch"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            Lakewood Ranch painting page
+          </Link>
+          .
         </p>
       </section>
 
@@ -275,7 +327,10 @@ function LakewoodRanchExteriorArticle() {
               text: "We use top-tier products such as Sherwin-Williams Duration and Emerald Rain Refresh.",
             },
           ].map((step) => (
-            <article key={step.title} className="border-l-4 border-[#e4ad42] pl-4">
+            <article
+              key={step.title}
+              className="border-l-4 border-[#e4ad42] pl-4"
+            >
               <h3 className="font-heading text-xl font-black text-[#e4ad42]">
                 {step.title}
               </h3>
@@ -337,10 +392,9 @@ function LakewoodRanchExteriorArticle() {
           Serving All Lakewood Ranch Communities
         </h2>
         <p>
-          We proudly serve Waterside at Lakewood Ranch, The Lake Club,
-          Esplanade Golf & Country Club, Country Club East and West, and Del
-          Webb Lakewood Ranch. We understand the expectations in each of these
-          neighborhoods.
+          We proudly serve Waterside at Lakewood Ranch, The Lake Club, Esplanade
+          Golf & Country Club, Country Club East and West, and Del Webb Lakewood
+          Ranch. We understand the expectations in each of these neighborhoods.
         </p>
       </section>
 
@@ -384,6 +438,30 @@ function FloridaPrepGuideArticle() {
           whether the finish bonds like a professional coating or chips like a
           quick touch-up.
         </p>
+        <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7">
+          If you are comparing prep standards by project type, review our{" "}
+          <Link
+            href="/blog/exterior-painting-lakewood-ranch-specialized-approach"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            Lakewood Ranch exterior painting article
+          </Link>
+          , our{" "}
+          <Link
+            href="/interior-painting-upgrade"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            interior painting service
+          </Link>
+          , and our{" "}
+          <Link
+            href="/cabinet-painting-mejor"
+            className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+          >
+            cabinet painting service
+          </Link>
+          .
+        </p>
       </section>
 
       <section className="space-y-4">
@@ -421,8 +499,7 @@ function FloridaPrepGuideArticle() {
 
       <section className="space-y-4">
         <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
-          3. Interior painting should feel clean, controlled, and
-          low-disruption
+          3. Interior painting should feel clean, controlled, and low-disruption
         </h2>
         <p>
           Interior work is personal because the painters are inside the home.
@@ -441,9 +518,9 @@ function FloridaPrepGuideArticle() {
           4. Cabinet refinishing is a system, not just a color change
         </h2>
         <p>
-          Cabinet painting can completely change a kitchen without replacing
-          the layout. But cabinets are high-touch surfaces, so the process has
-          to be more controlled than wall painting.
+          Cabinet painting can completely change a kitchen without replacing the
+          layout. But cabinets are high-touch surfaces, so the process has to be
+          more controlled than wall painting.
         </p>
         <p>
           Strong cabinet results usually include door removal, labeling,

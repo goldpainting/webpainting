@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { type Metadata } from "next";
-import { type ReactNode } from "react";
 import {
   FaCheckCircle,
   FaChevronRight,
@@ -219,6 +218,30 @@ const processGalleryImages = processSteps.map((step) => ({
   title: step.title,
   description: step.description,
 }));
+
+const serviceHighlights = [
+  {
+    title: "Exterior Systems",
+    href: "/exterior-painting-upgrade",
+    image: "/services/house-exterior-painting-manatee-county.jpg",
+    alt: "Exterior painting system for a Florida home",
+    text: "Weather-aware exterior repainting for stucco, trim, doors, soffits, fascia, and coastal Florida exposure.",
+  },
+  {
+    title: "Interior Finishes",
+    href: "/interior-painting-upgrade",
+    image: "/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg",
+    alt: "Luxury interior painting finish in Bradenton",
+    text: "Clean interior painting for walls, ceilings, trim, doors, occupied homes, and high-visibility living spaces.",
+  },
+  {
+    title: "Cabinet Refinishing",
+    href: "/cabinet-painting-mejor",
+    image: "/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg",
+    alt: "Kitchen cabinet painting and refinishing project",
+    text: "Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.",
+  },
+];
 
 const faqs = [
   {
@@ -501,7 +524,59 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 lg:px-8">
+      <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[0.34fr_0.66fr] lg:items-end">
+            <div>
+              <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
+                Service Focus
+              </p>
+              <h2 className="font-heading mt-3 text-4xl leading-tight font-black text-[#0c0d0e] md:text-5xl">
+                Painting Services Built For Florida Homes
+              </h2>
+            </div>
+            <p className="max-w-2xl text-lg leading-8 text-[#1f2124]">
+              The home page stays focused: choose the service you need, then
+              visit the dedicated page for full details, process, examples, and
+              local SEO content.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {serviceHighlights.map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group overflow-hidden border border-[#e4ad42]/45 bg-[#0c0d0e] text-white shadow-[0_18px_38px_rgba(0,0,0,0.25)] transition hover:-translate-y-1 hover:border-[#e4ad42]"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0c0d0e]/78 via-transparent to-transparent" />
+                  <span className="absolute right-4 bottom-4 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e]">
+                    View Service
+                  </span>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-heading text-2xl font-black text-[#e4ad42]">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#dddddd]">
+                    {service.text}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="hidden">
         <div className="mx-auto max-w-6xl">
           {/* HERO Interior */}
           <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
@@ -808,7 +883,7 @@ export default function HomePage() {
             </div>
             <div>
               <Image
-                src="/bradenton/luxury-interior-painting-bradenton-01.jpg.jpg"
+                src="/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg"
                 alt="Premium Sherwin-Williams interior coatings"
                 width={800}
                 height={600}
@@ -1008,30 +1083,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ServiceFeature
-        title="Exterior Painting Services in Manatee & Sarasota County"
-        href="/exterior-painting-upgrade"
-        image="/services/house-exterior-painting-manatee-county.jpg"
-        imageAlt="Exterior house painting"
-        caption="Exterior House Painting"
-        reverse
-      >
-        <p>
-          Exterior painting is not just about appearance — it is about
-          protecting your home. In Manatee and Sarasota County, homes are
-          exposed to: Intense UV exposure, High humidity, Rain and moisture,
-          Coastal salt air (in some areas). Without proper preparation, paint
-          will fail quickly.
-        </p>
-        <p>
-          At Gold Lion Painting, we focus on building complete systems — not
-          just applying paint. Our goal is to reduce repaint cycles and protect
-          your home long-term — not just improve appearance. We provide: Full
-          exterior repainting, Stucco and siding painting, Trim, fascia, and
-          soffit painting, Garage doors and entry doors, Surface repairs and
-          preparation.
-        </p>
-      </ServiceFeature>
+      <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+        <Image
+          src="/services/home-exterior-painting-manatee-county.jpg.jpg"
+          alt="Exterior painting project in Manatee County"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[#0c0d0e]/72" />
+        <div className="relative mx-auto max-w-6xl">
+          <div className="max-w-3xl">
+            <p className="font-display text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
+              Exterior Protection
+            </p>
+            <h2 className="font-heading mt-3 text-4xl leading-tight font-black md:text-6xl">
+              Built For Sun, Humidity, Rain, And Curb Appeal
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#dddddd]">
+              Exterior painting protects the home first and upgrades appearance
+              second. Our systems focus on prep, adhesion, caulking, and
+              coatings selected for Florida exposure.
+            </p>
+            <Link
+              href="/exterior-painting-upgrade"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+            >
+              <FaPaintRoller aria-hidden="true" />
+              View Exterior Painting
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
@@ -1099,8 +1182,8 @@ export default function HomePage() {
           <div className="flex items-center justify-center p-6 lg:p-10">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:max-w-lg">
               <Image
-                src="/consultation/color_consulation.png"
-                alt="Free painting consultation"
+                src="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
+                alt="Exterior painting consultation for a Florida home"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -1158,14 +1241,22 @@ export default function HomePage() {
             <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
               Frequently Asked Questions
             </h2>
-            <div className="mt-8 space-y-6">
+            <div className="mt-8 space-y-4">
               {faqs.map((faq) => (
-                <div key={faq.q}>
-                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
-                    {faq.q}
-                  </h3>
-                  <p className="mt-2 leading-7 text-[#1f2124]">{faq.a}</p>
-                </div>
+                <details
+                  key={faq.q}
+                  className="group overflow-hidden rounded-xl border border-[#0c0d0e]/12 bg-[#f7f7f7] transition open:border-[#e4ad42] open:bg-white open:shadow-[0_14px_28px_rgba(0,0,0,0.08)]"
+                >
+                  <summary className="font-heading flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-base font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-[#e4ad42]">
+                    <span>{faq.q}</span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0c0d0e] text-lg text-[#e4ad42] transition group-open:rotate-45 group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                      +
+                    </span>
+                  </summary>
+                  <p className="border-t border-[#0c0d0e]/10 px-5 py-4 leading-7 text-[#1f2124]">
+                    {faq.a}
+                  </p>
+                </details>
               ))}
             </div>
           </div>
@@ -1290,65 +1381,6 @@ function CardGrid({
             </Link>
           </article>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function ServiceFeature({
-  title,
-  href,
-  image,
-  imageAlt,
-  caption,
-  reverse = false,
-  children,
-}: {
-  title: string;
-  href: string;
-  image: string;
-  imageAlt: string;
-  caption: string;
-  reverse?: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <section className="px-4 py-16 sm:px-6 lg:px-8">
-      <div
-        className={`mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.35fr_0.65fr] lg:items-center ${
-          reverse ? "lg:grid-cols-[0.65fr_0.35fr]" : ""
-        }`}
-      >
-        <figure className={reverse ? "lg:order-2" : undefined}>
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={800}
-            height={900}
-            loading="eager"
-            className="h-auto w-full rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-          />
-          <figcaption className="mt-3 text-center text-sm font-semibold">
-            {caption}
-          </figcaption>
-        </figure>
-        <div className="space-y-5">
-          <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
-            <Link href={href} className="transition hover:text-[#e4ad42]">
-              {title}
-            </Link>
-          </h2>
-          <div className="space-y-4 text-lg leading-8 text-[#1f2124]">
-            {children}
-          </div>
-          <Link
-            href={href}
-            className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
-          >
-            <FaPaintRoller aria-hidden="true" />
-            Call Now for a Free Estimate
-          </Link>
-        </div>
       </div>
     </section>
   );
