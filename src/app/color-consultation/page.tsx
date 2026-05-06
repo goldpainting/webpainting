@@ -84,23 +84,20 @@ const stylingDirections = [
 
 export default function ColorConsultationPage() {
   return (
-    <main className="min-h-screen bg-[#f6f1e7] font-sans text-[#2f2a24]">
-      <section className="relative overflow-hidden border-b border-[#dfcfb5] bg-[radial-gradient(circle_at_top_left,_rgba(212,160,56,0.18),_transparent_28%),linear-gradient(180deg,_#fffaf2_0%,_#f4ead9_100%)]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-[-4rem] left-[-6rem] h-72 w-72 rounded-full bg-[#f0cd84]/30 blur-3xl" />
-          <div className="absolute top-10 right-[-4rem] h-80 w-80 rounded-full bg-[#d9b57a]/18 blur-3xl" />
-        </div>
+    <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
+      <section className="relative overflow-hidden border-b border-[#e4ad42]/35 bg-[#0c0d0e]">
+        <div className="texture-grid absolute inset-0 opacity-35" />
 
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 md:px-10 lg:grid-cols-[minmax(0,1.05fr)_26rem] lg:items-start lg:py-20">
           <div>
-            <p className="inline-flex rounded-full border border-[#d8c39f] bg-[#fffaf2]/90 px-4 py-2 text-xs font-semibold tracking-[0.24em] text-[#8f6220] uppercase shadow-sm">
+            <p className="inline-flex rounded-full border border-[#e4ad42]/50 bg-[#1f2124] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#e4ad42] uppercase shadow-[0_12px_24px_rgba(0,0,0,0.24)]">
               Luxury Color Consultation
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl leading-tight font-bold text-[#8f6220] md:text-6xl">
+            <h1 className="font-heading mt-5 max-w-4xl text-5xl leading-tight font-black text-white md:text-6xl">
               Custom color consultation for homeowners who want a cleaner, more
               elevated finish story.
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#615447] md:text-xl">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#dddddd] md:text-xl">
               We help define palettes for one or two rooms with real-world
               guidance around undertones, lighting, trim contrast, and overall
               room harmony so the final paint selections feel confident and
@@ -108,21 +105,27 @@ export default function ColorConsultationPage() {
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2]/90 p-5 shadow-sm">
-                <p className="text-3xl font-bold text-[#8f6220]">1:1</p>
-                <p className="mt-2 text-sm tracking-[0.18em] text-[#8f7d6a] uppercase">
+              <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-5 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
+                <p className="font-heading text-3xl font-black text-[#e4ad42]">
+                  1:1
+                </p>
+                <p className="mt-2 text-sm tracking-[0.18em] text-[#dddddd] uppercase">
                   Personalized guidance
                 </p>
               </div>
-              <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2]/90 p-5 shadow-sm">
-                <p className="text-3xl font-bold text-[#8f6220]">1-2</p>
-                <p className="mt-2 text-sm tracking-[0.18em] text-[#8f7d6a] uppercase">
+              <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-5 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
+                <p className="font-heading text-3xl font-black text-[#e4ad42]">
+                  1-2
+                </p>
+                <p className="mt-2 text-sm tracking-[0.18em] text-[#dddddd] uppercase">
                   Rooms per palette focus
                 </p>
               </div>
-              <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2]/90 p-5 shadow-sm">
-                <p className="text-3xl font-bold text-[#8f6220]">Luxury</p>
-                <p className="mt-2 text-sm tracking-[0.18em] text-[#8f7d6a] uppercase">
+              <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-5 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
+                <p className="font-heading text-3xl font-black text-[#e4ad42]">
+                  Luxury
+                </p>
+                <p className="mt-2 text-sm tracking-[0.18em] text-[#dddddd] uppercase">
                   Designer-inspired direction
                 </p>
               </div>
@@ -131,19 +134,19 @@ export default function ColorConsultationPage() {
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="#consultation"
-                className="rounded-2xl bg-[#d4a038] px-6 py-3 text-base font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                className="rounded-full bg-[#d90000] px-6 py-3 text-base font-black text-white shadow-[0_16px_30px_rgba(0,0,0,0.28)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 Book Your Consultation
               </a>
               <a
                 href="#gallery"
-                className="rounded-2xl border border-[#d8c39f] bg-[#fffaf2] px-6 py-3 text-base font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                className="rounded-full border border-[#e4ad42] bg-[#0c0d0e] px-6 py-3 text-base font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 View Styling Directions
               </a>
             </div>
 
-            <div className="mt-10 overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_20px_48px_rgba(120,94,52,0.14)]">
+            <div className="mt-10 overflow-hidden border border-[#e4ad42]/45 bg-[#1f2124] shadow-[0_20px_48px_rgba(0,0,0,0.34)]">
               <div className="relative h-[26rem]">
                 <Image
                   src="/consultation/color-consultation-team.jpeg"
@@ -170,23 +173,23 @@ export default function ColorConsultationPage() {
 
           <div
             id="consultation"
-            className="rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2]/95 p-7 shadow-[0_22px_50px_rgba(120,94,52,0.14)]"
+            className="border border-[#e4ad42]/45 bg-white p-7 shadow-[0_22px_50px_rgba(0,0,0,0.28)]"
           >
-            <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
               Book Now
             </p>
-            <h2 className="mt-2 text-3xl font-bold text-[#8f6220]">
+            <h2 className="font-heading mt-2 text-3xl font-black text-[#0c0d0e]">
               Request a custom consultation
             </h2>
-            <p className="mt-3 text-sm leading-6 text-[#64584c]">
+            <p className="mt-3 text-sm leading-6 text-[#1f2124]">
               Share the rooms, style goals, and finishes you are considering. We
               will send the consultation request directly to our team.
             </p>
-            <div className="mt-6 rounded-2xl border border-[#eadfcf] bg-[#fff7eb] p-4">
-              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <div className="mt-6 border border-[#e4ad42]/45 bg-[#f7f7f7] p-4">
+              <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
                 Ideal For
               </p>
-              <p className="mt-2 text-sm leading-6 text-[#64584c]">
+              <p className="mt-2 text-sm leading-6 text-[#1f2124]">
                 Homeowners choosing wall colors, trim contrast, accent
                 directions, or a more cohesive palette before painting begins.
               </p>
@@ -198,17 +201,17 @@ export default function ColorConsultationPage() {
         </div>
       </section>
 
-      <section className="border-b border-[#e1d3bd] bg-[#fffaf2] py-16">
+      <section className="border-b border-[#e4ad42]/35 bg-[#f3f3f3] py-16">
         <div className="mx-auto grid max-w-7xl gap-6 px-6 md:grid-cols-3 md:px-10">
           {consultationBenefits.map((item) => (
             <article
               key={item.title}
-              className="rounded-[2rem] border border-[#dfcfb5] bg-[#fff7eb] p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_35px_rgba(120,94,52,0.10)]"
+              className="border border-[#e4ad42]/45 bg-white p-8 shadow-[0_16px_30px_rgba(0,0,0,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#e4ad42] hover:shadow-[0_18px_35px_rgba(0,0,0,0.16)]"
             >
-              <h2 className="text-2xl font-bold text-[#8f6220]">
+              <h2 className="font-heading text-2xl font-black text-[#0c0d0e]">
                 {item.title}
               </h2>
-              <p className="mt-4 leading-7 text-[#615447]">
+              <p className="mt-4 leading-7 text-[#1f2124]">
                 {item.description}
               </p>
             </article>
@@ -219,13 +222,13 @@ export default function ColorConsultationPage() {
       <section id="gallery" className="py-16">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold tracking-[0.22em] text-[#a36a14] uppercase">
+            <p className="text-sm font-black tracking-[0.22em] text-[#a97a36] uppercase">
               Styling Directions
             </p>
-            <h2 className="mt-3 text-4xl font-bold text-[#8f6220]">
+            <h2 className="font-heading mt-3 text-4xl font-black text-[#0c0d0e]">
               A more luxurious palette starts with a stronger room story.
             </h2>
-            <p className="mt-4 text-lg leading-8 text-[#615447]">
+            <p className="mt-4 text-lg leading-8 text-[#1f2124]">
               These consultation directions are designed for homes that want
               warmth, polish, and a more intentional relationship between paint,
               finishes, and furnishings.
@@ -236,7 +239,7 @@ export default function ColorConsultationPage() {
             {stylingDirections.map((style) => (
               <article
                 key={style.name}
-                className="group overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_18px_40px_rgba(120,94,52,0.12)]"
+                className="group overflow-hidden border border-[#e4ad42]/45 bg-white shadow-[0_18px_40px_rgba(0,0,0,0.14)] transition hover:border-[#e4ad42]"
               >
                 <div className="relative h-80 overflow-hidden">
                   <Image
@@ -257,7 +260,7 @@ export default function ColorConsultationPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="leading-7 text-[#615447]">
+                  <p className="leading-7 text-[#1f2124]">
                     {style.description}
                   </p>
                 </div>
@@ -267,21 +270,21 @@ export default function ColorConsultationPage() {
         </div>
       </section>
 
-      <section className="border-y border-[#dfcfb5] bg-[linear-gradient(135deg,_rgba(255,250,242,1)_0%,_rgba(243,228,196,0.75)_100%)] py-16">
+      <section className="border-y border-[#e4ad42]/35 bg-[#0c0d0e] py-16 text-[#dddddd]">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <div>
-            <p className="text-sm font-semibold tracking-[0.22em] text-[#a36a14] uppercase">
+            <p className="text-sm font-black tracking-[0.22em] text-[#e4ad42] uppercase">
               What Is Included
             </p>
-            <h2 className="mt-3 text-4xl font-bold text-[#8f6220]">
+            <h2 className="font-heading mt-3 text-4xl font-black text-white">
               One or two rooms planned with more confidence and cohesion.
             </h2>
-            <p className="mt-4 text-lg leading-8 text-[#615447]">
+            <p className="mt-4 text-lg leading-8 text-[#dddddd]">
               This service is meant to reduce hesitation, clarify the palette,
               and help the next painting step feel more intentional from day
               one.
             </p>
-            <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-sm">
+            <div className="mt-8 overflow-hidden border border-[#e4ad42]/45 bg-[#1f2124] shadow-[0_20px_44px_rgba(0,0,0,0.32)]">
               <div className="relative h-80">
                 <Image
                   src="/consultation/color-consultation-team.jpeg"
@@ -298,7 +301,7 @@ export default function ColorConsultationPage() {
             {includedItems.map((item) => (
               <div
                 key={item}
-                className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2]/90 p-5 text-sm leading-6 text-[#615447] shadow-sm"
+                className="border border-[#e4ad42]/35 bg-[#1f2124] p-5 text-sm leading-6 text-[#dddddd] shadow-[0_12px_26px_rgba(0,0,0,0.18)]"
               >
                 {item}
               </div>
@@ -309,20 +312,20 @@ export default function ColorConsultationPage() {
 
       <section className="py-16">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
-          <div className="rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] p-8 shadow-[0_20px_48px_rgba(120,94,52,0.12)]">
-            <p className="text-sm font-semibold tracking-[0.22em] text-[#a36a14] uppercase">
+          <div className="border border-[#e4ad42]/45 bg-white p-8 shadow-[0_20px_48px_rgba(0,0,0,0.12)]">
+            <p className="text-sm font-black tracking-[0.22em] text-[#a97a36] uppercase">
               Why It Helps
             </p>
-            <h2 className="mt-3 text-4xl font-bold text-[#8f6220]">
+            <h2 className="font-heading mt-3 text-4xl font-black text-[#0c0d0e]">
               Better color decisions usually lead to better finished rooms.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#615447]">
+            <p className="mt-5 text-lg leading-8 text-[#1f2124]">
               Color consultation is not just about choosing a swatch. It is
               about creating a room that feels balanced in natural light, works
               with existing finishes, and still looks strong once the paint is
               on the wall every day.
             </p>
-            <p className="mt-5 text-lg leading-8 text-[#615447]">
+            <p className="mt-5 text-lg leading-8 text-[#1f2124]">
               If you already know you want Gold Lion Painting to complete the
               project, this consultation also helps streamline the painting
               estimate and keeps the finish direction aligned from start to
@@ -330,27 +333,27 @@ export default function ColorConsultationPage() {
             </p>
           </div>
 
-          <div className="rounded-[2rem] border border-[#d8c39f] bg-linear-to-br from-[#fffaf2] to-[#f3e4c4] p-7 shadow-[0_20px_45px_rgba(120,94,52,0.14)]">
-            <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+          <div className="border border-[#e4ad42]/45 bg-[#0c0d0e] p-7 text-[#dddddd] shadow-[0_20px_45px_rgba(0,0,0,0.22)]">
+            <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               Next Step
             </p>
-            <h3 className="mt-2 text-3xl font-bold text-[#8f6220]">
+            <h3 className="font-heading mt-2 text-3xl font-black text-white">
               Ready to define your palette?
             </h3>
-            <p className="mt-3 text-sm leading-6 text-[#64584c]">
+            <p className="mt-3 text-sm leading-6 text-[#dddddd]">
               Book a consultation, then move into your painting estimate with a
               clearer color direction and a more polished result in mind.
             </p>
             <div className="mt-5 flex flex-col gap-3">
               <a
                 href="#consultation"
-                className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                className="rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 Request Consultation
               </a>
               <Link
                 href="/contact-us"
-                className="rounded-2xl border border-[#d8c39f] bg-[#fffaf2] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                className="rounded-full border border-[#e4ad42] bg-[#0c0d0e] px-5 py-3 text-center font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 Contact Gold Lion Painting
               </Link>

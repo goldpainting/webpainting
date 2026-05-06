@@ -381,23 +381,23 @@ export default function WarrantyServicePage() {
               <div className="mt-5 flex flex-col gap-3">
                 <a
                   href="tel:9414625894"
-                  className="rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
                 >
-                  <FaPhone className="mr-2" />
+                  <FaPhone className="shrink-0" />
                   Call 941-462-5894
                 </a>
                 <a
                   href="mailto:goldlionpainting@gmail.com"
-                  className="rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
                 >
-                  <FaEnvelope className="mr-2" />
+                  <FaEnvelope className="shrink-0" />
                   Email Gold Lion Painting
                 </a>
                 <Link
                   href="/about-us"
-                  className="rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
                 >
-                  <FaInfoCircle className="mr-2" />
+                  <FaInfoCircle className="shrink-0" />
                   Learn More About Us
                 </Link>
               </div>

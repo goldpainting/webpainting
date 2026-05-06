@@ -66,7 +66,7 @@ export default function ColorConsultationForm() {
       <div className="flex flex-col gap-1">
         <label
           htmlFor="consult-name"
-          className="text-sm font-semibold text-[#8f6220]"
+          className="text-sm font-black text-[#0c0d0e]"
         >
           Name
         </label>
@@ -76,7 +76,7 @@ export default function ColorConsultationForm() {
           type="text"
           autoComplete="name"
           placeholder="Your name"
-          className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#2f2a24] transition placeholder:text-[#8f7d6a] focus:border-[#c7942f] focus:outline-none"
+          className="rounded-xl border border-[#0c0d0e]/20 bg-white p-3 text-[#0c0d0e] transition placeholder:text-[#5d646b] focus:border-[#e4ad42] focus:outline-none"
           required
         />
       </div>
@@ -84,7 +84,7 @@ export default function ColorConsultationForm() {
       <div className="flex flex-col gap-1">
         <label
           htmlFor="consult-email"
-          className="text-sm font-semibold text-[#8f6220]"
+          className="text-sm font-black text-[#0c0d0e]"
         >
           Email
         </label>
@@ -94,7 +94,7 @@ export default function ColorConsultationForm() {
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
-          className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#2f2a24] transition placeholder:text-[#8f7d6a] focus:border-[#c7942f] focus:outline-none"
+          className="rounded-xl border border-[#0c0d0e]/20 bg-white p-3 text-[#0c0d0e] transition placeholder:text-[#5d646b] focus:border-[#e4ad42] focus:outline-none"
           required
         />
       </div>
@@ -102,7 +102,7 @@ export default function ColorConsultationForm() {
       <div className="flex flex-col gap-1">
         <label
           htmlFor="consult-phone"
-          className="text-sm font-semibold text-[#8f6220]"
+          className="text-sm font-black text-[#0c0d0e]"
         >
           Phone Number
         </label>
@@ -112,7 +112,7 @@ export default function ColorConsultationForm() {
           type="tel"
           autoComplete="tel"
           placeholder="941-000-0000"
-          className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#2f2a24] transition placeholder:text-[#8f7d6a] focus:border-[#c7942f] focus:outline-none"
+          className="rounded-xl border border-[#0c0d0e]/20 bg-white p-3 text-[#0c0d0e] transition placeholder:text-[#5d646b] focus:border-[#e4ad42] focus:outline-none"
           required
         />
       </div>
@@ -120,7 +120,7 @@ export default function ColorConsultationForm() {
       <div className="flex flex-col gap-1">
         <label
           htmlFor="consult-room"
-          className="text-sm font-semibold text-[#8f6220]"
+          className="text-sm font-black text-[#0c0d0e]"
         >
           Room Type
         </label>
@@ -129,7 +129,7 @@ export default function ColorConsultationForm() {
           name="roomType"
           type="text"
           placeholder="Living room, bedroom, office..."
-          className="rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#2f2a24] transition placeholder:text-[#8f7d6a] focus:border-[#c7942f] focus:outline-none"
+          className="rounded-xl border border-[#0c0d0e]/20 bg-white p-3 text-[#0c0d0e] transition placeholder:text-[#5d646b] focus:border-[#e4ad42] focus:outline-none"
           required
         />
       </div>
@@ -137,7 +137,7 @@ export default function ColorConsultationForm() {
       <div className="flex flex-col gap-1">
         <label
           htmlFor="consult-style"
-          className="text-sm font-semibold text-[#8f6220]"
+          className="text-sm font-black text-[#0c0d0e]"
         >
           Style Goals
         </label>
@@ -146,7 +146,7 @@ export default function ColorConsultationForm() {
           name="styleGoals"
           rows={4}
           placeholder="Tell us about the mood, finishes, and spaces you want help coordinating."
-          className="resize-none rounded-xl border border-[#dfcfb5] bg-[#fffaf2] p-3 text-[#2f2a24] transition placeholder:text-[#8f7d6a] focus:border-[#c7942f] focus:outline-none"
+          className="resize-none rounded-xl border border-[#0c0d0e]/20 bg-white p-3 text-[#0c0d0e] transition placeholder:text-[#5d646b] focus:border-[#e4ad42] focus:outline-none"
           required
         />
       </div>
@@ -154,7 +154,7 @@ export default function ColorConsultationForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 w-full rounded-xl bg-[#d4a038] px-4 py-3 text-lg font-bold text-[#2f2a24] transition hover:bg-[#c7942f] disabled:cursor-not-allowed disabled:opacity-70"
+        className="mt-2 w-full rounded-xl bg-[#d90000] px-4 py-3 text-lg font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === "submitting" ? "Sending..." : "Request Consultation"}
       </button>
@@ -169,21 +169,21 @@ export default function ColorConsultationForm() {
           We could not send the form. Please call or email us directly.
         </p>
       ) : null}
-      <p className="text-sm leading-6 text-[#64584c]">
+      <p className="text-sm leading-6 text-[#1f2124]">
         Submit the form and our team will receive your consultation request.
       </p>
-      <p className="text-sm text-[#64584c]">
+      <p className="text-sm text-[#1f2124]">
         Prefer direct contact? Call{" "}
         <a
           href="tel:9414625894"
-          className="font-semibold text-[#8f6220] underline underline-offset-4"
+          className="font-black text-[#a97a36] underline underline-offset-4"
         >
           941-462-5894
         </a>{" "}
         or email{" "}
         <a
           href={`mailto:${emailTarget}`}
-          className="font-semibold text-[#8f6220] underline underline-offset-4"
+          className="font-black text-[#a97a36] underline underline-offset-4"
         >
           {emailTarget}
         </a>
