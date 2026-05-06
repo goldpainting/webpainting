@@ -11,7 +11,7 @@ const heroAlt = "Interior painting project by Gold Lion Painting Inc";
 
 export const metadata = buildMarkdownMetadata({
   raw,
-  canonical: "/interior-painting-upgrade",
+  canonical: "/interior-painting",
   image: heroImage,
   imageAlt: heroAlt,
 });

@@ -1,7 +1,7 @@
 export const serviceLinks = [
-  { href: "/interior-painting-upgrade", label: "Interior Painting" },
-  { href: "/exterior-painting-upgrade", label: "Exterior Painting" },
-  { href: "/cabinet-painting-mejor", label: "Cabinet Painting" },
+  { href: "/interior-painting", label: "Interior Painting" },
+  { href: "/exterior-painting", label: "Exterior Painting" },
+  { href: "/cabinet-painting", label: "Cabinet Painting" },
 ];
 
 export const areaLinks = [

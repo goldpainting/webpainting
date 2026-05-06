@@ -5,8 +5,6 @@ import {
   businessName,
   businessPhone,
   googleMapsHref,
-  googleRatingValue,
-  googleReviewCount,
   googleReviewsHref,
   sameAsProfiles,
   serviceAreaNames,
@@ -40,7 +38,7 @@ export function buildLocalBusinessSchema() {
       },
     ],
     sameAs: sameAsProfiles,
-    image: `${siteUrl}/logo.jpg`,
+    image: `${siteUrl}/gold-lion-painting-logo-512.png`,
     priceRange: "$$",
     areaServed: serviceAreaNames.map((area) => ({
       "@type": "City",
@@ -53,11 +51,6 @@ export function buildLocalBusinessSchema() {
       "Cabinet Refinishing",
       "Color Consultation",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: googleRatingValue,
-      reviewCount: googleReviewCount,
-    },
     potentialAction: {
       "@type": "ViewAction",
       target: googleReviewsHref,

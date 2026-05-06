@@ -29,14 +29,14 @@ function getServiceHref(label: string) {
   const normalized = label.toLowerCase();
 
   if (normalized.includes("exterior")) {
-    return "/exterior-painting-upgrade";
+    return "/exterior-painting";
   }
 
   if (normalized.includes("cabinet")) {
-    return "/cabinet-painting-mejor";
+    return "/cabinet-painting";
   }
 
-  return "/interior-painting-upgrade";
+  return "/interior-painting";
 }
 
 export default function AreaLandingPage({ area }: AreaLandingPageProps) {
@@ -292,60 +292,6 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
                   <FaChevronRight aria-hidden="true" />
                 </span>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#1f2124] px-4 py-16 text-[#dddddd] sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.42fr_0.58fr]">
-          <div>
-            <h2 className="font-heading text-4xl font-black text-[#e4ad42]">
-              Review Proof Homeowners In {area.city} Can Check
-            </h2>
-            <p className="mt-5 text-lg leading-8">
-              Local landing pages convert better when they pair service-specific
-              messaging with visible proof and a direct Google Business Profile
-              destination.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href={googleReviewsHref}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#0c0d0e]"
-              >
-                Open Google Reviews
-              </a>
-              <Link
-                href="/warranty-service"
-                className="rounded-full border border-[#e4ad42]/45 px-6 py-4 font-bold text-[#dddddd] transition hover:bg-[#0c0d0e]"
-              >
-                Review Warranty Details
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid gap-5">
-            {area.reviewHighlights.map((review) => (
-              <article
-                key={`${review.label}-${review.quote}`}
-                className="bg-white p-6 text-[#0c0d0e] shadow-[1px_1px_10px_rgba(0,0,0,0.35)]"
-              >
-                <p className="font-display font-bold text-[#a97a36]">
-                  {review.label}
-                </p>
-                <p className="mt-4 text-xl leading-8">{review.quote}</p>
-                <a
-                  href={googleReviewsHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 font-bold text-[#0c0d0e] transition hover:text-[#e4ad42]"
-                >
-                  Verify source
-                  <FaChevronRight aria-hidden="true" />
-                </a>
-              </article>
             ))}
           </div>
         </div>

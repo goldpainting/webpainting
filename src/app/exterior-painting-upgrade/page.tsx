@@ -11,7 +11,7 @@ const heroAlt = "Exterior painting project by Gold Lion Painting Inc";
 
 export const metadata = buildMarkdownMetadata({
   raw,
-  canonical: "/exterior-painting-upgrade",
+  canonical: "/exterior-painting",
   image: heroImage,
   imageAlt: heroAlt,
 });

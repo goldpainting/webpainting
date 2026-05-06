@@ -16,7 +16,7 @@ import {
   googleWriteReviewHref,
 } from "../siteConfig";
 
-type Review = {
+export type Review = {
   text: string;
   originalText: string;
   rating: number;
@@ -39,6 +39,7 @@ type GoogleReviewsCarouselProps = {
   areaName?: string;
   maxReviews?: number;
   showDates?: boolean;
+  featuredReviews?: Review[];
 };
 
 const VISIBLE_CARDS = 3;
@@ -74,6 +75,7 @@ export default function GoogleReviewsCarousel({
   areaName,
   maxReviews = 3,
   showDates = true,
+  featuredReviews,
 }: GoogleReviewsCarouselProps) {
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -96,6 +98,15 @@ export default function GoogleReviewsCarousel({
         }
         const json = await res.json();
         if (!cancelled) {
+          if (featuredReviews?.length) {
+            setData({
+              ...json,
+              reviews: featuredReviews.slice(0, maxReviews),
+            });
+            setError(null);
+            return;
+          }
+
           const reviewsFromApi = (json.reviews ?? []) as Review[];
           const reviewsWithRealAuthorAndText = reviewsFromApi.filter(
             (review) =>
@@ -121,7 +132,17 @@ export default function GoogleReviewsCarousel({
         }
       } catch (e) {
         if (!cancelled) {
-          setError(e instanceof Error ? e.message : "Unknown error");
+          if (featuredReviews?.length) {
+            setData({
+              placeId: "",
+              rating: Number(googleRatingValue),
+              reviewCount: Number(googleReviewCount),
+              reviews: featuredReviews.slice(0, maxReviews),
+            });
+            setError(null);
+          } else {
+            setError(e instanceof Error ? e.message : "Unknown error");
+          }
         }
       } finally {
         if (!cancelled) {
@@ -134,7 +155,7 @@ export default function GoogleReviewsCarousel({
     return () => {
       cancelled = true;
     };
-  }, [maxReviews]);
+  }, [featuredReviews, maxReviews]);
 
   const navigate = useCallback(
     (direction: "left" | "right") => {

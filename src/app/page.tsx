@@ -125,7 +125,7 @@ const areaCards = [
 const services = [
   {
     title: "Interior Painting",
-    href: "/interior-painting-upgrade",
+    href: "/interior-painting",
     image: "/home/interior-house-painting-anna-maria-.jpg",
     alt: "Interior painting project by Gold Lion Painting Inc",
     description:
@@ -133,7 +133,7 @@ const services = [
   },
   {
     title: "Exterior Painting",
-    href: "/exterior-painting-upgrade",
+    href: "/exterior-painting",
     image: "/home/luxury-exterior-painting-anna-maria.jpg",
     alt: "Exterior house painting project by Gold Lion Painting Inc",
     description:
@@ -141,7 +141,7 @@ const services = [
   },
   {
     title: "Cabinet Painting",
-    href: "/cabinet-painting-mejor",
+    href: "/cabinet-painting",
     image: "/home/kitchen-cabinet-painting.jpg",
     alt: "Kitchen cabinet painting project by Gold Lion Painting Inc",
     description:
@@ -222,21 +222,21 @@ const processGalleryImages = processSteps.map((step) => ({
 const serviceHighlights = [
   {
     title: "Exterior Systems",
-    href: "/exterior-painting-upgrade",
+    href: "/exterior-painting",
     image: "/services/house-exterior-painting-manatee-county.jpg",
     alt: "Exterior painting system for a Florida home",
     text: "Weather-aware exterior repainting for stucco, trim, doors, soffits, fascia, and coastal Florida exposure.",
   },
   {
     title: "Interior Finishes",
-    href: "/interior-painting-upgrade",
+    href: "/interior-painting",
     image: "/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg",
     alt: "Luxury interior painting finish in Bradenton",
     text: "Clean interior painting for walls, ceilings, trim, doors, occupied homes, and high-visibility living spaces.",
   },
   {
     title: "Cabinet Refinishing",
-    href: "/cabinet-painting-mejor",
+    href: "/cabinet-painting",
     image: "/Cabinet painting/cabinet-painting-bradenton-01.jpg.jpg",
     alt: "Kitchen cabinet painting and refinishing project",
     text: "Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.",
@@ -576,513 +576,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="hidden">
-        <div className="mx-auto max-w-6xl">
-          {/* HERO Interior */}
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-5">
-              <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
-                Interior Painting Services in Manatee & Sarasota County
-              </h2>
-              <p className="text-xl font-semibold text-[#8f6220]">
-                Clean, High-End Interior Finishes Built for Real Living
-              </p>
-              <p className="text-lg leading-8 text-[#1f2124]">
-                We deliver smooth, consistent interior painting designed to look
-                flawless under natural light and daily use — not rushed jobs or
-                uneven finishes.
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  5-Year Workmanship Warranty
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Fully Insured (Liability + Workers' Comp)
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Clean, Organized Job Sites
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  High-End Residential Focus
-                </li>
-              </ul>
-              <Link
-                href="/interior-painting-upgrade"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
-              >
-                Request Your Free Estimate Today
-              </Link>
-            </div>
-            <div>
-              <Image
-                src="/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg"
-                alt="Luxury interior transformation"
-                width={800}
-                height={600}
-                className="rounded-[2rem] object-cover shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-              />
-            </div>
-          </div>
-
-          {/* H2: Professional Interior Painting Services */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Professional Interior Painting Services
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Interior painting is one of the most noticeable upgrades in any
-              home.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              In Manatee and Sarasota County, where natural light is strong and
-              open layouts are common, even minor imperfections become highly
-              visible.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              A professional interior paint job requires more than just applying
-              color. It requires proper preparation, attention to detail, and
-              controlled application techniques to achieve a clean, consistent
-              finish.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              At Gold Lion Painting, we are not a production painting company.
-              We focus on delivering interiors that look smooth, sharp, and
-              professionally finished — never rushed or uneven.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              We provide:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Full interior repainting</li>
-              <li>Accent walls and custom finishes</li>
-              <li>Ceiling painting</li>
-              <li>Trim, doors, and baseboards</li>
-              <li>Drywall repair and surface preparation</li>
-            </ul>
-          </div>
-
-          {/* H2: Why Interior Painting Requires Precision */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Why Interior Painting Requires Precision
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Modern homes are designed in a way that exposes poor workmanship.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              Common features include:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Open floor plans</li>
-              <li>Large windows with natural light</li>
-              <li>Light or neutral color palettes</li>
-              <li>High ceilings and detailed trim</li>
-            </ul>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              These conditions make issues immediately visible, such as:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Roller marks</li>
-              <li>Flashing (uneven sheen)</li>
-              <li>Poor cut lines</li>
-              <li>Inconsistent color coverage</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              A low-quality paint job may look acceptable at first, but under
-              real lighting conditions, defects become obvious quickly.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              That's why we focus on:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Even application</li>
-              <li>Uniform finish</li>
-              <li>Clean, sharp transitions between surfaces</li>
-            </ul>
-          </div>
-
-          {/* H2: High-End Interior Painting Standards */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              High-End Interior Painting Standards
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Interior painting today requires more than basic coverage — it
-              requires control, precision, and consistency.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              We approach every project with a focus on:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Smooth, uniform finishes</li>
-              <li>Clean, sharp lines at all transitions</li>
-              <li>Even sheen across walls and ceilings</li>
-              <li>Proper surface preparation before any paint is applied</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              This level of detail is what separates a basic paint job from a
-              professional result.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124] italic">
-              👉 The difference is not the paint — it's the system behind it.
-            </p>
-          </div>
-
-          {/* H2: Our Interior Painting Process */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Our Interior Painting Process
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Every project follows a structured system designed for consistent,
-              high-quality results:
-            </p>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5">
-                <h4 className="mb-2 text-xl font-bold text-[#0c0d0e]">
-                  Evaluation
-                </h4>
-                <p className="leading-7 text-[#1f2124]">
-                  Inspection of walls, ceilings, trim, and existing paint
-                  conditions
-                </p>
-              </div>
-              <div className="rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5">
-                <h4 className="mb-2 text-xl font-bold text-[#0c0d0e]">
-                  Preparation
-                </h4>
-                <p className="leading-7 text-[#1f2124]">
-                  Protection of floors, furniture, and fixtures. Drywall
-                  repairs, patching, sanding, and smoothing.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5">
-                <h4 className="mb-2 text-xl font-bold text-[#0c0d0e]">
-                  Priming
-                </h4>
-                <p className="leading-7 text-[#1f2124]">
-                  Spot priming or full priming when required.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5">
-                <h4 className="mb-2 text-xl font-bold text-[#0c0d0e]">
-                  Application
-                </h4>
-                <p className="leading-7 text-[#1f2124]">
-                  Professional paint application using controlled techniques.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-[#e4ad42]/35 bg-[#f7f7f7] p-5">
-                <h4 className="mb-2 text-xl font-bold text-[#0c0d0e]">
-                  Final Inspection
-                </h4>
-                <p className="leading-7 text-[#1f2124]">
-                  Detailed walkthrough to ensure a clean and uniform finish.
-                </p>
-              </div>
-            </div>
-            <p className="text-lg leading-8 text-[#1f2124] italic">
-              👉 Proper preparation and application control are what determine
-              the final result.
-            </p>
-            <Link
-              href="/interior-painting-upgrade"
-              className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
-            >
-              Request Your Free Estimate Today
-            </Link>
-          </div>
-
-          {/* H2: Clean, Controlled Work Environment */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Clean, Controlled Work Environment
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Interior painting takes place inside your home — cleanliness is
-              critical.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              We maintain:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Fully protected floors and furniture</li>
-              <li>Masked and covered surfaces</li>
-              <li>Organized work areas</li>
-              <li>Daily cleanup throughout the project</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              We also implement dust control measures during preparation,
-              including controlled sanding and dust containment practices to
-              minimize airborne particles inside your home.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124] italic">
-              👉 One of the biggest concerns for homeowners is drywall dust —
-              our process is designed to keep your space clean and livable
-              during the project.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124] italic">
-              👉 Leave your home clean — and your walls flawless
-            </p>
-          </div>
-
-          {/* H2: Interior Finishes Built to Last */}
-          <div className="mt-16 grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-6">
-              <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-                Interior Finishes Built to Last
-              </h3>
-              <p className="text-lg leading-8 text-[#1f2124]">
-                Interior paint must do more than look good — it must perform
-                under daily use.
-              </p>
-              <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-                Walls and surfaces are exposed to:
-              </p>
-              <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-                <li>Regular contact and traffic</li>
-                <li>Cleaning products</li>
-                <li>Furniture movement</li>
-                <li>Everyday wear and tear</li>
-              </ul>
-              <p className="text-lg leading-8 text-[#1f2124]">
-                We use premium interior coatings from Sherwin-Williams,
-                including Emerald® Interior and Cashmere®, selected for their
-                durability, smooth finish, and ability to maintain a consistent
-                appearance under natural light.
-              </p>
-              <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-                These products are designed for:
-              </p>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Superior washability
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Long-term color retention
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Smooth, uniform finish
-                </li>
-                <li className="flex items-center gap-2">
-                  <FaCheckCircle className="text-[#d4a038]" />
-                  Resistance to daily wear
-                </li>
-              </ul>
-              <p className="text-lg leading-8 text-[#1f2124] italic">
-                👉 The right product matters — but proper application is what
-                makes it perform.
-              </p>
-            </div>
-            <div>
-              <Image
-                src="/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg"
-                alt="Premium Sherwin-Williams interior coatings"
-                width={800}
-                height={600}
-                className="rounded-[2rem] object-cover shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
-              />
-            </div>
-          </div>
-
-          {/* H2: Common Interior Painting Problems We Fix */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Common Interior Painting Problems We Fix
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              We regularly correct issues caused by poor preparation or improper
-              application:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Visible roller marks</li>
-              <li>Uneven sheen (flashing)</li>
-              <li>Rough or poorly repaired drywall</li>
-              <li>Inconsistent color coverage</li>
-              <li>Messy or uneven cut lines</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              By addressing these issues before painting, we ensure a clean,
-              professional finish.
-            </p>
-          </div>
-
-          {/* H2: Interior Painting for Occupied Homes */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Interior Painting for Occupied Homes
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              We frequently work in homes that are:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Fully occupied</li>
-              <li>Recently purchased</li>
-              <li>Being prepared for sale</li>
-              <li>Under renovation</li>
-            </ul>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              We adjust our process to:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Minimize disruption</li>
-              <li>Maintain a clean environment</li>
-              <li>Work efficiently and on schedule</li>
-            </ul>
-          </div>
-
-          {/* H2: Serving Manatee & Sarasota County */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Serving Manatee & Sarasota County
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              We provide interior painting services throughout:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Bradenton</li>
-              <li>Lakewood Ranch</li>
-              <li>Sarasota</li>
-              <li>Siesta Key</li>
-              <li>Venice</li>
-              <li>Anna Maria Island</li>
-              <li>Holmes Beach</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Each home is different, but our process remains consistent —
-              clean, controlled, and built for long-term results.
-            </p>
-          </div>
-
-          {/* H2: Why Homeowners Choose Gold Lion Painting */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Why Homeowners Choose Gold Lion Painting
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Choosing the right painting company is about more than price —
-              it's about results.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              Homeowners choose us because they want:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-lg leading-8 text-[#1f2124]">
-              <li>Clean, professional finishes</li>
-              <li>Proper preparation</li>
-              <li>Reliable scheduling</li>
-              <li>Respect for their home</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              We focus on delivering results that look right the first time —
-              and continue to perform over time.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124] italic">
-              👉 We are not the cheapest option — we are the option for
-              homeowners who want it done right the first time.
-            </p>
-          </div>
-
-          {/* H2: Frequently Asked Questions */}
-          <div className="mt-16 space-y-6">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Frequently Asked Questions
-            </h3>
-            <div className="space-y-4">
-              <details className="rounded-lg border border-[#0c0d0e]/10 bg-white p-4">
-                <summary className="cursor-pointer font-bold text-[#0c0d0e]">
-                  How long does interior painting last?
-                </summary>
-                <p className="mt-2 leading-7 text-[#1f2124]">
-                  Interior paint typically lasts 5–10 years depending on usage
-                  and maintenance.
-                </p>
-              </details>
-              <details className="rounded-lg border border-[#0c0d0e]/10 bg-white p-4">
-                <summary className="cursor-pointer font-bold text-[#0c0d0e]">
-                  Do you move furniture?
-                </summary>
-                <p className="mt-2 leading-7 text-[#1f2124]">
-                  Yes. We help move and protect furniture as needed.
-                </p>
-              </details>
-              <details className="rounded-lg border border-[#0c0d0e]/10 bg-white p-4">
-                <summary className="cursor-pointer font-bold text-[#0c0d0e]">
-                  How long does a project take?
-                </summary>
-                <p className="mt-2 leading-7 text-[#1f2124]">
-                  Most interior projects take 2–5 days depending on size and
-                  scope.
-                </p>
-              </details>
-              <details className="rounded-lg border border-[#0c0d0e]/10 bg-white p-4">
-                <summary className="cursor-pointer font-bold text-[#0c0d0e]">
-                  Do you repair walls before painting?
-                </summary>
-                <p className="mt-2 leading-7 text-[#1f2124]">
-                  Yes. Surface preparation and repairs are included when needed.
-                </p>
-              </details>
-              <details className="rounded-lg border border-[#0c0d0e]/10 bg-white p-4">
-                <summary className="cursor-pointer font-bold text-[#0c0d0e]">
-                  What paint do you use?
-                </summary>
-                <p className="mt-2 leading-7 text-[#1f2124]">
-                  We use high-quality Sherwin-Williams coatings selected for
-                  durability and finish quality.
-                </p>
-              </details>
-            </div>
-          </div>
-
-          {/* H2: Get a Free Estimate for Interior Painting */}
-          <div className="mx-auto mt-16 max-w-3xl space-y-6 text-center">
-            <h3 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              Get a Free Estimate for Interior Painting
-            </h3>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              If your home needs interior painting, the difference between a
-              basic job and a professional finish is immediately visible.
-            </p>
-            <p className="text-lg leading-8 font-semibold text-[#1f2124]">
-              A properly executed paint job:
-            </p>
-            <ul className="inline-block list-disc pl-5 text-left text-lg leading-8 text-[#1f2124]">
-              <li>Looks clean and uniform</li>
-              <li>Lasts longer</li>
-              <li>Improves the overall appearance of your home</li>
-            </ul>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              At Gold Lion Painting, we deliver finishes designed for real
-              living conditions — not just day-one appearance.
-            </p>
-            <p className="text-lg leading-8 text-[#1f2124]">
-              Our schedule fills quickly, especially during peak seasons.
-            </p>
-            <div className="space-y-4">
-              <p className="text-lg font-bold text-[#0c0d0e]">
-                📞 Call: (941) 462-5894
-              </p>
-              <p className="text-lg text-[#1f2124]">
-                📍 Serving Manatee & Sarasota County
-              </p>
-              <Link
-                href="/interior-painting-upgrade"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
-              >
-                Request Your Free Estimate Today
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
         <Image
           src="/services/home-exterior-painting-manatee-county.jpg.jpg"
@@ -1106,7 +599,7 @@ export default function HomePage() {
               coatings selected for Florida exposure.
             </p>
             <Link
-              href="/exterior-painting-upgrade"
+              href="/exterior-painting"
               className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
             >
               <FaPaintRoller aria-hidden="true" />
@@ -1138,7 +631,7 @@ export default function HomePage() {
               Professional spray-applied finishes.
             </p>
             <Link
-              href="/cabinet-painting-mejor"
+              href="/cabinet-painting"
               className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
             >
               <FaPaintRoller aria-hidden="true" />

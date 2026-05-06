@@ -1,9 +1,31 @@
-import { type Metadata } from "next";
+import MarkdownLandingPage from "../components/MarkdownLandingPage";
+import { areaInterlinkCards } from "../content/landingCards";
+import {
+  buildMarkdownMetadata,
+  readMarkdownContent,
+} from "../content/markdownContent";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/interior-painting-upgrade",
-  },
-};
+const raw = readMarkdownContent("doc/infor_services/interior.md");
+const heroImage = "/home/interior-house-painting-anna-maria-.jpg";
+const heroAlt = "Interior painting project by Gold Lion Painting Inc";
 
-export { default } from "../interior-painting-upgrade/page";
+export const metadata = buildMarkdownMetadata({
+  raw,
+  canonical: "/interior-painting",
+  image: heroImage,
+  imageAlt: heroAlt,
+});
+
+export default function InteriorPaintingPage() {
+  return (
+    <MarkdownLandingPage
+      raw={raw}
+      eyebrow="Interior Painting"
+      heroImage={heroImage}
+      heroAlt={heroAlt}
+      interlinkTitle="House Painting Areas"
+      interlinks={areaInterlinkCards}
+      interlinkType="areas"
+    />
+  );
+}

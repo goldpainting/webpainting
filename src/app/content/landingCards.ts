@@ -63,19 +63,19 @@ export const areaInterlinkCards = [
 
 export const serviceInterlinkCards = [
   {
-    href: "/interior-painting-upgrade",
+    href: "/interior-painting",
     title: "Interior Painting",
     image: "/home/interior-house-painting-anna-maria-.jpg",
     alt: "Interior painting project by Gold Lion Painting Inc",
   },
   {
-    href: "/exterior-painting-upgrade",
+    href: "/exterior-painting",
     title: "Exterior Painting",
     image: "/home/luxury-exterior-painting-anna-maria.jpg",
     alt: "Exterior house painting project by Gold Lion Painting Inc",
   },
   {
-    href: "/cabinet-painting-mejor",
+    href: "/cabinet-painting",
     title: "Cabinet Painting",
     image: "/home/kitchen-cabinet-painting.jpg",
     alt: "Kitchen cabinet painting project by Gold Lion Painting Inc",

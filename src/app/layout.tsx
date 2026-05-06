@@ -11,7 +11,7 @@ import { buildLocalBusinessSchema } from "./schema";
 import { siteUrl } from "./siteConfig";
 import { cn } from "~/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: "/logo.jpg",
-        width: 900,
-        height: 900,
+        url: "/gold-lion-painting-logo-og.png",
+        width: 1200,
+        height: 630,
         alt: "Gold Lion Painting Inc logo",
       },
     ],
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Gold Lion Painting Inc | Interior, Exterior & Cabinet Painting",
     description:
       "Residential interior, exterior, and cabinet painting with durable prep systems across Bradenton, Sarasota, Venice, Siesta Key, Lakewood Ranch, and nearby Florida areas.",
-    images: ["/logo.jpg"],
+    images: ["/gold-lion-painting-logo-og.png"],
   },
   alternates: {
     canonical: "/",
@@ -97,7 +97,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(heebo.variable, inter.variable, montserrat.variable, "font-sans", geist.variable)}
+      className={cn(
+        heebo.variable,
+        inter.variable,
+        montserrat.variable,
+        "font-sans",
+        geist.variable,
+      )}
     >
       <body>
         <Script

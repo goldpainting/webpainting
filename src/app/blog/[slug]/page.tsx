@@ -140,15 +140,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <div className="mt-5 grid gap-3">
                     {[
                       {
-                        href: "/interior-painting-upgrade",
+                        href: "/interior-painting",
                         label: "Interior Painting",
                       },
                       {
-                        href: "/exterior-painting-upgrade",
+                        href: "/exterior-painting",
                         label: "Exterior Painting",
                       },
                       {
-                        href: "/cabinet-painting-mejor",
+                        href: "/cabinet-painting",
                         label: "Cabinet Painting",
                       },
                     ].map((service) => (
@@ -225,7 +225,7 @@ function LakewoodRanchExteriorArticle() {
           </Link>
           , then compare our{" "}
           <Link
-            href="/exterior-painting-upgrade"
+            href="/exterior-painting"
             className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
           >
             exterior painting service
@@ -448,14 +448,14 @@ function FloridaPrepGuideArticle() {
           </Link>
           , our{" "}
           <Link
-            href="/interior-painting-upgrade"
+            href="/interior-painting"
             className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
           >
             interior painting service
           </Link>
           , and our{" "}
           <Link
-            href="/cabinet-painting-mejor"
+            href="/cabinet-painting"
             className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
           >
             cabinet painting service

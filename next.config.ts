@@ -1,6 +1,25 @@
 import type { NextConfig } from "next";
 
 const config: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/interior-painting-upgrade",
+        destination: "/interior-painting",
+        permanent: true,
+      },
+      {
+        source: "/exterior-painting-upgrade",
+        destination: "/exterior-painting",
+        permanent: true,
+      },
+      {
+        source: "/cabinet-painting-mejor",
+        destination: "/cabinet-painting",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
