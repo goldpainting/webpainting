@@ -57,7 +57,7 @@ export default function ServiceReviewHighlights({
                   rel="noreferrer"
                   className="font-semibold text-[#8f6220] underline underline-offset-4"
                 >
-                  Verify source
+                  Open Google profile
                 </a>
               </div>
             </article>

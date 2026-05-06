@@ -390,7 +390,7 @@ export default function ServiceLandingPage({
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.42fr_0.58fr]">
           <div className="scroll-reveal">
             <h2 className="font-heading text-4xl font-black text-[#e4ad42]">
-              Review Proof Homeowners Can Check
+              Project Proof Homeowners Can Check
             </h2>
             <p className="mt-5 text-lg leading-8">
               Service pages connect the promise to visible proof and a direct
