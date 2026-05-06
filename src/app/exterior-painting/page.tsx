@@ -7,7 +7,7 @@ import {
 import { buildPageImages, servicePageImages } from '../content/pageImages';
 
 const raw = readMarkdownContent('doc/infor_services/exterior.md');
-const heroImage = '/home/luxury-exterior-painting-anna-maria.jpg';
+const heroImage = '/exterior/home-extrior-lading8.png';
 const heroAlt = 'Exterior painting project by Gold Lion Painting Inc';
 
 export const metadata = buildMarkdownMetadata({

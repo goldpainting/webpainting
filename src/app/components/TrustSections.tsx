@@ -78,7 +78,7 @@ export function BbbAccreditedSection() {
         poster="/bbb_logo.png"
         className="absolute inset-0 h-full w-full object-cover"
       >
-        <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
+        <source src="/video_lading.mp4" type="video/mp4" />
       </video>
       <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
         <div className="max-w-2xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">

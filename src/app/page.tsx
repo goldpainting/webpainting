@@ -274,7 +274,7 @@ export default function HomePage() {
           poster="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
           className="absolute inset-0 h-full w-full object-cover"
         >
-          <source src="/video_lading.mp4" type="video/mp4" />
+          <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
         </video>
         <div className="relative mx-auto max-w-6xl pt-6 lg:pt-10">
           <div className="reveal-up max-w-3xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
@@ -382,7 +382,7 @@ export default function HomePage() {
           poster="/bbb_logo.png"
           className="absolute inset-0 h-full w-full object-cover"
         >
-          <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
+          <source src="/video_lading.mp4" type="video/mp4" />
         </video>
         <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
           <div className="max-w-2xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
@@ -729,7 +729,7 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden px-4 py-20 text-center text-white sm:px-6 lg:px-8">
         <Image
-          src="/home/luxury-exterior-painting-anna-maria.jpg"
+          src="/luxury/luxury-home-lading.png"
           alt="Luxury and standard residential painting projects"
           fill
           sizes="100vw"
