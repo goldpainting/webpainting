@@ -1,4 +1,4 @@
-Landing page de servicio exterior 
+Landing page de servicio exterior
 🔥 HERO
 
 H1
@@ -34,6 +34,8 @@ Without proper preparation, paint will fail quickly.
 At Gold Lion Painting, we focus on building complete systems — not just applying paint.
 👉 Our goal is to reduce repaint cycles and protect your home long-term — not just improve appearance.
 
+If you are updating the full property, our [interior painting](/interior-painting) service can be planned alongside the exterior scope for a cleaner overall finish.
+
 We provide:
 • Full exterior repainting
 • Stucco and siding painting
@@ -60,6 +62,8 @@ We provide exterior painting services in:
 Each area has different exposure levels.
 
 👉 We adjust our system based on location, material, and condition — never a one-size-fits-all approach.
+
+For local examples, review our painting pages for [Bradenton](/bradenton), [Lakewood Ranch](/lakewood-ranch), and [Venice](/venice).
 
 ---
 
@@ -163,6 +167,8 @@ We use Sherwin-Williams Duration® and Emerald® systems for:
 ✔ Moisture resistance
 
 👉 The product matters — but the system behind it is what makes it last.
+
+For kitchens and high-use built-ins, our [cabinet painting](/cabinet-painting) process uses a different coating system built for daily contact.
 
 ---
 

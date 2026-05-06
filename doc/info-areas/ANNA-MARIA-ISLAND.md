@@ -58,7 +58,7 @@ High humidity levels
 Strong UV radiation
 Wind-driven rain and coastal moisture
 Our systems are designed to handle these conditions and reduce premature failure.
-👉 Learn More: /exterior-painting-anna-maria-island
+👉 Learn More about [exterior painting](/exterior-painting)
 H2: Exterior Surfaces We Paint on Anna Maria Island
 Homes on Anna Maria Island include a range of exterior materials, each requiring a specific preparation and coating system.
 We regularly work on:
@@ -97,7 +97,7 @@ Clean, sharp cut lines
 No visible roller marks or flashing
 Full masking and protection
 We maintain a clean and controlled work environment in every project.
-👉 Explore: /interior-painting-anna-maria-island
+👉 Explore [interior painting](/interior-painting)
 H2: Cabinet Painting & Refinishing in Anna Maria Island, FL
 Cabinet refinishing is one of the most effective upgrades for coastal homes without full replacement.
 Humidity and daily use require a proper system to prevent early failure.
@@ -113,7 +113,7 @@ Smooth, factory-like finish
 Durable and moisture-resistant
 Easy to maintain
 Updated, modern appearance
-👉 View: /cabinet-painting-anna-maria-island
+👉 View [cabinet painting](/cabinet-painting)
 H2: Protecting High-Value Island Properties
 Anna Maria Island homes require more than standard residential painting. Many properties are exposed to coastal air year-round, and even small preparation mistakes can lead to early fading, peeling, or moisture-related failure.
 Our approach focuses on protecting the value of the property through correct surface preparation, proper primers, durable coatings, and clean execution.

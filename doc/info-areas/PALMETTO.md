@@ -53,6 +53,8 @@ We use professional-grade materials designed for Florida conditions, helping res
 
 The difference between a short-term paint job and a long-lasting one is preparation. That is where most projects fail — and where we focus the most.
 
+For more detail on our weather-ready coating system, review our [exterior painting](/exterior-painting) service.
+
 ---
 
 H2: Interior Painting Services in Palmetto
@@ -81,6 +83,8 @@ We also guide finish selection:
 
 The result is a clean, consistent finish that enhances the overall appearance of your home.
 
+For interior walls, ceilings, trim, and occupied-home repainting, see our [interior painting](/interior-painting) service.
+
 ---
 
 H2: Cabinet Painting & Refinishing
@@ -100,6 +104,8 @@ Our Cabinet Process
 We use durable coatings designed to resist wear, chipping, and moisture exposure.
 
 This allows us to achieve a factory-like finish that looks refined and performs well over time.
+
+For kitchens, vanities, and high-use cabinet surfaces, review our [cabinet painting](/cabinet-painting) process.
 
 ---
 

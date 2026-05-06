@@ -1,4 +1,4 @@
-Landing page de servicio de cabinets 
+Landing page de servicio de cabinets
 🔥 HERO
 
 H1
@@ -32,6 +32,8 @@ Without proper preparation and the right system, finishes can:
 
 At Gold Lion Painting, we don’t just paint cabinets — we refinish them using a system designed for durability and a true factory-like finish.
 
+If the cabinet project is part of a larger home refresh, our [interior painting](/interior-painting) service can help connect the kitchen finish with nearby walls, ceilings, trim, and living areas.
+
 We provide:
 • Kitchen cabinet painting
 • Bathroom vanity refinishing
@@ -56,6 +58,8 @@ We provide cabinet painting services throughout:
 • Parrish
 
 👉 We work in both primary residences and rental properties, adjusting our process based on how the space is used.
+
+Homeowners can also compare our local cabinet and painting work in [Bradenton](/bradenton), [Lakewood Ranch](/lakewood-ranch), and [Sarasota](/sarasota).
 
 ---
 
@@ -165,6 +169,8 @@ Our system is designed to handle:
 • Moisture exposure
 • Frequent use
 • Long-term wear
+
+For exterior maintenance needs, our [exterior painting](/exterior-painting) systems are built separately for Florida sun, humidity, stucco, siding, and trim.
 
 ---
 

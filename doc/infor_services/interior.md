@@ -31,6 +31,8 @@ A professional interior paint job requires more than just applying color. It req
 At Gold Lion Painting, we are not a production painting company.
 We focus on delivering interiors that look smooth, sharp, and professionally finished — never rushed or uneven.
 
+Homeowners planning a full repaint often pair this work with [exterior painting](/exterior-painting) when they want the entire property to feel updated and consistent.
+
 We provide:
 • Full interior repainting
 • Accent walls and custom finishes
@@ -145,6 +147,8 @@ These products are designed for:
 
 👉 The right product matters — but proper application is what makes it perform.
 
+For kitchens and built-ins, our [cabinet painting](/cabinet-painting) service uses a separate refinishing system designed for harder-use surfaces.
+
 ---
 
 H2: Common Interior Painting Problems We Fix
@@ -188,6 +192,8 @@ We provide interior painting services throughout:
 • Holmes Beach
 
 Each home is different, but our process remains consistent — clean, controlled, and built for long-term results.
+
+You can also review our local painting approach for [Bradenton](/bradenton), [Lakewood Ranch](/lakewood-ranch), and [Sarasota](/sarasota) homes.
 
 ---
 

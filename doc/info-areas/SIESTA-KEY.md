@@ -68,7 +68,7 @@ We design systems that handle:
 • Light reflection impact
 The goal is not just protection —
 👉 it’s maintaining a clean and consistent finish over time.
-👉 Learn More: /exterior-painting-siesta-key
+👉 Learn More about [exterior painting](/exterior-painting)
 H2: Exterior Surfaces We Paint in Siesta Key
 Homes in this area are built with a variety of materials, each requiring a different approach.
 We regularly work on:
@@ -102,7 +102,7 @@ What We Deliver
 • Consistent color under natural light
 • Full masking and protection
 In this environment, interior painting is about precision — not just coverage.
-👉 Explore: /interior-painting-siesta-key
+👉 Explore [interior painting](/interior-painting)
 H2: Cabinet Painting in Siesta Key
 Cabinet refinishing is one of the most requested upgrades in coastal homes, especially for kitchens that require a clean, modern look.
 However, humidity and daily use can cause:
@@ -121,7 +121,7 @@ Results
 • Smooth surface
 • Moisture-resistant coating
 • Durable, high-end appearance
-👉 View: /cabinet-painting-siesta-key
+👉 View [cabinet painting](/cabinet-painting)
 H2: Painting for Second Homes & Seasonal Properties
 This area has a high percentage of:
 • Seasonal homeowners

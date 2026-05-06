@@ -58,6 +58,8 @@ We use professional-grade coatings designed for Florida conditions, helping resi
 
 We commonly work on stucco homes, siding, and properties near commercial zones, adjusting our process depending on surface condition and exposure.
 
+For a broader explanation of our Florida exterior system, review our [exterior painting](/exterior-painting) service page.
+
 ---
 
 H2: Interior Painting Services in Ellenton
@@ -86,6 +88,8 @@ We guide finish selection based on durability and appearance:
 
 The result is a clean, consistent interior finish that enhances the overall look of your home.
 
+For walls, ceilings, trim, and occupied-home repainting, see our [interior painting](/interior-painting) service.
+
 ---
 
 H2: Cabinet Painting & Refinishing in Ellenton, FL
@@ -103,6 +107,8 @@ Our Cabinet System
 Our spray application system allows us to achieve a smooth, factory-like finish that cannot be replicated with brush or roller methods.
 
 We use durable coatings designed to resist wear, moisture, and daily use, making this an ideal solution for kitchens and bathrooms.
+
+For kitchens and detailed refinishing projects, review our [cabinet painting](/cabinet-painting) process.
 
 ---
 

@@ -66,7 +66,7 @@ High humidity levels
 Direct sunlight and heat
 Seasonal storms and moisture
 Our systems are designed to handle these conditions while maintaining durability under daily use.
-👉 Learn More: /exterior-painting-holmes-beach
+👉 Learn More about [exterior painting](/exterior-painting)
 H2: Interior Painting in Holmes Beach, FL
 Interior painting in Holmes Beach requires both precision and durability.
 Many homes feature:
@@ -93,7 +93,7 @@ Clean, sharp cut lines
 No visible roller marks
 Full masking and protection
 We maintain a clean and controlled work environment throughout the project.
-👉 Explore: /interior-painting-holmes-beach
+👉 Explore [interior painting](/interior-painting)
 H2: Cabinet Painting & Refinishing in Holmes Beach
 Cabinet refinishing is a cost-effective way to update kitchens without full replacement.
 In coastal environments, cabinets must withstand:
@@ -113,7 +113,7 @@ Smooth, even finish
 Durable surface
 Easy to maintain
 Updated appearance
-👉 View: /cabinet-painting-holmes-beach
+👉 View [cabinet painting](/cabinet-painting)
 H2: Why Homeowners Choose Gold Lion Painting
 We are not a high-volume painting company. We focus on consistency, organization, and long-term results.
 Homeowners choose us because they want:
