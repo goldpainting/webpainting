@@ -61,6 +61,14 @@ const trustPoints = [
   businessHours,
 ];
 
+const heroProofPoints = [
+  '5-Year Workmanship Warranty',
+  "Fully Insured (Liability & Workers' Comp)",
+  'Interior, Exterior & Cabinet Painting',
+  'Clean & Professional Crews',
+  'Built for Florida Weather',
+];
+
 const homeMapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
   'Gold Lion Painting Inc Sarasota Bradenton Florida'
 )}&output=embed`;
@@ -277,7 +285,7 @@ export default function HomePage() {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={faqs} id="home-faq-schema" />
 
-      <section className="relative min-h-[420px] overflow-hidden px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+      <section className="relative min-h-[620px] overflow-hidden px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
         <video
           aria-hidden="true"
           autoPlay
@@ -289,17 +297,46 @@ export default function HomePage() {
         >
           <source src="/video_lading.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-linear-to-r from-[#0c0d0e]/82 via-[#0c0d0e]/45 to-[#0c0d0e]/15" />
         <div className="relative mx-auto max-w-6xl pt-6 lg:pt-10">
-          <div className="reveal-up max-w-2xl">
+          <div className="reveal-up max-w-3xl">
             <p className="font-display text-base font-bold text-[#e4ad42] drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)]">
               {businessName}
             </p>
             <h1 className="mt-2 font-heading text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
-              Expert House Painters in Manatee & Sarasota County
+              Expert House Painters in Sarasota & Manatee County
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
               Clean Work. Professional Results. Built to Last.
+            </p>
+            <div className="mt-4 max-w-2xl space-y-3 text-sm leading-6 font-semibold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)] sm:text-base">
+              <p>
+                Professional interior painting, exterior painting, and cabinet
+                refinishing for homeowners who want reliable service, clean job
+                sites, and long-lasting results.
+              </p>
+              <p>
+                At Gold Lion Painting Inc, we focus on proper preparation,
+                premium materials, organized crews, and detailed workmanship
+                designed for Florida homes and coastal conditions.
+              </p>
+            </div>
+            <div className="mt-5 flex max-w-3xl flex-wrap gap-2">
+              {heroProofPoints.map((point) => (
+                <span
+                  key={point}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#0c0d0e]/65 px-3 py-1.5 text-xs font-bold text-white shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+                >
+                  <FaCheckCircle
+                    aria-hidden="true"
+                    className="shrink-0 text-[#e4ad42]"
+                  />
+                  {point}
+                </span>
+              ))}
+            </div>
+            <p className="mt-5 max-w-2xl text-sm leading-6 font-bold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)] sm:text-base">
+              Serving Homeowners Across: Bradenton, Sarasota, Lakewood Ranch,
+              Anna Maria Island, Holmes Beach, Venice, and Parrish.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
@@ -368,7 +405,6 @@ export default function HomePage() {
         >
           <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-linear-to-r from-[#0c0d0e]/84 via-[#0c0d0e]/48 to-[#0c0d0e]/16" />
         <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
           <div className="max-w-2xl">
             <a

@@ -53,7 +53,6 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c0d0e]/88 via-[#0c0d0e]/58 to-[#0c0d0e]/18" />
         <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[310px]">
           <div className="reveal-up max-w-4xl">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">

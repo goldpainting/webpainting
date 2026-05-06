@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { type ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -16,7 +16,11 @@ import { type PageImage } from '../content/pageImages';
 import { businessPhone } from '../siteConfig';
 import FaqSchema from './FaqSchema';
 import MarkdownFaqAccordion from './MarkdownFaqAccordion';
-import TrustSections from './TrustSections';
+import {
+  BbbAccreditedSection,
+  GoogleTrustSection,
+  WarrantyTrustSection,
+} from './TrustSections';
 
 type InterlinkCard = {
   href: string;
@@ -84,7 +88,6 @@ export default function MarkdownLandingPage({
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c0d0e]/90 via-[#0c0d0e]/58 to-[#0c0d0e]/18" />
         <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[330px]">
           <div className="reveal-up max-w-4xl">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
@@ -117,17 +120,11 @@ export default function MarkdownLandingPage({
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="space-y-12">
-            {renderContentSections(contentBlocks, pageImages)}
-          </div>
-        </div>
-      </section>
+      <GoogleTrustSection />
+
+      {renderContentSections(contentBlocks, pageImages)}
 
       <MarkdownFaqAccordion faqs={faqs} />
-
-      <TrustSections />
 
       <section className="bg-[#d39620] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -203,34 +200,41 @@ function renderContentSections(
     const sectionImages = imageGroups[index] ?? [];
 
     return (
-      <article
-        key={section.heading}
-        className="scroll-reveal overflow-hidden rounded-3xl border border-[#e4ad42]/25 bg-[#f8f8f8] shadow-[0_22px_55px_rgba(0,0,0,0.08)]"
-        style={{ animationDelay: `${Math.min(index, 6) * 70}ms` }}
-      >
-        <div className="grid gap-8 p-5 sm:p-7 lg:p-8">
-          <div className="rounded-2xl border border-[#e4ad42]/25 bg-white p-5 shadow-[0_18px_38px_rgba(0,0,0,0.06)] sm:p-7">
-            <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
-              {String(index + 1).padStart(2, '0')}
-            </p>
-            <h2 className="mt-2 font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
-              {section.heading}
-            </h2>
-            <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
-              {section.blocks.map((block, blockIndex) => (
-                <ContentBlock
-                  key={`${section.heading}-${block.type}-${blockIndex}`}
-                  block={block}
+      <Fragment key={section.heading}>
+        <section className="px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <article
+              className="scroll-reveal overflow-hidden rounded-3xl border border-[#e4ad42]/25 bg-[#f8f8f8] shadow-[0_22px_55px_rgba(0,0,0,0.08)]"
+              style={{ animationDelay: `${Math.min(index, 6) * 70}ms` }}
+            >
+              <div className="grid gap-8 p-5 sm:p-7 lg:p-8">
+                <div className="rounded-2xl border border-[#e4ad42]/25 bg-white p-5 shadow-[0_18px_38px_rgba(0,0,0,0.06)] sm:p-7">
+                  <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 className="mt-2 font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
+                    {section.heading}
+                  </h2>
+                  <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
+                    {section.blocks.map((block, blockIndex) => (
+                      <ContentBlock
+                        key={`${section.heading}-${block.type}-${blockIndex}`}
+                        block={block}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <SectionImageGrid
+                  images={sectionImages}
+                  sectionHeading={section.heading}
                 />
-              ))}
-            </div>
+              </div>
+            </article>
           </div>
-          <SectionImageGrid
-            images={sectionImages}
-            sectionHeading={section.heading}
-          />
-        </div>
-      </article>
+        </section>
+        {index === 0 ? <BbbAccreditedSection /> : null}
+        {index === 1 ? <WarrantyTrustSection /> : null}
+      </Fragment>
     );
   });
 }
@@ -322,37 +326,74 @@ function SectionImageGrid({
     return null;
   }
 
+  if (images.length === 4) {
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
+        {images.map((image, index) => (
+          <SectionImageFigure
+            key={`${sectionHeading}-${image.src}`}
+            image={image}
+            priorityLayout={index === 0}
+            className={index === 0 ? 'lg:row-span-3' : ''}
+          />
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {images.map((image, index) => (
-        <figure
+        <SectionImageFigure
           key={`${sectionHeading}-${image.src}`}
-          className={`hover-lift group relative overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-[#0c0d0e] shadow-[0_20px_42px_rgba(0,0,0,0.18)] ${
+          image={image}
+          className={
             index === 0 && images.length % 3 === 1
               ? 'lg:col-span-2'
               : index === 0 && images.length % 2 === 1
                 ? 'sm:col-span-2 lg:col-span-1'
                 : ''
-          }`}
-        >
-          <div className="relative aspect-[4/3]">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-linear-to-t from-[#0c0d0e]/82 via-[#0c0d0e]/10 to-transparent" />
-            <figcaption className="absolute right-4 bottom-4 left-4">
-              <span className="inline-flex rounded-full bg-[#e4ad42] px-3 py-1 font-display text-xs font-black text-[#0c0d0e] uppercase">
-                {imageLabel(image.src)}
-              </span>
-            </figcaption>
-          </div>
-        </figure>
+          }
+        />
       ))}
     </div>
+  );
+}
+
+function SectionImageFigure({
+  image,
+  className = '',
+  priorityLayout = false,
+}: {
+  image: PageImage;
+  className?: string;
+  priorityLayout?: boolean;
+}) {
+  return (
+    <figure
+      className={`hover-lift group relative overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-white shadow-[0_20px_42px_rgba(0,0,0,0.18)] ${className}`}
+    >
+      <div
+        className={`relative ${
+          priorityLayout
+            ? 'aspect-[4/3] lg:h-full lg:min-h-[520px] lg:aspect-auto'
+            : 'aspect-[4/3] lg:aspect-[16/10]'
+        }`}
+      >
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="(min-width: 1024px) 520px, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
+        <figcaption className="absolute right-4 bottom-4 left-4">
+          <span className="inline-flex rounded-full bg-[#e4ad42] px-3 py-1 font-display text-xs font-black text-[#0c0d0e] uppercase">
+            {imageLabel(image.src)}
+          </span>
+        </figcaption>
+      </div>
+    </figure>
   );
 }
 
