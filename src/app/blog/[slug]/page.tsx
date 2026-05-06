@@ -67,9 +67,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const relatedPosts = blogPosts.filter(
     (relatedPost) => relatedPost.slug !== post.slug,
   );
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: `${siteUrl}${post.image}`,
+    datePublished: post.dateTime,
+    dateModified: post.dateTime,
+    author: {
+      "@type": "Organization",
+      name: "Gold Lion Painting Inc",
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Gold Lion Painting Inc",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/gold-lion-painting-logo-512.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${post.slug}`,
+    },
+  };
 
   return (
     <main className="bg-white text-[#0c0d0e]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
       <article>
         <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
           <Image

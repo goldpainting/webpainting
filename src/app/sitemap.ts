@@ -1,12 +1,14 @@
 import { type MetadataRoute } from "next";
 
-import { blogCategories, blogPosts } from "./blog/blogData";
+import { blogPosts, getPopulatedBlogCategories } from "./blog/blogData";
 import { indexedRoutes, siteUrl } from "./siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const dynamicBlogRoutes = [
     ...blogPosts.map((post) => `/blog/${post.slug}`),
-    ...blogCategories.map((category) => `/blog/category/${category.slug}`),
+    ...getPopulatedBlogCategories().map(
+      (category) => `/blog/category/${category.slug}`,
+    ),
   ];
   const routes = Array.from(new Set([...indexedRoutes, ...dynamicBlogRoutes]));
 

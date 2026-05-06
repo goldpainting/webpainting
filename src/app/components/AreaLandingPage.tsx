@@ -11,7 +11,7 @@ import {
 
 import FaqSchema from "./FaqSchema";
 import GoogleReviewsCarousel from "./GoogleReviewsCarousel";
-import { type AreaLandingData, googleReviewsHref } from "./areaLandingData";
+import { type AreaLandingData } from "./areaLandingData";
 import { serviceLinks } from "./navigationData";
 import { googleRatingValue, googleReviewCount } from "../siteConfig";
 

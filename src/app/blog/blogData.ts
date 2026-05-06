@@ -82,3 +82,9 @@ export function getBlogPostsByCategory(categorySlug: string) {
     (post) => getCategorySlug(post.category) === categorySlug,
   );
 }
+
+export function getPopulatedBlogCategories() {
+  return blogCategories.filter(
+    (category) => getBlogPostsByCategory(category.slug).length > 0,
+  );
+}

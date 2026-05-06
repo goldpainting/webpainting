@@ -30,6 +30,7 @@ export async function generateMetadata({
   if (!category) {
     return {};
   }
+  const posts = getBlogPostsByCategory(category.slug);
 
   return {
     title: `${category.label} | Painting Blog`,
@@ -42,6 +43,16 @@ export async function generateMetadata({
       description: `Professional painting articles about ${category.label.toLowerCase()} for Florida homes.`,
       url: `${siteUrl}/blog/category/${category.slug}`,
     },
+    robots:
+      posts.length > 0
+        ? {
+            index: true,
+            follow: true,
+          }
+        : {
+            index: false,
+            follow: true,
+          },
   };
 }
 
