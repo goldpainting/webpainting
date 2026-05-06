@@ -11,6 +11,7 @@ type ProcessStepImageProps = {
   index: number;
   number: string;
   title: string;
+  compact?: boolean;
 };
 
 export default function ProcessStepImage({
@@ -18,6 +19,7 @@ export default function ProcessStepImage({
   index,
   number,
   title,
+  compact = false,
 }: ProcessStepImageProps) {
   const [open, setOpen] = useState(false);
   const image = images[index];
@@ -28,7 +30,9 @@ export default function ProcessStepImage({
     <>
       <button
         type="button"
-        className="group/image relative h-56 w-full overflow-hidden text-left"
+        className={`group/image relative w-full overflow-hidden text-left ${
+          compact ? "h-40" : "h-56"
+        }`}
         onClick={() => setOpen(true)}
         aria-label={`Expand ${title} image`}
       >

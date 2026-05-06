@@ -1,7 +1,12 @@
 import { type Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { FaEnvelope, FaFileContract, FaInfoCircle, FaPhone } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaFileContract,
+  FaInfoCircle,
+  FaPhone,
+} from "react-icons/fa";
 
 import EstimateRequestForm from "../components/EstimateRequestForm";
 import { siteUrl } from "../siteConfig";
@@ -20,7 +25,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/warranty-service`,
     images: [
       {
-        url: "/warranty service.jpeg",
+        url: "/warranty service nueva imagen.jpeg",
         width: 1152,
         height: 768,
         alt: "Gold Lion Painting 5-year limited warranty graphic",
@@ -144,7 +149,7 @@ export default function WarrantyServicePage() {
             <section className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_20px_50px_rgba(120,94,52,0.12)]">
               <div className="bg-[#f4ecdf] p-4">
                 <Image
-                  src="/warranty service.jpeg"
+                  src="/warranty service nueva imagen.jpeg"
                   alt="Gold Lion Painting 5-year limited warranty"
                   width={1152}
                   height={768}

@@ -412,7 +412,7 @@ export default function HomePage() {
               className="block overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition hover:scale-[1.02]"
             >
               <Image
-                src="/warranty service.jpeg"
+                src="/warranty service nueva imagen.jpeg"
                 alt="Gold Lion Painting 5-year limited warranty"
                 width={1024}
                 height={683}
@@ -433,7 +433,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-[#111214] px-4 py-16 text-[#dddddd] sm:px-6 lg:px-8">
         <div className="texture-grid absolute inset-0 opacity-45" />
         <div className="relative mx-auto max-w-6xl">
-          <div className="scroll-reveal grid gap-8 lg:grid-cols-[0.44fr_0.56fr] lg:items-end">
+          <div className="scroll-reveal grid gap-8 lg:grid-cols-[0.36fr_0.64fr] lg:items-end">
             <div>
               <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
                 Step By Step
@@ -449,11 +449,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="scroll-reveal mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {processSteps.slice(0, 3).map((step, index) => (
+          <div className="scroll-reveal mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+            {processSteps.map((step, index) => (
               <article
                 key={step.title}
-                className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
+                className="process-card group flex h-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f8f5ed] text-[#0c0d0e] shadow-[0_18px_34px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:border-[#e4ad42] hover:shadow-[0_24px_48px_rgba(0,0,0,0.42)]"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <ProcessStepImage
@@ -461,67 +461,26 @@ export default function HomePage() {
                   index={index}
                   number={String(index + 1).padStart(2, "0")}
                   title={step.title}
+                  compact
                 />
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
+                <div className="flex flex-1 flex-col p-4">
+                  <p className="border-l-4 border-[#e4ad42] pl-3 text-sm leading-6 font-semibold text-[#1f2124]">
                     {step.description}
                   </p>
 
                   {step.panels.length > 0 ? (
-                    <div className="mt-5 grid gap-3">
+                    <div className="mt-4 grid gap-2">
                       {step.panels.map((panel, panelIndex) => (
                         <details
                           key={panel.label}
                           open={panelIndex === 0}
                           className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
                         >
-                          <summary className="flex cursor-pointer list-none items-center gap-3 bg-[#0c0d0e] px-4 py-3 font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
+                          <summary className="flex cursor-pointer list-none items-center gap-2 bg-[#0c0d0e] px-3 py-2 text-sm font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
                             <span className="process-toggle text-lg font-black text-[#e4ad42]" />
                             {panel.label}:
                           </summary>
-                          <p className="bg-white px-5 py-5 leading-7 text-[#1f2124]">
-                            {panel.text}
-                          </p>
-                        </details>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="scroll-reveal mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
-            {processSteps.slice(3, 5).map((step, index) => (
-              <article
-                key={step.title}
-                className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
-                style={{ animationDelay: `${(index + 3) * 90}ms` }}
-              >
-                <ProcessStepImage
-                  images={processGalleryImages}
-                  index={index + 3}
-                  number={String(index + 4).padStart(2, "0")}
-                  title={step.title}
-                />
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
-                    {step.description}
-                  </p>
-
-                  {step.panels.length > 0 ? (
-                    <div className="mt-5 grid gap-3">
-                      {step.panels.map((panel, panelIndex) => (
-                        <details
-                          key={panel.label}
-                          open={panelIndex === 0}
-                          className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
-                        >
-                          <summary className="flex cursor-pointer list-none items-center gap-3 bg-[#0c0d0e] px-4 py-3 font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
-                            <span className="process-toggle text-lg font-black text-[#e4ad42]" />
-                            {panel.label}:
-                          </summary>
-                          <p className="bg-white px-5 py-5 leading-7 text-[#1f2124]">
+                          <p className="bg-white px-4 py-4 text-sm leading-6 text-[#1f2124]">
                             {panel.text}
                           </p>
                         </details>
