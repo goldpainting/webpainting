@@ -40,8 +40,7 @@ export const blogPosts = [
     readTime: "8 min read",
     category: "Exterior Painting Florida Homes",
     image: "/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg",
-    imageAlt:
-      "Exterior painting project for a Lakewood Ranch Florida home",
+    imageAlt: "Exterior painting project for a Lakewood Ranch Florida home",
   },
   {
     slug: "florida-painting-prep-guide",
