@@ -36,32 +36,31 @@ export default function FloatingChatbot() {
   return (
     <div className="fixed right-4 bottom-4 z-[80] sm:right-6 sm:bottom-6">
       <div
-        className={`mb-4 w-[calc(100vw-2rem)] max-w-sm origin-bottom-right overflow-hidden rounded-[1.5rem] border border-[#e4ad42]/35 bg-white shadow-[0_28px_80px_rgba(0,0,0,0.32)] transition-all duration-300 sm:w-[380px] ${
+        className={`mb-3 w-[calc(100vw-2rem)] max-w-xs origin-bottom-right overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-white shadow-[0_22px_60px_rgba(0,0,0,0.3)] transition-all duration-300 sm:w-[320px] ${
           isOpen
             ? 'translate-y-0 scale-100 opacity-100'
             : 'pointer-events-none translate-y-4 scale-95 opacity-0'
         }`}
         aria-hidden={!isOpen}
       >
-        <div className="relative overflow-hidden bg-[#0c0d0e] px-5 py-5 text-white">
-          <div className="absolute top-0 right-0 h-28 w-28 rounded-full bg-[#e4ad42]/15 blur-2xl" />
-          <div className="relative flex items-start justify-between gap-4">
+        <div className="relative overflow-hidden bg-[#0c0d0e] px-4 py-4 text-white">
+          <div className="absolute top-0 right-0 h-20 w-20 rounded-full bg-[#e4ad42]/15 blur-2xl" />
+          <div className="relative flex items-start justify-between gap-3">
             <div>
-              <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
+              <p className="font-display text-[10px] font-black tracking-[0.16em] text-[#e4ad42] uppercase">
                 Gold Lion Assistant
               </p>
-              <h2 className="mt-1 font-heading text-2xl font-black">
+              <h2 className="mt-1 font-heading text-xl font-black">
                 How can we help?
               </h2>
-              <p className="mt-2 text-sm leading-6 text-white/78">
-                Ask about estimates, exterior painting, interior painting, or
-                cabinet refinishing.
+              <p className="mt-1.5 text-xs leading-5 text-white/78">
+                Choose a quick option and our team will help.
               </p>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/15 bg-white/10 text-sm text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               aria-label="Close chat"
             >
               <FaTimes aria-hidden="true" />
@@ -69,25 +68,24 @@ export default function FloatingChatbot() {
           </div>
         </div>
 
-        <div className="space-y-4 bg-[#f7f7f7] p-5">
-          <div className="rounded-2xl border border-[#0c0d0e]/10 bg-white p-4 shadow-[0_12px_30px_rgba(0,0,0,0.06)]">
-            <div className="flex items-start gap-3">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#e4ad42] text-[#0c0d0e]">
+        <div className="space-y-3 bg-[#f7f7f7] p-4">
+          <div className="rounded-xl border border-[#0c0d0e]/10 bg-white p-3 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
+            <div className="flex items-start gap-2.5">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#e4ad42] text-sm text-[#0c0d0e]">
                 <FaPaintRoller aria-hidden="true" />
               </span>
               <div>
-                <p className="font-heading text-base font-black text-[#0c0d0e]">
-                  Hi, I am your painting assistant.
+                <p className="font-heading text-sm font-black text-[#0c0d0e]">
+                  Painting assistant
                 </p>
-                <p className="mt-1 text-sm leading-6 text-[#343b43]">
-                  This chat is being prepared for AI. For now, choose one of the
-                  quick options below and our team will help you directly.
+                <p className="mt-1 text-xs leading-5 text-[#343b43]">
+                  AI chat is coming soon. For now, contact the team directly.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="grid gap-3">
+          <div className="grid gap-2.5">
             {quickActions.map((action) => {
               const Icon = action.icon;
 
@@ -95,10 +93,10 @@ export default function FloatingChatbot() {
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="group flex items-center justify-between gap-3 rounded-2xl border border-[#0c0d0e]/10 bg-white px-4 py-3 font-heading font-black text-[#0c0d0e] shadow-[0_10px_25px_rgba(0,0,0,0.05)] transition hover:border-[#e4ad42] hover:bg-[#0c0d0e] hover:text-white"
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-[#0c0d0e]/10 bg-white px-3 py-2.5 font-heading text-sm font-black text-[#0c0d0e] shadow-[0_8px_20px_rgba(0,0,0,0.05)] transition hover:border-[#e4ad42] hover:bg-[#0c0d0e] hover:text-white"
                 >
-                  <span className="flex items-center gap-3">
-                    <span className="grid h-9 w-9 place-items-center rounded-full bg-[#0c0d0e] text-[#e4ad42] transition group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                  <span className="flex items-center gap-2.5">
+                    <span className="grid h-8 w-8 place-items-center rounded-full bg-[#0c0d0e] text-xs text-[#e4ad42] transition group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
                       <Icon aria-hidden="true" />
                     </span>
                     {action.label}
@@ -112,7 +110,7 @@ export default function FloatingChatbot() {
             })}
           </div>
 
-          <p className="text-center text-xs font-semibold text-[#6b7280]">
+          <p className="text-center text-[11px] font-semibold text-[#6b7280]">
             Live AI chat coming soon.
           </p>
         </div>
