@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { type ReactNode } from 'react';
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -213,12 +214,16 @@ function HeroBlock({ block }: { block: MarkdownBlock }) {
   }
 
   if (block.type === 'cta') {
-    return <p className="font-black text-[#e4ad42]">{block.text}</p>;
+    return (
+      <p className="font-black text-[#e4ad42]">
+        {renderInlineLinks(block.text)}
+      </p>
+    );
   }
 
   if (block.type === 'heading') return null;
 
-  return <p>{block.text}</p>;
+  return <p>{renderInlineLinks(block.text)}</p>;
 }
 
 function renderContentSections(
@@ -299,7 +304,7 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
               aria-hidden="true"
               className="mt-1 shrink-0 text-[#e4ad42]"
             />
-            <span>{item}</span>
+            <span>{renderInlineLinks(item)}</span>
           </li>
         ))}
       </ul>
@@ -309,12 +314,45 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
   if (block.type === 'cta') {
     return (
       <p className="rounded-xl bg-[#0c0d0e] px-5 py-4 font-heading text-xl font-black text-[#e4ad42]">
-        {block.text}
+        {renderInlineLinks(block.text)}
       </p>
     );
   }
 
-  return <p>{block.text}</p>;
+  return <p>{renderInlineLinks(block.text)}</p>;
+}
+
+function renderInlineLinks(text: string) {
+  const linkPattern = /\[([^\]]+)\]\((\/[^)\s]+)\)/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = linkPattern.exec(text)) !== null) {
+    const [fullMatch, label, href] = match;
+
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    parts.push(
+      <Link
+        key={`${href}-${match.index}`}
+        href={href}
+        className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+      >
+        {label}
+      </Link>
+    );
+
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
 }
 
 function SectionImageGrid({
