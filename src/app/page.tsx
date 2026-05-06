@@ -6,6 +6,7 @@ import {
   FaCheckCircle,
   FaChevronRight,
   FaExternalLinkAlt,
+  FaFileContract,
   FaMapMarkedAlt,
   FaPaintRoller,
   FaStar,
@@ -573,20 +574,20 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
           <div className="space-y-5">
             <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
-              Cabinet Refinishing & Kitchen Modernization
+              Cabinet Painting & Refinishing in Manatee & Sarasota County
             </h2>
             <p className="text-lg leading-8">
-              Cabinet refinishing delivers a dramatic transformation without
-              demolition. Our process includes hardware removal, surface
-              degreasing, sanding, bonding primer application, and controlled
-              spray finishing for a cleaner, smoother kitchen update.
+              Cabinet painting is one of the most effective ways to upgrade your kitchen or bathroom without the cost of full replacement. However, cabinets are also one of the most demanding surfaces to refinish correctly.
+            </p>
+            <p className="text-lg leading-8">
+              Without proper preparation and the right system, finishes can: Peel, Chip, Feel sticky, Wear down quickly. At Gold Lion Painting, we don't just paint cabinets — we refinish them using a system designed for durability and a true factory-like finish. We provide: Kitchen cabinet painting, Bathroom vanity refinishing, Cabinet color updates, Surface preparation and repairs, Professional spray-applied finishes.
             </p>
             <Link
               href="/cabinet-painting-mejor"
               className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
             >
               <FaPaintRoller aria-hidden="true" />
-              Book Your Service Today
+              Request Your Free Estimate Today
             </Link>
           </div>
           <Image
