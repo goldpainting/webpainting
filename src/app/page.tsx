@@ -75,7 +75,7 @@ const areaCards = [
   {
     href: "/lakewood-ranch",
     label: "Lakewood Ranch",
-    image: "/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg",
+    image: "/LakewoodRanch/kitchen-cabinet-painting-lakewood-ranch.jpg",
     alt: "Exterior house painting in Lakewood Ranch",
   },
   {
@@ -87,7 +87,7 @@ const areaCards = [
   {
     href: "/palmetto",
     label: "Palmetto",
-    image: "/palmeto/house-exterior-painting-palmetto.jpg",
+    image: "/palmetto/house-exterior-painting-palmetto.jpg.jpg",
     alt: "Exterior house painting in Palmetto",
   },
   {
@@ -111,7 +111,7 @@ const areaCards = [
   {
     href: "/venice",
     label: "Venice",
-    image: "/venice/house-exterior-painting-venice.jpg",
+    image: "/venice/exterior-painting-venice.jpeg",
     alt: "Exterior house painting in Venice",
   },
   {
@@ -123,7 +123,7 @@ const areaCards = [
   {
     href: "/sarasota",
     label: "Sarasota",
-    image: "/sarasota/house-exterior-painting-sarasota.jpg",
+    image: "/sarasota/exterior-painting-sarasota.jpeg",
     alt: "Exterior house painting in Sarasota",
   },
 ];
