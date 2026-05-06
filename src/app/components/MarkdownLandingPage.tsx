@@ -120,7 +120,11 @@ export default function MarkdownLandingPage({
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="space-y-12">
-            {renderContentSections(contentBlocks)}
+            {renderContentSections(
+              contentBlocks,
+              relatedInterlinks,
+              interlinkType,
+            )}
           </div>
         </div>
       </section>
@@ -218,7 +222,11 @@ function HeroBlock({ block }: { block: MarkdownBlock }) {
   return <p>{block.text}</p>;
 }
 
-function renderContentSections(blocks: MarkdownBlock[]) {
+function renderContentSections(
+  blocks: MarkdownBlock[],
+  relatedInterlinks: InterlinkCard[],
+  interlinkType: "areas" | "services",
+) {
   const sections: { heading: string; blocks: MarkdownBlock[] }[] = [];
 
   for (const block of blocks) {
@@ -234,25 +242,35 @@ function renderContentSections(blocks: MarkdownBlock[]) {
     }
   }
 
-  return sections.map((section, index) => (
-    <article
-      key={section.heading}
-      className="scroll-reveal border-b border-[#0c0d0e]/12 pb-10"
-      style={{ animationDelay: `${Math.min(index, 6) * 70}ms` }}
-    >
-      <h2 className="font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
-        {section.heading}
-      </h2>
-      <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
-        {section.blocks.map((block, blockIndex) => (
-          <ContentBlock
-            key={`${section.heading}-${block.type}-${blockIndex}`}
-            block={block}
-          />
-        ))}
-      </div>
-    </article>
-  ));
+  return sections.map((section, index) => {
+    const inlineLink = relatedInterlinks[index];
+
+    return (
+      <article
+        key={section.heading}
+        className="scroll-reveal border-b border-[#0c0d0e]/12 pb-10"
+        style={{ animationDelay: `${Math.min(index, 6) * 70}ms` }}
+      >
+        <h2 className="font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
+          {section.heading}
+        </h2>
+        <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
+          {section.blocks.map((block, blockIndex) => (
+            <ContentBlock
+              key={`${section.heading}-${block.type}-${blockIndex}`}
+              block={block}
+            />
+          ))}
+          {inlineLink ? (
+            <ContextualInterlink
+              card={inlineLink}
+              interlinkType={interlinkType}
+            />
+          ) : null}
+        </div>
+      </article>
+    );
+  });
 }
 
 function ContentBlock({ block }: { block: MarkdownBlock }) {
@@ -292,4 +310,30 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
   }
 
   return <p>{block.text}</p>;
+}
+
+function ContextualInterlink({
+  card,
+  interlinkType,
+}: {
+  card: InterlinkCard;
+  interlinkType: "areas" | "services";
+}) {
+  const copy =
+    interlinkType === "services"
+      ? "For this type of project, compare the details in our"
+      : "See how this same painting standard applies in";
+
+  return (
+    <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7 text-[#1f2124]">
+      {copy}{" "}
+      <Link
+        href={card.href}
+        className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+      >
+        {card.title}
+      </Link>{" "}
+      page.
+    </p>
+  );
 }

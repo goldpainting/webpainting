@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { FaChevronLeft, FaChevronRight, FaGoogle, FaStar } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaGoogle,
+  FaStar,
+} from "react-icons/fa";
 
 import {
   googleRatingValue,
@@ -49,7 +54,7 @@ function AvatarWithFallback({
 
   if (!photoUri || imgError) {
     return (
-      <div className="flex h-10 w-10 items-center justify-center shrink-0 rounded-full bg-[#1f5fec] text-sm font-bold text-white">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1f5fec] text-sm font-bold text-white">
         {name.charAt(0).toUpperCase()}
       </div>
     );
@@ -77,9 +82,7 @@ export default function GoogleReviewsCarousel({
   const [isZoomedOut, setIsZoomedOut] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const totalPages = data
-    ? Math.ceil(data.reviews.length / VISIBLE_CARDS)
-    : 0;
+  const totalPages = data ? Math.ceil(data.reviews.length / VISIBLE_CARDS) : 0;
 
   useEffect(() => {
     let cancelled = false;
@@ -133,21 +136,24 @@ export default function GoogleReviewsCarousel({
     };
   }, [maxReviews]);
 
-  const navigate = useCallback((direction: "left" | "right") => {
-    if (totalPages <= 1) return;
-    if (isZoomedOut) return; // prevent double-clicks
+  const navigate = useCallback(
+    (direction: "left" | "right") => {
+      if (totalPages <= 1) return;
+      if (isZoomedOut) return; // prevent double-clicks
 
-    setIsZoomedOut(true);
+      setIsZoomedOut(true);
 
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setCurrentIndex((prev) => {
-        if (direction === "left") return (prev - 1 + totalPages) % totalPages;
-        return (prev + 1) % totalPages;
-      });
-      setIsZoomedOut(false);
-    }, 300);
-  }, [totalPages, isZoomedOut]);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => {
+          if (direction === "left") return (prev - 1 + totalPages) % totalPages;
+          return (prev + 1) % totalPages;
+        });
+        setIsZoomedOut(false);
+      }, 300);
+    },
+    [totalPages, isZoomedOut],
+  );
 
   const scrollLeft = useCallback(() => navigate("left"), [navigate]);
   const scrollRight = useCallback(() => navigate("right"), [navigate]);
@@ -158,7 +164,7 @@ export default function GoogleReviewsCarousel({
 
   const visibleReviews = reviews.slice(
     currentIndex * VISIBLE_CARDS,
-    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS
+    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS,
   );
 
   return (
@@ -260,7 +266,7 @@ export default function GoogleReviewsCarousel({
                           photoUri={review.authorPhotoUri}
                           name={review.authorName}
                         />
-                        <div className="flex-1 min-w-0">
+                        <div className="min-w-0 flex-1">
                           <p className="truncate font-semibold text-[#0c0d0e]">
                             {review.authorName}
                           </p>
@@ -311,16 +317,24 @@ export default function GoogleReviewsCarousel({
                 <>
                   <button
                     type="button"
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); scrollLeft(); }}
-                    className="absolute left-[-16px] top-1/2 -translate-y-1/2 z-10 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:outline-none focus:ring-2 focus:ring-[#1f5fec] sm:left-[-20px]"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      scrollLeft();
+                    }}
+                    className="absolute top-1/2 left-[-16px] z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-2 focus:ring-[#1f5fec] focus:outline-none sm:left-[-20px]"
                     aria-label="Previous reviews"
                   >
                     <FaChevronLeft className="h-5 w-5" />
                   </button>
                   <button
                     type="button"
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); scrollRight(); }}
-                    className="absolute right-[-16px] top-1/2 -translate-y-1/2 z-10 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:outline-none focus:ring-2 focus:ring-[#1f5fec] sm:right-[-20px]"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      scrollRight();
+                    }}
+                    className="absolute top-1/2 right-[-16px] z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-2 focus:ring-[#1f5fec] focus:outline-none sm:right-[-20px]"
                     aria-label="Next reviews"
                   >
                     <FaChevronRight className="h-5 w-5" />
@@ -336,7 +350,8 @@ export default function GoogleReviewsCarousel({
                           e.stopPropagation();
                           if (isZoomedOut) return;
                           setIsZoomedOut(true);
-                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                          if (timeoutRef.current)
+                            clearTimeout(timeoutRef.current);
                           timeoutRef.current = setTimeout(() => {
                             setCurrentIndex(index);
                             setIsZoomedOut(false);
@@ -344,7 +359,7 @@ export default function GoogleReviewsCarousel({
                         }}
                         className={`h-2.5 w-2.5 rounded-full transition-all ${
                           index === currentIndex
-                            ? "bg-[#1f5fec] scale-125"
+                            ? "scale-125 bg-[#1f5fec]"
                             : "bg-[#d1d5db] hover:bg-[#9ca3af]"
                         }`}
                         aria-label={`Go to reviews page ${index + 1}`}

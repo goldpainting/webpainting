@@ -40,24 +40,26 @@ export async function GET() {
       placeId: data.id,
       rating: data.rating,
       reviewCount: data.userRatingCount,
-      reviews: data.reviews?.map((review: Record<string, unknown>) => ({
-        text: (review.text as Record<string, string>)?.text ?? "",
-        originalText:
-          (review.originalText as Record<string, string>)?.text ??
-          (review.text as Record<string, string>)?.text ??
-          "",
-        rating: review.rating as number,
-        authorName:
-          (review.authorAttribution as Record<string, string>)?.displayName ??
-          "Anonymous",
-        authorUri:
-          (review.authorAttribution as Record<string, string>)?.uri ?? "",
-        authorPhotoUri:
-          (review.authorAttribution as Record<string, string>)?.photoUri ?? "",
-        relativeTime: (review.relativePublishTimeDescription as string) ?? "",
-        publishTime: (review.publishTime as string) ?? "",
-        googleMapsUri: (review.googleMapsUri as string) ?? "",
-      })) ?? [],
+      reviews:
+        data.reviews?.map((review: Record<string, unknown>) => ({
+          text: (review.text as Record<string, string>)?.text ?? "",
+          originalText:
+            (review.originalText as Record<string, string>)?.text ??
+            (review.text as Record<string, string>)?.text ??
+            "",
+          rating: review.rating as number,
+          authorName:
+            (review.authorAttribution as Record<string, string>)?.displayName ??
+            "Anonymous",
+          authorUri:
+            (review.authorAttribution as Record<string, string>)?.uri ?? "",
+          authorPhotoUri:
+            (review.authorAttribution as Record<string, string>)?.photoUri ??
+            "",
+          relativeTime: (review.relativePublishTimeDescription as string) ?? "",
+          publishTime: (review.publishTime as string) ?? "",
+          googleMapsUri: (review.googleMapsUri as string) ?? "",
+        })) ?? [],
     });
   } catch {
     return NextResponse.json(

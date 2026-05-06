@@ -136,6 +136,25 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
             <p className="mt-5 text-lg leading-8 text-[#1f2124]">
               {area.highlight}
             </p>
+            <p className="mt-5 rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7 text-[#1f2124]">
+              Compare the right scope for your home with our{" "}
+              {serviceLinks.map((link, index) => (
+                <span key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+                  >
+                    {link.label}
+                  </Link>
+                  {index < serviceLinks.length - 2
+                    ? ", "
+                    : index === serviceLinks.length - 2
+                      ? " and "
+                      : ""}
+                </span>
+              ))}{" "}
+              pages.
+            </p>
             <Link
               href="/contact-us"
               className="mt-7 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-3 font-black text-white transition hover:bg-[#0c0d0e]"
