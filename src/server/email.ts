@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 import { env } from "~/env";
 
-const contactEmailTo = "arley75480@gmail.com";
+const contactEmailTo = "Goldlionpainting@gmail.com";
 
 type EmailError = {
   code: string;

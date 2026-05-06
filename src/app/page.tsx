@@ -236,30 +236,6 @@ const processGalleryImages = processSteps.map((step) => ({
   description: step.description,
 }));
 
-const serviceHighlights = [
-  {
-    title: 'Exterior Systems',
-    href: '/exterior-painting',
-    image: '/services/house-exterior-painting-manatee-county.jpg',
-    alt: 'Exterior painting system for a Florida home',
-    text: 'Weather-aware exterior repainting for stucco, trim, doors, soffits, fascia, and coastal Florida exposure.',
-  },
-  {
-    title: 'Interior Finishes',
-    href: '/interior-painting',
-    image: '/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg',
-    alt: 'Luxury interior painting finish in Bradenton',
-    text: 'Clean interior painting for walls, ceilings, trim, doors, occupied homes, and high-visibility living spaces.',
-  },
-  {
-    title: 'Cabinet Refinishing',
-    href: '/cabinet-painting',
-    image: '/home_refinishin.png',
-    alt: 'Kitchen cabinet painting and refinishing project',
-    text: 'Cabinet painting with proper degreasing, sanding, bonding primer, controlled finish coats, and careful reassembly.',
-  },
-];
-
 const faqs = [
   {
     q: 'Why choose a professional painting contractor in Manatee & Sarasota County?',
@@ -642,58 +618,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.34fr_0.66fr] lg:items-end">
-            <div>
-              <p className="font-display text-sm font-black tracking-[0.16em] text-[#e4ad42] uppercase">
-                Service Focus
-              </p>
-              <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-[#0c0d0e] md:text-5xl">
-                Painting Services Built For Florida Homes
-              </h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#1f2124]">
-              The home page stays focused: choose the service you need, then
-              visit the dedicated page for full details, process, examples, and
-              local SEO content.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {serviceHighlights.map((service) => (
-              <Link
-                key={service.href}
-                href={service.href}
-                className="group overflow-hidden border border-[#e4ad42]/45 bg-[#0c0d0e] text-white shadow-[0_18px_38px_rgba(0,0,0,0.25)] transition hover:-translate-y-1 hover:border-[#e4ad42]"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#0c0d0e]/78 via-transparent to-transparent" />
-                  <span className="absolute right-4 bottom-4 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e]">
-                    View Service
-                  </span>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-heading text-2xl font-black text-[#e4ad42]">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-[#dddddd]">
-                    {service.text}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
         <Image
           src="/services/home-exterior-painting-manatee-county.jpg.jpg"
@@ -960,7 +884,7 @@ function CardGrid({
         {items.map((item) => (
           <article
             key={`${item.title ?? item.label}-${item.href}`}
-            className="hover-lift relative bg-[#e4ad42] p-4 shadow-[1px_1px_10px_rgba(0,0,0,0.65)]"
+            className="hover-lift relative border border-[#e4ad42]/55 bg-[#0c0d0e] p-4 shadow-[1px_1px_10px_rgba(0,0,0,0.65)]"
           >
             <Link href={item.href} className="group block">
               <Image
@@ -971,21 +895,21 @@ function CardGrid({
                 loading="eager"
                 className="h-56 w-full rounded-xl object-cover"
               />
-              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
+              <h3 className="mt-4 font-heading text-2xl font-black text-[#e4ad42]">
                 {item.title ?? item.label}
               </h3>
               {item.description ? (
-                <p className="mt-3 text-sm leading-6 text-[#0c0d0e]">
+                <p className="mt-3 text-sm leading-6 text-[#f3d58e]">
                   {item.description}
                 </p>
               ) : null}
-              <span className="mt-5 inline-flex items-center gap-2 text-lg font-bold text-[#0c0d0e]">
+              <span className="mt-5 inline-flex items-center gap-2 text-lg font-bold text-[#e4ad42]">
                 <FaChevronRight aria-hidden="true" />
                 More
               </span>
               <Icon
                 aria-hidden="true"
-                className="pointer-events-none absolute right-[-10px] bottom-[-14px] hidden h-20 w-20 rounded-full bg-[#0c0d0e] p-4 text-[#e4ad42] opacity-90 transition group-hover:rotate-6 md:block"
+                className="pointer-events-none absolute right-[-10px] bottom-[-14px] hidden h-20 w-20 rounded-full bg-[#e4ad42] p-4 text-[#0c0d0e] opacity-95 transition group-hover:rotate-6 md:block"
               />
             </Link>
           </article>

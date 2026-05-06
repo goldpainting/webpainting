@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from "react";
 
-const emailTarget = "goldlionpainting@gmail.com";
+const emailTarget = "Goldlionpainting@gmail.com";
 
 function getFormValue(formData: FormData, key: string) {
   const value = formData.get(key);

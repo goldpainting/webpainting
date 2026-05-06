@@ -386,7 +386,7 @@ export default function WarrantyServicePage() {
                   Call 941-462-5894
                 </a>
                 <a
-                  href="mailto:goldlionpainting@gmail.com"
+                  href="mailto:Goldlionpainting@gmail.com"
                   className="inline-flex items-center justify-center gap-3 rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
                 >
                   <FaEnvelope className="shrink-0" />

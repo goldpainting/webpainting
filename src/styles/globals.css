@@ -81,11 +81,28 @@ body {
 }
 
 .reveal-up {
-  animation: revealUp 700ms ease both;
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
 }
 
 .scroll-reveal {
-  animation: revealUp 700ms ease both;
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+}
+
+.js-reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition:
+    opacity 680ms ease,
+    transform 680ms ease;
+  transition-delay: calc(var(--reveal-index, 0) * 85ms);
+  will-change: opacity, transform;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .animate-float-slow {
@@ -172,23 +189,13 @@ body {
   .hover-lift:hover,
   .reveal-up,
   .scroll-reveal,
+  .js-reveal,
   .animate-float-slow,
   .shimmer-panel::after {
     animation: none !important;
     transform: none !important;
     transition: none !important;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  .scroll-reveal {
-    opacity: 0;
-    animation-name: revealUp;
-    animation-duration: 700ms;
-    animation-fill-mode: both;
-    animation-timing-function: ease;
-    animation-timeline: view();
-    animation-range: entry 8% cover 28%;
+    opacity: 1 !important;
   }
 }
 

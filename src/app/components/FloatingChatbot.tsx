@@ -24,7 +24,7 @@ const quickActions = [
     icon: FaPhoneAlt,
   },
   {
-    href: 'mailto:goldlionpainting@gmail.com',
+    href: 'mailto:Goldlionpainting@gmail.com',
     label: 'Send email',
     icon: FaEnvelope,
   },
