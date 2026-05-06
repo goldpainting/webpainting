@@ -382,17 +382,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#dddddd] px-4 py-16 sm:px-6 lg:px-8">
+      <section className="bg-[#0c0d0e] px-4 py-16 text-[#dddddd] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-10 md:grid-cols-2 lg:items-center">
-            <div className="rounded-[2rem] border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-6 shadow-[0_18px_42px_rgba(0,0,0,0.35)]">
+              <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                 Warranty Snapshot
               </p>
-              <h2 className="mt-2 text-4xl font-bold text-[#8f6220]">
+              <h2 className="font-heading mt-2 text-4xl font-black text-white">
                 Gold Lion Painting Inc. 5-Year Limited Warranty
               </h2>
-              <p className="mt-3 leading-7 text-[#64584c]">
+              <p className="mt-3 leading-7 text-[#dddddd]">
                 Subject to the terms and conditions outlined below, for a period
                 of five (5) years from the project completion date, Gold Lion
                 Painting Inc. will repair any areas where peeling, blistering,
@@ -400,7 +400,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/warranty-service"
-                className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#d4a038] px-6 py-3 font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-3 font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 <FaFileContract aria-hidden="true" />
                 Review Warranty Details
@@ -409,7 +409,7 @@ export default function HomePage() {
 
             <a
               href="/warranty-service"
-              className="block overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition hover:scale-[1.02]"
+              className="block overflow-hidden border border-[#e4ad42]/45 bg-[#1f2124] p-3 shadow-[0_18px_45px_rgba(0,0,0,0.38)] transition hover:scale-[1.02] hover:border-[#e4ad42]"
             >
               <Image
                 src="/warranty service nueva imagen.jpeg"
@@ -456,10 +456,17 @@ export default function HomePage() {
                 className="process-card group flex h-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f8f5ed] text-[#0c0d0e] shadow-[0_18px_34px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 hover:border-[#e4ad42] hover:shadow-[0_24px_48px_rgba(0,0,0,0.42)]"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
+                <div className="flex items-center gap-3 bg-[#0c0d0e] px-4 py-3">
+                  <span className="font-heading flex h-10 w-10 shrink-0 items-center justify-center border border-[#e4ad42]/55 bg-[#1f2124] text-sm font-black text-[#e4ad42]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-heading text-lg leading-tight font-black text-white">
+                    {step.title.replace(/^\d+\.\s*/, "")}
+                  </h3>
+                </div>
                 <ProcessStepImage
                   images={processGalleryImages}
                   index={index}
-                  number={String(index + 1).padStart(2, "0")}
                   title={step.title}
                   compact
                 />

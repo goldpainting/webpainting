@@ -12,6 +12,7 @@ import {
 import FaqSchema from "./FaqSchema";
 import GoogleReviewsCarousel from "./GoogleReviewsCarousel";
 import { type AreaLandingData, googleReviewsHref } from "./areaLandingData";
+import { serviceLinks } from "./navigationData";
 import { googleRatingValue, googleReviewCount } from "../siteConfig";
 
 type AreaLandingPageProps = {
@@ -350,6 +351,36 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
                 </h3>
                 <p className="mt-2 leading-7 text-[#1f2124]">{faq.a}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f3f3f3] px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionTitle title="Related Painting Pages" />
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {serviceLinks.map((link) => (
+              <Link
+                key={`${area.slug}-${link.href}`}
+                href={link.href}
+                className="group border border-[#e4ad42]/45 bg-[#0c0d0e] p-6 text-[#dddddd] shadow-[0_18px_35px_rgba(0,0,0,0.22)] transition hover:-translate-y-1 hover:border-[#e4ad42]"
+              >
+                <FaPaintRoller
+                  aria-hidden="true"
+                  className="text-3xl text-[#e4ad42]"
+                />
+                <h3 className="font-heading mt-5 text-2xl font-black text-white">
+                  {link.label}
+                </h3>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#e4ad42] uppercase">
+                  View page
+                  <FaChevronRight
+                    aria-hidden="true"
+                    className="transition group-hover:translate-x-1"
+                  />
+                </span>
+              </Link>
             ))}
           </div>
         </div>

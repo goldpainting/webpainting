@@ -69,18 +69,19 @@ const exclusions = [
 
 export default function WarrantyServicePage() {
   return (
-    <main className="min-h-screen bg-[#f6f1e7] font-sans text-[#2f2a24]">
-      <section className="relative overflow-hidden border-b border-[#dfcfb5] bg-[radial-gradient(circle_at_top_left,_rgba(212,160,56,0.18),_transparent_28%),linear-gradient(180deg,_#fffaf2_0%,_#f5ecde_100%)]">
+    <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
+      <section className="relative overflow-hidden border-b border-[#e4ad42]/35 bg-[#0c0d0e]">
+        <div className="texture-grid absolute inset-0 opacity-35" />
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[minmax(0,1.05fr)_24rem] md:items-center md:px-10 lg:grid-cols-[minmax(0,1.05fr)_27rem]">
-          <div>
-            <p className="mb-4 inline-flex rounded-full border border-[#d8c39f] bg-[#fffaf2]/85 px-4 py-2 text-xs font-semibold tracking-[0.24em] text-[#8f6220] uppercase shadow-sm">
+          <div className="relative">
+            <p className="mb-4 inline-flex rounded-full border border-[#e4ad42]/45 bg-[#1f2124] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#e4ad42] uppercase shadow-sm">
               Warranty Service
             </p>
-            <h1 className="max-w-4xl text-5xl leading-tight font-bold text-[#8f6220] md:text-6xl">
+            <h1 className="font-heading max-w-4xl text-5xl leading-tight font-black text-white md:text-6xl">
               Warranty support that is clear, professional, and easy to
               understand.
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#615447] md:text-xl">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#dddddd] md:text-xl">
               Our 5-year limited workmanship warranty is designed to give
               clients confidence after the project is complete, with
               straightforward expectations around what is covered and how to
@@ -91,12 +92,12 @@ export default function WarrantyServicePage() {
               {coverageHighlights.map((item) => (
                 <article
                   key={item.title}
-                  className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2]/90 p-5 shadow-sm"
+                  className="border border-[#e4ad42]/35 bg-[#1f2124] p-5 shadow-[0_16px_32px_rgba(0,0,0,0.22)]"
                 >
-                  <p className="text-lg font-semibold text-[#2f2a24]">
+                  <p className="text-lg font-black text-[#e4ad42]">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-[#64584c]">
+                  <p className="mt-2 text-sm leading-6 text-[#dddddd]">
                     {item.description}
                   </p>
                 </article>
@@ -104,37 +105,37 @@ export default function WarrantyServicePage() {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2]/95 p-7 shadow-[0_22px_50px_rgba(120,94,52,0.14)]">
-            <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+          <div className="relative border border-[#e4ad42]/45 bg-white p-7 text-[#0c0d0e] shadow-[0_22px_50px_rgba(0,0,0,0.35)]">
+            <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
               Need Assistance?
             </p>
-            <h2 className="mt-2 text-3xl font-bold text-[#8f6220]">
+            <h2 className="font-heading mt-2 text-3xl font-black text-[#0c0d0e]">
               Talk with our team about coverage or service.
             </h2>
-            <p className="mt-3 text-sm leading-6 text-[#64584c]">
+            <p className="mt-3 text-sm leading-6 text-[#1f2124]">
               If you are unsure whether an issue is covered, we can help you
               understand the next step and point you to the right contact path.
             </p>
             <div className="mt-5 flex flex-col gap-3">
               <a
                 href="tel:9414625894"
-                className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                className="rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
               >
                 <FaPhone className="mr-2" />
                 Call 941-462-5894
               </a>
               <Link
                 href="/contact-us"
-                className="rounded-2xl border border-[#d8c39f] bg-[#fffaf2] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                className="rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
               >
                 Visit Contact Page
               </Link>
             </div>
-            <div className="mt-6 rounded-[2rem] border border-[#eadfcf] bg-[#fff7eb] p-4">
-              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <div className="mt-6 border border-[#e4ad42]/45 bg-[#f7f7f7] p-4">
+              <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
                 Best For
               </p>
-              <p className="mt-2 text-sm leading-6 text-[#64584c]">
+              <p className="mt-2 text-sm leading-6 text-[#1f2124]">
                 Coverage questions, workmanship concerns, and general support
                 related to previously completed projects.
               </p>
@@ -143,25 +144,25 @@ export default function WarrantyServicePage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_27rem]">
           <div className="space-y-8">
-            <section className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_20px_50px_rgba(120,94,52,0.12)]">
-              <div className="bg-[#f4ecdf] p-4">
+            <section className="overflow-hidden border border-[#e4ad42]/45 bg-[#1f2124] shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
+              <div className="bg-[#0c0d0e] p-4">
                 <Image
                   src="/warranty service nueva imagen.jpeg"
                   alt="Gold Lion Painting 5-year limited warranty"
                   width={1152}
                   height={768}
                   priority
-                  className="h-auto w-full rounded-[1.5rem] object-contain"
+                  className="h-auto w-full object-contain"
                 />
               </div>
-              <div className="border-t border-[#eadfcf] px-6 py-6">
-                <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+              <div className="border-t border-[#e4ad42]/35 px-6 py-6">
+                <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                   Warranty Snapshot
                 </p>
-                <p className="mt-2 text-base leading-7 text-[#615447]">
+                <p className="mt-2 text-base leading-7 text-[#dddddd]">
                   This page summarizes the structure of our 5-year limited
                   workmanship warranty while preserving the official terms below
                   for reference.
@@ -170,17 +171,17 @@ export default function WarrantyServicePage() {
             </section>
 
             <section className="grid gap-6 md:grid-cols-2">
-              <article className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-[#8f6220]">
+              <article className="border border-[#e4ad42]/45 bg-[#f7f7f7] p-6 shadow-sm">
+                <h2 className="font-heading text-2xl font-black text-[#0c0d0e]">
                   How To Submit A Claim
                 </h2>
                 <ol className="mt-5 space-y-4">
                   {claimSteps.map((step, index) => (
                     <li key={step} className="flex gap-4">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d4a038] font-bold text-[#2f2a24]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#e4ad42] font-black text-[#0c0d0e]">
                         {index + 1}
                       </span>
-                      <p className="pt-1 text-sm leading-6 text-[#64584c]">
+                      <p className="pt-1 text-sm leading-6 text-[#1f2124]">
                         {step}
                       </p>
                     </li>
@@ -188,15 +189,15 @@ export default function WarrantyServicePage() {
                 </ol>
               </article>
 
-              <article className="rounded-3xl border border-[#dfcfb5] bg-[#fff7eb] p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-[#8f6220]">
+              <article className="border border-[#e4ad42]/45 bg-[#0c0d0e] p-6 shadow-[0_18px_35px_rgba(0,0,0,0.22)]">
+                <h2 className="font-heading text-2xl font-black text-[#e4ad42]">
                   Common Exclusions
                 </h2>
                 <ul className="mt-5 space-y-3">
                   {exclusions.map((item) => (
                     <li
                       key={item}
-                      className="rounded-2xl border border-[#eadfcf] bg-[#fffaf2] px-4 py-3 text-sm leading-6 text-[#64584c]"
+                      className="border border-white/10 bg-[#1f2124] px-4 py-3 text-sm leading-6 text-[#dddddd]"
                     >
                       {item}
                     </li>
@@ -205,17 +206,17 @@ export default function WarrantyServicePage() {
               </article>
             </section>
 
-            <section className="rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] p-8 shadow-[0_20px_50px_rgba(120,94,52,0.12)]">
-              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <section className="border border-[#e4ad42]/45 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
+              <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
                 Official Terms
               </p>
-              <h2 className="mt-2 text-4xl font-bold text-[#8f6220]">
+              <h2 className="font-heading mt-2 text-4xl font-black text-[#0c0d0e]">
                 Gold Lion Painting Inc. 5-Year Limited Warranty
               </h2>
 
-              <div className="mt-8 space-y-7 text-[#615447]">
+              <div className="mt-8 space-y-7 text-[#1f2124]">
                 <section>
-                  <p className="text-base leading-7 font-semibold text-[#2f2a24]">
+                  <p className="border-l-4 border-[#e4ad42] pl-4 text-base leading-7 font-semibold text-[#0c0d0e]">
                     At Gold Lion Painting Inc., we are committed to delivering
                     exceptional craftsmanship and a stress-free experience from
                     start to finish. To support our quality and professionalism,
@@ -225,7 +226,7 @@ export default function WarrantyServicePage() {
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-[#2f2a24]">
+                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
                     Warranty Coverage
                   </h3>
                   <p className="mt-3 leading-7">
@@ -238,7 +239,7 @@ export default function WarrantyServicePage() {
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-[#2f2a24]">
+                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
                     How to Submit a Warranty Claim
                   </h3>
                   <p className="mt-3 leading-7">
@@ -264,7 +265,7 @@ export default function WarrantyServicePage() {
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-[#2f2a24]">
+                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
                     Warranty Limitations
                   </h3>
                   <p className="mt-3 leading-7">
@@ -300,7 +301,7 @@ export default function WarrantyServicePage() {
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-[#2f2a24]">
+                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
                     Exclusions Due to External Factors
                   </h3>
                   <p className="mt-3 leading-7">
@@ -323,7 +324,7 @@ export default function WarrantyServicePage() {
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-[#2f2a24]">
+                  <h3 className="font-heading text-xl font-black text-[#0c0d0e]">
                     Additional Terms & Conditions
                   </h3>
                   <ul className="mt-3 list-disc space-y-2 pl-5 leading-7">
@@ -354,14 +355,14 @@ export default function WarrantyServicePage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-[2rem] border border-[#d8c39f] bg-[linear-to-br_from-[#fffaf2]_to-[#f3e4c4] p-7 shadow-[0_20px_45px_rgba(120,94,52,0.14)]">
-              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+            <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-7 text-[#dddddd] shadow-[0_20px_45px_rgba(0,0,0,0.28)]">
+              <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                 Estimate Support
               </p>
-              <h2 className="mt-2 text-3xl font-bold text-[#8f6220]">
+              <h2 className="font-heading mt-2 text-3xl font-black text-white">
                 Planning a new project too?
               </h2>
-              <p className="mt-3 text-sm leading-6 text-[#64584c]">
+              <p className="mt-3 text-sm leading-6 text-[#dddddd]">
                 If you are reaching out about a past project and also want
                 pricing for new work, we can help with both.
               </p>
@@ -373,28 +374,28 @@ export default function WarrantyServicePage() {
               />
             </div>
 
-            <div className="rounded-3xl border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
-              <h3 className="text-2xl font-bold text-[#8f6220]">
+            <div className="border border-[#e4ad42]/45 bg-white p-6 shadow-sm">
+              <h3 className="font-heading text-2xl font-black text-[#0c0d0e]">
                 Quick Contact Options
               </h3>
               <div className="mt-5 flex flex-col gap-3">
                 <a
                   href="tel:9414625894"
-                  className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+                  className="rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
                 >
                   <FaPhone className="mr-2" />
                   Call 941-462-5894
                 </a>
                 <a
                   href="mailto:goldlionpainting@gmail.com"
-                  className="rounded-2xl border border-[#d8c39f] bg-[#fff7eb] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                  className="rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
                 >
                   <FaEnvelope className="mr-2" />
                   Email Gold Lion Painting
                 </a>
                 <Link
                   href="/about-us"
-                  className="rounded-2xl border border-[#d8c39f] bg-[#fff7eb] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
+                  className="rounded-full border border-[#0c0d0e] bg-white px-5 py-3 text-center font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-white"
                 >
                   <FaInfoCircle className="mr-2" />
                   Learn More About Us

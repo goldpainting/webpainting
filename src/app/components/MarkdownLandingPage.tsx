@@ -69,6 +69,7 @@ export default function MarkdownLandingPage({
   const faqs = extractMarkdownFaqs(raw);
   const { title, heroBlocks, contentBlocks } = getHeroAndContent(blocks);
   const schemaId = `${eyebrow.toLowerCase().replaceAll(/\s+/g, "-")}-faq-schema`;
+  const relatedInterlinks = interlinks.slice(0, 3);
 
   return (
     <main className="bg-white text-[#0c0d0e]">
@@ -133,7 +134,7 @@ export default function MarkdownLandingPage({
             <div className="mx-auto mt-5 h-1.5 w-2/3 max-w-xl bg-[#e4ad42]" />
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {interlinks.map((card) => (
+            {relatedInterlinks.map((card) => (
               <Link
                 key={`${card.title}-${card.href}`}
                 href={card.href}
