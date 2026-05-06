@@ -17,13 +17,7 @@ import FaqSchema from "./components/FaqSchema";
 import GoogleReviewsCarousel from "./components/GoogleReviewsCarousel";
 import ProcessStepImage from "./components/ProcessStepImage";
 import { areaLinks, serviceAreaNames } from "./components/navigationData";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel";
+
 import {
   bbbProfileHref,
   businessHours,
@@ -387,66 +381,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden px-4 py-16 text-[#dddddd] sm:px-6 lg:px-8">
-        <Image
-          src="/services/house-exterior-painting-manatee-county.jpg"
-          alt="Exterior painting background"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-[#0c0d0e]/78" />
-        <div className="relative mx-auto max-w-6xl">
-          <h2 className="font-heading text-center text-4xl font-black text-[#e4ad42]">
-            The Gold Lion Painting Warranty
-          </h2>
-          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center">
-            <Image
-              src="/warranty service.jpeg"
-              alt="Gold Lion Painting warranty"
-              width={1024}
-              height={683}
-              className="h-auto w-full rounded-2xl"
-            />
-            <div className="space-y-4">
-              {[
-                {
-                  title: "How do I get started with my painting project?",
-                  text: "Contact us to schedule a free estimate. We will guide you through the process from scope review to final walkthrough.",
-                },
-                {
-                  title: "Do you offer a warranty?",
-                  text: "Yes. We provide a 5-Year Limited Workmanship Warranty on qualifying residential painting work.",
-                },
-                {
-                  title: "Is summer a good time to paint in Florida?",
-                  text: "Painting can be done year-round when the project is scheduled around weather, humidity, drying time, and surface conditions.",
-                },
-              ].map((item, index) => (
-                <details
-                  key={item.title}
-                  open={index === 0}
-                  className="group border-b border-[#e4ad42]/35 py-4"
-                >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold text-[#dddddd]">
-                    {item.title}
-                    <span className="text-[#e4ad42] transition group-open:rotate-90">
-                      <FaChevronRight aria-hidden="true" />
-                    </span>
-                  </summary>
-                  <p className="mt-3 leading-7 text-[#dddddd]/85">
-                    {item.text}
-                  </p>
-                </details>
-              ))}
-              <Image
-                src="/logo.jpg"
-                alt="Gold Lion Painting Inc logo"
-                width={160}
-                height={160}
-                className="mx-auto mt-8 h-24 w-24 rounded-full object-cover opacity-75"
-              />
+      <section className="bg-[#dddddd] px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-10 md:grid-cols-2 lg:items-center">
+            <div className="rounded-[2rem] border border-[#dfcfb5] bg-[#fffaf2] p-6 shadow-sm">
+              <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
+                Warranty Snapshot
+              </p>
+              <h2 className="mt-2 text-4xl font-bold text-[#8f6220]">
+                Gold Lion Painting Inc. 5-Year Limited Warranty
+              </h2>
+              <p className="mt-3 leading-7 text-[#64584c]">
+                Subject to the terms and conditions outlined below, for a
+                period of five (5) years from the project completion date,
+                Gold Lion Painting Inc. will repair any areas where peeling,
+                blistering, or chipping occurs as a direct result of
+                defective workmanship.
+              </p>
+              <Link
+                href="/warranty-service"
+                className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-[#d4a038] px-6 py-3 font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
+              >
+                <FaFileContract aria-hidden="true" />
+                Review Warranty Details
+              </Link>
             </div>
+
+            <a
+              href="/warranty-service"
+              className="block overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(0,0,0,0.18)] transition hover:scale-[1.02]"
+            >
+              <Image
+                src="/warranty service.jpeg"
+                alt="Gold Lion Painting 5-year limited warranty"
+                width={1024}
+                height={683}
+                className="h-auto w-full"
+                priority
+              />
+            </a>
           </div>
         </div>
       </section>
@@ -476,91 +449,112 @@ export default function HomePage() {
             </p>
           </div>
 
-          <Carousel
-            opts={{
-              align: "start",
-              loop: false,
-            }}
-            className="scroll-reveal mt-10"
-          >
-            <CarouselContent className="-ml-5 items-stretch">
-              {processSteps.map((step, index) => (
-                <CarouselItem
-                  key={step.title}
-                  className="flex pl-5 md:basis-1/2 lg:basis-1/3"
-                >
-                  <article
-                    className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
-                    style={{ animationDelay: `${index * 90}ms` }}
-                  >
-                    <ProcessStepImage
-                      images={processGalleryImages}
-                      index={index}
-                      number={String(index + 1).padStart(2, "0")}
-                      title={step.title}
-                    />
-                    <div className="flex flex-1 flex-col p-5">
-                      <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
-                        {step.description}
-                      </p>
+          <div className="scroll-reveal mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {processSteps.slice(0, 3).map((step, index) => (
+              <article
+                key={step.title}
+                className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
+                style={{ animationDelay: `${index * 90}ms` }}
+              >
+                <ProcessStepImage
+                  images={processGalleryImages}
+                  index={index}
+                  number={String(index + 1).padStart(2, "0")}
+                  title={step.title}
+                />
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
+                    {step.description}
+                  </p>
 
-                      {step.panels.length > 0 ? (
-                        <div className="mt-5 grid gap-3">
-                          {step.panels.map((panel, panelIndex) => (
-                            <details
-                              key={panel.label}
-                              open={panelIndex === 0}
-                              className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
-                            >
-                              <summary className="flex cursor-pointer list-none items-center gap-3 bg-[#0c0d0e] px-4 py-3 font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
-                                <span className="process-toggle text-lg font-black text-[#e4ad42]" />
-                                {panel.label}:
-                              </summary>
-                              <p className="bg-white px-5 py-5 leading-7 text-[#1f2124]">
-                                {panel.text}
-                              </p>
-                            </details>
-                          ))}
-                        </div>
-                      ) : null}
+                  {step.panels.length > 0 ? (
+                    <div className="mt-5 grid gap-3">
+                      {step.panels.map((panel, panelIndex) => (
+                        <details
+                          key={panel.label}
+                          open={panelIndex === 0}
+                          className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+                        >
+                          <summary className="flex cursor-pointer list-none items-center gap-3 bg-[#0c0d0e] px-4 py-3 font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
+                            <span className="process-toggle text-lg font-black text-[#e4ad42]" />
+                            {panel.label}:
+                          </summary>
+                          <p className="bg-white px-5 py-5 leading-7 text-[#1f2124]">
+                            {panel.text}
+                          </p>
+                        </details>
+                      ))}
                     </div>
-                  </article>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious
-              size="icon-lg"
-              className="-left-4 size-12 border-2 border-[#e4ad42] bg-[#0c0d0e] text-[#e4ad42] shadow-[0_16px_35px_rgba(0,0,0,0.42)] hover:bg-[#e4ad42] hover:text-[#0c0d0e] active:-translate-y-1/2 active:scale-90 disabled:opacity-30 [&_svg]:size-6"
-            />
-            <CarouselNext
-              size="icon-lg"
-              className="-right-4 size-12 border-2 border-[#e4ad42] bg-[#0c0d0e] text-[#e4ad42] shadow-[0_16px_35px_rgba(0,0,0,0.42)] hover:bg-[#e4ad42] hover:text-[#0c0d0e] active:-translate-y-1/2 active:scale-90 disabled:opacity-30 [&_svg]:size-6"
-            />
-          </Carousel>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="scroll-reveal mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-2">
+            {processSteps.slice(3, 5).map((step, index) => (
+              <article
+                key={step.title}
+                className="process-card group flex min-h-[720px] w-full flex-col overflow-hidden border border-[#e4ad42]/35 bg-[#f7f7f7] text-[#0c0d0e] shadow-[0_22px_42px_rgba(0,0,0,0.32)] transition duration-300 hover:-translate-y-2 hover:border-[#e4ad42] hover:shadow-[0_28px_58px_rgba(0,0,0,0.46)]"
+                style={{ animationDelay: `${(index + 3) * 90}ms` }}
+              >
+                <ProcessStepImage
+                  images={processGalleryImages}
+                  index={index + 3}
+                  number={String(index + 4).padStart(2, "0")}
+                  title={step.title}
+                />
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="min-h-[112px] border-l-4 border-[#e4ad42] pl-4 leading-7 text-[#1f2124]">
+                    {step.description}
+                  </p>
+
+                  {step.panels.length > 0 ? (
+                    <div className="mt-5 grid gap-3">
+                      {step.panels.map((panel, panelIndex) => (
+                        <details
+                          key={panel.label}
+                          open={panelIndex === 0}
+                          className="process-accordion group/accordion overflow-hidden border border-[#0c0d0e]/10 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+                        >
+                          <summary className="flex cursor-pointer list-none items-center gap-3 bg-[#0c0d0e] px-4 py-3 font-bold text-white transition hover:bg-[#17191c] hover:text-[#e4ad42]">
+                            <span className="process-toggle text-lg font-black text-[#e4ad42]" />
+                            {panel.label}:
+                          </summary>
+                          <p className="bg-white px-5 py-5 leading-7 text-[#1f2124]">
+                            {panel.text}
+                          </p>
+                        </details>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <ServiceFeature
-        title="Interior Painting Systems"
+        title="Interior Painting Services in Manatee & Sarasota County"
         href="/interior-painting-upgrade"
         image="/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg"
         imageAlt="Luxury interior transformation"
         caption="Luxury Interior Transformation"
       >
         <p>
-          Interior painting requires more than color selection. It involves
-          surface evaluation, drywall preparation, sanding, caulking, priming,
-          and controlled application.
+          Interior painting is one of the most noticeable upgrades in any home. In Manatee and Sarasota County, where natural light is strong and open layouts are common, even minor imperfections become highly visible.
         </p>
         <p>
-          Our structured system supports smoother finishes, crisp transitions,
-          balanced sheen, cleaner trim lines, and a polished look throughout the
-          home.
+          A professional interior paint job requires more than just applying color. It requires proper preparation, attention to detail, and controlled application techniques to achieve a clean, consistent finish. At Gold Lion Painting, we are not a production painting company. We focus on delivering interiors that look smooth, sharp, and professionally finished — never rushed or uneven.
+        </p>
+        <p>
+          We provide: Full interior repainting, Accent walls and custom finishes, Ceiling painting, Trim, doors, and baseboards, Drywall repair and surface preparation.
         </p>
       </ServiceFeature>
 
       <ServiceFeature
-        title="Exterior Repaint & Protection"
+        title="Exterior Painting Services in Manatee & Sarasota County"
         href="/exterior-painting-upgrade"
         image="/services/house-exterior-painting-manatee-county.jpg"
         imageAlt="Exterior house painting"
@@ -568,10 +562,10 @@ export default function HomePage() {
         reverse
       >
         <p>
-          Florida sun exposure, humidity, and rain cycles require durable
-          exterior coating systems. Our process includes washing, stucco repair,
-          bonding primers, caulking, and multi-coat application where the
-          project needs it.
+          Exterior painting is not just about appearance — it is about protecting your home. In Manatee and Sarasota County, homes are exposed to: Intense UV exposure, High humidity, Rain and moisture, Coastal salt air (in some areas). Without proper preparation, paint will fail quickly.
+        </p>
+        <p>
+          At Gold Lion Painting, we focus on building complete systems — not just applying paint. Our goal is to reduce repaint cycles and protect your home long-term — not just improve appearance. We provide: Full exterior repainting, Stucco and siding painting, Trim, fascia, and soffit painting, Garage doors and entry doors, Surface repairs and preparation.
         </p>
       </ServiceFeature>
 

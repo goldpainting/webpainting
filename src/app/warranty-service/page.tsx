@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FaEnvelope, FaFileContract, FaInfoCircle, FaPhone } from "react-icons/fa";
 
 import EstimateRequestForm from "../components/EstimateRequestForm";
 import { siteUrl } from "../siteConfig";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/warranty-service`,
     images: [
       {
-        url: "/warranty service nueva imagen.jpeg",
+        url: "/warranty service.jpeg",
         width: 1152,
         height: 768,
         alt: "Gold Lion Painting 5-year limited warranty graphic",
@@ -114,6 +115,7 @@ export default function WarrantyServicePage() {
                 href="tel:9414625894"
                 className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
               >
+                <FaPhone className="mr-2" />
                 Call 941-462-5894
               </a>
               <Link
@@ -123,7 +125,7 @@ export default function WarrantyServicePage() {
                 Visit Contact Page
               </Link>
             </div>
-            <div className="mt-6 rounded-2xl border border-[#eadfcf] bg-[#fff7eb] p-4">
+            <div className="mt-6 rounded-[2rem] border border-[#eadfcf] bg-[#fff7eb] p-4">
               <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
                 Best For
               </p>
@@ -142,7 +144,7 @@ export default function WarrantyServicePage() {
             <section className="overflow-hidden rounded-[2rem] border border-[#d8c39f] bg-[#fffaf2] shadow-[0_20px_50px_rgba(120,94,52,0.12)]">
               <div className="bg-[#f4ecdf] p-4">
                 <Image
-                  src="/warranty service nueva imagen.jpeg"
+                  src="/warranty service.jpeg"
                   alt="Gold Lion Painting 5-year limited warranty"
                   width={1152}
                   height={768}
@@ -347,7 +349,7 @@ export default function WarrantyServicePage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-[2rem] border border-[#d8c39f] bg-linear-to-br from-[#fffaf2] to-[#f3e4c4] p-7 shadow-[0_20px_45px_rgba(120,94,52,0.14)]">
+            <div className="rounded-[2rem] border border-[#d8c39f] bg-[linear-to-br_from-[#fffaf2]_to-[#f3e4c4] p-7 shadow-[0_20px_45px_rgba(120,94,52,0.14)]">
               <p className="text-sm font-semibold tracking-[0.18em] text-[#8f7d6a] uppercase">
                 Estimate Support
               </p>
@@ -375,18 +377,21 @@ export default function WarrantyServicePage() {
                   href="tel:9414625894"
                   className="rounded-2xl bg-[#d4a038] px-5 py-3 text-center font-bold text-[#2f2a24] transition hover:bg-[#c7942f]"
                 >
+                  <FaPhone className="mr-2" />
                   Call 941-462-5894
                 </a>
                 <a
                   href="mailto:goldlionpainting@gmail.com"
                   className="rounded-2xl border border-[#d8c39f] bg-[#fff7eb] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
                 >
+                  <FaEnvelope className="mr-2" />
                   Email Gold Lion Painting
                 </a>
                 <Link
                   href="/about-us"
                   className="rounded-2xl border border-[#d8c39f] bg-[#fff7eb] px-5 py-3 text-center font-bold text-[#8f6220] transition hover:bg-[#f4ecdf]"
                 >
+                  <FaInfoCircle className="mr-2" />
                   Learn More About Us
                 </Link>
               </div>
