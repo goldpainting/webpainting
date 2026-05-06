@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { FaGoogle, FaStar } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaGoogle, FaStar } from "react-icons/fa";
 
 import {
   googleRatingValue,
@@ -34,66 +34,7 @@ type GoogleReviewsCarouselProps = {
   areaName?: string;
 };
 
-const areaReviewTerms: Record<string, string[]> = {
-  "Anna Maria Island": ["anna maria", "anna maria island", "island"],
-  Bradenton: ["bradenton", "manatee"],
-  Ellenton: ["ellenton"],
-  "Holmes Beach": ["holmes beach"],
-  "Lakewood Ranch": ["lakewood ranch", "lwr"],
-  Palmetto: ["palmetto"],
-  Parrish: ["parrish"],
-  Sarasota: ["sarasota"],
-  "Siesta Key": ["siesta key"],
-  Venice: ["venice"],
-};
-
-function normalizeReviewText(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
-}
-
-function getAreaOffset(areaName: string, total: number) {
-  if (total === 0) return 0;
-
-  return (
-    areaName.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) %
-    total
-  );
-}
-
-function rotateReviews(reviews: Review[], areaName: string) {
-  const offset = getAreaOffset(areaName, reviews.length);
-  return [...reviews.slice(offset), ...reviews.slice(0, offset)];
-}
-
-function getAreaReviews(reviews: Review[], areaName?: string) {
-  const sorted = [...reviews].sort((a, b) => {
-    if (b.rating !== a.rating) return b.rating - a.rating;
-    return (
-      new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
-    );
-  });
-
-  if (!areaName) {
-    return sorted.slice(0, 3);
-  }
-
-  const terms = areaReviewTerms[areaName] ?? [areaName.toLowerCase()];
-  const matchingReviews = sorted.filter((review) => {
-    const text = normalizeReviewText(
-      `${review.originalText || review.text} ${review.authorName}`,
-    );
-
-    return terms.some((term) => text.includes(normalizeReviewText(term)));
-  });
-  const remainingReviews = sorted.filter(
-    (review) => !matchingReviews.includes(review),
-  );
-
-  return [
-    ...matchingReviews,
-    ...rotateReviews(remainingReviews, areaName),
-  ].slice(0, 3);
-}
+const VISIBLE_CARDS = 3;
 
 function AvatarWithFallback({
   photoUri,
@@ -106,7 +47,7 @@ function AvatarWithFallback({
 
   if (!photoUri || imgError) {
     return (
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1f5fec] text-sm font-bold text-white">
+      <div className="flex h-10 w-10 items-center justify-center shrink-0 rounded-full bg-[#1f5fec] text-sm font-bold text-white">
         {name.charAt(0).toUpperCase()}
       </div>
     );
@@ -128,6 +69,13 @@ export default function GoogleReviewsCarousel({
   const [data, setData] = useState<GoogleReviewsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isZoomedOut, setIsZoomedOut] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const totalPages = data
+    ? Math.ceil(data.reviews.length / VISIBLE_CARDS)
+    : 0;
 
   useEffect(() => {
     let cancelled = false;
@@ -136,23 +84,21 @@ export default function GoogleReviewsCarousel({
       try {
         const res = await fetch("/api/google-reviews");
         if (!res.ok) {
-          const body = (await res.json().catch(() => null)) as unknown;
-          const message =
-            typeof body === "object" &&
-            body !== null &&
-            "error" in body &&
-            typeof body.error === "string"
-              ? body.error
-              : "Failed to fetch reviews";
-
-          throw new Error(message);
+          const body = await res.json().catch(() => null);
+          throw new Error(body?.error || "Failed to fetch reviews");
         }
-        const json = (await res.json()) as unknown as GoogleReviewsData;
+        const json = await res.json();
         if (!cancelled) {
-          setData({
-            ...json,
-            reviews: getAreaReviews(json.reviews ?? [], areaName),
-          });
+          const sorted = (json.reviews ?? [])
+            .sort((a: Review, b: Review) => {
+              if (b.rating !== a.rating) return b.rating - a.rating;
+              return (
+                new Date(b.publishTime).getTime() -
+                new Date(a.publishTime).getTime()
+              );
+            })
+            .slice(0, 3);
+          setData({ ...json, reviews: sorted });
           setError(null);
         }
       } catch (e) {
@@ -170,11 +116,35 @@ export default function GoogleReviewsCarousel({
     return () => {
       cancelled = true;
     };
-  }, [areaName]);
+  }, []);
+
+  const navigate = useCallback((direction: "left" | "right") => {
+    if (totalPages <= 1) return;
+    if (isZoomedOut) return; // prevent double-clicks
+
+    setIsZoomedOut(true);
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCurrentIndex((prev) => {
+        if (direction === "left") return (prev - 1 + totalPages) % totalPages;
+        return (prev + 1) % totalPages;
+      });
+      setIsZoomedOut(false);
+    }, 300);
+  }, [totalPages, isZoomedOut]);
+
+  const scrollLeft = useCallback(() => navigate("left"), [navigate]);
+  const scrollRight = useCallback(() => navigate("right"), [navigate]);
 
   const displayRating = data?.rating ?? Number(googleRatingValue);
   const displayReviewCount = data?.reviewCount ?? Number(googleReviewCount);
   const reviews = data?.reviews ?? [];
+
+  const visibleReviews = reviews.slice(
+    currentIndex * VISIBLE_CARDS,
+    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS
+  );
 
   return (
     <section className="bg-[#dddddd] px-4 py-6 sm:px-6 lg:px-8">
@@ -222,7 +192,7 @@ export default function GoogleReviewsCarousel({
           </a>
         </div>
 
-        <div className="mt-8">
+        <div className="relative mt-8">
           {loading ? (
             <div className="flex items-center justify-center gap-3 rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-8">
               <div className="h-5 w-5 animate-spin rounded-full border-2 border-[#1f5fec] border-t-transparent" />
@@ -256,60 +226,117 @@ export default function GoogleReviewsCarousel({
               </a>
             </div>
           ) : reviews.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {reviews.map((review, index) => (
-                <article
-                  key={`${review.authorName}-${review.publishTime}-${index}`}
-                  className="rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 transition hover:shadow-md"
-                >
-                  <div className="flex items-center gap-3">
-                    <AvatarWithFallback
-                      photoUri={review.authorPhotoUri}
-                      name={review.authorName}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate font-semibold text-[#0c0d0e]">
-                        {review.authorName}
-                      </p>
-                      <p className="text-xs text-[#5d646b]">
-                        {review.relativeTime}
-                      </p>
-                    </div>
-                    <FaGoogle
-                      className="h-5 w-5 flex-shrink-0 text-[#4285f4]"
-                      aria-hidden="true"
-                    />
-                  </div>
+            <>
+              <div
+                className="transition-transform duration-300 ease-out"
+                style={{
+                  transform: isZoomedOut ? "scale(0.85)" : "scale(1)",
+                  opacity: isZoomedOut ? 0.5 : 1,
+                }}
+              >
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {visibleReviews.map((review, index) => (
+                    <article
+                      key={`${review.authorName}-${review.publishTime}-${index}`}
+                      className="rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 transition hover:shadow-md"
+                    >
+                      <div className="flex items-center gap-3">
+                        <AvatarWithFallback
+                          photoUri={review.authorPhotoUri}
+                          name={review.authorName}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="truncate font-semibold text-[#0c0d0e]">
+                            {review.authorName}
+                          </p>
+                          <p className="text-xs text-[#5d646b]">
+                            {review.relativeTime}
+                          </p>
+                        </div>
+                        <FaGoogle
+                          className="h-5 w-5 shrink-0 text-[#4285f4]"
+                          aria-hidden="true"
+                        />
+                      </div>
 
-                  <div className="mt-3 flex items-center gap-0.5">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <FaStar
-                        key={star}
-                        className={`h-3.5 w-3.5 ${star <= review.rating ? "text-[#f5aa00]" : "text-[#d1d5db]"}`}
-                        aria-hidden="true"
+                      <div className="mt-3 flex items-center gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <FaStar
+                            key={star}
+                            className={`h-3.5 w-3.5 ${star <= review.rating ? "text-[#f5aa00]" : "text-[#d1d5db]"}`}
+                            aria-hidden="true"
+                          />
+                        ))}
+                        <span className="ml-1.5 text-xs font-medium text-[#5d646b]">
+                          {review.rating.toFixed(1)}
+                        </span>
+                      </div>
+
+                      <p className="mt-3 line-clamp-5 text-sm leading-6 text-[#343b43]">
+                        {review.originalText || review.text}
+                      </p>
+
+                      <a
+                        href={review.googleMapsUri}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f5fec] transition hover:text-[#0c0d0e]"
+                      >
+                        <FaGoogle className="h-3 w-3" />
+                        View on Google
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              {totalPages > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); scrollLeft(); }}
+                    className="absolute left-[-16px] top-1/2 -translate-y-1/2 z-10 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:outline-none focus:ring-2 focus:ring-[#1f5fec] sm:left-[-20px]"
+                    aria-label="Previous reviews"
+                  >
+                    <FaChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); scrollRight(); }}
+                    className="absolute right-[-16px] top-1/2 -translate-y-1/2 z-10 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:outline-none focus:ring-2 focus:ring-[#1f5fec] sm:right-[-20px]"
+                    aria-label="Next reviews"
+                  >
+                    <FaChevronRight className="h-5 w-5" />
+                  </button>
+
+                  <div className="mt-5 flex justify-center gap-2">
+                    {Array.from({ length: totalPages }).map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          if (isZoomedOut) return;
+                          setIsZoomedOut(true);
+                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                          timeoutRef.current = setTimeout(() => {
+                            setCurrentIndex(index);
+                            setIsZoomedOut(false);
+                          }, 300);
+                        }}
+                        className={`h-2.5 w-2.5 rounded-full transition-all ${
+                          index === currentIndex
+                            ? "bg-[#1f5fec] scale-125"
+                            : "bg-[#d1d5db] hover:bg-[#9ca3af]"
+                        }`}
+                        aria-label={`Go to reviews page ${index + 1}`}
                       />
                     ))}
-                    <span className="ml-1.5 text-xs font-medium text-[#5d646b]">
-                      {review.rating.toFixed(1)}
-                    </span>
                   </div>
-
-                  <p className="mt-3 line-clamp-5 text-sm leading-6 text-[#343b43]">
-                    {review.originalText || review.text}
-                  </p>
-
-                  <a
-                    href={review.googleMapsUri}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f5fec] transition hover:text-[#0c0d0e]"
-                  >
-                    <FaGoogle className="h-3 w-3" />
-                    View on Google
-                  </a>
-                </article>
-              ))}
-            </div>
+                </>
+              )}
+            </>
           ) : (
             <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
               <FaGoogle

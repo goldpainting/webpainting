@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         url: "/home/luxury-exterior-painting-anna-maria.jpg",
         width: 1200,
         height: 900,
-        alt: "Gold Lion Painting exterior painting project in Bradenton, Sarasota, and Tampa Bay",
+        alt: "Gold Lion Painting exterior painting project in Bradenton, Sarasota",
       },
     ],
   },
@@ -227,7 +227,7 @@ const processGalleryImages = processSteps.map((step) => ({
 
 const faqs = [
   {
-    q: "Why choose a professional painting contractor in the Tampa Bay area?",
+    q: "Why choose a professional painting contractor in Manatee & Sarasota County?",
     a: "Professional preparation, product selection, protection, and application help Florida homes handle UV exposure, humidity, rain cycles, and daily use better than rushed repainting.",
   },
   {
@@ -272,11 +272,10 @@ export default function HomePage() {
               {businessName}
             </p>
             <h1 className="font-heading mt-2 text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
-              Premium Painting For Florida Homes
+              Expert House Painters in Manatee & Sarasota County
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">
-              Interior, exterior, and cabinet painting with clean prep, durable
-              coatings, and refined finishes across Manatee County.
+              Clean Work. Professional Results. Built to Last.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
@@ -284,7 +283,7 @@ export default function HomePage() {
                 className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white shadow-[0_0_14px_rgba(0,0,0,0.45)] transition hover:bg-[#1f2124]"
               >
                 <FaPaintRoller aria-hidden="true" />
-                Schedule your professional consultation today
+                Schedule Your Free Estimate
               </Link>
               <a
                 href="tel:9414625894"
@@ -308,10 +307,11 @@ export default function HomePage() {
             ))}
           </div>
           <p className="mx-auto mt-5 max-w-4xl text-lg leading-8">
-            Homeowners across{" "}
-            <strong>
-              Bradenton, Sarasota, Tampa Bay, and nearby service areas
-            </strong>{" "}
+              Homeowners across{" "}
+              <strong>
+                Bradenton, Sarasota, Lakewood Ranch, Anna Maria Island, and nearby
+                service areas
+              </strong>{" "}
             rely on Gold Lion Painting Inc for structured execution, clean job
             sites, and refined finishes. Our projects focus on residential
             properties where quality, presentation, and longevity matter most.
