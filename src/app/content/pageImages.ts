@@ -1,0 +1,206 @@
+export type PageImage = {
+  src: string;
+  alt: string;
+};
+
+export const areaPageImages = {
+  'ana-maria': [
+    '/anamaria/cabinet-painting-anna-maria-01.jpg.jpg',
+    '/anamaria/custom-cabinet-painting-anna-maria-03.jpg.jpg',
+    '/anamaria/exterior-house-painting-anna-maria-01.jpg.jpg',
+    '/anamaria/interior-house-painting-anna-maria-01.jpg.jpg',
+    '/anamaria/kitchen-cabinet-painting-anna-maria-.jpg',
+    '/anamaria/kitchen-cabinet-painting-anna-maria-02.jpg.jpg',
+    '/anamaria/living-room-painting-anna-maria-03.jpg.jpg',
+    '/anamaria/luxury-exterior-painting-anna-maria-02.jpg.jpg',
+    '/anamaria/luxury-interior-painting-anna-maria-02.jpg.jpg',
+    '/anamaria/professional-exterior-painters-anna-maria-03.jpg',
+    '/anamaria/professional-interior-painters-anna-maria-04.jpg.jpg',
+    '/anamaria/residential-exterior-painting-anna-maria-04.jpg.jpg',
+  ],
+  bradenton: [
+    '/bradenton/custom-cabinet-painting-bradenton-03.jpg',
+    '/bradenton/exterior-house-painting-bradenton-01.jpg.jpg',
+    '/bradenton/interior-house-painting-bradenton-01.jpg.jpg',
+    '/bradenton/kitchen-cabinet-painting-bradenton-02.jpg.jpg',
+    '/bradenton/living-room-painting-bradenton-03.jpg.jpg',
+    '/bradenton/luxury-exterior-painting-bradenton-02.jpg.jpg',
+    '/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg',
+    '/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg',
+    '/bradenton/professional-interior-painters-bradenton-.jpg',
+    '/bradenton/residential-exterior-painting-bradenton-04.jpg.jpg',
+  ],
+  ellenton: [
+    '/ellenton/cabinet-refinishing-ellenton-florida.jpg',
+    '/ellenton/ellenton-cabinet-painting.jpg',
+    '/ellenton/ellenton-exterior-painting.jpg',
+    '/ellenton/ellenton-interior-painting.jpg',
+    '/ellenton/home-interior-painting-ellenton-florida.jpg',
+    '/ellenton/house-exterior-painting-ellenton-fl.jpg',
+    '/ellenton/house-exterior-painting-ellenton.jpg',
+    '/ellenton/house-interior-painting-ellenton-fl.jpg',
+    '/ellenton/house-interior-painting-ellenton.jpg',
+    '/ellenton/kitchen-cabinet-painting-ellenton-fl.jpg',
+    '/ellenton/kitchen-cabinet-refinishing-ellenton.jpg',
+    '/ellenton/professional-cabinet-painters-ellenton.jpg',
+    '/ellenton/professional-exterior-painter-ellenton.jpg',
+    '/ellenton/professional-interior-painter-ellenton.jpg',
+    '/ellenton/residential-exterior-painting-ellenton.jpg',
+  ],
+  'holmes-beach': [
+    '/holmesbeach/cabinet-painting-holmes-beach-01.jpg',
+    '/holmesbeach/cabinet-painting-holmes-beach-01.jpg.jpg',
+    '/holmesbeach/Compress_20260223_105723_3112.jpg',
+    '/holmesbeach/custom-cabinet-painting-holmes-beach-.jpg',
+    '/holmesbeach/exterior-house-painting-holmes-beach-01.jpg',
+    '/holmesbeach/interior-house-painting-holmes-beach-.jpg',
+    '/holmesbeach/kitchen-cabinet-painting-holmes-beach-02.jpg.jpg',
+    '/holmesbeach/living-room-painting-holmes-beach-03.jpg.jpg',
+    '/holmesbeach/luxury-exterior-painting-holmes-beach-02.jpg',
+    '/holmesbeach/luxury-interior-painting-holmes-beach-.jpg',
+    '/holmesbeach/professional-exterior-painters-holmes-beach-03.jpg',
+    '/holmesbeach/professional-interior-painters-holmes-beach-.jpg',
+    '/holmesbeach/residential-exterior-painting-holmes-beach-04.jpg',
+  ],
+  'lakewood-ranch': [
+    '/LakewoodRanch/cabinet-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/cabinet-refinishing-lakewood-ranch.painters.jpg',
+    '/LakewoodRanch/cabinet-refinishing-lakewood-ranch.painting.jpg',
+    '/LakewoodRanch/Cabinets-painting-lakewood-ranch-painters.jpg',
+    '/LakewoodRanch/exterior-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/house-exterior-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/house-interior-painting-lakewood-ranch-florida.jpg',
+    '/LakewoodRanch/interior-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/interior-wall-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/kitchen-cabinet-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/Lakewood-ranch-county-cabinet-painting.jpg',
+    '/LakewoodRanch/residential-interior-painter-lakewoodranch-county.jpg',
+    '/LakewoodRanch/stucco-painting-lakewood-ranch.jpg',
+    '/LakewoodRanch/stucco-repair-lakewood-ranch.jpg',
+  ],
+  palmetto: [
+    '/palmeto/cabinet-painting-palmetto.jpg.jpg',
+    '/palmeto/cabinet-refinishing-palmetto-painters.jpg',
+    '/palmeto/cabinet-refinishing-palmetto.jpg',
+    '/palmeto/exterior-painting-palmetto.jpg',
+    '/palmeto/house-exterior-painting-palmetto.jpg',
+    '/palmeto/house-exterior-painting-palmetto.jpg.jpg',
+    '/palmeto/kitchen-cabinet-painting-palmetto.jpg.jpg',
+    '/palmeto/Painters-interior-contractor-painting-house.jpg',
+    '/palmeto/Painting-interior-luxury-painters.jpg',
+    '/palmeto/Palmetto-interior-painting-contractor.jpg',
+    '/palmeto/stucco-painting-palmetto.jpg',
+  ],
+  parrish: [
+    '/parrish/cabinet-painting-parrish.jpg',
+    '/parrish/cabinet-refinishing-parrish.jpg',
+    '/parrish/cabinet-refinishing-parrish.painters.jpg',
+    '/parrish/exterior-painting-parrish.jpg',
+    '/parrish/house-exterior-painting-parrish.jpg',
+    '/parrish/house-exterior-painting-parrish.painters.jpg',
+    '/parrish/Interior-painting-ceiling-painters.jpg',
+    '/parrish/kitchen-cabinet-painting-parrish.painters.jpg',
+    '/parrish/Lluxury-interior-painting.jpg',
+    '/parrish/Luxury-cabinets-painting-.jpg',
+    '/parrish/Luxury-cabinets-painting-dif.png',
+    '/parrish/Painters-contractor-interior-painting.jpg',
+    '/parrish/stucco-repair-parrish.jpg',
+  ],
+  sarasota: [
+    '/sarasota/cabinet-sarasota.jpeg',
+    '/sarasota/cabinet-sarasota2.jpeg',
+    '/sarasota/exterior-sarasota.jpeg',
+    '/sarasota/fachada-sarasota.jpeg',
+    '/sarasota/house-exterior-painting-sarasota.jpeg',
+    '/sarasota/interior-sarasota-3.jpeg',
+    '/sarasota/interior-sarasota-techo.jpeg',
+    '/sarasota/interior-setup-sarasota.jpeg',
+    '/sarasota/interir-sarasota.jpeg',
+    '/sarasota/painting-interior-sarasota.jpeg',
+    '/sarasota/preparation-sarasota.jpeg',
+    '/sarasota/sarasota_home.jpeg',
+  ],
+  'siesta-key': [
+    '/siesta/cabinet-siesta3.jpeg',
+    '/siesta/cabinet-siesta7.jpeg',
+    '/siesta/cabinet-siesta9.jpeg',
+    '/siesta/exterior-home-siesta2.jpeg',
+    '/siesta/exterior-siesta.jpeg',
+    '/siesta/interior-setup-siesta.jpeg',
+    '/siesta/interior-siest6.jpeg',
+    '/siesta/interior-siesta.jpeg',
+    '/siesta/interior-siesta5.jpeg',
+    '/siesta/interior-siesta8.jpeg',
+    '/siesta/preparation-siesta-7.jpeg',
+    '/siesta/siesta-exterior-home.jpeg',
+  ],
+  venice: [
+    '/venice/cabinet-venice1.jpeg',
+    '/venice/exterior-home-venice.jpeg',
+    '/venice/exterior-painting-venice.jpeg',
+    '/venice/exterior-venice2.jpeg',
+    '/venice/exterior-venice5.jpeg',
+    '/venice/interior-cabinet.jpeg',
+    '/venice/interior-setup5-venice.jpeg',
+    '/venice/interior-vecnie4.jpeg',
+    '/venice/interior-venice2.jpeg',
+    '/venice/preparation-venice-painting.jpeg',
+    '/venice/preparation.jpeg',
+    '/venice/setup-interior-venice.jpeg',
+  ],
+} satisfies Record<string, string[]>;
+
+export const servicePageImages = {
+  interior: [
+    '/services/house-interior-painting-manatee-county.jpg',
+    '/services/living-room-painting-manatee-county.jpg',
+    '/services/professional-interior-painting-manatee-county.jpg',
+    '/services/professional-interior-painting-manatee.jpg',
+    '/services/professional-interior-painting.jpg',
+    '/services/residential-interior-painting-manatee-county.jpg',
+    '/services/wall-painting-manatee-county.jpg',
+    '/bradenton/luxury-interior-painting-bradenton-02.jpg.jpg',
+    '/ellenton/house-interior-painting-ellenton-fl.jpg',
+    '/parrish/Interior-painting-ceiling-painters.jpg',
+  ],
+  exterior: [
+    '/services/Exterior painting - lakewood ranch.jpg',
+    '/services/exterior-painting-manatee-county.jpg',
+    '/services/home-exterior-painting-manatee-county.jpg.jpg',
+    '/services/house-exterior-painting-manatee-county.jpg',
+    '/bradenton/luxury-exterior-painting-bradenton-02.jpg.jpg',
+    '/ellenton/ellenton-exterior-painting.jpg',
+    '/parrish/exterior-painting-parrish.jpg',
+    '/venice/exterior-painting-venice.jpeg',
+  ],
+  cabinet: [
+    '/services/cabinet-refinishing-manatee-county-florida.jpg',
+    '/services/custom-cabinet-painting-manatee-county.jpg',
+    '/services/kitchen-cabinet-painting-manatee-county-fl.jpg',
+    '/services/manatee-county-cabinet-painting.jpg',
+    '/services/professional-cabinet-painters-manatee-county.jpg',
+    '/cabinet painting captura.png',
+    '/bradenton/kitchen-cabinet-painting-bradenton-02.jpg.jpg',
+    '/ellenton/kitchen-cabinet-refinishing-ellenton.jpg',
+    '/LakewoodRanch/kitchen-cabinet-painting-lakewood-ranch.jpg',
+  ],
+} satisfies Record<string, string[]>;
+
+export function buildPageImages(images: string[], pageLabel: string) {
+  return images.map((src) => ({
+    src,
+    alt: buildImageAlt(src, pageLabel),
+  }));
+}
+
+function buildImageAlt(src: string, pageLabel: string) {
+  const filename = src.split('/').at(-1) ?? pageLabel;
+  const label = filename
+    .replace(/\.(jpg|jpeg|png|webp)$/i, '')
+    .replace(/\.+/g, ' ')
+    .replace(/[-_]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return `${label} by Gold Lion Painting Inc for ${pageLabel}`;
+}

@@ -624,7 +624,7 @@ export default function HomePage() {
             <p className="text-lg leading-8">
               Without proper preparation and the right system, finishes can:
               Peel, Chip, Feel sticky, Wear down quickly. At Gold Lion Painting,
-              we don't just paint cabinets — we refinish them using a system
+              we don&apos;t just paint cabinets — we refinish them using a system
               designed for durability and a true factory-like finish. We
               provide: Kitchen cabinet painting, Bathroom vanity refinishing,
               Cabinet color updates, Surface preparation and repairs,

@@ -12,7 +12,7 @@ const config = {
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'lf',
-  tailwindStylesheet: './src/app/globals.css',
+  tailwindStylesheet: './src/styles/globals.css',
   tailwindPreserveWhitespace: true,
 };
 

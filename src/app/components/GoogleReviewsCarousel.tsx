@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
@@ -62,9 +63,12 @@ function AvatarWithFallback({
   }
 
   return (
-    <img
+    <Image
       src={`/api/photo-proxy?url=${encodeURIComponent(photoUri)}`}
       alt={name}
+      width={40}
+      height={40}
+      unoptimized
       className="h-10 w-10 shrink-0 rounded-full object-cover"
       onError={() => setImgError(true)}
     />

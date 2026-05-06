@@ -1,17 +1,18 @@
-import MarkdownLandingPage from "../components/MarkdownLandingPage";
-import { serviceInterlinkCards } from "../content/landingCards";
+import MarkdownLandingPage from '../components/MarkdownLandingPage';
+import { serviceInterlinkCards } from '../content/landingCards';
 import {
   buildMarkdownMetadata,
   readMarkdownContent,
-} from "../content/markdownContent";
+} from '../content/markdownContent';
+import { areaPageImages, buildPageImages } from '../content/pageImages';
 
-const raw = readMarkdownContent("doc/info-areas/VENICE.md");
-const heroImage = "/venice/exterior-painting-venice.jpeg";
-const heroAlt = "Exterior house painting project in Venice";
+const raw = readMarkdownContent('doc/info-areas/VENICE.md');
+const heroImage = '/venice/exterior-painting-venice.jpeg';
+const heroAlt = 'Exterior house painting project in Venice';
 
 export const metadata = buildMarkdownMetadata({
   raw,
-  canonical: "/venice",
+  canonical: '/venice',
   image: heroImage,
   imageAlt: heroAlt,
 });
@@ -26,6 +27,7 @@ export default function VenicePage() {
       interlinkTitle="Residential Painting Services"
       interlinks={serviceInterlinkCards}
       interlinkType="services"
+      pageImages={buildPageImages(areaPageImages.venice, 'Venice')}
     />
   );
 }

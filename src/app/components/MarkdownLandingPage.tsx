@@ -1,20 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   FaArrowRight,
   FaCheckCircle,
   FaChevronRight,
   FaMapMarkedAlt,
   FaPaintRoller,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 import {
   extractMarkdownFaqs,
   parseMarkdownContent,
   type MarkdownBlock,
-} from "../content/markdownContent";
-import { businessPhone } from "../siteConfig";
-import FaqSchema from "./FaqSchema";
+} from '../content/markdownContent';
+import { type PageImage } from '../content/pageImages';
+import { businessPhone } from '../siteConfig';
+import FaqSchema from './FaqSchema';
 
 type InterlinkCard = {
   href: string;
@@ -30,27 +31,28 @@ type MarkdownLandingPageProps = {
   heroAlt: string;
   interlinkTitle: string;
   interlinks: InterlinkCard[];
-  interlinkType: "areas" | "services";
+  interlinkType: 'areas' | 'services';
+  pageImages?: PageImage[];
 };
 
 function getHeroAndContent(blocks: MarkdownBlock[]) {
   const h1Index = blocks.findIndex(
-    (block) => block.type === "heading" && block.level === 1,
+    (block) => block.type === 'heading' && block.level === 1
   );
   const firstH2Index = blocks.findIndex(
     (block, index) =>
-      index > h1Index && block.type === "heading" && block.level === 2,
+      index > h1Index && block.type === 'heading' && block.level === 2
   );
 
   const titleBlock = blocks[h1Index];
   const title =
-    titleBlock?.type === "heading" ? titleBlock.text : "Gold Lion Painting Inc";
+    titleBlock?.type === 'heading' ? titleBlock.text : 'Gold Lion Painting Inc';
   const heroBlocks = blocks.slice(
     h1Index + 1,
-    firstH2Index === -1 ? undefined : firstH2Index,
+    firstH2Index === -1 ? undefined : firstH2Index
   );
   const contentBlocks = blocks.slice(
-    firstH2Index === -1 ? h1Index + 1 : firstH2Index,
+    firstH2Index === -1 ? h1Index + 1 : firstH2Index
   );
 
   return { title, heroBlocks, contentBlocks };
@@ -64,11 +66,12 @@ export default function MarkdownLandingPage({
   interlinkTitle,
   interlinks,
   interlinkType,
+  pageImages = [],
 }: MarkdownLandingPageProps) {
   const blocks = parseMarkdownContent(raw);
   const faqs = extractMarkdownFaqs(raw);
   const { title, heroBlocks, contentBlocks } = getHeroAndContent(blocks);
-  const schemaId = `${eyebrow.toLowerCase().replaceAll(/\s+/g, "-")}-faq-schema`;
+  const schemaId = `${eyebrow.toLowerCase().replaceAll(/\s+/g, '-')}-faq-schema`;
   const relatedInterlinks = interlinks.slice(0, 3);
 
   return (
@@ -90,7 +93,7 @@ export default function MarkdownLandingPage({
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {eyebrow}
             </p>
-            <h1 className="font-heading mt-3 max-w-4xl text-3xl leading-[1.02] font-black sm:text-4xl lg:text-5xl">
+            <h1 className="mt-3 max-w-4xl font-heading text-3xl leading-[1.02] font-black sm:text-4xl lg:text-5xl">
               {title}
             </h1>
             <div className="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-[#f3f3f3] sm:text-base">
@@ -120,11 +123,7 @@ export default function MarkdownLandingPage({
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="space-y-12">
-            {renderContentSections(
-              contentBlocks,
-              relatedInterlinks,
-              interlinkType,
-            )}
+            {renderContentSections(contentBlocks, pageImages)}
           </div>
         </div>
       </section>
@@ -151,7 +150,7 @@ export default function MarkdownLandingPage({
                   height={500}
                   className="h-56 w-full rounded-xl object-cover"
                 />
-                <h3 className="font-heading mt-4 text-2xl font-black text-[#0c0d0e]">
+                <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
                   {card.title}
                 </h3>
                 <span className="mt-5 inline-flex items-center gap-2 text-base font-black text-[#0c0d0e]">
@@ -161,7 +160,7 @@ export default function MarkdownLandingPage({
                     className="transition group-hover:translate-x-1"
                   />
                 </span>
-                {interlinkType === "areas" ? (
+                {interlinkType === 'areas' ? (
                   <FaMapMarkedAlt
                     aria-hidden="true"
                     className="pointer-events-none absolute right-[-10px] bottom-[-14px] hidden h-20 w-20 rounded-full bg-[#0c0d0e] p-4 text-[#e4ad42] opacity-90 md:block"
@@ -197,7 +196,7 @@ export default function MarkdownLandingPage({
 }
 
 function HeroBlock({ block }: { block: MarkdownBlock }) {
-  if (block.type === "list") {
+  if (block.type === 'list') {
     return (
       <div className="flex flex-wrap gap-2">
         {block.items.map((item) => (
@@ -213,24 +212,23 @@ function HeroBlock({ block }: { block: MarkdownBlock }) {
     );
   }
 
-  if (block.type === "cta") {
+  if (block.type === 'cta') {
     return <p className="font-black text-[#e4ad42]">{block.text}</p>;
   }
 
-  if (block.type === "heading") return null;
+  if (block.type === 'heading') return null;
 
   return <p>{block.text}</p>;
 }
 
 function renderContentSections(
   blocks: MarkdownBlock[],
-  relatedInterlinks: InterlinkCard[],
-  interlinkType: "areas" | "services",
+  pageImages: PageImage[]
 ) {
   const sections: { heading: string; blocks: MarkdownBlock[] }[] = [];
 
   for (const block of blocks) {
-    if (block.type === "heading" && block.level === 2) {
+    if (block.type === 'heading' && block.level === 2) {
       sections.push({ heading: block.text, blocks: [] });
       continue;
     }
@@ -242,31 +240,38 @@ function renderContentSections(
     }
   }
 
+  const imageGroups = assignImagesToSections(sections, pageImages);
+
   return sections.map((section, index) => {
-    const inlineLink = relatedInterlinks[index];
+    const sectionImages = imageGroups[index] ?? [];
 
     return (
       <article
         key={section.heading}
-        className="scroll-reveal border-b border-[#0c0d0e]/12 pb-10"
+        className="scroll-reveal overflow-hidden rounded-3xl border border-[#e4ad42]/25 bg-[#f8f8f8] shadow-[0_22px_55px_rgba(0,0,0,0.08)]"
         style={{ animationDelay: `${Math.min(index, 6) * 70}ms` }}
       >
-        <h2 className="font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
-          {section.heading}
-        </h2>
-        <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
-          {section.blocks.map((block, blockIndex) => (
-            <ContentBlock
-              key={`${section.heading}-${block.type}-${blockIndex}`}
-              block={block}
-            />
-          ))}
-          {inlineLink ? (
-            <ContextualInterlink
-              card={inlineLink}
-              interlinkType={interlinkType}
-            />
-          ) : null}
+        <div className="grid gap-8 p-5 sm:p-7 lg:p-8">
+          <div className="rounded-2xl border border-[#e4ad42]/25 bg-white p-5 shadow-[0_18px_38px_rgba(0,0,0,0.06)] sm:p-7">
+            <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
+              {String(index + 1).padStart(2, '0')}
+            </p>
+            <h2 className="mt-2 font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
+              {section.heading}
+            </h2>
+            <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
+              {section.blocks.map((block, blockIndex) => (
+                <ContentBlock
+                  key={`${section.heading}-${block.type}-${blockIndex}`}
+                  block={block}
+                />
+              ))}
+            </div>
+          </div>
+          <SectionImageGrid
+            images={sectionImages}
+            sectionHeading={section.heading}
+          />
         </div>
       </article>
     );
@@ -274,15 +279,15 @@ function renderContentSections(
 }
 
 function ContentBlock({ block }: { block: MarkdownBlock }) {
-  if (block.type === "heading") {
+  if (block.type === 'heading') {
     return (
-      <h3 className="font-heading pt-2 text-2xl font-black text-[#a97a36]">
+      <h3 className="pt-2 font-heading text-2xl font-black text-[#a97a36]">
         {block.text}
       </h3>
     );
   }
 
-  if (block.type === "list") {
+  if (block.type === 'list') {
     return (
       <ul className="grid gap-3 sm:grid-cols-2">
         {block.items.map((item) => (
@@ -301,9 +306,9 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
     );
   }
 
-  if (block.type === "cta") {
+  if (block.type === 'cta') {
     return (
-      <p className="font-heading rounded-xl bg-[#0c0d0e] px-5 py-4 text-xl font-black text-[#e4ad42]">
+      <p className="rounded-xl bg-[#0c0d0e] px-5 py-4 font-heading text-xl font-black text-[#e4ad42]">
         {block.text}
       </p>
     );
@@ -312,28 +317,124 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
   return <p>{block.text}</p>;
 }
 
-function ContextualInterlink({
-  card,
-  interlinkType,
+function SectionImageGrid({
+  images,
+  sectionHeading,
 }: {
-  card: InterlinkCard;
-  interlinkType: "areas" | "services";
+  images: PageImage[];
+  sectionHeading: string;
 }) {
-  const copy =
-    interlinkType === "services"
-      ? "For this type of project, compare the details in our"
-      : "See how this same painting standard applies in";
+  if (images.length === 0) {
+    return null;
+  }
 
   return (
-    <p className="rounded-xl border-l-4 border-[#e4ad42] bg-[#f7f7f7] px-5 py-4 text-base leading-7 text-[#1f2124]">
-      {copy}{" "}
-      <Link
-        href={card.href}
-        className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
-      >
-        {card.title}
-      </Link>{" "}
-      page.
-    </p>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {images.map((image, index) => (
+        <figure
+          key={`${sectionHeading}-${image.src}`}
+          className={`hover-lift group relative overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-[#0c0d0e] shadow-[0_20px_42px_rgba(0,0,0,0.18)] ${
+            index === 0 && images.length % 3 === 1
+              ? 'lg:col-span-2'
+              : index === 0 && images.length % 2 === 1
+                ? 'sm:col-span-2 lg:col-span-1'
+                : ''
+          }`}
+        >
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-[#0c0d0e]/82 via-[#0c0d0e]/10 to-transparent" />
+            <figcaption className="absolute right-4 bottom-4 left-4">
+              <span className="inline-flex rounded-full bg-[#e4ad42] px-3 py-1 font-display text-xs font-black text-[#0c0d0e] uppercase">
+                {imageLabel(image.src)}
+              </span>
+            </figcaption>
+          </div>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function assignImagesToSections(
+  sections: { heading: string; blocks: MarkdownBlock[] }[],
+  images: PageImage[]
+) {
+  const groups = sections.map((): PageImage[] => []);
+
+  if (sections.length === 0) return groups;
+
+  const sectionText = sections.map((section) =>
+    [
+      section.heading,
+      ...section.blocks.flatMap((block) =>
+        block.type === 'list'
+          ? block.items
+          : 'text' in block
+            ? [block.text]
+            : []
+      ),
+    ]
+      .join(' ')
+      .toLowerCase()
+  );
+
+  images.forEach((image, imageIndex) => {
+    const category = imageCategory(`${image.src} ${image.alt}`);
+    const scores = sectionText.map((text) => scoreSection(text, category));
+    const bestScore = Math.max(...scores);
+    const bestIndex =
+      bestScore > 0 ? scores.indexOf(bestScore) : imageIndex % sections.length;
+
+    groups[bestIndex]?.push(image);
+  });
+
+  return groups;
+}
+
+function imageCategory(value: string) {
+  const text = value.toLowerCase();
+
+  if (/(cabinet|kitchen|vanity|refinish)/.test(text)) return 'cabinet';
+  if (/(interior|living|room|wall|ceiling|trim|door)/.test(text)) {
+    return 'interior';
+  }
+  if (/(prep|preparation|stucco|repair|setup|pressure|compress)/.test(text)) {
+    return 'prep';
+  }
+
+  return 'exterior';
+}
+
+function scoreSection(text: string, category: string) {
+  const keywords: Record<string, string[]> = {
+    cabinet: ['cabinet', 'kitchen', 'vanity', 'refinish'],
+    exterior: ['exterior', 'stucco', 'siding', 'coastal', 'hoa', 'weather'],
+    interior: ['interior', 'wall', 'ceiling', 'trim', 'door', 'room'],
+    prep: ['prep', 'preparation', 'repair', 'wash', 'primer', 'caulk'],
+  };
+
+  return (keywords[category] ?? []).reduce(
+    (score, keyword) => score + (text.includes(keyword) ? 1 : 0),
+    0
+  );
+}
+
+function imageLabel(src: string) {
+  return (
+    src
+      .split('/')
+      .at(-1)
+      ?.replace(/\.(jpg|jpeg|png|webp)$/i, '')
+      .replace(/\.+/g, ' ')
+      .replace(/[-_]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim() ?? 'Painting Project'
   );
 }
