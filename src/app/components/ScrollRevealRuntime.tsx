@@ -43,9 +43,12 @@ export default function ScrollRevealRuntime() {
 
     for (const groupElements of grouped.values()) {
       groupElements.forEach((element, index) => {
-        element.style.setProperty('--reveal-index', String(index % 8));
+        element.style.setProperty('--reveal-index', String(index % 4));
       });
     }
+
+    const revealAhead = window.innerHeight * 1.45;
+    const revealBack = window.innerHeight * -0.2;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,12 +60,19 @@ export default function ScrollRevealRuntime() {
         }
       },
       {
-        rootMargin: '0px 0px -12% 0px',
-        threshold: 0.12,
+        rootMargin: '0px 0px 55% 0px',
+        threshold: 0.01,
       }
     );
 
     for (const element of elements) {
+      const bounds = element.getBoundingClientRect();
+
+      if (bounds.top < revealAhead && bounds.bottom > revealBack) {
+        element.classList.add('is-visible');
+        continue;
+      }
+
       observer.observe(element);
     }
 

@@ -52,7 +52,7 @@ body {
 @keyframes revealUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -82,21 +82,21 @@ body {
 
 .reveal-up {
   opacity: 0;
-  transform: translateY(22px) scale(0.985);
+  transform: translateY(10px) scale(0.995);
 }
 
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(22px) scale(0.985);
+  transform: translateY(10px) scale(0.995);
 }
 
 .js-reveal {
   opacity: 0;
-  transform: translateY(22px) scale(0.985);
+  transform: translateY(10px) scale(0.995);
   transition:
-    opacity 680ms ease,
-    transform 680ms ease;
-  transition-delay: calc(var(--reveal-index, 0) * 85ms);
+    opacity 340ms ease,
+    transform 340ms ease;
+  transition-delay: calc(var(--reveal-index, 0) * 28ms);
   will-change: opacity, transform;
 }
 

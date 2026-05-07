@@ -109,9 +109,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <main className="bg-white text-[#0c0d0e]">
       <script
+        id={`${post.slug}-article-schema`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleSchema),
+          __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c'),
         }}
       />
       <article>

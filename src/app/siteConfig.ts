@@ -13,7 +13,7 @@ export const bbbProfileHref =
 export const businessName = "Gold Lion Painting Inc";
 export const businessPhone = "+1-941-462-5894";
 export const businessEmail = "Goldlionpainting@gmail.com";
-export const businessHours = "Monday - Saturday, 8 am - 8 pm";
+export const businessHours = "Monday - Sunday, 6 am - 10 pm";
 
 export const serviceAreaNames = [
   "Bradenton",

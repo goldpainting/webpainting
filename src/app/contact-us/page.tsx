@@ -62,7 +62,7 @@ const contactItems = [
   {
     icon: FaMapMarkerAlt,
     label: "Service Area",
-    value: "Bradenton, Tampa Bay, Sarasota & nearby Florida areas",
+    value: "Sarasota & Manatee County",
     href: googleMapsHref,
   },
   {

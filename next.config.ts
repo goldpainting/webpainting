@@ -18,6 +18,21 @@ const config: NextConfig = {
         destination: "/cabinet-painting",
         permanent: true,
       },
+      {
+        source: "/painters-sarasota-fl",
+        destination: "/sarasota",
+        permanent: true,
+      },
+      {
+        source: "/cabinet-refinishing-painting",
+        destination: "/cabinet-painting",
+        permanent: true,
+      },
+      {
+        source: "/residential-painting",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   images: {
