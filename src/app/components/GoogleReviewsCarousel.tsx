@@ -1,8 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
-
+import { useMemo, useState } from 'react';
+import { ReactGoogleReviews } from 'react-google-reviews';
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -17,34 +16,26 @@ import {
   googleWriteReviewHref,
 } from '../siteConfig';
 
-export type Review = {
-  text: string;
-  originalText: string;
-  rating: number;
-  authorName: string;
-  authorUri: string;
-  authorPhotoUri: string;
-  relativeTime: string;
-  publishTime: string;
-  googleMapsUri: string;
-};
-
-type GoogleReviewsData = {
-  placeId: string;
-  rating: number;
-  reviewCount: number;
-  reviews: Review[];
+type GoogleReview = {
+  reviewId: string | null;
+  reviewer: {
+    profilePhotoUrl: string;
+    displayName: string;
+    isAnonymous: boolean;
+  };
+  starRating: number;
+  comment: string;
+  createTime: string | null;
+  updateTime: string | null;
 };
 
 type GoogleReviewsCarouselProps = {
   areaName?: string;
-  maxReviews?: number;
-  randomizeOnLoad?: boolean;
-  showDates?: boolean;
-  featuredReviews?: Review[];
+  pageSize?: number;
 };
 
-const VISIBLE_CARDS = 3;
+const FEATURABLE_WIDGET_ID =
+  process.env.NEXT_PUBLIC_FEATURABLE_WIDGET_ID ?? 'example';
 
 function AvatarWithFallback({
   photoUri,
@@ -54,394 +45,296 @@ function AvatarWithFallback({
   name: string;
 }) {
   const [imgError, setImgError] = useState(false);
+  const initial = (name?.charAt(0) ?? '?').toUpperCase();
 
   if (!photoUri || imgError) {
     return (
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1f5fec] text-sm font-bold text-white">
-        {name.charAt(0).toUpperCase()}
+        {initial}
       </div>
     );
   }
 
   return (
-    <Image
-      src={`/api/photo-proxy?url=${encodeURIComponent(photoUri)}`}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={photoUri}
       alt={name}
       width={40}
       height={40}
-      unoptimized
       className="h-10 w-10 shrink-0 rounded-full object-cover"
+      referrerPolicy="no-referrer"
       onError={() => setImgError(true)}
     />
   );
 }
 
-function pickReviews(
-  reviews: Review[],
-  maxReviews: number,
-  randomizeOnLoad: boolean
-) {
-  if (randomizeOnLoad) {
-    return [...reviews].sort(() => Math.random() - 0.5).slice(0, maxReviews);
+function formatDate(iso: string | null): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+}
+
+function buildPager(current: number, total: number): (number | 'gap')[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const pages: (number | 'gap')[] = [1];
+  const left = Math.max(2, current - 1);
+  const right = Math.min(total - 1, current + 1);
+  if (left > 2) pages.push('gap');
+  for (let i = left; i <= right; i++) pages.push(i);
+  if (right < total - 1) pages.push('gap');
+  pages.push(total);
+  return pages;
+}
+
+function ReviewCard({ review }: { review: GoogleReview }) {
+  const [expanded, setExpanded] = useState(false);
+  const text = review.comment || '';
+  const isLong = text.length > 220;
+  const displayText = expanded || !isLong ? text : `${text.slice(0, 220)}…`;
+
+  return (
+    <article className="flex h-full flex-col rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 transition hover:shadow-md">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-1">
+          <span className="font-heading text-xl font-black text-[#0c0d0e]">
+            {review.starRating}
+          </span>
+          <span className="ml-1 flex items-center gap-0.5 text-[#f5aa00]">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <FaStar
+                key={star}
+                className={`h-3.5 w-3.5 ${
+                  star <= review.starRating
+                    ? 'text-[#f5aa00]'
+                    : 'text-[#d1d5db]'
+                }`}
+                aria-hidden="true"
+              />
+            ))}
+          </span>
+        </div>
+        <span className="text-xs text-[#5d646b]">
+          {formatDate(review.createTime)}
+        </span>
+      </div>
+
+      <p className="mt-4 text-sm leading-6 text-[#343b43]">
+        {displayText}
+        {isLong && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="ml-1 font-semibold text-[#1f5fec] hover:text-[#0c0d0e]"
+          >
+            {expanded ? 'Less' : 'More'}
+          </button>
+        )}
+      </p>
+
+      <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+        <div className="flex min-w-0 items-center gap-3">
+          <AvatarWithFallback
+            photoUri={review.reviewer.profilePhotoUrl}
+            name={review.reviewer.displayName}
+          />
+          <p className="truncate text-sm font-semibold text-[#0c0d0e]">
+            {review.reviewer.displayName}
+          </p>
+        </div>
+        <FaGoogle className="h-5 w-5 shrink-0 text-[#4285f4]" aria-hidden="true" />
+      </div>
+    </article>
+  );
+}
+
+function PaginatedReviews({
+  reviews,
+  pageSize,
+}: {
+  reviews: GoogleReview[];
+  pageSize: number;
+}) {
+  const [page, setPage] = useState(1);
+
+  const sorted = useMemo(() => {
+    const filtered = reviews.filter(
+      (r) =>
+        r.starRating >= 4 &&
+        r.comment?.trim().length > 0 &&
+        r.reviewer?.displayName &&
+        !r.reviewer.isAnonymous
+    );
+    for (let i = filtered.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [filtered[i], filtered[j]] = [filtered[j]!, filtered[i]!];
+    }
+    return filtered;
+  }, [reviews]);
+
+  const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
+  const safePage = Math.min(page, totalPages);
+  const start = (safePage - 1) * pageSize;
+  const visible = sorted.slice(start, start + pageSize);
+  const pagerItems = buildPager(safePage, totalPages);
+
+  if (sorted.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
+        <FaGoogle aria-hidden="true" className="mx-auto text-4xl text-[#4285f4]" />
+        <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
+          No reviews available yet
+        </h3>
+        <a
+          href={googleReviewsHref}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex rounded-lg bg-[#0c0d0e] px-5 py-3 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+        >
+          Open Google Reviews
+        </a>
+      </div>
+    );
   }
 
-  return [...reviews]
-    .sort((a: Review, b: Review) => {
-      if (b.rating !== a.rating) return b.rating - a.rating;
+  return (
+    <>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {visible.map((review, i) => (
+          <ReviewCard key={review.reviewId ?? `${start}-${i}`} review={review} />
+        ))}
+      </div>
 
-      return (
-        new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
-      );
-    })
-    .slice(0, maxReviews);
+      {totalPages > 1 && (
+        <nav
+          aria-label="Reviews pagination"
+          className="mt-8 flex items-center justify-center gap-1.5 text-sm"
+        >
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={safePage === 1}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[#9aa3b5] transition hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-[#9aa3b5]"
+            aria-label="Previous page"
+          >
+            <FaChevronLeft className="h-4 w-4" />
+          </button>
+
+          {pagerItems.map((item, idx) =>
+            item === 'gap' ? (
+              <span
+                key={`gap-${idx}`}
+                className="px-1 text-[#9aa3b5] select-none"
+              >
+                …
+              </span>
+            ) : (
+              <button
+                key={item}
+                type="button"
+                onClick={() => setPage(item)}
+                aria-current={item === safePage ? 'page' : undefined}
+                className={`flex h-9 min-w-9 items-center justify-center rounded-full px-3 font-bold transition ${
+                  item === safePage
+                    ? 'text-white'
+                    : 'text-[#9aa3b5] hover:text-white'
+                }`}
+              >
+                {item}
+              </button>
+            )
+          )}
+
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={safePage === totalPages}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[#9aa3b5] transition hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-[#9aa3b5]"
+            aria-label="Next page"
+          >
+            <FaChevronRight className="h-4 w-4" />
+          </button>
+        </nav>
+      )}
+    </>
+  );
 }
 
 export default function GoogleReviewsCarousel({
   areaName,
-  maxReviews = 3,
-  randomizeOnLoad = false,
-  showDates = true,
-  featuredReviews,
+  pageSize = 3,
 }: GoogleReviewsCarouselProps) {
-  const [data, setData] = useState<GoogleReviewsData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isZoomedOut, setIsZoomedOut] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const totalPages = data ? Math.ceil(data.reviews.length / VISIBLE_CARDS) : 0;
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function fetchReviews() {
-      try {
-        const res = await fetch('/api/google-reviews');
-        if (!res.ok) {
-          const body = await res.json().catch(() => null);
-          throw new Error(body?.error || 'Failed to fetch reviews');
-        }
-        const json = await res.json();
-        if (!cancelled) {
-          if (featuredReviews?.length) {
-            setData({
-              ...json,
-              reviews: pickReviews(
-                featuredReviews,
-                maxReviews,
-                randomizeOnLoad
-              ),
-            });
-            setError(null);
-            return;
-          }
-
-          const reviewsFromApi = (json.reviews ?? []) as Review[];
-          const reviewsWithRealAuthorAndText = reviewsFromApi.filter(
-            (review) =>
-              review.authorName &&
-              review.authorName !== 'Anonymous' &&
-              Boolean(review.originalText || review.text)
-          );
-          const selectedReviews =
-            reviewsWithRealAuthorAndText.length >= maxReviews
-              ? reviewsWithRealAuthorAndText
-              : reviewsFromApi;
-          const sorted = pickReviews(
-            selectedReviews,
-            maxReviews,
-            randomizeOnLoad
-          );
-          setData({ ...json, reviews: sorted });
-          setError(null);
-        }
-      } catch (e) {
-        if (!cancelled) {
-          if (featuredReviews?.length) {
-            setData({
-              placeId: '',
-              rating: Number(googleRatingValue),
-              reviewCount: Number(googleReviewCount),
-              reviews: pickReviews(
-                featuredReviews,
-                maxReviews,
-                randomizeOnLoad
-              ),
-            });
-            setError(null);
-          } else {
-            setError(e instanceof Error ? e.message : 'Unknown error');
-          }
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    }
-
-    void fetchReviews();
-    return () => {
-      cancelled = true;
-    };
-  }, [featuredReviews, maxReviews, randomizeOnLoad]);
-
-  const navigate = useCallback(
-    (direction: 'left' | 'right') => {
-      if (totalPages <= 1) return;
-      if (isZoomedOut) return; // prevent double-clicks
-
-      setIsZoomedOut(true);
-
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => {
-        setCurrentIndex((prev) => {
-          if (direction === 'left') return (prev - 1 + totalPages) % totalPages;
-          return (prev + 1) % totalPages;
-        });
-        setIsZoomedOut(false);
-      }, 300);
-    },
-    [totalPages, isZoomedOut]
-  );
-
-  const scrollLeft = useCallback(() => navigate('left'), [navigate]);
-  const scrollRight = useCallback(() => navigate('right'), [navigate]);
-
-  const displayRating = data?.rating ?? Number(googleRatingValue);
-  const displayReviewCount = data?.reviewCount ?? Number(googleReviewCount);
-  const reviews = data?.reviews ?? [];
-
-  const visibleReviews = reviews.slice(
-    currentIndex * VISIBLE_CARDS,
-    currentIndex * VISIBLE_CARDS + VISIBLE_CARDS
-  );
+  const displayRating = Number(googleRatingValue);
+  const displayReviewCount = Number(googleReviewCount);
 
   return (
-    <section className="bg-[#dddddd] px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl rounded-[24px] bg-white px-4 py-6 shadow-[0_18px_38px_rgba(0,0,0,0.12)] sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1fr_auto_auto] lg:items-center">
-          <div>
-            <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
-              {areaName
-                ? `Real Google reviews from clients near ${areaName}`
-                : 'Real Google reviews from our clients'}
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#5d646b]">
-              These reviews load directly from the Google Business Profile
-              connected to Gold Lion Painting Inc. No manual or invented review
-              text is used.
-            </p>
-          </div>
+    <section className="bg-[#0c0d0e] px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+          <h2 className="font-heading text-2xl font-black text-white sm:text-3xl">
+            {areaName
+              ? `What our clients near ${areaName} say about us`
+              : 'What our clients say about us'}
+          </h2>
 
-          <div className="text-center lg:text-left">
-            <p className="font-heading text-5xl font-black text-[#1f2830]">
-              {displayRating.toFixed(1)}
-            </p>
-            <div className="mt-2 flex justify-center gap-1 text-[#f5aa00] lg:justify-start">
-              {[0, 1, 2, 3, 4].map((star) => (
-                <FaStar key={star} aria-hidden="true" />
-              ))}
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <p className="font-heading text-4xl font-black text-white sm:text-5xl">
+                {displayRating.toFixed(2)}
+              </p>
+              <div className="mt-1 flex items-center justify-end gap-2">
+                <span className="flex gap-0.5 text-[#f5aa00]">
+                  {[0, 1, 2, 3, 4].map((star) => (
+                    <FaStar key={star} aria-hidden="true" />
+                  ))}
+                </span>
+                <span className="text-[#9aa3b5]">|</span>
+                <a
+                  href={googleReviewsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-medium text-[#9aa3b5] transition hover:text-white"
+                >
+                  {displayReviewCount} reviews
+                </a>
+              </div>
             </div>
+
             <a
-              href={googleReviewsHref}
+              href={googleWriteReviewHref}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 block text-lg font-semibold text-[#8993aa] transition hover:text-[#1f5fec]"
+              className="inline-flex justify-center rounded-lg bg-[#e4ad42] px-5 py-3 text-base font-black text-white transition hover:bg-[#caa345] sm:px-7 sm:py-4 sm:text-lg"
             >
-              {displayReviewCount} reviews
+              Write a review
             </a>
           </div>
-
-          <a
-            href={googleWriteReviewHref}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex justify-center rounded-lg bg-[#1f5fec] px-6 py-4 text-xl font-black text-white transition hover:bg-[#0c0d0e]"
-          >
-            Write a review
-          </a>
         </div>
 
         <div className="relative mt-8">
-          {loading ? (
-            <div className="flex items-center justify-center gap-3 rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-8">
-              <div className="h-5 w-5 animate-spin rounded-full border-2 border-[#1f5fec] border-t-transparent" />
-              <span className="text-sm text-[#5d646b]">
-                Loading Google reviews...
-              </span>
-            </div>
-          ) : error ? (
-            <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
-              <FaGoogle
-                aria-hidden="true"
-                className="mx-auto text-4xl text-[#4285f4]"
+          <ReactGoogleReviews
+            layout="custom"
+            featurableId={FEATURABLE_WIDGET_ID}
+            widgetVersion="v2"
+            errorMessage="Could not load Google reviews. Please try again later."
+            loadingMessage="Loading Google reviews..."
+            errorClassName="text-center text-[#9aa3b5] py-8"
+            loaderClassName="text-center text-[#9aa3b5] py-8"
+            loaderLabelClassName="text-[#9aa3b5]"
+            renderer={(reviews) => (
+              <PaginatedReviews
+                reviews={reviews as GoogleReview[]}
+                pageSize={pageSize}
               />
-              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
-                Google Reviews not available
-              </h3>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-6">
-                Configure{' '}
-                <code className="mx-1 rounded bg-white px-2 py-1">
-                  GOOGLE_PLACES_API_KEY
-                </code>{' '}
-                in your environment variables to display real reviews.
-              </p>
-              <a
-                href={googleReviewsHref}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex rounded-lg bg-[#0c0d0e] px-5 py-3 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
-              >
-                Open Google Reviews
-              </a>
-            </div>
-          ) : reviews.length > 0 ? (
-            <>
-              <div
-                className="transition-transform duration-300 ease-out"
-                style={{
-                  transform: isZoomedOut ? 'scale(0.85)' : 'scale(1)',
-                  opacity: isZoomedOut ? 0.5 : 1,
-                }}
-              >
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {visibleReviews.map((review, index) => (
-                    <article
-                      key={`${review.authorName}-${review.publishTime}-${index}`}
-                      className="rounded-2xl border border-[#e5e7eb] bg-[#f8fafc] p-6 transition hover:shadow-md"
-                    >
-                      <div className="flex items-center gap-3">
-                        <AvatarWithFallback
-                          photoUri={review.authorPhotoUri}
-                          name={review.authorName}
-                        />
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate font-semibold text-[#0c0d0e]">
-                            {review.authorName}
-                          </p>
-                          {showDates && review.relativeTime ? (
-                            <p className="text-xs text-[#5d646b]">
-                              {review.relativeTime}
-                            </p>
-                          ) : null}
-                        </div>
-                        <FaGoogle
-                          className="h-5 w-5 shrink-0 text-[#4285f4]"
-                          aria-hidden="true"
-                        />
-                      </div>
-
-                      <div className="mt-3 flex items-center gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <FaStar
-                            key={star}
-                            className={`h-3.5 w-3.5 ${star <= review.rating ? 'text-[#f5aa00]' : 'text-[#d1d5db]'}`}
-                            aria-hidden="true"
-                          />
-                        ))}
-                        <span className="ml-1.5 text-xs font-medium text-[#5d646b]">
-                          {review.rating.toFixed(1)}
-                        </span>
-                      </div>
-
-                      <p className="mt-3 line-clamp-5 text-sm leading-6 text-[#343b43]">
-                        {review.originalText || review.text}
-                      </p>
-
-                      <a
-                        href={review.googleMapsUri}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#1f5fec] transition hover:text-[#0c0d0e]"
-                      >
-                        <FaGoogle className="h-3 w-3" />
-                        View on Google
-                      </a>
-                    </article>
-                  ))}
-                </div>
-              </div>
-
-              {totalPages > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      scrollLeft();
-                    }}
-                    className="absolute top-1/2 left-[-16px] z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-2 focus:ring-[#1f5fec] focus:outline-none sm:left-[-20px]"
-                    aria-label="Previous reviews"
-                  >
-                    <FaChevronLeft className="h-5 w-5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      scrollRight();
-                    }}
-                    className="absolute top-1/2 right-[-16px] z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-2 focus:ring-[#1f5fec] focus:outline-none sm:right-[-20px]"
-                    aria-label="Next reviews"
-                  >
-                    <FaChevronRight className="h-5 w-5" />
-                  </button>
-
-                  <div className="mt-5 flex justify-center gap-2">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                      <button
-                        key={index}
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          if (isZoomedOut) return;
-                          setIsZoomedOut(true);
-                          if (timeoutRef.current)
-                            clearTimeout(timeoutRef.current);
-                          timeoutRef.current = setTimeout(() => {
-                            setCurrentIndex(index);
-                            setIsZoomedOut(false);
-                          }, 300);
-                        }}
-                        className={`h-2.5 w-2.5 rounded-full transition-all ${
-                          index === currentIndex
-                            ? 'scale-125 bg-[#1f5fec]'
-                            : 'bg-[#d1d5db] hover:bg-[#9ca3af]'
-                        }`}
-                        aria-label={`Go to reviews page ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </>
-          ) : (
-            <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
-              <FaGoogle
-                aria-hidden="true"
-                className="mx-auto text-4xl text-[#4285f4]"
-              />
-              <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
-                No reviews available
-              </h3>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-6">
-                Google Places API returned no reviews for this business.
-              </p>
-              <a
-                href={googleReviewsHref}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-flex rounded-lg bg-[#0c0d0e] px-5 py-3 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
-              >
-                Open Google Reviews
-              </a>
-            </div>
-          )}
+            )}
+          />
         </div>
       </div>
     </section>

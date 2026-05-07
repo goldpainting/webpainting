@@ -54,11 +54,7 @@ export function GoogleTrustSection() {
         </div>
       </section>
 
-      <GoogleReviewsCarousel
-        maxReviews={3}
-        randomizeOnLoad
-        showDates={false}
-      />
+      <GoogleReviewsCarousel />
     </>
   );
 }

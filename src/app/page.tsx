@@ -367,7 +367,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <GoogleReviewsCarousel maxReviews={3} randomizeOnLoad showDates={false} />
+      <GoogleReviewsCarousel />
 
       <section
         id="bbb-accredited"
