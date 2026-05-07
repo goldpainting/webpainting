@@ -21,6 +21,7 @@ export default function ExteriorPaintingPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/exterior-painting"
       eyebrow="Exterior Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

@@ -21,6 +21,7 @@ export default function ParrishPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/parrish"
       eyebrow="Parrish Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

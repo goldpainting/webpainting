@@ -2,7 +2,6 @@ import '~/styles/globals.css';
 import 'react-google-reviews/dist/index.css';
 
 import { type Metadata, type Viewport } from 'next';
-import Script from 'next/script';
 
 import { Heebo, Inter, Montserrat, Geist } from 'next/font/google';
 import FloatingChatbot from './components/FloatingChatbot';
@@ -64,6 +63,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: 'IPeAQUpR7unt8Q7IxcdpJwkgHDo0f_DYVPMDE9eVvuY',
+  },
 };
 
 export const viewport: Viewport = {
@@ -109,11 +111,11 @@ export default function RootLayout({
       )}
     >
       <body>
-        <Script
+        <script
           id="gold-lion-painting-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
+            __html: JSON.stringify(localBusinessSchema).replace(/</g, '\\u003c'),
           }}
         />
         <Topbar />

@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 type FaqItem = {
   q: string;
   a: string;
@@ -25,10 +23,12 @@ export default function FaqSchema({ faqs, id }: FaqSchemaProps) {
   };
 
   return (
-    <Script
+    <script
       id={id}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

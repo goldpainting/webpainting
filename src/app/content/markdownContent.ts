@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { type Metadata } from "next";
 
-import { siteUrl } from "../siteConfig";
+import { businessName, siteUrl } from "../siteConfig";
 
 export type MarkdownBlock =
   | {
@@ -211,6 +211,8 @@ export function buildMarkdownMetadata({
 }): Metadata {
   const title = getMarkdownTitle(raw);
   const description = getMarkdownDescription(raw);
+  const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+  const pageUrl = `${siteUrl}${canonical}`;
 
   return {
     title,
@@ -221,10 +223,24 @@ export function buildMarkdownMetadata({
     openGraph: {
       title,
       description,
-      url: `${siteUrl}${canonical}`,
+      url: pageUrl,
+      siteName: businessName,
+      locale: "en_US",
+      type: "website",
       images: [
         {
-          url: image,
+          url: imageUrl,
+          alt: imageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [
+        {
+          url: imageUrl,
           alt: imageAlt,
         },
       ],

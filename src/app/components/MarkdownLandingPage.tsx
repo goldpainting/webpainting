@@ -9,10 +9,12 @@ import {
 
 import {
   extractMarkdownFaqs,
+  getMarkdownDescription,
   parseMarkdownContent,
   type MarkdownBlock,
 } from '../content/markdownContent';
 import { type PageImage } from '../content/pageImages';
+import { buildLandingPageSchema } from '../schema';
 import { businessPhone } from '../siteConfig';
 import FaqSchema from './FaqSchema';
 import MarkdownFaqAccordion from './MarkdownFaqAccordion';
@@ -31,6 +33,7 @@ type InterlinkCard = {
 
 type MarkdownLandingPageProps = {
   raw: string;
+  canonical: string;
   eyebrow: string;
   heroImage: string;
   heroAlt: string;
@@ -65,18 +68,36 @@ function getHeroAndContent(blocks: MarkdownBlock[]) {
 
 export default function MarkdownLandingPage({
   raw,
+  canonical,
   eyebrow,
   heroImage,
   heroAlt,
+  interlinkType,
   pageImages = [],
 }: MarkdownLandingPageProps) {
   const blocks = parseMarkdownContent(raw);
   const faqs = extractMarkdownFaqs(raw);
   const { title, heroBlocks, contentBlocks } = getHeroAndContent(blocks);
+  const description = getMarkdownDescription(raw);
+  const structuredData = buildLandingPageSchema({
+    title,
+    description,
+    canonical,
+    image: heroImage,
+    pageType: interlinkType === 'areas' ? 'service' : 'area',
+    label: eyebrow,
+  });
   const schemaId = `${eyebrow.toLowerCase().replaceAll(/\s+/g, '-')}-faq-schema`;
 
   return (
     <main className="bg-white text-[#0c0d0e]">
+      <script
+        id={`${schemaId}-housepainter`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
+      />
       {faqs.length > 0 ? <FaqSchema faqs={faqs} id={schemaId} /> : null}
 
       <section className="relative min-h-[430px] overflow-hidden px-4 py-8 text-white sm:px-6 lg:px-8 lg:py-10">

@@ -21,6 +21,7 @@ export default function VenicePage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/venice"
       eyebrow="Venice Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

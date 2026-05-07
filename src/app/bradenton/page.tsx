@@ -21,6 +21,7 @@ export default function BradentonPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/bradenton"
       eyebrow="Bradenton Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

@@ -21,6 +21,7 @@ export default function PalmettoPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/palmetto"
       eyebrow="Palmetto Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

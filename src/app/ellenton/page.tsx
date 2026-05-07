@@ -21,6 +21,7 @@ export default function EllentonPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/ellenton"
       eyebrow="Ellenton Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

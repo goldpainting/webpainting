@@ -21,6 +21,7 @@ export default function LakewoodRanchPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/lakewood-ranch"
       eyebrow="Lakewood Ranch Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

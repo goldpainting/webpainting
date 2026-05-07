@@ -21,6 +21,7 @@ export default function InteriorPaintingPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/interior-painting"
       eyebrow="Interior Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

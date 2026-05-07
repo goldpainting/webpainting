@@ -21,6 +21,7 @@ export default function CabinetPaintingPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/cabinet-painting"
       eyebrow="Cabinet Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

@@ -21,6 +21,7 @@ export default function SarasotaPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/sarasota"
       eyebrow="Sarasota Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

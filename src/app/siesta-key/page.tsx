@@ -21,6 +21,7 @@ export default function SiestaKeyPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/siesta-key"
       eyebrow="Siesta Key Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

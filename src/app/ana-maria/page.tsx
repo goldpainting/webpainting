@@ -21,6 +21,7 @@ export default function AnaMariaPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/ana-maria"
       eyebrow="Anna Maria Island Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}

@@ -21,6 +21,7 @@ export default function HolmesBeachPage() {
   return (
     <MarkdownLandingPage
       raw={raw}
+      canonical="/holmes-beach"
       eyebrow="Holmes Beach Painting"
       heroImage={heroImage}
       heroAlt={heroAlt}
