@@ -80,17 +80,19 @@ export default function AboutUsPage() {
   return (
     <>
       <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
-        <section className="relative overflow-hidden bg-[#0c0d0e] px-4 py-14 text-white sm:px-6 sm:py-20 lg:px-8">
-          <Image
-            src="/services/house-exterior-painting-manatee-county.jpg"
-            alt="Gold Lion Painting completed exterior project"
-            fill
-            loading="eager"
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_360px] lg:items-center">
-            <div className="rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
+        <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
+          <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
+            <Image
+              src="/services/house-exterior-painting-manatee-county.jpg"
+              alt="Gold Lion Painting completed exterior project"
+              fill
+              loading="eager"
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-6 sm:px-0 sm:py-0 lg:grid-cols-[1fr_360px] lg:items-center">
+            <div className="bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
               <p className="font-display text-lg font-bold text-[#e4ad42]">
                 About {businessName}
               </p>

@@ -264,20 +264,22 @@ export default function HomePage() {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={faqs} id="home-faq-schema" />
 
-      <section className="relative min-h-[620px] overflow-hidden px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
-        <video
-          aria-hidden="true"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
-        </video>
-        <div className="relative mx-auto max-w-6xl pt-6 lg:pt-10">
-          <div className="reveal-up max-w-3xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
+      <section className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16">
+        <div className="relative h-[300px] sm:absolute sm:inset-0 sm:h-auto">
+          <video
+            aria-hidden="true"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-6 sm:px-0 sm:pt-6 lg:pt-10">
+          <div className="reveal-up max-w-3xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
             <p className="font-display text-base font-bold text-[#e4ad42] drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)]">
               {businessName}
             </p>

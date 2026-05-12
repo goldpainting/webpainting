@@ -44,17 +44,19 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={area.faqs} id={`${area.slug}-faq-schema`} />
 
-      <section className="relative min-h-[390px] overflow-hidden px-4 py-7 text-white sm:px-6 lg:px-8 lg:py-9">
-        <Image
-          src={area.heroImage}
-          alt={area.heroImageAlt}
-          fill
-          loading="eager"
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[310px]">
-          <div className="reveal-up max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9">
+        <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
+          <Image
+            src={area.heroImage}
+            alt={area.heroImageAlt}
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="relative mx-auto flex max-w-6xl items-center px-4 py-6 sm:px-0 sm:py-4 lg:min-h-[310px]">
+          <div className="reveal-up max-w-4xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {area.county} Residential Painting
             </p>

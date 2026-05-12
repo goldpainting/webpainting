@@ -100,17 +100,19 @@ export default function MarkdownLandingPage({
       />
       {faqs.length > 0 ? <FaqSchema faqs={faqs} id={schemaId} /> : null}
 
-      <section className="relative min-h-[430px] overflow-hidden px-4 py-8 text-white sm:px-6 lg:px-8 lg:py-10">
-        <Image
-          src={heroImage}
-          alt={heroAlt}
-          fill
-          loading="eager"
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="relative mx-auto flex max-w-6xl items-center py-4 lg:min-h-[330px]">
-          <div className="reveal-up max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[430px] sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+        <div className="relative h-[260px] sm:absolute sm:inset-0 sm:h-auto">
+          <Image
+            src={heroImage}
+            alt={heroAlt}
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="relative mx-auto flex max-w-6xl items-center px-4 py-6 sm:px-0 sm:py-4 lg:min-h-[330px]">
+          <div className="reveal-up max-w-4xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {eyebrow}
             </p>

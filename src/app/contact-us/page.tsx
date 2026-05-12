@@ -75,16 +75,18 @@ const contactItems = [
 export default function ContactUsPage() {
   return (
     <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
-      <section className="relative min-h-[340px] overflow-hidden px-4 py-14 text-white sm:min-h-[380px] sm:px-6 sm:py-20 lg:px-8">
-        <Image
-          src="/services/house-exterior-painting-manatee-county.jpg"
-          alt="Gold Lion Painting exterior painting project"
-          fill
-          loading="eager"
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="relative mx-auto flex min-h-[240px] max-w-6xl flex-col justify-center rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[380px] sm:px-6 sm:py-20 lg:px-8">
+        <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
+          <Image
+            src="/services/house-exterior-painting-manatee-county.jpg"
+            alt="Gold Lion Painting exterior painting project"
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="relative mx-auto flex max-w-6xl flex-col justify-center bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:min-h-[240px] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
           <div className="mb-5 flex flex-wrap items-center gap-2 text-sm font-bold text-[#dddddd]">
             <Link href="/" className="transition hover:text-[#e4ad42]">
               Home
