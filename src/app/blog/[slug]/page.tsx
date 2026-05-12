@@ -116,7 +116,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         }}
       />
       <article>
-        <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden px-4 py-14 text-white sm:px-6 sm:py-20 lg:px-8">
           <Image
             src={post.image}
             alt={post.imageAlt}
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <FaPaintRoller aria-hidden="true" />
               Blog
             </Link>
-            <h1 className="mt-7 font-heading text-4xl leading-tight font-black md:text-6xl">
+            <h1 className="mt-7 font-heading text-3xl leading-tight font-black sm:text-4xl md:text-6xl">
               {post.title}
             </h1>
             <div className="mt-6 flex flex-wrap gap-4 text-sm font-bold text-[#dddddd]">
@@ -315,8 +315,8 @@ function InlineBlogLink({
 
 function LakewoodRanchExteriorArticle() {
   return (
-    <div className="space-y-10 text-lg leading-8 text-[#1f2124]">
-      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-6 text-xl leading-9 font-semibold text-[#0c0d0e]">
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
         Lakewood Ranch, FL is known for upscale communities, strict HOA
         standards, and beautifully designed homes. Maintaining that high-end
         appearance takes more than a fresh coat of paint. Exterior painting in
@@ -406,7 +406,7 @@ function LakewoodRanchExteriorArticle() {
         </p>
       </section>
 
-      <section className="bg-[#1f2124] p-7 text-[#dddddd]">
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
         <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
           Our Professional Exterior Painting Process
         </h2>
@@ -512,7 +512,7 @@ function LakewoodRanchExteriorArticle() {
         </p>
       </section>
 
-      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-7">
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
         <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
           Get a Professional Exterior Painting Estimate in Lakewood Ranch, FL
         </h2>
@@ -529,8 +529,8 @@ function LakewoodRanchExteriorArticle() {
 
 function FloridaPrepGuideArticle() {
   return (
-    <div className="space-y-10 text-lg leading-8 text-[#1f2124]">
-      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-6 text-xl leading-9 font-semibold text-[#0c0d0e]">
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
         Great paint work starts before the first coat. In Florida, preparation
         decides whether a finish looks sharp for years or starts failing early
         under heat, humidity, rain cycles, and daily use.
@@ -640,7 +640,7 @@ function FloridaPrepGuideArticle() {
         </p>
       </section>
 
-      <section className="bg-[#1f2124] p-7 text-[#dddddd]">
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
         <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
           Homeowner checklist before booking a painter
         </h2>

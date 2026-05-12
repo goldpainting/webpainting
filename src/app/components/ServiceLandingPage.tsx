@@ -137,17 +137,17 @@ export default function ServiceLandingPage({
                 </span>
               ))}
             </div>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact-us"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-5 py-2.5 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-2.5 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 <FaPaintRoller aria-hidden="true" />
                 Request Your Free Estimate
               </Link>
               <a
                 href="tel:9414625894"
-                className="inline-flex items-center gap-3 rounded-full border-2 border-white px-5 py-2.5 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full border-2 border-white px-5 py-2.5 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 <FaPhoneAlt aria-hidden="true" />
                 Call (941) 462-5894
@@ -176,7 +176,7 @@ export default function ServiceLandingPage({
             href={googleReviewsHref}
             target="_blank"
             rel="noreferrer"
-            className="font-heading mt-5 inline-flex text-2xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42]"
+            className="font-heading mt-5 inline-flex text-xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42] sm:text-2xl"
           >
             {googleRatingValue} Google Rating From {googleReviewCount} Reviews
           </a>
@@ -187,7 +187,7 @@ export default function ServiceLandingPage({
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="scroll-reveal">
             <SectionKicker text="Professional Service" />
-            <h2 className="font-heading mt-3 text-4xl leading-tight font-black lg:text-5xl">
+            <h2 className="font-heading mt-3 text-3xl leading-tight font-black sm:text-4xl lg:text-5xl">
               A Better Painting Result Starts Before Paint Touches the Surface
             </h2>
             <div className="mt-8 grid gap-6">
@@ -233,7 +233,7 @@ export default function ServiceLandingPage({
         <div className="mx-auto max-w-6xl">
           <div className="scroll-reveal max-w-3xl">
             <SectionKicker text="Process" />
-            <h2 className="font-heading mt-3 text-4xl leading-tight font-black text-white lg:text-5xl">
+            <h2 className="font-heading mt-3 text-3xl leading-tight font-black text-white sm:text-4xl lg:text-5xl">
               Our Structured Painting Process
             </h2>
             <p className="mt-5 text-lg leading-8">
@@ -263,9 +263,9 @@ export default function ServiceLandingPage({
 
       <section className="px-4 py-18 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
-          <div className="scroll-reveal bg-[#f3f3f3] p-7">
+          <div className="scroll-reveal bg-[#f3f3f3] p-5 sm:p-7">
             <SectionKicker text="Problems We Prevent" />
-            <h2 className="font-heading mt-3 text-4xl font-black">
+            <h2 className="font-heading mt-3 text-3xl font-black sm:text-4xl">
               {failureTitle}
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#1f2124]">
@@ -284,9 +284,9 @@ export default function ServiceLandingPage({
             </div>
           </div>
 
-          <div className="scroll-reveal bg-[#e4ad42] p-7">
+          <div className="scroll-reveal bg-[#e4ad42] p-5 sm:p-7">
             <SectionKicker text="Finish Standard" dark />
-            <h2 className="font-heading mt-3 text-4xl font-black">
+            <h2 className="font-heading mt-3 text-3xl font-black sm:text-4xl">
               {standardsTitle}
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#1f2124]">
@@ -316,7 +316,7 @@ export default function ServiceLandingPage({
             <SectionKicker
               text={imageGallery ? "Project Gallery" : "Image Placeholders"}
             />
-            <h2 className="font-heading mt-3 text-4xl leading-tight font-black lg:text-5xl">
+            <h2 className="font-heading mt-3 text-3xl leading-tight font-black sm:text-4xl lg:text-5xl">
               {imageGalleryTitle ?? "Photo Blocks Ready For Your Final Images"}
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#dddddd]">
@@ -353,7 +353,7 @@ export default function ServiceLandingPage({
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_0.9fr]">
           <div className="scroll-reveal">
             <SectionKicker text="Built For Local Homes" />
-            <h2 className="font-heading mt-3 text-4xl leading-tight font-black lg:text-5xl">
+            <h2 className="font-heading mt-3 text-3xl leading-tight font-black sm:text-4xl lg:text-5xl">
               {environmentTitle}
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#1f2124]">
@@ -399,7 +399,7 @@ export default function ServiceLandingPage({
               href={googleReviewsHref}
               target="_blank"
               rel="noreferrer"
-              className="mt-6 inline-flex rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+              className="mt-6 inline-flex w-full justify-center rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
             >
               Open Google Reviews
             </a>
@@ -475,12 +475,12 @@ export default function ServiceLandingPage({
 
       <section className="bg-[#d39620] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          <h2 className="font-heading text-2xl font-black text-[#0c0d0e] sm:text-3xl">
             Get Expert Painting Services From Gold Lion Painting Inc
           </h2>
           <Link
             href="/contact-us"
-            className="inline-flex shrink-0 items-center justify-center gap-3 rounded-lg bg-[#0c0d0e] px-6 py-4 font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#d90000]"
+            className="inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-lg bg-[#0c0d0e] px-5 py-4 text-center font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#d90000] sm:w-auto sm:px-6"
           >
             Get a Free Estimate
             <FaArrowRight aria-hidden="true" />
@@ -494,7 +494,7 @@ export default function ServiceLandingPage({
 function SectionTitle({ title }: { title: string }) {
   return (
     <div className="text-center">
-      <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
+      <h2 className="font-heading text-3xl font-black text-[#0c0d0e] sm:text-4xl">
         {title}
       </h2>
       <div className="mx-auto mt-5 h-1.5 w-2/3 max-w-xl bg-[#e4ad42]" />

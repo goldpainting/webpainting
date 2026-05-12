@@ -71,12 +71,12 @@ export default function WarrantyServicePage() {
     <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
       <section className="relative overflow-hidden border-b border-[#e4ad42]/35 bg-[#0c0d0e]">
         <div className="texture-grid absolute inset-0 opacity-35" />
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[minmax(0,1.05fr)_24rem] md:items-center md:px-10 lg:grid-cols-[minmax(0,1.05fr)_27rem]">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-[minmax(0,1.05fr)_24rem] md:items-center md:px-10 lg:grid-cols-[minmax(0,1.05fr)_27rem]">
           <div className="relative">
-            <p className="mb-4 inline-flex rounded-full border border-[#e4ad42]/45 bg-[#1f2124] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#e4ad42] uppercase shadow-sm">
+            <p className="mb-4 inline-flex rounded-full border border-[#e4ad42]/45 bg-[#1f2124] px-4 py-2 text-xs font-black tracking-[0.16em] text-[#e4ad42] uppercase shadow-sm sm:tracking-[0.24em]">
               Warranty Service
             </p>
-            <h1 className="font-heading max-w-4xl text-5xl leading-tight font-black text-white md:text-6xl">
+            <h1 className="font-heading max-w-4xl text-3xl leading-tight font-black text-white sm:text-5xl md:text-6xl">
               Warranty support that is clear, professional, and easy to
               understand.
             </h1>
@@ -104,7 +104,7 @@ export default function WarrantyServicePage() {
             </div>
           </div>
 
-          <div className="relative border border-[#e4ad42]/45 bg-white p-7 text-[#0c0d0e] shadow-[0_22px_50px_rgba(0,0,0,0.35)]">
+          <div className="relative border border-[#e4ad42]/45 bg-white p-5 text-[#0c0d0e] shadow-[0_22px_50px_rgba(0,0,0,0.35)] sm:p-7">
             <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
               Need Assistance?
             </p>
@@ -144,7 +144,7 @@ export default function WarrantyServicePage() {
       </section>
 
       <section className="bg-white py-16">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_27rem]">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:px-10 lg:grid-cols-[minmax(0,1fr)_27rem]">
           <div className="space-y-8">
             <section className="overflow-hidden border border-[#e4ad42]/45 bg-[#1f2124] shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
               <div className="bg-[#0c0d0e] p-4">
@@ -205,11 +205,11 @@ export default function WarrantyServicePage() {
               </article>
             </section>
 
-            <section className="border border-[#e4ad42]/45 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
+            <section className="border border-[#e4ad42]/45 bg-white p-5 shadow-[0_20px_50px_rgba(0,0,0,0.12)] sm:p-8">
               <p className="text-sm font-black tracking-[0.18em] text-[#a97a36] uppercase">
                 Official Terms
               </p>
-              <h2 className="font-heading mt-2 text-4xl font-black text-[#0c0d0e]">
+              <h2 className="font-heading mt-2 text-3xl font-black text-[#0c0d0e] sm:text-4xl">
                 Gold Lion Painting Inc. 5-Year Limited Warranty
               </h2>
 
@@ -354,7 +354,7 @@ export default function WarrantyServicePage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-7 text-[#dddddd] shadow-[0_20px_45px_rgba(0,0,0,0.28)]">
+            <div className="border border-[#e4ad42]/45 bg-[#1f2124] p-5 text-[#dddddd] shadow-[0_20px_45px_rgba(0,0,0,0.28)] sm:p-7">
               <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                 Estimate Support
               </p>

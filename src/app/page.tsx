@@ -317,17 +317,17 @@ export default function HomePage() {
               Serving Homeowners Across: Bradenton, Sarasota, Lakewood Ranch,
               Anna Maria Island, Holmes Beach, Venice, and Parrish.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 href="/contact-us"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white shadow-[0_0_14px_rgba(0,0,0,0.45)] transition hover:bg-[#1f2124]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white shadow-[0_0_14px_rgba(0,0,0,0.45)] transition hover:bg-[#1f2124] sm:w-auto sm:px-6"
               >
                 <FaPaintRoller aria-hidden="true" />
                 Schedule Your Free Estimate
               </Link>
               <a
                 href="tel:9414625894"
-                className="inline-flex items-center rounded-full border-2 border-white px-6 py-4 font-bold text-white transition hover:bg-white hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center rounded-full border-2 border-white px-5 py-4 text-center font-bold text-white transition hover:bg-white hover:text-[#0c0d0e] sm:w-auto sm:px-6"
               >
                 Call (941) 462-5894
               </a>
@@ -360,7 +360,7 @@ export default function HomePage() {
             href={googleReviewsHref}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-flex font-heading text-2xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42]"
+            className="mt-5 inline-flex font-heading text-xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42] sm:text-2xl"
           >
             {googleRatingValue} Google Rating From {googleReviewCount} Reviews
           </a>
@@ -371,7 +371,7 @@ export default function HomePage() {
 
       <section
         id="bbb-accredited"
-        className="relative min-h-[540px] overflow-hidden px-4 py-16 text-white sm:px-6 lg:px-8"
+        className="relative min-h-[460px] overflow-hidden px-4 py-12 text-white sm:px-6 sm:py-16 lg:min-h-[540px] lg:px-8"
       >
         <video
           aria-hidden="true"
@@ -384,7 +384,7 @@ export default function HomePage() {
         >
           <source src="/video_lading.mp4" type="video/mp4" />
         </video>
-        <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
+        <div className="relative mx-auto flex min-h-[340px] max-w-6xl items-center lg:min-h-[420px]">
           <div className="max-w-2xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
             <a
               href={bbbProfileHref}
@@ -405,10 +405,10 @@ export default function HomePage() {
             <p className="mt-6 font-heading text-base font-black tracking-[0.2em] text-[#e4ad42] uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
               Accredited Trust Signal
             </p>
-            <h2 className="mt-3 font-heading text-5xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] md:text-7xl">
+            <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] sm:text-5xl md:text-7xl">
               BBB Accredited Business
             </h2>
-            <p className="mt-5 max-w-xl text-xl leading-8 font-semibold text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.78)]">
+            <p className="mt-5 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.78)] sm:text-xl sm:leading-8">
               {businessName} is listed by BBB with an A+ rating. Review the
               official profile for business trust details.
             </p>
@@ -417,7 +417,7 @@ export default function HomePage() {
               href={bbbProfileHref}
               target="_blank"
               rel="noreferrer"
-              className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-black text-white shadow-[0_12px_26px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+              className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-black text-white shadow-[0_12px_26px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
             >
               Visit Official BBB Profile
               <FaExternalLinkAlt aria-hidden="true" />
@@ -433,7 +433,7 @@ export default function HomePage() {
               <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                 Warranty Snapshot
               </p>
-              <h2 className="mt-2 font-heading text-4xl font-black text-white">
+              <h2 className="mt-2 font-heading text-3xl font-black text-white sm:text-4xl">
                 Gold Lion Painting Inc. 5-Year Limited Warranty
               </h2>
               <p className="mt-3 leading-7 text-[#dddddd]">
@@ -444,7 +444,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/warranty-service"
-                className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-3 font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
               >
                 <FaFileContract aria-hidden="true" />
                 Review Warranty Details
@@ -631,7 +631,7 @@ export default function HomePage() {
             <p className="font-display text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               Exterior Protection
             </p>
-            <h2 className="mt-3 font-heading text-4xl leading-tight font-black md:text-6xl">
+            <h2 className="mt-3 font-heading text-3xl leading-tight font-black sm:text-4xl md:text-6xl">
               Built For Sun, Humidity, Rain, And Curb Appeal
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-[#dddddd]">
@@ -641,7 +641,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/exterior-painting"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+              className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
             >
               <FaPaintRoller aria-hidden="true" />
               View Exterior Painting
@@ -653,7 +653,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
           <div className="space-y-5">
-            <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
+            <h2 className="font-heading text-3xl font-black text-[#0c0d0e] sm:text-4xl">
               Cabinet Painting & Refinishing in Manatee & Sarasota County
             </h2>
             <p className="text-lg leading-8">
@@ -673,7 +673,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/cabinet-painting"
-              className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
+              className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#1f2124] sm:w-auto sm:px-6"
             >
               <FaPaintRoller aria-hidden="true" />
               Request Your Free Estimate Today
@@ -694,7 +694,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-0 lg:grid-cols-2 lg:items-stretch">
           <div className="flex items-center px-4 py-16 sm:px-6 lg:px-8">
             <div className="max-w-xl space-y-5">
-              <h2 className="font-heading text-4xl font-black text-[#e4ad42]">
+              <h2 className="font-heading text-3xl font-black text-[#e4ad42] sm:text-4xl">
                 Color Consultation & Professional Guidance
               </h2>
               <p className="text-lg leading-8 text-[#dddddd]">
@@ -706,7 +706,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/color-consultation"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124] hover:ring-2 hover:ring-[#e4ad42]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#1f2124] hover:ring-2 hover:ring-[#e4ad42] sm:w-auto sm:px-6"
               >
                 <FaPaintRoller aria-hidden="true" />
                 Request Your Color Consultation
@@ -738,7 +738,7 @@ export default function HomePage() {
         <div className="relative mx-auto max-w-4xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
           <Link
             href="/contact-us"
-            className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#1f2124]"
+            className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#1f2124] sm:w-auto sm:px-6"
           >
             <FaPaintRoller aria-hidden="true" />
             Call Now for a Free Estimate
@@ -836,12 +836,12 @@ export default function HomePage() {
 
       <section className="bg-[#d39620] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          <h2 className="font-heading text-2xl font-black text-[#0c0d0e] sm:text-3xl">
             Get Expert Painting Services from Gold Lion Painting Inc
           </h2>
           <a
             href="tel:9414625894"
-            className="inline-flex shrink-0 justify-center rounded-lg bg-[#0c0d0e] px-6 py-4 font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#a97a36]"
+            className="inline-flex w-full shrink-0 justify-center rounded-lg bg-[#0c0d0e] px-5 py-4 text-center font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#a97a36] sm:w-auto sm:px-6"
           >
             Give Us A Call! (941) 462-5894
           </a>
@@ -855,7 +855,7 @@ function SectionTitle({ title }: { title: string }) {
   return (
     <section className="px-4 pt-16 pb-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl text-center">
-        <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e] sm:text-4xl">
           {title}
         </h2>
         <div className="mx-auto mt-5 h-1.5 w-2/3 max-w-xl bg-[#e4ad42]" />

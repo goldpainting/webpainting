@@ -18,12 +18,37 @@
 
 html {
   background: #0c0d0e;
+  max-width: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
   background: #ffffff;
   color: #0c0d0e;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg,
+iframe {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  a,
+  button,
+  span {
+    overflow-wrap: break-word;
+  }
 }
 
 ::selection {

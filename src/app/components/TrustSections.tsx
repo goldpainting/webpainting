@@ -47,7 +47,7 @@ export function GoogleTrustSection() {
             href={googleReviewsHref}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-flex font-heading text-2xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42]"
+            className="mt-5 inline-flex font-heading text-xl font-black text-[#0c0d0e] transition hover:text-[#e4ad42] sm:text-2xl"
           >
             {googleRatingValue} Google Rating From {googleReviewCount} Reviews
           </a>
@@ -63,7 +63,7 @@ export function BbbAccreditedSection() {
   return (
     <section
       id="bbb-accredited"
-      className="relative min-h-[540px] overflow-hidden px-4 py-16 text-white sm:px-6 lg:px-8"
+      className="relative min-h-[460px] overflow-hidden px-4 py-12 text-white sm:px-6 sm:py-16 lg:min-h-[540px] lg:px-8"
     >
       <video
         aria-hidden="true"
@@ -76,7 +76,7 @@ export function BbbAccreditedSection() {
       >
         <source src="/video_lading.mp4" type="video/mp4" />
       </video>
-      <div className="relative mx-auto flex min-h-[420px] max-w-6xl items-center">
+      <div className="relative mx-auto flex min-h-[340px] max-w-6xl items-center lg:min-h-[420px]">
         <div className="max-w-2xl rounded-2xl bg-[#0c0d0e]/58 p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:p-7">
           <a
             href={bbbProfileHref}
@@ -97,10 +97,10 @@ export function BbbAccreditedSection() {
           <p className="mt-6 font-heading text-base font-black tracking-[0.2em] text-[#e4ad42] uppercase drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
             Accredited Trust Signal
           </p>
-          <h2 className="mt-3 font-heading text-5xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] md:text-7xl">
+          <h2 className="mt-3 font-heading text-4xl leading-tight font-black text-white drop-shadow-[0_5px_18px_rgba(0,0,0,0.75)] sm:text-5xl md:text-7xl">
             BBB Accredited Business
           </h2>
-          <p className="mt-5 max-w-xl text-xl leading-8 font-semibold text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.78)]">
+          <p className="mt-5 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.78)] sm:text-xl sm:leading-8">
             {businessName} is listed by BBB with an A+ rating. Review the
             official profile for business trust details.
           </p>
@@ -109,7 +109,7 @@ export function BbbAccreditedSection() {
             href={bbbProfileHref}
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-black text-white shadow-[0_12px_26px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+            className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-black text-white shadow-[0_12px_26px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
           >
             Visit Official BBB Profile
             <FaExternalLinkAlt aria-hidden="true" />
@@ -129,7 +129,7 @@ export function WarrantyTrustSection() {
             <p className="text-sm font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               Warranty Snapshot
             </p>
-            <h2 className="mt-2 font-heading text-4xl font-black text-white">
+            <h2 className="mt-2 font-heading text-3xl font-black text-white sm:text-4xl">
               Gold Lion Painting Inc. 5-Year Limited Warranty
             </h2>
             <p className="mt-3 leading-7 text-[#dddddd]">
@@ -140,7 +140,7 @@ export function WarrantyTrustSection() {
             </p>
             <Link
               href="/warranty-service"
-              className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-3 font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+              className="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
             >
               <FaFileContract aria-hidden="true" />
               Review Warranty Details

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <main className="bg-white text-[#0c0d0e]">
-      <section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden px-4 py-14 text-white sm:px-6 sm:py-20 lg:px-8">
         <Image
           src="/services/house-exterior-painting-manatee-county.jpg"
           alt="Gold Lion Painting blog hero"
@@ -51,7 +51,7 @@ export default function BlogPage() {
             <FaPaintRoller aria-hidden="true" />
             Painting Blog
           </p>
-          <h1 className="font-heading mt-6 max-w-4xl text-5xl leading-tight font-black md:text-7xl">
+          <h1 className="font-heading mt-6 max-w-4xl text-3xl leading-tight font-black sm:text-5xl md:text-7xl">
             Expert Painting Advice For Florida Homes
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-[#dddddd]">

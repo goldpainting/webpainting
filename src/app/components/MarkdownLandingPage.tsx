@@ -122,17 +122,17 @@ export default function MarkdownLandingPage({
                 <HeroBlock key={`${block.type}-${index}`} block={block} />
               ))}
             </div>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact-us"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 <FaPaintRoller aria-hidden="true" />
                 Request Your Free Estimate
               </Link>
               <a
                 href={`tel:${businessPhone}`}
-                className="inline-flex items-center rounded-full border-2 border-white px-5 py-3 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center rounded-full border-2 border-white px-5 py-3 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 Call (941) 462-5894
               </a>
@@ -149,12 +149,12 @@ export default function MarkdownLandingPage({
 
       <section className="bg-[#d39620] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          <h2 className="font-heading text-2xl font-black text-[#0c0d0e] sm:text-3xl">
             Request Your Free Estimate Today
           </h2>
           <Link
             href="/contact-us"
-            className="inline-flex shrink-0 items-center justify-center gap-3 rounded-lg bg-[#0c0d0e] px-6 py-4 font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#d90000]"
+            className="inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-lg bg-[#0c0d0e] px-5 py-4 text-center font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#d90000] sm:w-auto sm:px-6"
           >
             Contact Gold Lion Painting
             <FaArrowRight aria-hidden="true" />
@@ -233,10 +233,10 @@ function renderContentSections(
                   <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
                     {String(index + 1).padStart(2, '0')}
                   </p>
-                  <h2 className="mt-2 font-heading text-3xl leading-tight font-black text-[#0c0d0e] lg:text-4xl">
+                  <h2 className="mt-2 font-heading text-2xl leading-tight font-black text-[#0c0d0e] sm:text-3xl lg:text-4xl">
                     {section.heading}
                   </h2>
-                  <div className="mt-6 space-y-5 text-lg leading-8 text-[#1f2124]">
+                  <div className="mt-6 space-y-5 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
                     {section.blocks.map((block, blockIndex) => (
                       <ContentBlock
                         key={`${section.heading}-${block.type}-${blockIndex}`}
@@ -279,7 +279,7 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
         {block.items.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-3 border-l-4 border-[#e4ad42] bg-[#f7f7f7] p-4 font-semibold"
+            className="flex items-start gap-3 border-l-4 border-[#e4ad42] bg-[#f7f7f7] p-4 text-sm font-semibold leading-6 sm:text-base"
           >
             <FaCheckCircle
               aria-hidden="true"
@@ -294,7 +294,7 @@ function ContentBlock({ block }: { block: MarkdownBlock }) {
 
   if (block.type === 'cta') {
     return (
-      <p className="rounded-xl bg-[#0c0d0e] px-5 py-4 font-heading text-xl font-black text-[#e4ad42]">
+      <p className="rounded-xl bg-[#0c0d0e] px-4 py-4 font-heading text-base font-black text-[#e4ad42] sm:px-5 sm:text-xl">
         {renderInlineLinks(block.text)}
       </p>
     );

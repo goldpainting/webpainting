@@ -187,7 +187,7 @@ export default function Topbar() {
       </nav>
 
       {mobileOpen ? (
-        <div className="border-t border-white/10 bg-[#0c0d0e] px-4 py-5 sm:px-6 lg:hidden">
+        <div className="max-h-[calc(100dvh-76px)] overflow-y-auto border-t border-white/10 bg-[#0c0d0e] px-4 py-5 sm:px-6 lg:hidden">
           <div className="mx-auto max-w-6xl space-y-6">
             <MobileSection title="Menu">
               <MobileLink

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ReactGoogleReviews } from 'react-google-reviews';
 import {
   FaChevronLeft,
@@ -11,10 +11,15 @@ import {
 
 import {
   googleRatingValue,
-  googleReviewCount,
   googleReviewsHref,
   googleWriteReviewHref,
 } from '../siteConfig';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from '~/components/ui/carousel';
 
 type GoogleReview = {
   reviewId: string | null;
@@ -32,6 +37,16 @@ type GoogleReview = {
 type GoogleReviewsCarouselProps = {
   areaName?: string;
   pageSize?: number;
+};
+
+type FeaturableWidgetSummaryResponse = {
+  success: boolean;
+  widget?: {
+    gbpLocationSummary?: {
+      reviewsCount?: number;
+    };
+  };
+  totalReviewCount?: number;
 };
 
 const FEATURABLE_WIDGET_ID =
@@ -91,6 +106,16 @@ function buildPager(current: number, total: number): (number | 'gap')[] {
   for (let i = left; i <= right; i++) pages.push(i);
   if (right < total - 1) pages.push('gap');
   pages.push(total);
+  return pages;
+}
+
+function chunkReviews(reviews: GoogleReview[], size: number) {
+  const pages: GoogleReview[][] = [];
+
+  for (let i = 0; i < reviews.length; i += size) {
+    pages.push(reviews.slice(i, i + size));
+  }
+
   return pages;
 }
 
@@ -158,34 +183,67 @@ function ReviewCard({ review }: { review: GoogleReview }) {
 function PaginatedReviews({
   reviews,
   pageSize,
+  onLoadedReviewCountChange,
 }: {
   reviews: GoogleReview[];
   pageSize: number;
+  onLoadedReviewCountChange: (count: number) => void;
 }) {
+  const [api, setApi] = useState<CarouselApi>();
   const [page, setPage] = useState(1);
+  const visibleReviews = useMemo(() => reviews, [reviews]);
+  const pages = useMemo(
+    () => chunkReviews(visibleReviews, pageSize),
+    [pageSize, visibleReviews],
+  );
 
-  const sorted = useMemo(() => {
-    const filtered = reviews.filter(
-      (r) =>
-        r.starRating >= 4 &&
-        r.comment?.trim().length > 0 &&
-        r.reviewer?.displayName &&
-        !r.reviewer.isAnonymous
-    );
-    for (let i = filtered.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [filtered[i], filtered[j]] = [filtered[j]!, filtered[i]!];
+  useEffect(() => {
+    onLoadedReviewCountChange(visibleReviews.length);
+  }, [onLoadedReviewCountChange, visibleReviews.length]);
+
+  useEffect(() => {
+    if (page > pages.length) {
+      setPage(1);
     }
-    return filtered;
-  }, [reviews]);
+  }, [page, pages.length]);
 
-  const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
+  useEffect(() => {
+    if (!api) return;
+
+    const updatePage = () => {
+      setPage(api.selectedScrollSnap() + 1);
+    };
+
+    updatePage();
+    api.on('select', updatePage);
+    api.on('reInit', updatePage);
+
+    return () => {
+      api.off('select', updatePage);
+      api.off('reInit', updatePage);
+    };
+  }, [api]);
+
+  useEffect(() => {
+    if (!api || pages.length <= 1) return;
+
+    const interval = window.setInterval(() => {
+      if (api.selectedScrollSnap() >= pages.length - 1) {
+        api.scrollTo(0);
+        return;
+      }
+
+      api.scrollNext();
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, [api, pages.length]);
+
+  const totalPages = Math.max(1, pages.length);
   const safePage = Math.min(page, totalPages);
-  const start = (safePage - 1) * pageSize;
-  const visible = sorted.slice(start, start + pageSize);
   const pagerItems = buildPager(safePage, totalPages);
 
-  if (sorted.length === 0) {
+  if (visibleReviews.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
         <FaGoogle aria-hidden="true" className="mx-auto text-4xl text-[#4285f4]" />
@@ -206,11 +264,28 @@ function PaginatedReviews({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {visible.map((review, i) => (
-          <ReviewCard key={review.reviewId ?? `${start}-${i}`} review={review} />
-        ))}
-      </div>
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: 'start',
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+          {pages.map((pageReviews, pageIndex) => (
+            <CarouselItem key={`review-page-${pageIndex}`}>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {pageReviews.map((review, reviewIndex) => (
+                  <ReviewCard
+                    key={review.reviewId ?? `${pageIndex}-${reviewIndex}`}
+                    review={review}
+                  />
+                ))}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
 
       {totalPages > 1 && (
         <nav
@@ -219,7 +294,9 @@ function PaginatedReviews({
         >
           <button
             type="button"
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            onClick={() => {
+              api?.scrollPrev();
+            }}
             disabled={safePage === 1}
             className="flex h-9 w-9 items-center justify-center rounded-full text-[#9aa3b5] transition hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-[#9aa3b5]"
             aria-label="Previous page"
@@ -239,7 +316,7 @@ function PaginatedReviews({
               <button
                 key={item}
                 type="button"
-                onClick={() => setPage(item)}
+                onClick={() => api?.scrollTo(item - 1)}
                 aria-current={item === safePage ? 'page' : undefined}
                 className={`flex h-9 min-w-9 items-center justify-center rounded-full px-3 font-bold transition ${
                   item === safePage
@@ -254,7 +331,9 @@ function PaginatedReviews({
 
           <button
             type="button"
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            onClick={() => {
+              api?.scrollNext();
+            }}
             disabled={safePage === totalPages}
             className="flex h-9 w-9 items-center justify-center rounded-full text-[#9aa3b5] transition hover:text-white disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-[#9aa3b5]"
             aria-label="Next page"
@@ -271,8 +350,48 @@ export default function GoogleReviewsCarousel({
   areaName,
   pageSize = 3,
 }: GoogleReviewsCarouselProps) {
+  const [reviewCount, setReviewCount] = useState<number | null>(null);
   const displayRating = Number(googleRatingValue);
-  const displayReviewCount = Number(googleReviewCount);
+  const reviewCountLabel =
+    reviewCount === null
+      ? 'Loading reviews...'
+      : `${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'}`;
+  const handleLoadedReviewCountChange = useCallback((count: number) => {
+    setReviewCount((current) => current ?? count);
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadReviewSummary() {
+      try {
+        const response = await fetch(
+          `https://featurable.com/api/v2/widgets/${FEATURABLE_WIDGET_ID}`,
+        );
+
+        if (!response.ok) return;
+
+        const data =
+          (await response.json()) as FeaturableWidgetSummaryResponse;
+        const count =
+          data.widget?.gbpLocationSummary?.reviewsCount ??
+          data.totalReviewCount ??
+          null;
+
+        if (!ignore && typeof count === 'number') {
+          setReviewCount(count);
+        }
+      } catch {
+        // Keep the loading/fallback state if the widget summary is unavailable.
+      }
+    }
+
+    void loadReviewSummary();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   return (
     <section className="bg-[#0c0d0e] px-4 py-12 sm:px-6 lg:px-8">
@@ -284,12 +403,12 @@ export default function GoogleReviewsCarousel({
               : 'What our clients say about us'}
           </h2>
 
-          <div className="flex items-center gap-6">
-            <div className="text-right">
+          <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 lg:w-auto">
+            <div className="text-left sm:text-right">
               <p className="font-heading text-4xl font-black text-white sm:text-5xl">
                 {displayRating.toFixed(2)}
               </p>
-              <div className="mt-1 flex items-center justify-end gap-2">
+              <div className="mt-1 flex flex-wrap items-center gap-2 sm:justify-end">
                 <span className="flex gap-0.5 text-[#f5aa00]">
                   {[0, 1, 2, 3, 4].map((star) => (
                     <FaStar key={star} aria-hidden="true" />
@@ -302,7 +421,7 @@ export default function GoogleReviewsCarousel({
                   rel="noreferrer"
                   className="text-sm font-medium text-[#9aa3b5] transition hover:text-white"
                 >
-                  {displayReviewCount} reviews
+                  {reviewCountLabel}
                 </a>
               </div>
             </div>
@@ -311,7 +430,7 @@ export default function GoogleReviewsCarousel({
               href={googleWriteReviewHref}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex justify-center rounded-lg bg-[#e4ad42] px-5 py-3 text-base font-black text-white transition hover:bg-[#caa345] sm:px-7 sm:py-4 sm:text-lg"
+              className="inline-flex w-full justify-center rounded-lg bg-[#e4ad42] px-5 py-3 text-base font-black text-white transition hover:bg-[#caa345] sm:w-auto sm:px-7 sm:py-4 sm:text-lg"
             >
               Write a review
             </a>
@@ -332,6 +451,7 @@ export default function GoogleReviewsCarousel({
               <PaginatedReviews
                 reviews={reviews as GoogleReview[]}
                 pageSize={pageSize}
+                onLoadedReviewCountChange={handleLoadedReviewCountChange}
               />
             )}
           />

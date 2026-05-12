@@ -75,7 +75,7 @@ const contactItems = [
 export default function ContactUsPage() {
   return (
     <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
-      <section className="relative min-h-[380px] overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+      <section className="relative min-h-[340px] overflow-hidden px-4 py-14 text-white sm:min-h-[380px] sm:px-6 sm:py-20 lg:px-8">
         <Image
           src="/services/house-exterior-painting-manatee-county.jpg"
           alt="Gold Lion Painting exterior painting project"
@@ -95,12 +95,12 @@ export default function ContactUsPage() {
           <p className="font-display text-lg font-bold text-[#e4ad42]">
             {businessName}
           </p>
-          <h1 className="font-heading mt-3 text-5xl leading-tight font-black md:text-7xl">
+          <h1 className="font-heading mt-3 text-3xl leading-tight font-black sm:text-5xl md:text-7xl">
             Schedule an Estimate
           </h1>
           <a
             href="tel:9414625894"
-            className="mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 text-xl font-black text-white shadow-[0_14px_28px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+            className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-base font-black text-white shadow-[0_14px_28px_rgba(0,0,0,0.35)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-fit sm:px-6 sm:text-xl"
           >
             <FaPhone aria-hidden="true" />
             (941) 462-5894
@@ -111,7 +111,7 @@ export default function ContactUsPage() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.56fr_0.44fr] lg:items-start">
           <div>
-            <h2 className="font-heading text-5xl font-black text-[#d90000]">
+            <h2 className="font-heading text-3xl font-black text-[#d90000] sm:text-5xl">
               Schedule an Estimate!
             </h2>
             <h3 className="font-heading mt-6 text-3xl font-black text-[#0c0d0e]">
@@ -129,7 +129,7 @@ export default function ContactUsPage() {
           </div>
 
           <aside className="space-y-8">
-            <div className="border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-7 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.28)]">
+            <div className="border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-5 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] sm:p-7">
               <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
                 Contact Information
               </h2>
@@ -198,7 +198,7 @@ export default function ContactUsPage() {
               </div>
             </div>
 
-            <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+            <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 shadow-[1px_1px_16px_rgba(0,0,0,0.16)] sm:p-7">
               <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
                 Area Of Services
               </h2>
@@ -224,7 +224,7 @@ export default function ContactUsPage() {
               </p>
             </div>
 
-            <div className="border-t-4 border-[#e4ad42] bg-white p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+            <div className="border-t-4 border-[#e4ad42] bg-white p-5 shadow-[1px_1px_16px_rgba(0,0,0,0.16)] sm:p-7">
               <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
                 Our Services
               </h2>

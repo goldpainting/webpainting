@@ -70,7 +70,7 @@ export default async function BlogCategoryPage({
 
   return (
     <main className="bg-white text-[#0c0d0e]">
-      <section className="bg-[#0c0d0e] px-4 py-16 text-white sm:px-6 lg:px-8">
+      <section className="bg-[#0c0d0e] px-4 py-12 text-white sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <Link
             href="/blog"
@@ -78,7 +78,7 @@ export default async function BlogCategoryPage({
           >
             Painting Blog
           </Link>
-          <h1 className="font-heading mt-6 max-w-4xl text-5xl leading-tight font-black md:text-6xl">
+          <h1 className="font-heading mt-6 max-w-4xl text-3xl leading-tight font-black sm:text-5xl md:text-6xl">
             {category.label}
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-[#dddddd]">
@@ -183,7 +183,7 @@ export default async function BlogCategoryPage({
                 </p>
                 <Link
                   href="/blog"
-                  className="mt-6 inline-flex rounded-full bg-[#d90000] px-6 py-4 font-bold text-white transition hover:bg-[#0c0d0e]"
+                  className="mt-6 inline-flex w-full justify-center rounded-full bg-[#d90000] px-5 py-4 text-center font-bold text-white transition hover:bg-[#0c0d0e] sm:w-auto sm:px-6"
                 >
                   View All Articles
                 </Link>

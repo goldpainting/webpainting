@@ -80,7 +80,7 @@ export default function AboutUsPage() {
   return (
     <>
       <main className="min-h-screen bg-white font-sans text-[#0c0d0e]">
-        <section className="relative overflow-hidden bg-[#0c0d0e] px-4 py-20 text-white sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden bg-[#0c0d0e] px-4 py-14 text-white sm:px-6 sm:py-20 lg:px-8">
           <Image
             src="/services/house-exterior-painting-manatee-county.jpg"
             alt="Gold Lion Painting completed exterior project"
@@ -94,7 +94,7 @@ export default function AboutUsPage() {
               <p className="font-display text-lg font-bold text-[#e4ad42]">
                 About {businessName}
               </p>
-              <h1 className="font-heading mt-4 max-w-4xl text-5xl leading-tight font-black md:text-7xl">
+              <h1 className="font-heading mt-4 max-w-4xl text-3xl leading-tight font-black sm:text-5xl md:text-7xl">
                 Professional painting with sharp prep, clean work, and durable
                 finishes.
               </h1>
@@ -104,17 +104,17 @@ export default function AboutUsPage() {
                 process built around communication, protection, and lasting
                 results.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href="tel:9414625894"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-4 font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-4 text-center font-black text-white transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
                 >
                   <FaPhone aria-hidden="true" />
                   Call 941-462-5894
                 </a>
                 <Link
                   href="/contact-us"
-                  className="inline-flex items-center rounded-full border border-[#e4ad42] px-6 py-4 font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                  className="inline-flex w-full items-center justify-center rounded-full border border-[#e4ad42] px-5 py-4 text-center font-black text-[#e4ad42] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto sm:px-6"
                 >
                   Request A Free Estimate
                 </Link>
@@ -170,7 +170,7 @@ export default function AboutUsPage() {
               <p className="font-display text-lg font-bold text-[#e4ad42]">
                 Who We Are
               </p>
-              <h2 className="font-heading mt-3 text-5xl font-black text-[#0c0d0e]">
+              <h2 className="font-heading mt-3 text-3xl font-black text-[#0c0d0e] sm:text-5xl">
                 A local painting team built around trust and follow-through.
               </h2>
               <div className="mt-6 space-y-5 text-lg leading-8 text-[#343b43]">
@@ -203,7 +203,7 @@ export default function AboutUsPage() {
               </div>
             </div>
 
-            <div className="border-t-4 border-[#d90000] bg-[#0c0d0e] p-7 text-white shadow-[1px_1px_18px_rgba(0,0,0,0.25)]">
+            <div className="border-t-4 border-[#d90000] bg-[#0c0d0e] p-5 text-white shadow-[1px_1px_18px_rgba(0,0,0,0.25)] sm:p-7">
               <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
                 Start Your Project
               </h2>
@@ -253,7 +253,7 @@ export default function AboutUsPage() {
         <section className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.42fr_0.58fr]">
             <div className="space-y-8">
-              <div className="border-t-4 border-[#e4ad42] bg-white p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.16)]">
+              <div className="border-t-4 border-[#e4ad42] bg-white p-5 shadow-[1px_1px_16px_rgba(0,0,0,0.16)] sm:p-7">
                 <h2 className="font-heading text-3xl font-black">
                   Our Services
                 </h2>
@@ -274,7 +274,7 @@ export default function AboutUsPage() {
                 </div>
               </div>
 
-              <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-7 shadow-[1px_1px_16px_rgba(0,0,0,0.12)]">
+              <div className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 shadow-[1px_1px_16px_rgba(0,0,0,0.12)] sm:p-7">
                 <h2 className="font-heading text-3xl font-black">
                   Service Areas
                 </h2>

@@ -81,17 +81,17 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
                 </span>
               ))}
             </div>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact-us"
-                className="inline-flex items-center gap-3 rounded-full bg-[#d90000] px-5 py-2.5 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-2.5 text-sm font-black text-white shadow-[0_18px_35px_rgba(0,0,0,0.42)] transition hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 <FaPaintRoller aria-hidden="true" />
                 Get a Free Estimate
               </Link>
               <a
                 href="tel:9414625894"
-                className="inline-flex items-center rounded-full border-2 border-white px-5 py-2.5 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e]"
+                className="inline-flex w-full items-center justify-center rounded-full border-2 border-white px-5 py-2.5 text-sm font-black text-white transition hover:border-[#e4ad42] hover:bg-[#e4ad42] hover:text-[#0c0d0e] sm:w-auto"
               >
                 Call (941) 462-5894
               </a>
@@ -156,7 +156,7 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
             </p>
             <Link
               href="/contact-us"
-              className="mt-7 inline-flex items-center gap-3 rounded-full bg-[#d90000] px-6 py-3 font-black text-white transition hover:bg-[#0c0d0e]"
+              className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d90000] px-5 py-3 text-center font-black text-white transition hover:bg-[#0c0d0e] sm:w-auto sm:px-6"
             >
               Schedule Local Estimate
               <FaArrowRight aria-hidden="true" />
@@ -363,7 +363,7 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
           </div>
           <Link
             href="/contact-us"
-            className="inline-flex shrink-0 justify-center rounded-lg bg-[#0c0d0e] px-6 py-4 font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#a97a36]"
+            className="inline-flex w-full shrink-0 justify-center rounded-lg bg-[#0c0d0e] px-5 py-4 text-center font-bold text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.45)] transition hover:bg-[#a97a36] sm:w-auto sm:px-6"
           >
             Get a Free Estimate
           </Link>
@@ -376,7 +376,7 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
 function SectionTitle({ title }: { title: string }) {
   return (
     <div className="text-center">
-      <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
+      <h2 className="font-heading text-3xl font-black text-[#0c0d0e] sm:text-4xl">
         {title}
       </h2>
       <div className="mx-auto mt-5 h-1.5 w-2/3 max-w-xl bg-[#e4ad42]" />
