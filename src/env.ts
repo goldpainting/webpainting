@@ -8,6 +8,7 @@ export const env = createEnv({
     SMTP_USER: z.email().optional(),
     PASS: z.string().min(1).optional(),
     GOOGLE_PLACES_API_KEY: z.string().min(1).optional(),
+    GEMINI_API_KEY: z.string().min(1),
   },
   client: {},
   runtimeEnv: {
@@ -16,6 +17,7 @@ export const env = createEnv({
     SMTP_USER: process.env.SMTP_USER,
     PASS: process.env.PASS,
     GOOGLE_PLACES_API_KEY: process.env.GOOGLE_PLACES_API_KEY,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true,

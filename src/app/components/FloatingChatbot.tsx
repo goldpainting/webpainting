@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 import {
   FaCalendarAlt,
   FaChevronDown,
@@ -10,6 +12,7 @@ import {
   FaPaintRoller,
   FaPhoneAlt,
   FaTimes,
+  FaPaperPlane,
 } from 'react-icons/fa';
 
 const quickActions = [
@@ -30,20 +33,56 @@ const quickActions = [
   },
 ];
 
+function extractText(parts: { type: string; text?: string }[]) {
+  return parts
+    .filter((p) => p.type === 'text')
+    .map((p) => p.text)
+    .join('');
+}
+
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
+
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({
+      api: '/api/chat',
+    }),
+  });
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || status === 'submitted' || status === 'streaming') return;
+    const text = input;
+    setInput('');
+    try {
+      await sendMessage({ text });
+    } catch {
+      // error is handled by the useChat error state
+    }
+  };
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   return (
     <div className="fixed right-4 bottom-4 z-[80] sm:right-6 sm:bottom-6">
       <div
-        className={`mb-3 w-[calc(100vw-2rem)] max-w-xs origin-bottom-right overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-white shadow-[0_22px_60px_rgba(0,0,0,0.3)] transition-all duration-300 sm:w-[320px] ${
+        className={`mb-3 flex w-[calc(100vw-2rem)] max-w-xs origin-bottom-right flex-col overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-white shadow-[0_22px_60px_rgba(0,0,0,0.3)] transition-all duration-300 sm:w-[350px] ${
           isOpen
-            ? 'translate-y-0 scale-100 opacity-100'
-            : 'pointer-events-none translate-y-4 scale-95 opacity-0'
+            ? 'h-[520px] translate-y-0 scale-100 opacity-100'
+            : 'pointer-events-none h-0 translate-y-4 scale-95 opacity-0'
         }`}
         aria-hidden={!isOpen}
       >
-        <div className="relative overflow-hidden bg-[#0c0d0e] px-4 py-4 text-white">
+        <div className="relative shrink-0 overflow-hidden bg-[#0c0d0e] px-4 py-4 text-white">
           <div className="absolute top-0 right-0 h-20 w-20 rounded-full bg-[#e4ad42]/15 blur-2xl" />
           <div className="relative flex items-start justify-between gap-3">
             <div>
@@ -54,7 +93,7 @@ export default function FloatingChatbot() {
                 How can we help?
               </h2>
               <p className="mt-1.5 text-xs leading-5 text-white/78">
-                Choose a quick option and our team will help.
+                Chat with AI or choose a quick option.
               </p>
             </div>
             <button
@@ -68,51 +107,114 @@ export default function FloatingChatbot() {
           </div>
         </div>
 
-        <div className="space-y-3 bg-[#f7f7f7] p-4">
-          <div className="rounded-xl border border-[#0c0d0e]/10 bg-white p-3 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
-            <div className="flex items-start gap-2.5">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#e4ad42] text-sm text-[#0c0d0e]">
-                <FaPaintRoller aria-hidden="true" />
-              </span>
-              <div>
-                <p className="font-heading text-sm font-black text-[#0c0d0e]">
-                  Painting assistant
-                </p>
-                <p className="mt-1 text-xs leading-5 text-[#343b43]">
-                  AI chat is coming soon. For now, contact the team directly.
-                </p>
+        <div className="flex-1 overflow-y-auto bg-[#f7f7f7] p-4">
+          {messages.length === 0 ? (
+            <div className="space-y-4">
+              <div className="rounded-xl border border-[#0c0d0e]/10 bg-white p-3 shadow-[0_10px_24px_rgba(0,0,0,0.06)]">
+                <div className="flex items-start gap-2.5">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#e4ad42] text-sm text-[#0c0d0e]">
+                    <FaPaintRoller aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="font-heading text-sm font-black text-[#0c0d0e]">
+                      Painting assistant
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-[#343b43]">
+                      Hello! I can help you answer questions about our services or
+                      schedule an estimate.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-2.5">
+                {quickActions.map((action) => {
+                  const Icon = action.icon;
+
+                  return (
+                    <Link
+                      key={action.href}
+                      href={action.href}
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-[#0c0d0e]/10 bg-white px-3 py-2.5 font-heading text-sm font-black text-[#0c0d0e] shadow-[0_8px_20px_rgba(0,0,0,0.05)] transition hover:border-[#e4ad42] hover:bg-[#0c0d0e] hover:text-white"
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <span className="grid h-8 w-8 place-items-center rounded-full bg-[#0c0d0e] text-xs text-[#e4ad42] transition group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                          <Icon aria-hidden="true" />
+                        </span>
+                        {action.label}
+                      </span>
+                      <FaChevronDown
+                        aria-hidden="true"
+                        className="-rotate-90 text-[#e4ad42] transition group-hover:translate-x-1"
+                      />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
-          </div>
-
-          <div className="grid gap-2.5">
-            {quickActions.map((action) => {
-              const Icon = action.icon;
-
-              return (
-                <Link
-                  key={action.href}
-                  href={action.href}
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-[#0c0d0e]/10 bg-white px-3 py-2.5 font-heading text-sm font-black text-[#0c0d0e] shadow-[0_8px_20px_rgba(0,0,0,0.05)] transition hover:border-[#e4ad42] hover:bg-[#0c0d0e] hover:text-white"
+          ) : (
+            <div className="flex flex-col space-y-3">
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={`flex ${
+                    m.role === 'user' ? 'justify-end' : 'justify-start'
+                  }`}
                 >
-                  <span className="flex items-center gap-2.5">
-                    <span className="grid h-8 w-8 place-items-center rounded-full bg-[#0c0d0e] text-xs text-[#e4ad42] transition group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
-                      <Icon aria-hidden="true" />
-                    </span>
-                    {action.label}
-                  </span>
-                  <FaChevronDown
-                    aria-hidden="true"
-                    className="-rotate-90 text-[#e4ad42] transition group-hover:translate-x-1"
-                  />
-                </Link>
-              );
-            })}
-          </div>
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                      m.role === 'user'
+                        ? 'bg-[#0c0d0e] text-white rounded-br-none'
+                        : 'border border-[#0c0d0e]/10 bg-white text-[#343b43] shadow-sm rounded-bl-none'
+                    }`}
+                  >
+                    {extractText(m.parts)}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="max-w-[85%] animate-pulse rounded-2xl rounded-bl-none border border-[#0c0d0e]/10 bg-white px-4 py-2.5 text-sm text-[#6b7280] shadow-sm">
+                    Thinking...
+                  </div>
+                </div>
+              )}
+              {error && (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">
+                  Something went wrong. Please try again or contact us directly
+                  at{' '}
+                  <a href="tel:9414625894" className="font-semibold underline">
+                    (941) 462-5894
+                  </a>
+                  .
+                </div>
+              )}
+            </div>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
 
-          <p className="text-center text-[11px] font-semibold text-[#6b7280]">
-            Live AI chat coming soon.
-          </p>
+        <div className="shrink-0 border-t border-[#0c0d0e]/10 bg-white p-3">
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-2 rounded-full border border-[#0c0d0e]/10 bg-[#f7f7f7] p-1 transition-colors focus-within:border-[#e4ad42]"
+          >
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about our services..."
+              className="w-full bg-transparent px-3 py-2 text-sm text-[#0c0d0e] placeholder:text-[#6b7280] focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#e4ad42] text-[#0c0d0e] transition hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+              aria-label="Send message"
+            >
+              <FaPaperPlane className="text-xs" />
+            </button>
+          </form>
         </div>
       </div>
 

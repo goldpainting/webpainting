@@ -154,8 +154,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.68fr)_0.32fr]">
             <div>
-              {post.slug ===
-              'exterior-painting-lakewood-ranch-specialized-approach' ? (
+              {post.article ? (
+                <GenericBlogArticle article={post.article} />
+              ) : post.slug ===
+                'exterior-painting-lakewood-ranch-specialized-approach' ? (
                 <LakewoodRanchExteriorArticle />
               ) : (
                 <FloridaPrepGuideArticle />
@@ -312,6 +314,92 @@ function InlineBlogLink({
     >
       {children}
     </Link>
+  );
+}
+
+function GenericBlogArticle({
+  article,
+}: {
+  article: NonNullable<BlogPost['article']>;
+}) {
+  return (
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
+        {article.intro}
+      </p>
+
+      {article.sections.map((section) => {
+        if (section.variant === 'dark') {
+          return (
+            <section
+              key={section.title}
+              className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7"
+            >
+              <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+                {section.title}
+              </h2>
+              <div className="mt-4 space-y-4">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              {section.bullets ? (
+                <ul className="mt-6 grid gap-4">
+                  {section.bullets.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <FaCheckCircle
+                        aria-hidden="true"
+                        className="mt-1 shrink-0 text-[#e4ad42]"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
+          );
+        }
+
+        return (
+          <section key={section.title} className="space-y-4">
+            <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+              {section.title}
+            </h2>
+            {section.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            {section.bullets ? (
+              <div
+                className={`grid gap-5 ${
+                  section.bullets.length > 3 ? 'md:grid-cols-2' : 'md:grid-cols-3'
+                }`}
+              >
+                {section.bullets.map((item) => (
+                  <div
+                    key={item}
+                    className={`flex items-start gap-3 p-5 font-semibold ${
+                      section.variant === 'gold'
+                        ? 'bg-[#e4ad42] text-[#0c0d0e]'
+                        : 'bg-[#f3f3f3] text-[#0c0d0e]'
+                    }`}
+                  >
+                    <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </section>
+        );
+      })}
+
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          {article.closing.title}
+        </h2>
+        <p className="mt-4">{article.closing.text}</p>
+      </section>
+    </div>
   );
 }
 
