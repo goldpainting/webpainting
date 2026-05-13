@@ -64,7 +64,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <main className="bg-white text-[#0c0d0e]">
-      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
+      <section className="blog-hero-enter overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
         <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src="/services/house-exterior-painting-manatee-county.jpg"
@@ -75,7 +75,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             className="object-cover"
           />
         </div>
-        <div className="relative mx-auto max-w-6xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
+        <div className="blog-panel-enter relative mx-auto max-w-6xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
           <p className="font-heading inline-flex items-center gap-2 rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e]">
             <FaPaintRoller aria-hidden="true" />
             Painting Blog
@@ -93,11 +93,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[300px_1fr] lg:items-start">
-          <aside className="border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-6 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.22)] lg:sticky lg:top-32">
+          <aside className="blog-sidebar-enter border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-6 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.22)] lg:sticky lg:top-32">
             <h2 className="font-heading text-2xl font-black text-[#e4ad42]">
               Blog Categories
             </h2>
-            <div className="mt-5 grid gap-2">
+            <div className="blog-category-list-enter mt-5 grid gap-2">
               <Link
                 href="/blog"
                 className="group flex items-center justify-between gap-3 border border-[#e4ad42] bg-[#1f2124] px-4 py-3 text-sm font-bold text-[#e4ad42] transition hover:border-[#e4ad42] hover:text-[#e4ad42]"
@@ -124,7 +124,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </div>
           </aside>
 
-          <div>
+          <div className="blog-content-enter">
             <div className="mb-8 flex flex-col justify-between gap-4 border-b border-[#e4ad42]/40 pb-6 md:flex-row md:items-end">
               <div>
                 <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
@@ -137,7 +137,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="blog-card-grid-enter grid gap-8 md:grid-cols-2">
               {visibleBlogPosts.map((post) => (
                 <article
                   key={post.slug}
@@ -186,7 +186,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {totalPages > 1 ? (
               <nav
                 aria-label="Blog pagination"
-                className="mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#e4ad42]/40 pt-8"
+                className="blog-pagination-enter mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#e4ad42]/40 pt-8"
               >
                 {currentPage === 1 ? (
                   <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">

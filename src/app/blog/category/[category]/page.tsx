@@ -70,8 +70,8 @@ export default async function BlogCategoryPage({
 
   return (
     <main className="bg-white text-[#0c0d0e]">
-      <section className="bg-[#0c0d0e] px-4 py-12 text-white sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto max-w-6xl">
+      <section className="blog-hero-enter bg-[#0c0d0e] px-4 py-12 text-white sm:px-6 sm:py-16 lg:px-8">
+        <div className="blog-panel-enter mx-auto max-w-6xl">
           <Link
             href="/blog"
             className="font-heading inline-flex rounded-full bg-[#e4ad42] px-4 py-2 text-sm font-black text-[#0c0d0e] transition hover:bg-white"
@@ -90,11 +90,11 @@ export default async function BlogCategoryPage({
 
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[300px_1fr] lg:items-start">
-          <aside className="border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-6 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.22)] lg:sticky lg:top-32">
+          <aside className="blog-sidebar-enter border-t-4 border-[#e4ad42] bg-[#0c0d0e] p-6 text-[#dddddd] shadow-[1px_1px_16px_rgba(0,0,0,0.22)] lg:sticky lg:top-32">
             <h2 className="font-heading text-2xl font-black text-[#e4ad42]">
               Categories
             </h2>
-            <div className="mt-5 grid gap-2">
+            <div className="blog-category-list-enter mt-5 grid gap-2">
               <Link
                 href="/blog"
                 className="group flex items-center justify-between gap-3 border border-white/10 bg-[#1f2124] px-4 py-3 text-sm font-bold text-[#dddddd] transition hover:border-[#e4ad42] hover:text-[#e4ad42]"
@@ -125,13 +125,13 @@ export default async function BlogCategoryPage({
             </div>
           </aside>
 
-          <div>
+          <div className="blog-content-enter">
             {posts.length > 0 ? (
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="blog-card-grid-enter grid gap-8 md:grid-cols-2">
                 {posts.map((post) => (
                   <article
                     key={post.slug}
-                    className="group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
+                    className="blog-card-enter group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
                   >
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="relative h-64 overflow-hidden">

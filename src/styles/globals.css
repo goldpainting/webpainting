@@ -96,6 +96,41 @@ iframe {
   }
 }
 
+@keyframes blogHeroEnter {
+  from {
+    filter: blur(8px);
+    opacity: 0;
+    transform: translateY(18px) scale(1.025);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes blogPanelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.975);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes blogCategoryLinkEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 @keyframes shimmerSweep {
   0% {
     transform: translateX(-160%);
@@ -145,10 +180,119 @@ iframe {
   animation: floatSlow 6s ease-in-out infinite;
 }
 
+.blog-hero-enter {
+  animation: blogHeroEnter 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, filter, transform;
+}
+
+.blog-panel-enter {
+  animation: blogPanelEnter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 90ms;
+  will-change: opacity, transform;
+}
+
+.blog-sidebar-enter {
+  animation: blogPanelEnter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 150ms;
+  transform-origin: left top;
+  will-change: opacity, transform;
+}
+
+.blog-content-enter {
+  animation: blogPanelEnter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 210ms;
+  will-change: opacity, transform;
+}
+
+.blog-category-list-enter > * {
+  animation: blogCategoryLinkEnter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.blog-category-list-enter > :nth-child(1) {
+  animation-delay: 220ms;
+}
+
+.blog-category-list-enter > :nth-child(2) {
+  animation-delay: 250ms;
+}
+
+.blog-category-list-enter > :nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.blog-category-list-enter > :nth-child(4) {
+  animation-delay: 310ms;
+}
+
+.blog-category-list-enter > :nth-child(5) {
+  animation-delay: 340ms;
+}
+
+.blog-category-list-enter > :nth-child(6) {
+  animation-delay: 370ms;
+}
+
+.blog-category-list-enter > :nth-child(7) {
+  animation-delay: 400ms;
+}
+
+.blog-category-list-enter > :nth-child(8) {
+  animation-delay: 430ms;
+}
+
+.blog-category-list-enter > :nth-child(9) {
+  animation-delay: 460ms;
+}
+
+.blog-category-list-enter > :nth-child(10) {
+  animation-delay: 490ms;
+}
+
+.blog-category-list-enter > :nth-child(11) {
+  animation-delay: 520ms;
+}
+
+.blog-category-list-enter > :nth-child(12) {
+  animation-delay: 550ms;
+}
+
+.blog-category-list-enter > :nth-child(13) {
+  animation-delay: 580ms;
+}
+
 .blog-card-enter {
   animation: blogCardZoomOut 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   transform-origin: center top;
   will-change: opacity, transform;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(1) {
+  animation-delay: 260ms;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(2) {
+  animation-delay: 310ms;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(3) {
+  animation-delay: 360ms;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(4) {
+  animation-delay: 410ms;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(5) {
+  animation-delay: 460ms;
+}
+
+.blog-card-grid-enter > .blog-card-enter:nth-child(6) {
+  animation-delay: 510ms;
+}
+
+.blog-pagination-enter {
+  animation: blogPanelEnter 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 560ms;
 }
 
 .shimmer-panel {
@@ -232,9 +376,16 @@ iframe {
   .reveal-up,
   .scroll-reveal,
   .js-reveal,
+  .blog-hero-enter,
+  .blog-panel-enter,
+  .blog-sidebar-enter,
+  .blog-content-enter,
+  .blog-category-list-enter > *,
   .blog-card-enter,
+  .blog-pagination-enter,
   .animate-float-slow,
   .shimmer-panel::after {
+    filter: none !important;
     animation: none !important;
     transform: none !important;
     transition: none !important;
