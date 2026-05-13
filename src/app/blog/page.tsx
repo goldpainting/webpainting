@@ -11,6 +11,12 @@ import {
 import { blogCategories, blogPosts, featuredBlogPost } from "./blogData";
 import { siteUrl } from "../siteConfig";
 
+const BLOG_POSTS_PER_PAGE = 6;
+
+type BlogPageProps = {
+  searchParams: Promise<{ page?: string | string[] }>;
+};
+
 export const metadata: Metadata = {
   title: "Painting Blog | Gold Lion Painting Inc",
   description:
@@ -34,7 +40,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const { page } = await searchParams;
+  const pageValue = Array.isArray(page) ? page[0] : page;
+  const requestedPage = Number.parseInt(pageValue ?? "1", 10);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(blogPosts.length / BLOG_POSTS_PER_PAGE),
+  );
+  const currentPage =
+    Number.isFinite(requestedPage) && requestedPage > 0
+      ? Math.min(requestedPage, totalPages)
+      : 1;
+  const startIndex = (currentPage - 1) * BLOG_POSTS_PER_PAGE;
+  const visibleBlogPosts = blogPosts.slice(
+    startIndex,
+    startIndex + BLOG_POSTS_PER_PAGE,
+  );
+  const paginationPages = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1,
+  );
+
   return (
     <main className="bg-white text-[#0c0d0e]">
       <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
@@ -75,7 +102,7 @@ export default function BlogPage() {
                 href="/blog"
                 className="group flex items-center justify-between gap-3 border border-[#e4ad42] bg-[#1f2124] px-4 py-3 text-sm font-bold text-[#e4ad42] transition hover:border-[#e4ad42] hover:text-[#e4ad42]"
               >
-                <span>All Categories</span>
+                <span>All Blog</span>
                 <FaArrowRight
                   aria-hidden="true"
                   className="shrink-0 text-xs text-[#e4ad42] transition group-hover:translate-x-1"
@@ -111,10 +138,10 @@ export default function BlogPage() {
             </div>
 
             <div className="grid gap-8 md:grid-cols-2">
-              {blogPosts.map((post) => (
+              {visibleBlogPosts.map((post) => (
                 <article
                   key={post.slug}
-                  className="group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
+                  className="blog-card-enter group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
                 >
                   <Link href={`/blog/${post.slug}`} className="block">
                     <div className="relative h-64 overflow-hidden">
@@ -155,6 +182,82 @@ export default function BlogPage() {
                 </article>
               ))}
             </div>
+
+            {totalPages > 1 ? (
+              <nav
+                aria-label="Blog pagination"
+                className="mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#e4ad42]/40 pt-8"
+              >
+                {currentPage === 1 ? (
+                  <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
+                    <FaArrowRight aria-hidden="true" className="rotate-180" />
+                    Previous
+                  </span>
+                ) : (
+                  <Link
+                    href={
+                      currentPage > 2
+                        ? {
+                            pathname: "/blog",
+                            query: { page: currentPage - 1 },
+                          }
+                        : "/blog"
+                    }
+                    scroll={false}
+                    className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
+                  >
+                    <FaArrowRight aria-hidden="true" className="rotate-180" />
+                    Previous
+                  </Link>
+                )}
+
+                <div className="flex flex-wrap justify-center gap-2">
+                  {paginationPages.map((pageNumber) => (
+                    <Link
+                      key={pageNumber}
+                      href={
+                        pageNumber === 1
+                          ? "/blog"
+                          : {
+                              pathname: "/blog",
+                              query: { page: pageNumber },
+                            }
+                      }
+                      aria-current={
+                        pageNumber === currentPage ? "page" : undefined
+                      }
+                      scroll={false}
+                      className={`font-heading flex size-11 items-center justify-center border text-sm font-black transition ${
+                        pageNumber === currentPage
+                          ? "border-[#0c0d0e] bg-[#0c0d0e] text-white"
+                          : "border-[#e4ad42] text-[#0c0d0e] hover:bg-[#e4ad42]"
+                      }`}
+                    >
+                      {pageNumber}
+                    </Link>
+                  ))}
+                </div>
+
+                {currentPage === totalPages ? (
+                  <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
+                    Next
+                    <FaArrowRight aria-hidden="true" />
+                  </span>
+                ) : (
+                  <Link
+                    href={{
+                      pathname: "/blog",
+                      query: { page: currentPage + 1 },
+                    }}
+                    scroll={false}
+                    className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
+                  >
+                    Next
+                    <FaArrowRight aria-hidden="true" />
+                  </Link>
+                )}
+              </nav>
+            ) : null}
           </div>
         </div>
       </section>

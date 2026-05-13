@@ -99,7 +99,7 @@ export default async function BlogCategoryPage({
                 href="/blog"
                 className="group flex items-center justify-between gap-3 border border-white/10 bg-[#1f2124] px-4 py-3 text-sm font-bold text-[#dddddd] transition hover:border-[#e4ad42] hover:text-[#e4ad42]"
               >
-                <span>All Categories</span>
+                <span>All Blog</span>
                 <FaArrowRight
                   aria-hidden="true"
                   className="shrink-0 text-xs text-[#e4ad42] transition group-hover:translate-x-1"
