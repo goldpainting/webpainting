@@ -17,21 +17,25 @@ import {
 
 const quickActions = [
   {
-    href: '/contact-us',
-    label: 'Schedule an estimate',
+    kind: 'prompt',
+    label: 'Request service appointment',
     icon: FaCalendarAlt,
+    prompt:
+      'I want to schedule painting service. Please help me book an appointment.',
   },
   {
+    kind: 'link',
     href: 'tel:9414625894',
     label: 'Call now',
     icon: FaPhoneAlt,
   },
   {
-    href: 'mailto:Goldlionpainting@gmail.com',
+    kind: 'link',
+    href: 'mailto:goldlionpainting@gmail.com',
     label: 'Send email',
     icon: FaEnvelope,
   },
-];
+] as const;
 
 function extractText(parts: { type: string; text?: string }[]) {
   return parts
@@ -51,6 +55,7 @@ export default function FloatingChatbot() {
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -60,7 +65,7 @@ export default function FloatingChatbot() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || status === 'submitted' || status === 'streaming') return;
+    if (!input.trim() || isLoading) return;
     const text = input;
     setInput('');
     try {
@@ -70,7 +75,15 @@ export default function FloatingChatbot() {
     }
   };
 
-  const isLoading = status === 'submitted' || status === 'streaming';
+  const handleQuickPrompt = async (prompt: string) => {
+    if (isLoading) return;
+
+    try {
+      await sendMessage({ text: prompt });
+    } catch {
+      // error is handled by the useChat error state
+    }
+  };
 
   return (
     <div className="fixed right-4 bottom-4 z-[80] sm:right-6 sm:bottom-6">
@@ -120,8 +133,8 @@ export default function FloatingChatbot() {
                       Painting assistant
                     </p>
                     <p className="mt-1 text-xs leading-5 text-[#343b43]">
-                      Hello! I can help you answer questions about our services or
-                      schedule an estimate.
+                      Hello! I can answer service questions and help send your
+                      appointment request to our team.
                     </p>
                   </div>
                 </div>
@@ -130,6 +143,29 @@ export default function FloatingChatbot() {
               <div className="grid gap-2.5">
                 {quickActions.map((action) => {
                   const Icon = action.icon;
+
+                  if (action.kind === 'prompt') {
+                    return (
+                      <button
+                        key={action.label}
+                        type="button"
+                        onClick={() => handleQuickPrompt(action.prompt)}
+                        disabled={isLoading}
+                        className="group flex items-center justify-between gap-3 rounded-xl border border-[#0c0d0e]/10 bg-white px-3 py-2.5 text-left font-heading text-sm font-black text-[#0c0d0e] shadow-[0_8px_20px_rgba(0,0,0,0.05)] transition hover:border-[#e4ad42] hover:bg-[#0c0d0e] hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <span className="grid h-8 w-8 place-items-center rounded-full bg-[#0c0d0e] text-xs text-[#e4ad42] transition group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                            <Icon aria-hidden="true" />
+                          </span>
+                          {action.label}
+                        </span>
+                        <FaChevronDown
+                          aria-hidden="true"
+                          className="-rotate-90 text-[#e4ad42] transition group-hover:translate-x-1"
+                        />
+                      </button>
+                    );
+                  }
 
                   return (
                     <Link
@@ -154,24 +190,30 @@ export default function FloatingChatbot() {
             </div>
           ) : (
             <div className="flex flex-col space-y-3">
-              {messages.map((m) => (
-                <div
-                  key={m.id}
-                  className={`flex ${
-                    m.role === 'user' ? 'justify-end' : 'justify-start'
-                  }`}
-                >
+              {messages.map((m) => {
+                const messageText = extractText(m.parts);
+
+                if (!messageText.trim()) return null;
+
+                return (
                   <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                      m.role === 'user'
-                        ? 'bg-[#0c0d0e] text-white rounded-br-none'
-                        : 'border border-[#0c0d0e]/10 bg-white text-[#343b43] shadow-sm rounded-bl-none'
+                    key={m.id}
+                    className={`flex ${
+                      m.role === 'user' ? 'justify-end' : 'justify-start'
                     }`}
                   >
-                    {extractText(m.parts)}
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                        m.role === 'user'
+                          ? 'rounded-br-none bg-[#0c0d0e] text-white'
+                          : 'rounded-bl-none border border-[#0c0d0e]/10 bg-white text-[#343b43] shadow-sm'
+                      }`}
+                    >
+                      {messageText}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="max-w-[85%] animate-pulse rounded-2xl rounded-bl-none border border-[#0c0d0e]/10 bg-white px-4 py-2.5 text-sm text-[#6b7280] shadow-sm">

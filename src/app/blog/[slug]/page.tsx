@@ -14,7 +14,14 @@ import {
   FaPhone,
 } from 'react-icons/fa';
 
-import { type BlogPost, blogPosts, getBlogPost } from '../blogData';
+import {
+  type BlogFaq,
+  type BlogPost,
+  blogPosts,
+  getBlogFaqs,
+  getBlogPost,
+} from '../blogData';
+import FaqSchema from '../../components/FaqSchema';
 import { siteUrl } from '../../siteConfig';
 
 type BlogPostPageProps = {
@@ -79,6 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     currentPostIndex < blogPosts.length - 1
       ? blogPosts[currentPostIndex + 1]
       : null;
+  const faqs = getBlogFaqs(post);
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -115,6 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c'),
         }}
       />
+      <FaqSchema faqs={faqs} id={`${post.slug}-faq-schema`} />
       <article>
         <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
           <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
@@ -167,6 +176,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 previousPost={previousPost}
                 nextPost={nextPost}
               />
+
+              <BlogPostFaqs faqs={faqs} />
             </div>
 
             <aside className="space-y-6">
@@ -248,6 +259,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
       </article>
     </main>
+  );
+}
+
+function BlogPostFaqs({ faqs }: { faqs: BlogFaq[] }) {
+  if (faqs.length === 0) return null;
+
+  return (
+    <section className="mt-12 bg-white p-5 shadow-[1px_1px_10px_rgba(0,0,0,0.18)] sm:p-6">
+      <h2 className="font-heading text-4xl font-black text-[#0c0d0e]">
+        Frequently Asked Questions
+      </h2>
+      <div className="mt-8 space-y-4">
+        {faqs.map((faq) => (
+          <details
+            key={faq.q}
+            className="group overflow-hidden rounded-xl border border-[#0c0d0e]/12 bg-[#f7f7f7] transition open:border-[#e4ad42] open:bg-white open:shadow-[0_14px_28px_rgba(0,0,0,0.08)]"
+          >
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-heading text-base font-black text-[#0c0d0e] transition hover:bg-[#0c0d0e] hover:text-[#e4ad42]">
+              <span>{faq.q}</span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0c0d0e] text-lg text-[#e4ad42] transition group-open:rotate-45 group-hover:bg-[#e4ad42] group-hover:text-[#0c0d0e]">
+                +
+              </span>
+            </summary>
+            <p className="border-t border-[#0c0d0e]/10 px-5 py-4 leading-7 text-[#1f2124]">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -371,7 +412,9 @@ function GenericBlogArticle({
             {section.bullets ? (
               <div
                 className={`grid gap-5 ${
-                  section.bullets.length > 3 ? 'md:grid-cols-2' : 'md:grid-cols-3'
+                  section.bullets.length > 3
+                    ? 'md:grid-cols-2'
+                    : 'md:grid-cols-3'
                 }`}
               >
                 {section.bullets.map((item) => (
@@ -383,7 +426,10 @@ function GenericBlogArticle({
                         : 'bg-[#f3f3f3] text-[#0c0d0e]'
                     }`}
                   >
-                    <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+                    <FaCheckCircle
+                      aria-hidden="true"
+                      className="mt-1 shrink-0"
+                    />
                     {item}
                   </div>
                 ))}
