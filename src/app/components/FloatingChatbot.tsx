@@ -263,7 +263,7 @@ export default function FloatingChatbot() {
       <button
         type="button"
         onClick={() => setIsOpen((value) => !value)}
-        className="group relative ml-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#d90000] text-white shadow-[0_18px_45px_rgba(0,0,0,0.36)] transition hover:scale-105 hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-4 focus:ring-[#e4ad42]/35 focus:outline-none"
+        className="group relative ml-auto flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-[#d90000] text-white shadow-[0_18px_45px_rgba(0,0,0,0.36)] transition hover:scale-105 hover:bg-[#e4ad42] hover:text-[#0c0d0e] focus:ring-4 focus:ring-[#e4ad42]/35 focus:outline-none"
         aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
         aria-expanded={isOpen}
       >
