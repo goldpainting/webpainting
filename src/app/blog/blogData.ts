@@ -50,6 +50,30 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    slug: 'signs-florida-home-needs-exterior-painting',
+    title: 'Signs a Florida Home Needs Exterior Painting',
+    excerpt:
+      'Learn the most common signs a Florida home needs exterior painting, from fading and chalking to stucco cracks, peeling paint, mildew, and weather damage.',
+    date: 'May 29, 2026',
+    dateTime: '2026-05-29',
+    readTime: '7 min read',
+    category: 'Exterior Painting Florida Homes',
+    image: '/LakewoodRanch/exterior-painting-lakewood-ranch.jpg',
+    imageAlt: 'Exterior painting project for a Lakewood Ranch Florida home',
+  },
+  {
+    slug: 'satin-vs-flat-paint-interior-walls-bradenton',
+    title: 'Satin vs. Flat Paint: Which Finish Is Best for Interior Walls?',
+    excerpt:
+      'Compare satin vs. flat paint for interior walls in Bradenton homes and learn which finish works best for durability, cleaning, lighting, bedrooms, and high-traffic spaces.',
+    date: 'May 29, 2026',
+    dateTime: '2026-05-29',
+    readTime: '7 min read',
+    category: 'Interior Painting & Finishes',
+    image: '/bradenton/living-room-painting-bradenton-03.jpg.jpg',
+    imageAlt: 'Interior wall painting project in a Bradenton Florida home',
+  },
+  {
     slug: 'exterior-painting-lakewood-ranch-specialized-approach',
     title:
       'Why Exterior Painting in Lakewood Ranch, FL Requires a Specialized Approach',
@@ -624,6 +648,46 @@ export const blogPosts = [
 ] satisfies BlogPost[];
 
 const blogFaqsBySlug: Record<string, BlogFaq[]> = {
+  'signs-florida-home-needs-exterior-painting': [
+    {
+      q: 'What are the first signs my Florida home needs exterior painting?',
+      a: 'The most common early signs are fading, chalking, mildew buildup, cracked caulking, dull exterior color, and visible stucco cracks.',
+    },
+    {
+      q: 'Is peeling exterior paint serious?',
+      a: 'Yes. Peeling paint means the coating is no longer properly bonded to the surface, which can allow moisture to reach the material underneath.',
+    },
+    {
+      q: 'Do stucco cracks need repair before painting?',
+      a: 'Yes. Stucco cracks should be sealed or repaired before painting to help reduce moisture intrusion and early coating failure.',
+    },
+    {
+      q: 'Why does exterior paint fade quickly in Florida?',
+      a: 'Florida homes receive intense UV exposure, high humidity, seasonal rain, and heat, all of which can break down exterior coatings over time.',
+    },
+  ],
+  'satin-vs-flat-paint-interior-walls-bradenton': [
+    {
+      q: 'Is satin or flat paint better for interior walls?',
+      a: 'Satin is better for durability and cleaning, while flat is better for a soft look and hiding minor wall imperfections.',
+    },
+    {
+      q: 'Should I use flat paint in a living room?',
+      a: 'Flat paint can work in a formal or low-traffic living room, but eggshell or satin may be better for busy family areas.',
+    },
+    {
+      q: 'Is satin paint too shiny for walls?',
+      a: 'Satin has a noticeable but moderate sheen. It is not as shiny as semi-gloss, but it reflects more light than flat or matte paint.',
+    },
+    {
+      q: 'What paint finish is best for bedrooms?',
+      a: 'Flat, matte, or eggshell finishes are often good for bedrooms because they create a softer, calmer appearance.',
+    },
+    {
+      q: 'What paint finish is best for hallways?',
+      a: 'Satin or eggshell is usually better for hallways because these areas receive more traffic and need easier cleaning.',
+    },
+  ],
   'exterior-painting-lakewood-ranch-specialized-approach': [
     {
       q: 'Why does exterior painting in Lakewood Ranch need special preparation?',
