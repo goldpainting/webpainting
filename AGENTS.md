@@ -6,219 +6,161 @@ Before any Next.js work, find and read the relevant doc in `node_modules/next/di
 
 <!-- END:nextjs-agent-rules -->
 
-# Repository Guidelines
+# Repository Agent Instructions
 
-## How to Use This Guide
+How AI coding agents must work in this repository. The user describes changes in plain natural language; the agent infers the workflow, keeps token usage minimal, and protects the repo.
 
-- Start here for project-wide norms for this Next.js boilerplate.
-- This project is a Next.js 16 App Router app with React 19, TypeScript, Tailwind CSS 4, Clerk, Drizzle ORM, Oxlint/Oxfmt/Ultracite, Lefthook, Vitest, and Playwright.
-- Read the **Available Skills** and **Auto-invoke Skills** tables before acting.
-- Auto-invoke: if the prompt matches an action in the table, load that skill before doing the work. Do not ask first.
-- Load only the skill required by the task. Do not load skills "just in case"; keep token usage low.
-- If two skills apply, load the most specific project skill first. Example: `drizzle` before `next-best-practices`.
-- If no skill applies, follow the rules in this file and the existing project patterns.
-- Local route/component guidelines override generic rules when there is a conflict.
+## Context Loading
 
-## Available Skills
+`CLAUDE.md` must contain only `@AGENTS.md`. Never `@`-import skills, docs, or other files into session context — they are read on demand, per task.
 
-Use these skills for detailed patterns on-demand. Skills live in `.agents/skills/` and are tracked by `skills-lock.json`.
+## Natural Language First
 
-### Generic Skills (Any Project)
-| Skill | Description | URL |
-|-------|-------------|-----|
-| `accessibility` | WCAG, ARIA, keyboard navigation, focus management, contrast | [SKILL.md](.agents/skills/accessibility/SKILL.md) |
-| `bash-defensive-patterns` | Defensive Bash programming for production-grade scripts | [SKILL.md](.agents/skills/bash-defensive-patterns/SKILL.md) |
-| `deploy-to-vercel` | Deploy applications and websites to Vercel | [SKILL.md](.agents/skills/deploy-to-vercel/SKILL.md) |
-| `nodejs-backend-patterns` | Backend services, route handlers, errors, layering, middleware patterns | [SKILL.md](.agents/skills/nodejs-backend-patterns/SKILL.md) |
-| `nodejs-best-practices` | General Node.js architecture, async, modules, security, and performance | [SKILL.md](.agents/skills/nodejs-best-practices/SKILL.md) |
-| `seo` | Metadata, sitemap, robots, Open Graph, structured data | [SKILL.md](.agents/skills/seo/SKILL.md) |
-| `tailwind-css-patterns` | Tailwind CSS 4 utilities, responsive styling, dark mode, component styling | [SKILL.md](.agents/skills/tailwind-css-patterns/SKILL.md) |
-| `tailwind-v4-shadcn` | Tailwind CSS v4 with shadcn/ui, Vite, React setup and dark mode | [SKILL.md](.agents/skills/tailwind-v4-shadcn/SKILL.md) |
-| `typescript-advanced-types` | Utility types, generics, conditional types, mapped types, narrowing | [SKILL.md](.agents/skills/typescript-advanced-types/SKILL.md) |
-| `zod` | Zod schemas, parsing, errors, type inference, validation composition | [SKILL.md](.agents/skills/zod/SKILL.md) |
+The user says things like "make these titles fit on one line on desktop" — nothing more. From that, the agent infers the size and risk of the change, the relevant files, whether SDD/OpenSpec or Engram is needed, and the smallest sufficient validation. Never require the user to name modes, workflows, or tooling; this file controls that behavior.
 
-### Next.js Boilerplate Skills
-| Skill | Description | URL |
-|-------|-------------|-----|
-| `composition-patterns` | Slots, children, compound components, render props, component APIs | [SKILL.md](.agents/skills/composition-patterns/SKILL.md) |
-| `drizzle` | Drizzle ORM schemas, queries, migrations, performance patterns | [SKILL.md](.agents/skills/drizzle/SKILL.md) |
-| `frontend-design` | Visual hierarchy, layout, spacing, responsive UI, product-quality screens | [SKILL.md](.agents/skills/frontend-design/SKILL.md) |
-| `next-best-practices` | Next.js App Router, RSC, Server Actions, routing, metadata, async APIs | [SKILL.md](.agents/skills/next-best-practices/SKILL.md) |
-| `next-cache-components` | Cache Components, `use cache`, `cacheLife`, `cacheTag`, revalidation | [SKILL.md](.agents/skills/next-cache-components/SKILL.md) |
-| `next-upgrade` | Upgrade and migrate Next.js versions with official guides and codemods | [SKILL.md](.agents/skills/next-upgrade/SKILL.md) |
-| `react-best-practices` | React 19 patterns, React Compiler, component structure, rerender hygiene | [SKILL.md](.agents/skills/react-best-practices/SKILL.md) |
-| `shadcn` | Manage shadcn/ui components — add, search, fix, debug, style, compose | [SKILL.md](.agents/skills/shadcn/SKILL.md) |
+## Language Contract
 
-### Auto-invoke Skills
+- Replies to the user: always Spanish.
+- Code, comments, UI copy, docs, commits, PRs, and all generated artifacts: English, unless the user explicitly requests otherwise or the existing project context requires it.
 
-When performing these actions, ALWAYS invoke the corresponding skill FIRST:
+## Token Budget (hard rules)
 
-| Action | Skill |
-|--------|-------|
-| Add or modify a page/route in `src/app/` | `next-best-practices` |
-| Work on App Router, Server Components, Server Actions, or `"use server"` | `next-best-practices` |
-| Read or change Next.js async APIs: `params`, `searchParams`, `cookies()`, `headers()` | `next-best-practices` |
-| Add or adjust metadata, `generateMetadata`, OG images, sitemap, robots, or JSON-LD | `seo` |
-| Add or adjust cache behavior, `use cache`, `cacheLife`, `cacheTag`, `revalidate`, or `unstable_cache` | `next-cache-components` |
-| Upgrade or migrate Next.js | `next-upgrade` |
-| Write or refactor React components | `react-best-practices` |
-| Design component APIs with slots, children, compound components, or render props | `composition-patterns` |
-| Make UI layout, spacing, visual hierarchy, responsive design, or mockup decisions | `frontend-design` |
-| Write or adjust Tailwind classes, hover states, gradients, borders, dark mode, or responsive styles | `tailwind-css-patterns` |
-| Initialize or configure Tailwind CSS v4 with shadcn/ui, dark mode, or CSS variables | `tailwind-v4-shadcn` |
-| Add, search, fix, or debug shadcn/ui components | `shadcn` |
-| Define or modify Drizzle schema, queries, migrations, or database models | `drizzle` |
-| Write production-grade shell scripts, CI/CD pipelines, or system utilities | `bash-defensive-patterns` |
-| Deploy to Vercel: preview, production, or configure deployment settings | `deploy-to-vercel` |
-| Write advanced TypeScript types, generics, conditional types, or mapped types | `typescript-advanced-types` |
-| Create API route handlers, server logic, backend errors, or middleware | `nodejs-backend-patterns` |
-| Ask general Node.js architecture, async, module, performance, or security questions | `nodejs-best-practices` |
-| Review or improve accessibility, ARIA, keyboard navigation, or contrast | `accessibility` |
-| Create or adjust Zod schemas | `zod` |
+- Use the smallest workflow that safely solves the task.
+- Read only files likely relevant to the change. Never crawl the repo or `node_modules`.
+- No web search unless the task needs current external information or the user asks.
+- No subagents for tiny or local changes.
+- No SDD/OpenSpec artifacts for tiny direct changes.
+- Do not read skills or documentation for small copy, typography, spacing, color, or Tailwind-class edits.
+- Engram: at most ~3 calls before implementation; only when continuing prior work or recording a real decision.
+- Never store screenshots, base64 images, logs, or large code dumps in Engram, specs, or prompts. If the user provides an image, summarize the visual issue in 1-2 sentences.
+- If a small task grows, stop and explain before escalating.
 
----
+## Automatic Work Mode Selection
+
+Classify every implementation request silently — the user never names the mode. There is no mode called "SDD Lite".
+
+| Mode | Use when | Behavior |
+| --- | --- | --- |
+| `DIRECT` | Tiny, low-risk change in 1 file or a small local area: copy, typography, spacing, color, Tailwind classes, a label, a typo, an isolated bug fix | No SDD, no subagents, no web, no broad reading; touch only the exact files |
+| `SDD CONTROLLED` (`strict_tdd: false`) | 1-3 related files; limited UI behavior, component structure, validation, data fetching, or tests; reversible; no new architecture | Short plan and traceability only when useful; no RED/GREEN/REFACTOR; at most 1 focused skill |
+| `SDD STRICT` (`strict_tdd: true`) | 4+ files; database schema/migrations, middleware, caching, routing, public APIs, server actions, security, CI; new features or integrations; ambiguous or high-risk work; user explicitly asks for SDD/TDD | Full SDD/OpenSpec discipline, Engram recovery, small batches, verification |
+
+Tie-breaks: DIRECT vs CONTROLLED → choose DIRECT and stop if scope grows. CONTROLLED vs STRICT → choose STRICT. If the user explicitly picks a mode, follow it unless unsafe. Never turn a tiny visual change into SDD STRICT.
+
+Escalation: DIRECT → CONTROLLED when more files or non-trivial behavior appear; CONTROLLED → STRICT when architecture, database, cache, routes, public APIs, or a 4th file appears. De-escalate only after explaining why.
+
+### Workflow per mode
+
+`DIRECT`: inspect only the exact relevant files → tell the user briefly in Spanish (small direct change, likely files, short plan) → wait for approval only if the user asked to approve first or the impact is not obvious → make the minimal change → run the smallest relevant validation only when it adds real signal → summarize in 1-3 lines.
+
+`SDD CONTROLLED`: check `git status` → inspect only relevant files → keep proposal/tasks short, and only when they truly help or the user asked → explain briefly in Spanish (workflow, files, plan, validation) → wait for approval unless risk is trivial → smallest coherent change → relevant checks only → save an Engram memory only for real decisions or non-trivial fixes → summarize.
+
+`SDD STRICT`: recover Engram context → check `git status` and OpenSpec state (initialize SDD context if missing; reuse an active relevant change) → proposal/design/tasks before implementing → explain in Spanish (change name, files, plan, validation strategy, risks) → wait for explicit approval → apply in small batches → verify against specs → run relevant checks → sync/archive after verification with approval → save an Engram session summary.
+
+## Next.js Documentation Rule
+
+Read the relevant installed doc under `node_modules/next/dist/docs/` only when the task depends on Next.js behavior (routing, Server Components, caching, metadata, route handlers, middleware/proxy, App Router conventions). Never for visual-only Tailwind, copy, typography, or spacing edits. Read only the exact relevant file; if it is missing, fall back to local skills and installed versions — do not fail the task.
+
+## Skills
+
+Skills live in `.agents/skills/` (source of truth; `skills-lock.json` is the install record). Before an action matching "Use for" below, read only that skill's `SKILL.md`. At most one skill for small changes; load more only when the task genuinely spans several domains — and never for tiny copy/style edits.
+
+| Skill | Use for |
+| --- | --- |
+| `accessibility` | WCAG, ARIA, keyboard navigation, focus, contrast |
+| `agents-md-maintainer` | Syncing AGENTS.md with skills, scripts, workflows, hooks |
+| `bash-defensive-patterns` | Production-grade shell scripts and CI/CD shell steps |
+| `composition-patterns` | Component APIs: children, slots, compound components |
+| `deploy-to-vercel` | Vercel preview/production deployments |
+| `drizzle` | Drizzle ORM schemas, queries, migrations |
+| `frontend-design` | Layout, visual hierarchy, responsive UI, polish |
+| `next-best-practices` | App Router, RSC, Server Actions, async APIs, routing, metadata |
+| `next-cache-components` | `use cache`, cache lifetimes, tags, revalidation |
+| `next-upgrade` | Next.js upgrades and codemods |
+| `nodejs-backend-patterns` | API route handlers, server logic, middleware, errors |
+| `nodejs-best-practices` | Node.js architecture, async, security, performance |
+| `react-best-practices` | Writing/refactoring React components, rerender hygiene |
+| `seo` | Metadata, sitemap, robots, Open Graph, structured data |
+| `shadcn` | Adding, fixing, styling, composing shadcn/ui components |
+| `tailwind-css-patterns` | Tailwind utilities, responsive layouts, dark mode |
+| `tailwind-v4-shadcn` | Tailwind v4 + shadcn/ui setup, theming, CSS variables |
+| `typescript-advanced-types` | Generics, conditional/mapped types, narrowing |
+| `weekly-blog-topic-planner` | Planning weekly blog topics for the marketing blog |
+| `zod` | Zod schemas, parsing, composition, inference |
+
+Sync rule: keep this table aligned with the actual directories in `.agents/skills/`. Read a new skill's `SKILL.md` before documenting it; if its trigger is unclear, write `PENDING: review trigger for <skill>`.
 
 ## Project Overview
 
-This repository is a Next.js boilerplate for building a production-ready web app from scratch.
+Gold Painting marketing site and lead-capture app (Next.js App Router).
 
-| Component | Location | Tech Stack |
-|-----------|----------|------------|
+| Area | Location | Stack |
+| --- | --- | --- |
 | App Router | `src/app/` | Next.js 16, React 19, Server Components |
-| Components | `src/components/` | React 19, TypeScript, Tailwind CSS 4 |
-| Auth | `src/app/[locale]/(auth)/`, `src/libs/` | Clerk |
-| Database | `src/models/`, `migrations/` | Drizzle ORM, PostgreSQL, PGlite local DB, Neon production DB |
-| Styles | `src/styles/global.css` | Tailwind CSS 4, CSS-first theme tokens |
-| i18n | `src/locales/`, `src/libs/I18n.ts` | next-intl, Crowdin |
-| Tests | `src/**/*.test.*`, `tests/` | Vitest, Vitest Browser mode, Playwright |
-| Tooling | root config files | Oxlint, Oxfmt, Ultracite, Lefthook, Commitlint, Knip |
-| Monitoring | `checkly.config.ts`, Sentry config | Checkly, Sentry, LogTape, Better Stack |
+| Components | `src/components/`, `src/app/components/` | React 19, TypeScript, Tailwind CSS 4 |
+| Database | `src/server/db/`, `drizzle.config.ts` | Drizzle ORM, Postgres.js |
+| Content | `doc/`, `src/app/content/`, `src/app/blog/` | Markdown-driven marketing and blog content |
+| Styles | `src/styles/globals.css` | Tailwind CSS 4, CSS-first theme tokens |
+| APIs | `src/app/api/` | Next.js Route Handlers |
+| Tooling | root configs | ESLint, Prettier, TypeScript, Drizzle Kit |
 
----
+Verified repo notes (do not assume otherwise):
 
-## Development
+- `package.json` has NO `test`, `test:e2e`, or `db:*` scripts. Verify any database workflow with the user before running Drizzle commands.
+- `drizzle.config.ts` points to `./src/server/schema.ts`, but the actual schema is `src/server/db/schema.ts`; no `migrations/` directory exists.
+- Marketing/service copy comes from the Markdown content flow in `doc/` and `src/app/content/` — change the `.md` first, then render from it. Do not invent or replace that content without explicit request.
+- No git hooks are configured; do not assume Husky/Lefthook.
+
+## Commands
+
+Verified scripts (`npm run`, npm 11.x):
 
 ```bash
-# Install dependencies
-npm install
-
-# Start local development
 npm run dev
-
-# Production-like local build with temporary in-memory DB
-npm run build-local
+npm run build
+npm run start
+npm run preview
+npm run check          # lint + tsc
+npm run lint / lint:fix
+npm run typecheck
+npm run format:check / format:write
 ```
 
-Use Node.js 22+ when possible. The README currently says Node.js 22+, while `package.json` allows `>=20`; prefer the README requirement for this boilerplate.
-
----
+For tiny visual or copy changes, run the smallest relevant validation only when it adds real signal (usually `typecheck` or nothing). Do not run `build` by default. Do not invent or rename commands.
 
 ## Code Quality
 
-```bash
-# Lint with Ultracite/Oxlint
-npm run lint
+- ESLint + Prettier + strict TypeScript; avoid `any`; let the compiler infer return types.
+- Named exports except Next.js pages/layouts; absolute imports via `@/`.
+- Never reformat unrelated files.
+- Env vars: validate through the project env layer; never read `process.env` directly in app code; never read, print, or store secret values.
+- No unnecessary `useEffect`; no `useMemo`/`useCallback` without a documented exception; use `React.ReactNode`.
+- Tailwind CSS 4 utilities and existing theme tokens; reuse shared components before creating new ones.
 
-# Fix lint/format issues
-npm run lint:fix
+## Commits and PRs
 
-# Type-check the whole project
-npm run check:types
+Conventional commits without scope: `type: short specific summary` (feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert). Never add Co-Authored-By or AI attribution. Run relevant checks before committing; screenshots for visible UI changes; no unrelated formatting churn. Never commit, push, or open a PR without explicit user approval.
 
-# Find unused files and dependencies
-npm run check:deps
+## Commit & Push Integrity (MANDATORY)
 
-# Check i18n messages
-npm run check:i18n
-```
+Two absolute anti-cheating rules — suppressing a problem is not fixing it.
 
-- This repo uses **Oxlint + Ultracite** instead of ESLint.
-- This repo uses **Oxfmt** instead of Prettier.
-- This repo uses **Lefthook** instead of Husky.
-- Do not reformat unrelated files.
-- Keep TypeScript strict. Avoid `any` unless isolated and justified.
-- Let the compiler infer return types unless an annotation improves clarity.
-- Use absolute imports via `@/` unless importing from the same directory.
-- Follow existing config in `oxlint.config.ts`, `oxfmt.config.ts`, and `lefthook.yml`.
+1. **Never disable linters/formatters to force a pass.** Do NOT add `eslint-disable` / `eslint-disable-next-line`, `@ts-ignore`, `@ts-expect-error`, a `// prettier-ignore`, or blanket rule-offs just to silence a warning or error. Fix the real cause (refactor deprecated APIs, use proper types, mark decorative elements `aria-hidden`, etc.). A rule that genuinely does not apply project-wide may be turned off once in the central ESLint config with a justifying comment — never silenced inline per file or per line, and never the Prettier formatter.
+2. **Never bypass the commit/push gate.** This project currently has no pre-commit hooks configured, so before any authorized commit/push run `npm run check` (ESLint + tsc) and fix every reported error at its real cause; only then `git commit` and push. If Husky/lint-staged hooks are added later, never skip them with `git commit --no-verify` / `-n` or `HUSKY=0` — fix the errors instead.
 
----
+## Engram Memory
 
-## Database
+Use Engram only for: continuing prior work ("continúa", "retoma", "vengo de otro agente"), meaningful decisions, non-trivial bug fixes, architecture/DB/integration changes, end-of-session summaries, and cross-agent handoffs (objective, files changed, commands run, risks, next safe step). Never store secrets, `.env` values, base64, screenshots, logs, or code dumps. Not for tiny visual or copy edits.
 
-```bash
-# Generate a migration after changing src/models/Schema.ts
-npm run db:generate
+## GGA Code Review
 
-# Apply migrations
-npm run db:migrate
+GGA (Gentleman Guardian Angel) reviews staged files on pre-commit when `.gga` exists. Point its `RULES_FILE` to a short review file (e.g. `docs/CODE-REVIEW.md`), never this manual. Treat failures as real review feedback and fix the reported violations; never bypass with `git commit --no-verify` (see Commit & Push Integrity above).
 
-# Explore the database
-npm run db:studio
-```
+## Final Safety Rules
 
-- Database schema lives in `src/models/Schema.ts`.
-- Migrations live in `migrations/`.
-- Local development uses PGlite.
-- Production should use a PostgreSQL provider such as Neon.
-- Environment variables must be validated through the project env layer. Do not read `process.env` directly in app code unless you are inside config/bootstrap files that already follow the repo pattern.
-
----
-
-## Testing
-
-```bash
-# Unit and component tests
-npm run test
-
-# Integration and E2E tests
-npm run test:e2e
-```
-
-- `*.test.ts` and `*.test.tsx` are unit/component tests.
-- `*.spec.ts` files are integration tests.
-- `*.e2e.ts` files are Playwright E2E tests.
-- Keep unit tests close to implementation. Keep integration and E2E tests in `tests/`.
-- Avoid mocking unless it is necessary.
-
----
-
-## React, Next.js, And Styling
-
-- Before any Next.js code change, read the relevant file in `node_modules/next/dist/docs/`.
-- Default exports are allowed for Next.js pages/layouts; prefer named exports elsewhere.
-- Locale pages use `props: { params: Promise<{ locale: string }> }`, then `await props.params`, then `setRequestLocale(locale)`.
-- Dashboard pages sit behind auth. Define dashboard metadata in layout when possible.
-- Never hard-code user-visible strings in localized pages. Use `getTranslations` on the server and `useTranslations` on the client.
-- Use Tailwind CSS 4 utility classes and existing theme tokens from `src/styles/global.css`.
-- Reuse shared components before creating new ones.
-- No unnecessary `useEffect`.
-- Do not add `useMemo` or `useCallback` unless the repo has a documented exception.
-- Use `React.ReactNode`, not imported `ReactNode`.
-
----
-
-## Commit & Pull Request Guidelines
-
-Follow conventional commits:
-
-```text
-type: short specific summary
-```
-
-Allowed types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
-
-Before committing or opening a PR:
-
-1. Run the relevant checks.
-2. Include UI screenshots for visible UI changes.
-3. Keep the summary specific to the changed behavior or file area.
-4. Do not include unrelated formatting or generated churn.
-
----
-
-## Response Guidelines
-
-- Keep responses concise, specific, and focused on the requested task.
-- When code changes are made, summarize the files changed and the behavior affected.
-- Mention any checks that were run, and clearly state if a relevant check could not be completed.
-- Avoid promotional footers, unrelated links, or repeated boilerplate text.
+- Never commit, push, deploy, or run migrations without explicit user approval.
+- Never expose secrets or `.env` values; keep `.env*` out of git.
+- Never overwrite or revert unrelated work.
+- Never run destructive database operations without explicit approval.
+- Never convert a tiny visual change into a full SDD STRICT workflow.
+- If unsure, ask one concise question in Spanish and stop.

@@ -1,0 +1,20 @@
+﻿{
+    "startedAt":  "2026-06-04T12:33:05.1666171-05:00",
+    "devRoot":  "applis",
+    "dryRun":  false,
+    "force":  false,
+    "repos":  [
+                  {
+                      "repo":  "artiefy",
+                      "path":  "applis\\artiefy",
+                      "status":  "skipped",
+                      "reason":  "Repository folder not found.",
+                      "commands":  [
+
+                                   ],
+                      "dependencyFileStatusAfter":  [
+
+                                                    ]
+                  }
+              ]
+}
