@@ -2,8 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
 import {
   FaCalendarAlt,
   FaChevronDown,
@@ -37,25 +35,61 @@ const quickActions = [
   },
 ] as const;
 
-function extractText(parts: { type: string; text?: string }[]) {
-  return parts
-    .filter((p) => p.type === 'text')
-    .map((p) => p.text)
-    .join('');
+type ChatMessage = {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+};
+
+function createChatMessage(
+  role: ChatMessage['role'],
+  content: string
+): ChatMessage {
+  return {
+    id: crypto.randomUUID(),
+    role,
+    content,
+  };
+}
+
+async function sendChatRequest(messages: ChatMessage[]) {
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messages: messages.map(({ role, content }) => ({ role, content })),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Chat request failed');
+  }
+
+  const data: unknown = await response.json();
+
+  if (
+    !data ||
+    typeof data !== 'object' ||
+    !('message' in data) ||
+    typeof data.message !== 'string'
+  ) {
+    throw new Error('Invalid chat response');
+  }
+
+  return data.message;
 }
 
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-
-  const { messages, sendMessage, status, error } = useChat({
-    transport: new DefaultChatTransport({
-      api: '/api/chat',
-    }),
-  });
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [status, setStatus] = useState<'ready' | 'submitted'>('ready');
+  const [error, setError] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const isLoading = status === 'submitted' || status === 'streaming';
+  const isLoading = status === 'submitted';
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -63,26 +97,44 @@ export default function FloatingChatbot() {
     }
   }, [messages, isOpen]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-    const text = input;
-    setInput('');
+  const sendPrompt = async (text: string) => {
+    if (!text.trim() || isLoading) return;
+
+    const userMessage = createChatMessage('user', text);
+    const nextMessages = [...messages, userMessage];
+
+    setMessages(nextMessages);
+    setStatus('submitted');
+    setError(null);
+
     try {
-      await sendMessage({ text });
+      const responseText = await sendChatRequest(nextMessages);
+      setMessages([
+        ...nextMessages,
+        createChatMessage(
+          'assistant',
+          responseText ||
+            'Thanks for reaching out! Please call (941) 462-5894 so our team can help right away.'
+        ),
+      ]);
     } catch {
-      // error is handled by the useChat error state
+      setError('Something went wrong.');
+    } finally {
+      setStatus('ready');
     }
   };
 
-  const handleQuickPrompt = async (prompt: string) => {
-    if (isLoading) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = input.trim();
+    if (!text || isLoading) return;
 
-    try {
-      await sendMessage({ text: prompt });
-    } catch {
-      // error is handled by the useChat error state
-    }
+    setInput('');
+    await sendPrompt(text);
+  };
+
+  const handleQuickPrompt = async (prompt: string) => {
+    await sendPrompt(prompt);
   };
 
   return (
@@ -190,30 +242,24 @@ export default function FloatingChatbot() {
             </div>
           ) : (
             <div className="flex flex-col space-y-3">
-              {messages.map((m) => {
-                const messageText = extractText(m.parts);
-
-                if (!messageText.trim()) return null;
-
-                return (
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={`flex ${
+                    m.role === 'user' ? 'justify-end' : 'justify-start'
+                  }`}
+                >
                   <div
-                    key={m.id}
-                    className={`flex ${
-                      m.role === 'user' ? 'justify-end' : 'justify-start'
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                      m.role === 'user'
+                        ? 'rounded-br-none bg-[#0c0d0e] text-white'
+                        : 'rounded-bl-none border border-[#0c0d0e]/10 bg-white text-[#343b43] shadow-sm'
                     }`}
                   >
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                        m.role === 'user'
-                          ? 'rounded-br-none bg-[#0c0d0e] text-white'
-                          : 'rounded-bl-none border border-[#0c0d0e]/10 bg-white text-[#343b43] shadow-sm'
-                      }`}
-                    >
-                      {messageText}
-                    </div>
+                    {m.content}
                   </div>
-                );
-              })}
+                </div>
+              ))}
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="max-w-[85%] animate-pulse rounded-2xl rounded-bl-none border border-[#0c0d0e]/10 bg-white px-4 py-2.5 text-sm text-[#6b7280] shadow-sm">

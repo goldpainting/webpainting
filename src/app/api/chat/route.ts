@@ -1,18 +1,20 @@
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import {
-  convertToModelMessages,
-  stepCountIs,
-  streamText,
-  tool,
-  type UIMessage,
-} from 'ai';
+  FunctionCallingConfigMode,
+  GoogleGenAI,
+  type Content,
+  type FunctionCall,
+  type FunctionDeclaration,
+} from '@google/genai';
 import { z } from 'zod';
 
 import { env } from '~/env';
 import { sendServiceAppointmentEmail } from '~/server/email';
 
-const genAI = createGoogleGenerativeAI({ apiKey: env.GEMINI_API_KEY });
+const genAI = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
+const model = 'gemini-2.5-flash-lite';
+const maxHistoryMessages = 12;
 const serviceTimeWindows = ['8:00 AM - 10:00 AM', '4:00 PM - 6:00 PM'] as const;
+const serviceAppointmentToolName = 'createServiceAppointment';
 const serviceAppointmentToolSchema = z.object({
   fullName: z.string().trim().min(2).describe("The customer's full name."),
   phone: z
@@ -50,8 +52,76 @@ const serviceAppointmentToolSchema = z.object({
     .describe('Any extra customer notes or project details.'),
 });
 
+const chatRequestSchema = z.object({
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(['user', 'assistant']),
+        content: z.string().trim().min(1),
+      })
+    )
+    .min(1),
+});
+
+const createServiceAppointmentDeclaration: FunctionDeclaration = {
+  name: serviceAppointmentToolName,
+  description:
+    'Send a Gold Lion Painting service appointment request email to goldlionpainting@gmail.com after the customer provides all required scheduling details.',
+  parametersJsonSchema: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      fullName: {
+        type: 'string',
+        description: "The customer's full name.",
+      },
+      phone: {
+        type: 'string',
+        description:
+          "The customer's best phone number for confirming the visit.",
+      },
+      email: {
+        type: 'string',
+        description: "The customer's email address, if they provided one.",
+      },
+      serviceAddress: {
+        type: 'string',
+        description:
+          'The full street address where the painting service is needed.',
+      },
+      serviceNeeded: {
+        type: 'string',
+        description: 'The painting service the customer needs.',
+      },
+      requestedDate: {
+        type: 'string',
+        description: 'The service date requested by the customer.',
+      },
+      preferredTimeWindow: {
+        type: 'string',
+        enum: serviceTimeWindows,
+        description: 'The appointment window selected by the customer.',
+      },
+      notes: {
+        type: 'string',
+        description: 'Any extra customer notes or project details.',
+      },
+    },
+    required: [
+      'fullName',
+      'phone',
+      'serviceAddress',
+      'serviceNeeded',
+      'requestedDate',
+      'preferredTimeWindow',
+    ],
+  },
+};
+
 export const runtime = 'nodejs';
 export const maxDuration = 30;
+
+type ChatMessage = z.infer<typeof chatRequestSchema>['messages'][number];
 
 function getEasternDateParts(date: Date) {
   const parts = new Intl.DateTimeFormat('en-US', {
@@ -91,14 +161,10 @@ function getSchedulingContext() {
   };
 }
 
-export async function POST(req: Request) {
-  try {
-    const { messages }: { messages: UIMessage[] } = await req.json();
-    const schedulingContext = getSchedulingContext();
+function getSystemInstruction() {
+  const schedulingContext = getSchedulingContext();
 
-    const result = await streamText({
-      model: genAI('gemini-2.5-flash-lite'),
-      system: `You are the virtual sales assistant for "Gold Lion Painting," a professional painting company based in Sarasota, Florida.
+  return `You are the virtual sales assistant for "Gold Lion Painting," a professional painting company based in Sarasota, Florida.
 
 COMPANY INFO:
 - Name: Gold Lion Painting
@@ -123,47 +189,103 @@ SERVICE APPOINTMENT INSTRUCTIONS:
 - The standard available windows are always 8:00 AM - 10:00 AM or 4:00 PM - 6:00 PM. If the customer asks for tomorrow, use ${schedulingContext.tomorrow}. If they need a different day, ask which day and still offer one of those two windows.
 - Ask for missing details one or two at a time. Do not ask the customer to repeat details they already gave.
 - Do not call the appointment tool until the customer provided the required details and selected one of the two time windows.
-- After the appointment tool succeeds, tell the customer the service appointment request was sent to goldlionpainting@gmail.com and that the team will confirm the visit. If it fails, apologize briefly and ask them to call (941) 462-5894.`,
-      messages: await convertToModelMessages(messages),
-      stopWhen: stepCountIs(5),
-      tools: {
-        createServiceAppointment: tool({
-          description:
-            'Send a Gold Lion Painting service appointment request email to goldlionpainting@gmail.com using Nodemailer after the customer provides the required scheduling details.',
-          inputSchema: serviceAppointmentToolSchema,
-          execute: async (appointment) => {
-            const result = await sendServiceAppointmentEmail({
-              ...appointment,
-              email: appointment.email || undefined,
-            });
+- After the appointment tool succeeds, tell the customer the service appointment request was sent to goldlionpainting@gmail.com and that the team will confirm the visit. If it fails, apologize briefly and ask them to call (941) 462-5894.`;
+}
 
-            if (!result.success) {
-              return {
-                ok: false,
-                error: result.error?.code ?? 'EMAIL_ERROR',
-              };
-            }
+function toGenAIHistory(messages: ChatMessage[]): Content[] {
+  return messages.slice(-maxHistoryMessages).map((message) => ({
+    role: message.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: message.content }],
+  }));
+}
 
-            return {
-              ok: true,
-              sentTo: 'goldlionpainting@gmail.com',
-              requestedDate: appointment.requestedDate,
-              preferredTimeWindow: appointment.preferredTimeWindow,
-            };
+async function executeServiceAppointment(functionCall: FunctionCall) {
+  if (functionCall.name !== serviceAppointmentToolName) {
+    return {
+      ok: false,
+      error: 'UNKNOWN_TOOL',
+    };
+  }
+
+  const appointment = serviceAppointmentToolSchema.parse(
+    functionCall.args ?? {}
+  );
+  const result = await sendServiceAppointmentEmail({
+    ...appointment,
+    email: appointment.email || undefined,
+  });
+
+  if (!result.success) {
+    return {
+      ok: false,
+      error: result.error?.code ?? 'EMAIL_ERROR',
+    };
+  }
+
+  return {
+    ok: true,
+    sentTo: 'goldlionpainting@gmail.com',
+    requestedDate: appointment.requestedDate,
+    preferredTimeWindow: appointment.preferredTimeWindow,
+  };
+}
+
+export async function POST(req: Request) {
+  try {
+    const payload = chatRequestSchema.parse(await req.json());
+    const history = toGenAIHistory(payload.messages.slice(0, -1));
+    const latestMessage = payload.messages.at(-1)!;
+    const chat = genAI.chats.create({
+      model,
+      history,
+      config: {
+        systemInstruction: getSystemInstruction(),
+        temperature: 0.4,
+        maxOutputTokens: 350,
+        tools: [
+          {
+            functionDeclarations: [createServiceAppointmentDeclaration],
           },
-        }),
+        ],
+        toolConfig: {
+          functionCallingConfig: {
+            mode: FunctionCallingConfigMode.AUTO,
+          },
+        },
       },
     });
 
-    return result.toUIMessageStreamResponse();
+    const firstResponse = await chat.sendMessage({
+      message: latestMessage.content,
+    });
+    const functionCall = firstResponse.functionCalls?.[0];
+
+    if (functionCall) {
+      const toolResult = await executeServiceAppointment(functionCall);
+      const finalResponse = await chat.sendMessage({
+        message: [
+          {
+            functionResponse: {
+              id: functionCall.id,
+              name: functionCall.name,
+              response: toolResult,
+            },
+          },
+        ],
+      });
+
+      return Response.json({ message: finalResponse.text ?? '' });
+    }
+
+    return Response.json({ message: firstResponse.text ?? '' });
   } catch (error) {
     console.error('Chat API error:', error);
-    return new Response(
-      JSON.stringify({
+    return Response.json(
+      {
         error: 'Error processing your request',
         detail: error instanceof Error ? error.message : String(error),
-      }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      },
+      { status: 500 }
     );
   }
 }
