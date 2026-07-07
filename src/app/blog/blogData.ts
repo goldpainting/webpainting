@@ -50,6 +50,32 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    slug: 'painting-older-florida-home-pre-1978',
+    title:
+      'Painting an Older Florida Home: What to Know Before Repainting a Pre-1978 House',
+    excerpt:
+      'Learn what Bradenton, Sarasota, and Lakewood Ranch homeowners should know before repainting an older pre-1978 Florida home, including lead paint safety, prep, and contractor planning.',
+    date: 'July 7, 2026',
+    dateTime: '2026-07-07',
+    readTime: '10 min read',
+    category: 'Painting Tips for Florida Homes',
+    image: '/bradenton/exterior-house-painting-bradenton-01.jpg.jpg',
+    imageAlt:
+      'Older Florida home exterior prepared for professional repainting',
+  },
+  {
+    slug: 'best-coastal-exterior-paint-colors-florida-homes',
+    title: 'Best Coastal Exterior Paint Colors for Florida Homes',
+    excerpt:
+      'Explore coastal exterior paint color ideas for Florida homes, including body, trim, and accent combinations that work with sunlight, roof color, landscaping, and curb appeal.',
+    date: 'July 7, 2026',
+    dateTime: '2026-07-07',
+    readTime: '9 min read',
+    category: 'Coastal Home Painting (Anna Maria, Siesta Key)',
+    image: '/siesta/siesta-exterior-home.jpeg',
+    imageAlt: 'Coastal Florida home exterior with light paint colors',
+  },
+  {
     slug: 'signs-florida-home-needs-exterior-painting',
     title: 'Signs a Florida Home Needs Exterior Painting',
     excerpt:
@@ -648,6 +674,42 @@ export const blogPosts = [
 ] satisfies BlogPost[];
 
 const blogFaqsBySlug: Record<string, BlogFaq[]> = {
+  'painting-older-florida-home-pre-1978': [
+    {
+      q: 'Why does a pre-1978 Florida home need extra care before repainting?',
+      a: 'Homes built before 1978 are more likely to contain lead-based paint, so paint that will be disturbed by sanding, scraping, cutting, or repairs should be evaluated before normal prep begins.',
+    },
+    {
+      q: 'Can I sand old exterior paint on a pre-1978 house?',
+      a: 'Do not dry-sand or scrape old paint without confirming the risk and using lead-safe practices. Disturbing lead-based paint can create hazardous dust and chips.',
+    },
+    {
+      q: 'Does every older home have lead paint?',
+      a: 'No. A pre-1978 build date does not prove lead paint is present, but it increases the likelihood enough that homeowners should ask the right safety questions before repainting.',
+    },
+    {
+      q: 'What should I ask a painter before repainting an older Florida home?',
+      a: 'Ask how the surface will be evaluated, what preparation is included, whether lead-safe practices may apply, how dust and debris will be contained, and what repairs should happen before coating.',
+    },
+  ],
+  'best-coastal-exterior-paint-colors-florida-homes': [
+    {
+      q: 'What exterior paint colors work best for coastal Florida homes?',
+      a: 'Light neutrals, warm whites, soft grays, sandy beige, muted blue, blue-gray, sage, and controlled navy accents often work well because they suit coastal light and natural surroundings.',
+    },
+    {
+      q: 'Should coastal homes use bright white exterior paint?',
+      a: 'Bright white can look sharp, but in intense Florida sun it may feel harsh. Warm whites and softer off-whites often create a cleaner coastal look with less glare.',
+    },
+    {
+      q: 'How should I choose trim and accent colors?',
+      a: 'Start with the roof, stone, driveway, windows, and landscaping, then choose a trim that frames the home and an accent color that highlights doors, shutters, or architectural details.',
+    },
+    {
+      q: 'Do HOA rules affect coastal exterior paint colors?',
+      a: 'Yes. Many coastal and planned communities require approved palettes or review before repainting, so homeowners should confirm color rules before finalizing body, trim, and accent choices.',
+    },
+  ],
   'signs-florida-home-needs-exterior-painting': [
     {
       q: 'What are the first signs my Florida home needs exterior painting?',

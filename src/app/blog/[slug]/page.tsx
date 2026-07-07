@@ -168,6 +168,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ) : post.slug ===
                 'satin-vs-flat-paint-interior-walls-bradenton' ? (
                 <SatinVsFlatPaintInteriorWallsArticle />
+              ) : post.slug === 'painting-older-florida-home-pre-1978' ? (
+                <PaintingOlderFloridaHomePre1978Article />
+              ) : post.slug ===
+                'best-coastal-exterior-paint-colors-florida-homes' ? (
+                <BestCoastalExteriorPaintColorsArticle />
               ) : post.article ? (
                 <GenericBlogArticle article={post.article} />
               ) : post.slug ===
@@ -363,6 +368,25 @@ function InlineBlogLink({
   );
 }
 
+function ExternalBlogLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-black text-[#a97a36] underline decoration-[#e4ad42] decoration-2 underline-offset-4 transition hover:text-[#d90000]"
+    >
+      {children}
+    </a>
+  );
+}
+
 function GenericBlogArticle({
   article,
 }: {
@@ -449,6 +473,450 @@ function GenericBlogArticle({
           {article.closing.title}
         </h2>
         <p className="mt-4">{article.closing.text}</p>
+      </section>
+    </div>
+  );
+}
+
+function PaintingOlderFloridaHomePre1978Article() {
+  return (
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
+        Repainting an older Florida home is not the same as repainting a newer
+        stucco house. If the home was built before 1978, the first question is
+        not only color, sheen, or curb appeal. The first question is whether the
+        existing coating may contain lead-based paint and whether normal prep
+        could disturb it.
+      </p>
+
+      <section className="space-y-4">
+        <p>
+          This matters for older homes in Bradenton, Sarasota, Lakewood Ranch,
+          Palmetto, Venice, and nearby coastal communities because many
+          properties have been repainted several times. A newer topcoat does not
+          always tell the whole story. Older layers can still be under the
+          surface, especially around trim, doors, windows, fascia, shutters,
+          porches, and detailed exterior areas.
+        </p>
+        <p>
+          The U.S. Environmental Protection Agency explains that homes built
+          before 1978 are more likely to have lead-based paint, and renovation,
+          repair, or painting work that disturbs those surfaces can create
+          hazardous dust and chips. Homeowners can review the EPA&apos;s{' '}
+          <ExternalBlogLink href="https://www.epa.gov/lead/renovation-repair-and-painting-rrp-program-consumers">
+            Renovation, Repair and Painting Program consumer guidance
+          </ExternalBlogLink>{' '}
+          before planning a project.
+        </p>
+        <p>
+          If your home is not a pre-1978 property and you mainly need standard
+          repaint planning, start with our{' '}
+          <InlineBlogLink href="/blog/florida-painting-prep-guide">
+            Florida painting prep guide
+          </InlineBlogLink>{' '}
+          or our article on{' '}
+          <InlineBlogLink href="/blog/signs-florida-home-needs-exterior-painting">
+            signs your Florida home needs exterior painting
+          </InlineBlogLink>
+          .
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Why 1978 is the key year for older home repainting
+        </h2>
+        <p>
+          In the United States, 1978 is the dividing line many homeowners hear
+          about because consumer use of lead-based paint was banned that year. A
+          home built before that date does not automatically mean every painted
+          surface contains lead, but it does mean the repainting plan should be
+          more careful.
+        </p>
+        <p>
+          The mistake is treating age like a cosmetic detail. Older paint can be
+          brittle, layered, chalky, glossy, or poorly bonded. If a crew starts
+          aggressive sanding or scraping without evaluating the surface, the
+          project can move from a normal repaint into a safety problem.
+        </p>
+      </section>
+
+      <section className="grid gap-5 md:grid-cols-2">
+        {[
+          'Confirm the approximate build year before planning surface prep.',
+          'Look closely at windows, doors, trim, fascia, and older wood details.',
+          'Avoid uncontrolled sanding, grinding, scraping, or dry dust creation.',
+          'Ask whether lead-safe work practices or additional evaluation may apply.',
+        ].map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-3 bg-[#e4ad42] p-5 font-semibold text-[#0c0d0e]"
+          >
+            <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+            {item}
+          </div>
+        ))}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Do not start by sanding everything
+        </h2>
+        <p>
+          Sanding is useful on many painting projects, but on a possible
+          lead-paint surface it cannot be treated like a simple prep shortcut.
+          Dry sanding, grinding, cutting, and uncontrolled scraping can release
+          dust. That dust can settle on soil, porches, flooring, HVAC returns,
+          furniture, toys, landscaping, and walkways.
+        </p>
+        <p>
+          A safer project starts with evaluation. The painter should understand
+          what surfaces are being disturbed, how much paint is failing, whether
+          repairs are needed, and what containment or cleanup standards should
+          be discussed before work begins. EPA&apos;s{' '}
+          <ExternalBlogLink href="https://www.epa.gov/lead/lead-renovation-repair-and-painting-program-rules">
+            RRP rule information
+          </ExternalBlogLink>{' '}
+          states that firms disturbing lead-based paint in pre-1978 homes, child
+          care facilities, and kindergartens must be certified and use certified
+          renovators who follow specific work practices when the rule applies.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          What to inspect before repainting an older Florida home
+        </h2>
+        <p>
+          Older Florida homes often have a mix of materials: stucco, wood trim,
+          concrete block, porch ceilings, metal railings, old doors, and newer
+          repairs. Each surface may have a different paint history. The exterior
+          body may be stable while trim paint is peeling. A porch may have old
+          layers even if the main walls were updated recently.
+        </p>
+        <p>
+          Walk the property slowly and look for peeling, cracking, bubbling,
+          chalking, failing caulk, moisture stains, soft wood, rust bleed, and
+          areas where paint is separating from old glossy layers. These details
+          help determine whether the project needs a simple repaint, targeted
+          repairs, specialized containment, or more careful product selection.
+        </p>
+      </section>
+
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+          Questions to ask before hiring a painter
+        </h2>
+        <ul className="mt-6 grid gap-4">
+          {[
+            'How will you evaluate old paint before sanding or scraping?',
+            'What areas will be disturbed during prep, repair, or replacement?',
+            'Do any surfaces require lead-safe practices before normal painting begins?',
+            'How will dust, chips, landscaping, porches, and entry areas be contained?',
+            'What primer, bonding, or encapsulating approach is appropriate for the surface condition?',
+            'What repairs should happen before the finish coats are applied?',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3">
+              <FaCheckCircle
+                aria-hidden="true"
+                className="mt-1 shrink-0 text-[#e4ad42]"
+              />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Florida climate makes preparation even more important
+        </h2>
+        <p>
+          Heat, humidity, UV exposure, wind-driven rain, and mildew pressure all
+          affect paint performance. Older homes can also have hidden moisture
+          issues around windows, fascia, soffits, stucco cracks, old caulk
+          lines, and porch details. Painting over these problems may look good
+          for a short time, then fail as the surface continues moving or
+          trapping moisture.
+        </p>
+        <p>
+          This is where preparation and safety meet. The goal is not to remove
+          every old coating aggressively. The goal is to create a stable,
+          paintable surface without creating unnecessary dust or damage. That
+          may include washing, controlled hand preparation, repairs,
+          substrate-specific primer, careful masking, and a clear cleanup plan.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          When color planning should wait
+        </h2>
+        <p>
+          Color is the fun part, but with older homes it should not be the first
+          decision. If the surface has peeling paint, failing trim, wood rot,
+          moisture staining, or possible lead-based paint, those conditions can
+          change the scope, schedule, budget, and product system.
+        </p>
+        <p>
+          Once the surface plan is clear, color decisions become easier. Body,
+          trim, and accent colors can then be chosen around the roof,
+          landscaping, neighborhood character, and the amount of direct sun the
+          home receives. For coastal color planning, see our guide to{' '}
+          <InlineBlogLink href="/blog/best-coastal-exterior-paint-colors-florida-homes">
+            coastal exterior paint colors for Florida homes
+          </InlineBlogLink>
+          .
+        </p>
+      </section>
+
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Final recommendation for pre-1978 repainting
+        </h2>
+        <p className="mt-4">
+          If your Florida home was built before 1978, treat repainting as a
+          planning project before it becomes a paint project. Confirm the age,
+          evaluate the surfaces, avoid uncontrolled sanding or scraping, and ask
+          direct questions about lead-safe work practices when old paint may be
+          disturbed.
+        </p>
+        <p className="mt-4">
+          Gold Lion Painting Inc helps homeowners plan cleaner, safer, and more
+          durable painting projects across Bradenton, Sarasota, Lakewood Ranch,
+          Anna Maria, Siesta Key, and nearby Florida communities.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+function BestCoastalExteriorPaintColorsArticle() {
+  return (
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
+        The best coastal exterior paint colors for Florida homes are not chosen
+        from a single swatch in isolation. They have to work with bright sun,
+        roof color, pavers, landscaping, trim, shutters, garage doors, HOA
+        rules, salt air, and the relaxed architecture of places like Anna Maria,
+        Siesta Key, Holmes Beach, Sarasota, and Bradenton.
+      </p>
+
+      <section className="space-y-4">
+        <p>
+          Coastal color should feel clean and elevated without looking flat,
+          washed out, or too trendy. That usually means building a full palette:
+          a body color, a trim color, and one or two controlled accents.
+          Sherwin-Williams describes coastal palettes as softened shades of
+          traditional seaside colors, and its coastal exterior collections show
+          body, trim, and accent combinations rather than one-color decisions.
+          Benjamin Moore also presents coastal color as a complete design style
+          instead of a single blue or white.
+        </p>
+        <p>
+          For durability and surface planning in coastal areas, pair this color
+          guide with our{' '}
+          <InlineBlogLink href="/blog/coastal-home-painting-anna-maria-siesta-key-guide">
+            coastal home painting guide for Anna Maria and Siesta Key
+          </InlineBlogLink>{' '}
+          and our{' '}
+          <InlineBlogLink href="/exterior-painting">
+            exterior painting service
+          </InlineBlogLink>{' '}
+          overview.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Start with the fixed colors you cannot change
+        </h2>
+        <p>
+          Before choosing paint, look at the roof, stone, pavers, driveway,
+          window frames, gutters, railing, pool cage, and landscaping. These
+          fixed elements control the direction of the palette. A cool gray roof
+          may support soft blue-gray, white, and charcoal accents. A warm tile
+          roof may look better with creamy white, sand, greige, clay, or muted
+          green.
+        </p>
+        <p>
+          This is where many homeowners make the wrong move. They choose a
+          beautiful color online, then discover it fights the roof or turns
+          harsh in Florida sun. A coastal palette should feel connected to the
+          whole property, not pasted onto it.
+        </p>
+      </section>
+
+      <section className="grid gap-5 md:grid-cols-2">
+        {[
+          'Warm white body with soft beige trim and a muted blue front door.',
+          'Sandy greige body with crisp off-white trim and bronze accents.',
+          'Pale blue-gray body with white trim and navy shutters.',
+          'Soft sage body with creamy trim and a natural wood or deep green door.',
+        ].map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-3 bg-[#e4ad42] p-5 font-semibold text-[#0c0d0e]"
+          >
+            <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+            {item}
+          </div>
+        ))}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Warm whites and off-whites for coastal curb appeal
+        </h2>
+        <p>
+          White is a classic coastal exterior choice, but the wrong white can
+          feel too bright in Florida light. Pure, high-reflective whites may
+          create glare and make trim details disappear. Warm whites, off-whites,
+          and creamy whites often look more natural against tile roofs, palms,
+          pavers, sand-colored stone, and tropical landscaping.
+        </p>
+        <p>
+          Use white strategically. A warm white body can feel elegant when the
+          trim is slightly cleaner and the front door or shutters add depth. If
+          the body color is sandy or blue-gray, white trim can create the crisp
+          outline coastal homes need.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Sandy neutrals, greige, and taupe
+        </h2>
+        <p>
+          Sandy neutrals are some of the safest coastal exterior colors because
+          they connect the home to beach tones without becoming themed. Greige,
+          taupe, light tan, and soft beige can work on stucco, siding, and
+          masonry when the undertone matches the roof and hardscape.
+        </p>
+        <p>
+          Sherwin-Williams includes coastal combinations with body colors such
+          as Perfect Greige, Accessible Beige, Macadamia, and other warm
+          neutrals in its{' '}
+          <ExternalBlogLink href="https://www.sherwin-williams.com/en-us/color/color-collections/architectural-paint-colors/coastal-design-exterior-paint-colors">
+            Coastal Style Exterior Paint Colors
+          </ExternalBlogLink>{' '}
+          collection. The takeaway is not to copy a palette blindly. The
+          takeaway is to compare body, trim, and accent together.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Blue, blue-gray, and green coastal colors
+        </h2>
+        <p>
+          Blue and green can be beautiful near the water, but saturation
+          matters. A strong tropical blue may look playful on a small accent but
+          overwhelming across a large two-story exterior. Softer blue-gray,
+          muted teal, sage, and sea-glass tones usually age better because they
+          feel coastal without turning the home into a theme.
+        </p>
+        <p>
+          Benjamin Moore&apos;s{' '}
+          <ExternalBlogLink href="https://www.benjaminmoore.com/en-us/project-ideas-inspiration/design-style/casual-coastal-color-palette-ideas">
+            coastal color palette ideas
+          </ExternalBlogLink>{' '}
+          are useful for thinking in families of color: soft neutrals, watery
+          blues, warm whites, and relaxed accent tones. For Florida exteriors,
+          test these colors outside at different times of day before committing.
+        </p>
+      </section>
+
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+          A practical coastal palette formula
+        </h2>
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {[
+            {
+              title: 'Body color',
+              text: 'Choose the largest color first: warm white, sandy beige, greige, soft gray, blue-gray, or muted sage.',
+            },
+            {
+              title: 'Trim color',
+              text: 'Use trim to sharpen the architecture. Off-white, creamy white, or a slightly deeper neutral can frame the home.',
+            },
+            {
+              title: 'Accent color',
+              text: 'Keep accents controlled on doors, shutters, railings, or garage details. Navy, bronze, deep green, or muted blue can add depth.',
+            },
+          ].map((item) => (
+            <article
+              key={item.title}
+              className="border-l-4 border-[#e4ad42] pl-4"
+            >
+              <h3 className="font-heading text-xl font-black text-[#e4ad42]">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-base leading-7">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Match the palette to the home style
+        </h2>
+        <p>
+          A waterfront cottage, Mediterranean stucco home, modern coastal build,
+          and HOA community home should not all use the same palette. Cottage
+          homes can handle softer blues and casual accents. Mediterranean homes
+          usually need warmer neutrals and roof-aware trim. Modern coastal homes
+          often look best with cleaner contrast, restrained accents, and fewer
+          color breaks.
+        </p>
+        <p>
+          If your property is in a planned community, review color rules early.
+          Many HOAs control body colors, trim contrast, garage colors, front
+          door accents, and even sheen expectations. Our{' '}
+          <InlineBlogLink href="/blog/hoa-community-painting-standards-homeowner-guide">
+            HOA painting standards guide
+          </InlineBlogLink>{' '}
+          explains what to check before painting.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Test colors in real Florida light
+        </h2>
+        <p>
+          Coastal light changes everything. A color can look soft indoors,
+          bright at noon, gray in shade, and warmer near sunset. Test large
+          samples on more than one side of the home, then review them in morning
+          light, full sun, shade, and evening light.
+        </p>
+        <p>
+          Also test colors near the materials they must coordinate with: roof
+          tile, pavers, stone, garage doors, porch ceilings, shutters, and
+          landscaping. That extra step prevents expensive repainting and helps
+          the final exterior feel intentional.
+        </p>
+      </section>
+
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Final recommendation for Florida coastal colors
+        </h2>
+        <p className="mt-4">
+          The strongest coastal exterior palettes are calm, coordinated, and
+          durable. Choose colors that work with the roof, hardscape, sun
+          exposure, neighborhood standards, and architecture. Then make sure the
+          surface preparation and coating system are strong enough for Florida
+          conditions.
+        </p>
+        <p className="mt-4">
+          Gold Lion Painting Inc helps homeowners in Anna Maria, Siesta Key,
+          Sarasota, Bradenton, Lakewood Ranch, and surrounding areas plan
+          coastal exterior painting projects with cleaner color direction and a
+          professional finish.
+        </p>
       </section>
     </div>
   );

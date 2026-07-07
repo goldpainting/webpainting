@@ -174,7 +174,10 @@ function ReviewCard({ review }: { review: GoogleReview }) {
             {review.reviewer.displayName}
           </p>
         </div>
-        <FaGoogle className="h-5 w-5 shrink-0 text-[#4285f4]" aria-hidden="true" />
+        <FaGoogle
+          className="h-5 w-5 shrink-0 text-[#4285f4]"
+          aria-hidden="true"
+        />
       </div>
     </article>
   );
@@ -194,18 +197,12 @@ function PaginatedReviews({
   const visibleReviews = useMemo(() => reviews, [reviews]);
   const pages = useMemo(
     () => chunkReviews(visibleReviews, pageSize),
-    [pageSize, visibleReviews],
+    [pageSize, visibleReviews]
   );
 
   useEffect(() => {
     onLoadedReviewCountChange(visibleReviews.length);
   }, [onLoadedReviewCountChange, visibleReviews.length]);
-
-  useEffect(() => {
-    if (page > pages.length) {
-      setPage(1);
-    }
-  }, [page, pages.length]);
 
   useEffect(() => {
     if (!api) return;
@@ -246,7 +243,10 @@ function PaginatedReviews({
   if (visibleReviews.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#9aa3b5] bg-[#f8fafc] p-8 text-center text-[#343b43]">
-        <FaGoogle aria-hidden="true" className="mx-auto text-4xl text-[#4285f4]" />
+        <FaGoogle
+          aria-hidden="true"
+          className="mx-auto text-4xl text-[#4285f4]"
+        />
         <h3 className="mt-4 font-heading text-2xl font-black text-[#0c0d0e]">
           No reviews available yet
         </h3>
@@ -366,13 +366,12 @@ export default function GoogleReviewsCarousel({
     async function loadReviewSummary() {
       try {
         const response = await fetch(
-          `https://featurable.com/api/v2/widgets/${FEATURABLE_WIDGET_ID}`,
+          `https://featurable.com/api/v2/widgets/${FEATURABLE_WIDGET_ID}`
         );
 
         if (!response.ok) return;
 
-        const data =
-          (await response.json()) as FeaturableWidgetSummaryResponse;
+        const data = (await response.json()) as FeaturableWidgetSummaryResponse;
         const count =
           data.widget?.gbpLocationSummary?.reviewsCount ??
           data.totalReviewCount ??
