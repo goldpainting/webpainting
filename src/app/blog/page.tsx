@@ -18,7 +18,8 @@ type BlogPageProps = {
 };
 
 export const metadata: Metadata = {
-  title: "Painting Blog | Gold Lion Painting Inc",
+  // The root layout title template already appends "| Gold Lion Painting Inc".
+  title: "Painting Blog",
   description:
     "Professional painting tips from Gold Lion Painting Inc for Florida homeowners planning interior painting, exterior repainting, and cabinet refinishing projects.",
   alternates: {

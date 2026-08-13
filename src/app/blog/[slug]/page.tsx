@@ -45,7 +45,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | Gold Lion Painting Inc`,
+    // The root layout title template already appends "| Gold Lion Painting Inc".
+    title: post.title,
     description: post.excerpt,
     alternates: {
       canonical: `/blog/${post.slug}`,
@@ -163,7 +164,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.68fr)_0.32fr]">
             <div>
-              {post.slug === 'signs-florida-home-needs-exterior-painting' ? (
+              {post.slug ===
+              'how-long-to-wait-before-painting-after-pressure-washing-florida' ? (
+                <PressureWashingDryTimeArticle />
+              ) : post.slug === 'kitchen-cabinet-paint-colors-florida-2026' ? (
+                <KitchenCabinetPaintColors2026Article />
+              ) : post.slug === 'signs-florida-home-needs-exterior-painting' ? (
                 <SignsFloridaHomeNeedsExteriorPaintingArticle />
               ) : post.slug ===
                 'satin-vs-flat-paint-interior-walls-bradenton' ? (
@@ -473,6 +479,530 @@ function GenericBlogArticle({
           {article.closing.title}
         </h2>
         <p className="mt-4">{article.closing.text}</p>
+      </section>
+    </div>
+  );
+}
+
+function PressureWashingDryTimeArticle() {
+  return (
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
+        Most Florida exterior painting projects start with a pressure wash, and
+        the question that follows is always the same: how long do you have to
+        wait before painting? The short answer is usually 24 to 48 hours. The
+        honest answer is that Florida humidity, shade, surface material, and the
+        afternoon storm pattern can stretch that window well past two days.
+      </p>
+
+      <section className="space-y-4">
+        <p>
+          Washing is not a cosmetic step. It removes mildew, chalk, salt air
+          residue, pollen, and loose paint so the new coating can bond to the
+          home instead of to contamination. Our guide on{' '}
+          <InlineBlogLink href="/blog/pressure-washing-surface-preparation-before-exterior-paint">
+            pressure washing and surface preparation before exterior paint
+          </InlineBlogLink>{' '}
+          covers why that matters. This article covers what happens next: the
+          drying window, and how to know when the surface is genuinely ready.
+        </p>
+        <p>
+          Getting this wrong is expensive. Paint applied over a damp substrate
+          can look perfect on day one and start blistering weeks later, long
+          after the crew has packed up and the invoice has been paid.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          The baseline: 24 to 48 hours before painting
+        </h2>
+        <p>
+          Sherwin-Williams guidance for homeowners is direct about this step:
+          pressure-wash the house to remove dirt, mildew, and loose paint, then{' '}
+          <ExternalBlogLink href="https://www.sherwin-williams.com/en-us/project-center/paint/exterior-painting-how-tos">
+            allow at least 24 to 48 hours for the house to dry before painting
+          </ExternalBlogLink>
+          . That baseline assumes reasonable weather: sun, airflow, moderate
+          humidity, and no rain in between.
+        </p>
+        <p>
+          Florida rarely delivers all four at once. Between June and September,
+          a home can be washed on Monday, rained on Monday afternoon, and still
+          be holding moisture in the north-facing walls on Wednesday morning.
+          The clock does not start when the washing finishes. It effectively
+          restarts every time the surface gets wet again.
+        </p>
+        <p>
+          The same manufacturer guidance sets clear weather limits alongside the
+          drying window: avoid painting when temperatures are below 50 degrees
+          or above 90 degrees Fahrenheit, and per Sherwin-Williams{' '}
+          <ExternalBlogLink href="https://www.sherwin-williams.com/homeowners/how-to/painting/exterior-painting-how-tos/exterior-preparing/sw-article-dir-ext_surfaceprep">
+            exterior surface preparation guidance
+          </ExternalBlogLink>
+          , do not paint immediately after rain, when rain is predicted, or
+          during foggy weather. In a Florida summer, those three conditions
+          overlap constantly.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Drying time changes with the surface
+        </h2>
+        <p>
+          A stucco wall, a wood fascia board, and a brick accent do not release
+          water at the same rate. Treating the whole exterior as one drying
+          timeline is one of the most common shortcuts in residential repainting
+          and one of the easiest ways to create isolated failures.
+        </p>
+        <p>
+          Stucco and concrete block are porous. Water goes deeper than the
+          surface film suggests, and hairline cracks hold it longer. Wood
+          absorbs and swells, so exterior wood, fascia, and trim generally need
+          more time than the 24 to 48 hour baseline before they are coated or
+          stained. Sherwin-Williams also notes that siding should be allowed to
+          dry a day or so on its own, so the water driven up behind the boards
+          can work its way back out before painting.
+        </p>
+      </section>
+
+      <section className="grid gap-5 md:grid-cols-2">
+        {[
+          'Stucco and block: 24 to 48 hours minimum, longer on shaded elevations.',
+          'Siding: allow time for water driven behind the boards to escape.',
+          'Exterior wood, fascia, and trim: plan on longer than the baseline.',
+          'Any surface that got rained on: restart the drying window.',
+        ].map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-3 bg-[#e4ad42] p-5 font-semibold text-[#0c0d0e]"
+          >
+            <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+            {item}
+          </div>
+        ))}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Why Florida humidity extends the wait
+        </h2>
+        <p>
+          Drying is evaporation, and evaporation slows down as the surrounding
+          air gets closer to saturation. On a humid Gulf Coast afternoon, the
+          air already holds a large share of the moisture it can carry, so water
+          leaves the stucco far more slowly than it would in a dry climate.
+        </p>
+        <p>
+          This is why the same 24-hour wait behaves differently in Bradenton in
+          February and in Bradenton in August. It is also why a wall that feels
+          dry to the hand at 2 p.m. can read as damp on a moisture meter, and
+          why the north side of a home routinely needs more time than the south
+          side that has been in direct sun all day.
+        </p>
+        <p>
+          Coastal properties add another layer. Salt air, sea breeze moisture,
+          and heavy morning dew all slow the process further. Our{' '}
+          <InlineBlogLink href="/blog/coastal-home-painting-anna-maria-siesta-key-guide">
+            coastal home painting guide for Anna Maria and Siesta Key
+          </InlineBlogLink>{' '}
+          covers what that exposure means for the coating system itself.
+        </p>
+      </section>
+
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+          What goes wrong when paint goes on wet
+        </h2>
+        <p className="mt-4">
+          Moisture trapped under a fresh coating has to escape somewhere. As the
+          sun heats the wall, that water turns to vapor and pushes outward
+          against a film that has already sealed the surface. The result is
+          predictable, and it is not a cosmetic issue.
+        </p>
+        <ul className="mt-6 grid gap-4">
+          {[
+            'Blistering and bubbling as vapor lifts the coating off the substrate.',
+            'Early peeling, usually starting at edges, trim, and caulk joints.',
+            'Poor adhesion, so the paint never reaches its expected service life.',
+            'Mildew growth underneath the film, where washing cannot reach it.',
+            'Uneven sheen and flashing across walls that dried at different rates.',
+            'Warranty disputes, because the failure traces back to preparation.',
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3">
+              <FaCheckCircle
+                aria-hidden="true"
+                className="mt-1 shrink-0 text-[#e4ad42]"
+              />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          How to check whether the surface is really dry
+        </h2>
+        <p>
+          Do not judge the house by its sunniest wall. Walk the property and
+          check the places that dry last: north-facing elevations, shaded areas
+          under trees, soffits, window ledges, porch ceilings, caulk joints,
+          wood trim, and any area where water pooled or ran during washing.
+        </p>
+        <p>
+          A moisture meter is the reliable answer, and it is what a professional
+          crew should be using rather than guessing. Beyond that, look for
+          darker patches on stucco, damp-feeling caulk lines, condensation on
+          shaded surfaces in the morning, and any area that still smells damp.
+          If cracks or failed caulk are holding water, those repairs belong in
+          the prep phase anyway, as covered in our{' '}
+          <InlineBlogLink href="/blog/stucco-siding-painting-florida-homeowners-guide">
+            stucco and siding painting guide
+          </InlineBlogLink>
+          .
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Scheduling a Florida exterior project around the weather
+        </h2>
+        <p>
+          The practical move is to build the drying window into the schedule
+          instead of treating it as a delay. Wash early in the week, plan the
+          full drying period, and keep the forecast in view. During Florida
+          summer, that often means washing in the morning so the surface gets a
+          full day of sun and airflow before the afternoon storm pattern
+          arrives.
+        </p>
+        <p>
+          Dry season, roughly November through April, gives the cleanest
+          conditions for exterior repainting on the Gulf Coast: lower humidity,
+          more predictable days, and shorter drying windows. If the project has
+          to happen in the wet season, the schedule needs more buffer, not more
+          optimism.
+        </p>
+        <p>
+          A contractor who pushes to paint the same day the house was washed is
+          telling you something about how the rest of the preparation will be
+          handled. For the wider prep checklist, see our{' '}
+          <InlineBlogLink href="/blog/florida-painting-prep-guide">
+            Florida painting prep guide
+          </InlineBlogLink>{' '}
+          and our{' '}
+          <InlineBlogLink href="/exterior-painting">
+            exterior painting service
+          </InlineBlogLink>{' '}
+          overview.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          When washing reveals work that has to happen first
+        </h2>
+        <p>
+          A thorough wash often exposes problems that were hidden under dirt and
+          chalk: peeling sections, soft wood, open stucco cracks, failed caulk
+          joints, rust bleed, and areas where a previous coating never bonded
+          properly. Those repairs are not an upsell. They are the difference
+          between a repaint that lasts and one that fails on schedule.
+        </p>
+        <p>
+          Repairs also affect the timeline in their own right. Patching
+          compounds, new caulk, and primer each need cure time before finish
+          coats. If the wash uncovered failures you had not noticed before, our
+          article on the{' '}
+          <InlineBlogLink href="/blog/signs-florida-home-needs-exterior-painting">
+            signs a Florida home needs exterior painting
+          </InlineBlogLink>{' '}
+          is a useful reference for scoping the work.
+        </p>
+      </section>
+
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Final recommendation on drying time
+        </h2>
+        <p className="mt-4">
+          Plan on 24 to 48 hours as the minimum after pressure washing, give
+          exterior wood and masonry more time than that, and restart the clock
+          any time it rains. Check the shaded elevations rather than the sunny
+          ones, respect the rain, fog, and temperature limits, and never let a
+          calendar date override what the surface is actually telling you.
+        </p>
+        <p className="mt-4">
+          Gold Lion Painting Inc plans exterior projects in Bradenton, Sarasota,
+          Lakewood Ranch, Palmetto, Anna Maria, Siesta Key, and nearby Florida
+          communities around real drying conditions, so the coating system has a
+          fair chance to perform.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+function KitchenCabinetPaintColors2026Article() {
+  return (
+    <div className="space-y-10 text-base leading-7 text-[#1f2124] sm:text-lg sm:leading-8">
+      <p className="border-l-4 border-[#e4ad42] bg-[#f7f2e8] p-5 text-lg leading-8 font-semibold text-[#0c0d0e] sm:p-6 sm:text-xl sm:leading-9">
+        The cabinet colors moving into Florida kitchens in 2026 have a clear
+        direction: warmer, earthier, and calmer. Cool gray has been retreating
+        for several years, and what is replacing it is a family of warm whites,
+        soft greens, khaki and greige neutrals, and deep grounding shades that
+        look intentional in strong Gulf Coast daylight.
+      </p>
+
+      <section className="space-y-4">
+        <p>
+          The best part is that none of this requires new cabinetry. If the
+          boxes, doors, and drawer fronts are structurally sound, refinishing
+          changes the entire feel of the kitchen for a fraction of replacement
+          cost. What that process actually involves is covered in our guide on{' '}
+          <InlineBlogLink href="/blog/cabinet-painting-refinishing-before-you-start">
+            cabinet painting and refinishing
+          </InlineBlogLink>
+          .
+        </p>
+        <p>
+          This article is about the color decision: what is trending for 2026,
+          why it works in Florida homes, and how to coordinate it with the
+          countertops, flooring, lighting, and backsplash you are keeping.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          The 2026 direction: warm neutrals over cool gray
+        </h2>
+        <p>
+          Both major manufacturers pointed the same way for 2026.
+          Sherwin-Williams named{' '}
+          <ExternalBlogLink href="https://www.sherwin-williams.com/en-us/color/color-of-the-year/2026">
+            Universal Khaki SW 6150
+          </ExternalBlogLink>{' '}
+          its Color of the Year, an earthy mid-tone neutral with a soft yellow
+          cast that reads as grounded rather than sterile. Benjamin Moore
+          selected{' '}
+          <ExternalBlogLink href="https://www.benjaminmoore.com/en-us/paint-colors/color-of-the-year-2026">
+            Silhouette AF-655
+          </ExternalBlogLink>
+          , a rich espresso brown with charcoal undertones.
+        </p>
+        <p>
+          Read together, those two picks describe the year: a warm neutral base
+          and a deep brown-black anchor. That is almost a two-tone kitchen
+          formula on its own, and it explains why brown, khaki, and greige are
+          showing up on cabinets after a decade of gray dominance.
+        </p>
+      </section>
+
+      <section className="grid gap-5 md:grid-cols-2">
+        {[
+          'Warm whites and creams: bright without the blue-gray chill.',
+          'Soft green and sage: calm, natural, and forgiving in daylight.',
+          'Khaki, greige, and taupe: the 2026 neutral, warmer than gray.',
+          'Deep espresso, charcoal, and navy: grounding colors for lowers and islands.',
+        ].map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-3 bg-[#e4ad42] p-5 font-semibold text-[#0c0d0e]"
+          >
+            <FaCheckCircle aria-hidden="true" className="mt-1 shrink-0" />
+            {item}
+          </div>
+        ))}
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Warm whites and creams
+        </h2>
+        <p>
+          White cabinets are not going anywhere, but the whites themselves have
+          shifted. The crisp, blue-leaning whites that defined the last decade
+          can feel cold and clinical under Florida light, especially in kitchens
+          with large windows or a west-facing exposure.
+        </p>
+        <p>
+          Warm whites, creams, and soft off-whites hold the same brightness
+          while feeling softer. They also pair far better with the materials
+          Florida kitchens tend to have: travertine, wood floors, sand-toned
+          stone, brass or bronze hardware, and natural light that runs warm most
+          of the day.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Greens and sage
+        </h2>
+        <p>
+          Green has become the reliable alternative to neutral. Sage, muted
+          olive, and soft herb tones read as calm rather than bold, and they
+          connect naturally to Florida landscaping and outdoor views. In a
+          smaller kitchen, a light sage on the uppers can feel more open than a
+          heavy neutral.
+        </p>
+        <p>
+          Deeper greens work too, but usually with restraint: on the island, on
+          the lower cabinets, or on a single run of built-ins. Pair them with
+          warm white walls and let the green carry the personality.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Earth tones, khaki, and greige
+        </h2>
+        <p>
+          This is the center of the 2026 palette. Khaki, greige, taupe, mushroom,
+          and soft clay tones give a kitchen depth without committing to a
+          statement color. They are also the most forgiving option when the
+          countertops and flooring have busy or warm-toned patterns, because
+          they sit between the extremes rather than competing.
+        </p>
+        <p>
+          For homeowners who found gray too cold and white too plain, this is
+          the family worth sampling first. It also ages well, which matters when
+          the cabinets will not be repainted again for years.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Deep shades: espresso, charcoal, and navy
+        </h2>
+        <p>
+          Dark cabinets are back, but placed more carefully than in past cycles.
+          Espresso brown, charcoal, and navy work best as the grounding element:
+          lower cabinets, an island, a pantry wall, or a butler&apos;s pantry,
+          with lighter uppers keeping the room from closing in.
+        </p>
+        <p>
+          Lighting is the deciding factor. A deep color in a kitchen with good
+          natural light and layered under-cabinet lighting looks rich. The same
+          color in a small, dim kitchen looks heavy. Test it in the actual room
+          before committing.
+        </p>
+      </section>
+
+      <section className="bg-[#1f2124] p-5 text-[#dddddd] sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#e4ad42]">
+          How to coordinate the color with what you are keeping
+        </h2>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {[
+            {
+              title: 'Countertops',
+              text: 'Identify the undertone first. Warm cream and gold-veined stone pushes toward warm whites, khaki, and green. Cool white quartz with gray veining can carry charcoal, navy, or a crisper white.',
+            },
+            {
+              title: 'Flooring',
+              text: 'Wood and wood-look tile usually run warm in Florida homes. Warm neutrals and greens sit comfortably against them; a cool gray cabinet will fight the floor and both will look off.',
+            },
+            {
+              title: 'Backsplash',
+              text: 'If the backsplash stays, treat it as a fixed color. A busy or strongly colored backsplash calls for a quieter cabinet; a plain subway or slab backsplash gives the cabinets room to lead.',
+            },
+            {
+              title: 'Lighting and hardware',
+              text: 'Warm LED lighting pushes every color warmer, which flatters creams and greens and can muddy cool grays. Brass and bronze hardware suit warm palettes; matte black and nickel suit deeper, cooler ones.',
+            },
+          ].map((item) => (
+            <article key={item.title} className="border-l-4 border-[#e4ad42] pl-4">
+              <h3 className="font-heading text-xl font-black text-[#e4ad42]">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-base leading-7">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Two-tone kitchens are still the safest way to use color
+        </h2>
+        <p>
+          A lighter upper with a deeper lower or island remains the most
+          practical way to bring a bold color into a kitchen. It keeps the room
+          feeling open at eye level, hides daily wear where it actually happens,
+          and lets you use a color like espresso or navy without the kitchen
+          becoming dark.
+        </p>
+        <p>
+          It also gives you an exit. If the deep color eventually feels dated,
+          repainting the lowers alone is a much smaller project than redoing the
+          entire kitchen.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Sheen matters as much as color on cabinets
+        </h2>
+        <p>
+          Cabinet doors get touched constantly, so the finish has to be
+          washable. Satin and semi-gloss are the usual choices, and the sheen
+          changes how the color reads: a higher sheen brightens and reflects,
+          while a lower sheen deepens the color and softens it.
+        </p>
+        <p>
+          Higher sheen also shows more. Every sanding mark, dust nib, and
+          imperfection in the surface becomes visible, which is why sprayed
+          finishes over properly prepared doors matter so much on cabinet work.
+          Our{' '}
+          <InlineBlogLink href="/blog/interior-painting-finishes-guide-for-florida-homes">
+            interior painting and finish choices guide
+          </InlineBlogLink>{' '}
+          goes deeper on how sheen behaves across a home.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Test the color in your own kitchen before committing
+        </h2>
+        <p>
+          A cabinet color that looks perfect in a showroom or on a screen can
+          shift noticeably once it is in your room. Paint a large sample board,
+          not a small swatch, and move it around the kitchen: next to the
+          countertop, against the backsplash, near the window, and under the
+          artificial lighting you use at night.
+        </p>
+        <p>
+          Check it in morning light, midday sun, and evening lamp light before
+          deciding. If the choice feels stuck between two directions, a{' '}
+          <InlineBlogLink href="/color-consultation">
+            color consultation
+          </InlineBlogLink>{' '}
+          is a faster way to resolve it than repainting a full set of doors
+          twice.
+        </p>
+      </section>
+
+      <section className="border-t-4 border-[#d90000] bg-[#f3f3f3] p-5 sm:p-7">
+        <h2 className="font-heading text-3xl font-black text-[#0c0d0e]">
+          Final recommendation for 2026 cabinet color
+        </h2>
+        <p className="mt-4">
+          Lean warm. Start from the countertops, flooring, and backsplash you
+          are keeping, choose a cabinet color that shares their undertone, and
+          use deeper shades on lowers and islands rather than across the whole
+          kitchen. Then make sure the refinishing process, from degreasing to
+          cure time, is strong enough to keep that color looking new.
+        </p>
+        <p className="mt-4">
+          Gold Lion Painting Inc handles{' '}
+          <InlineBlogLink href="/cabinet-painting">
+            cabinet painting and refinishing
+          </InlineBlogLink>{' '}
+          for homeowners in Bradenton, Sarasota, Lakewood Ranch, Palmetto,
+          Parrish, and nearby Florida communities.
+        </p>
       </section>
     </div>
   );

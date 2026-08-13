@@ -50,6 +50,33 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    slug: 'how-long-to-wait-before-painting-after-pressure-washing-florida',
+    title:
+      'How Long to Wait Before Painting After Pressure Washing a House in Florida',
+    excerpt:
+      'Learn how long a Florida home should dry after pressure washing before exterior painting, how humidity, rain, stucco, wood, and brick change the timeline, and what goes wrong when paint is applied to a damp surface.',
+    date: 'August 13, 2026',
+    dateTime: '2026-08-13',
+    readTime: '10 min read',
+    category: 'Pressure Washing & Surface Preparation',
+    image: '/sarasota/preparation-sarasota.jpeg',
+    imageAlt:
+      'Exterior surface drying after pressure washing before painting a Florida home',
+  },
+  {
+    slug: 'kitchen-cabinet-paint-colors-florida-2026',
+    title: 'Trending Kitchen Cabinet Paint Colors for Florida Homes in 2026',
+    excerpt:
+      'Explore the kitchen cabinet paint colors trending in Florida homes for 2026, from warm whites and greens to earth tones and deep shades, plus how to match them to countertops, flooring, lighting, and backsplash.',
+    date: 'August 13, 2026',
+    dateTime: '2026-08-13',
+    readTime: '10 min read',
+    category: 'Cabinet Painting & Refinishing',
+    image: '/services/custom-cabinet-painting-manatee-county.jpg',
+    imageAlt:
+      'Repainted kitchen cabinets in a Manatee County Florida home after refinishing',
+  },
+  {
     slug: 'painting-older-florida-home-pre-1978',
     title:
       'Painting an Older Florida Home: What to Know Before Repainting a Pre-1978 House',
@@ -674,6 +701,58 @@ export const blogPosts = [
 ] satisfies BlogPost[];
 
 const blogFaqsBySlug: Record<string, BlogFaq[]> = {
+  'how-long-to-wait-before-painting-after-pressure-washing-florida': [
+    {
+      q: 'How long should a house dry after pressure washing before painting?',
+      a: 'A common guideline is to allow at least 24 to 48 hours of drying after pressure washing before exterior paint is applied. In Florida, high humidity, shaded elevations, and afternoon storms often push that window longer.',
+    },
+    {
+      q: 'Does wood need more drying time than stucco after pressure washing?',
+      a: 'Yes. Wood absorbs and holds water, so exterior wood, fascia, and trim generally need more than the 24 to 48 hour baseline before coating or staining. Siding also needs time for water driven up behind the boards to work its way back out.',
+    },
+    {
+      q: 'Can I paint the same day I pressure wash my Florida home?',
+      a: 'Same-day painting is not recommended. Even when a surface looks dry, moisture can remain inside stucco, wood, caulk joints, and porous masonry, which can lead to blistering, peeling, and poor adhesion.',
+    },
+    {
+      q: 'What weather conditions should stop an exterior painting day?',
+      a: 'Manufacturer guidance is to avoid painting immediately after rain, when rain is predicted, and during foggy weather, and to stay within a working range of roughly 50 to 90 degrees Fahrenheit unless the product is designed for other conditions.',
+    },
+    {
+      q: 'How can I tell if the surface is actually dry enough to paint?',
+      a: 'Check shaded and north-facing walls, soffits, window ledges, caulk joints, and wood trim rather than the sunniest wall. A moisture meter gives the most reliable answer, and a professional painter will check these areas before opening the first can.',
+    },
+    {
+      q: 'What happens if paint is applied over a damp surface?',
+      a: 'Trapped moisture can cause blistering, bubbling, early peeling, poor adhesion, mildew growth under the coating, and uneven sheen. The failure often appears weeks or months later, after the crew has finished.',
+    },
+  ],
+  'kitchen-cabinet-paint-colors-florida-2026': [
+    {
+      q: 'What kitchen cabinet colors are trending in Florida for 2026?',
+      a: 'Warm whites and creams, soft greens and sage, earthy khaki and greige tones, and deep shades such as espresso brown, charcoal, and navy are the most requested directions for 2026. Cool gray is still fading in favor of warmer, earthier neutrals.',
+    },
+    {
+      q: 'Are white kitchen cabinets still a good choice in 2026?',
+      a: 'Yes, but the whites have shifted. Stark, blue-leaning whites are being replaced by warm whites, creams, and soft off-whites that feel calmer under strong Florida daylight and pair better with wood, stone, and brass.',
+    },
+    {
+      q: 'How do I match cabinet color to my countertops and backsplash?',
+      a: 'Start with the surfaces you are not replacing. Identify the undertone of the countertop and backsplash, then choose a cabinet color that shares or intentionally balances that undertone instead of fighting it.',
+    },
+    {
+      q: 'Should upper and lower cabinets be different colors?',
+      a: 'Two-tone kitchens remain popular. A lighter upper and a deeper lower keeps the room feeling open while adding depth, and it is a practical way to use a bold color without committing the entire kitchen to it.',
+    },
+    {
+      q: 'Do dark cabinet colors work in small Florida kitchens?',
+      a: 'They can, when the room has good natural or layered lighting. In a small kitchen, deep colors usually work best on the lower cabinets or an island, with lighter uppers and walls keeping the space open.',
+    },
+    {
+      q: 'Can I change my cabinet color without replacing the cabinets?',
+      a: 'Yes. If the boxes, doors, and drawer fronts are structurally sound, professional cabinet refinishing can change the color completely with degreasing, sanding, bonding primer, and sprayed finish coats, at a fraction of replacement cost.',
+    },
+  ],
   'painting-older-florida-home-pre-1978': [
     {
       q: 'Why does a pre-1978 Florida home need extra care before repainting?',
