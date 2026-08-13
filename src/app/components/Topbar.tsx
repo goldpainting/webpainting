@@ -104,7 +104,6 @@ export default function Topbar() {
               alt="Gold Lion Painting Inc logo"
               width={96}
               height={96}
-              priority
               className="h-12 w-12 rounded-full object-cover xl:h-14 xl:w-14"
             />
             <span className="font-heading text-xs leading-tight font-black text-[#e4ad42] uppercase xl:text-sm">

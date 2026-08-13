@@ -169,7 +169,7 @@ const services = [
 const processSteps = [
   {
     title: '1. Setup',
-    image: '/process/1..png',
+    image: '/process/1.webp',
     description:
       'We begin by preparing your space to ensure full protection and efficiency.',
     panels: [
@@ -185,7 +185,7 @@ const processSteps = [
   },
   {
     title: '2. Preparation',
-    image: '/process/2.png',
+    image: '/process/2.webp',
     description: 'Proper prep is the foundation of a long-lasting finish.',
     panels: [
       {
@@ -200,7 +200,7 @@ const processSteps = [
   },
   {
     title: '3. Painting',
-    image: '/process/3.png',
+    image: '/process/3.webp',
     description: 'This is where your vision comes to life.',
     panels: [
       {
@@ -215,14 +215,14 @@ const processSteps = [
   },
   {
     title: '4. Clean-Up',
-    image: '/process/4.png',
+    image: '/process/4.webp',
     description:
       'We maintain a clean, organized workspace throughout the project. Once the job is complete, we remove all materials, coverings, and debris, leaving your space spotless and ready to enjoy.',
     panels: [],
   },
   {
     title: 'Final Inspection',
-    image: '/process/5.png',
+    image: '/process/5.webp',
     description:
       'Your satisfaction is our priority. We conduct a detailed walkthrough with you to ensure every detail meets your expectations. Any final touch-ups are addressed promptly to guarantee a flawless result.',
     panels: [],
@@ -266,16 +266,29 @@ export default function HomePage() {
 
       <section className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16">
         <div className="relative h-[300px] sm:absolute sm:inset-0 sm:h-auto">
+          <Image
+            src="/bradenton/professional-exterior-painters-bradenton-03-mobile.webp"
+            alt="Exterior house painting project in Bradenton"
+            fill
+            sizes="100vw"
+            preload
+            className="object-cover sm:hidden"
+          />
           <video
             aria-hidden="true"
             autoPlay
             loop
             muted
             playsInline
+            preload="none"
             poster="/bradenton/professional-exterior-painters-bradenton-03.jpg.jpg"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 hidden h-full w-full object-cover sm:block"
           >
-            <source src="/video_mini_landing_bbb.mp4" type="video/mp4" />
+            <source
+              src="/video_mini_landing_bbb.mp4"
+              type="video/mp4"
+              media="(min-width: 640px)"
+            />
           </video>
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-6 sm:px-0 sm:pt-6 lg:pt-10">
@@ -462,8 +475,8 @@ export default function HomePage() {
                 alt="Gold Lion Painting 5-year limited warranty"
                 width={1024}
                 height={683}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-auto w-full"
-                priority
               />
             </a>
           </div>
@@ -682,11 +695,11 @@ export default function HomePage() {
             </Link>
           </div>
           <Image
-            src="/home_refinishin.png"
+            src="/home_refinishin.webp"
             alt="Cabinet painting and kitchen modernization in Bradenton"
             width={800}
             height={800}
-            loading="eager"
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="aspect-square w-full rounded-[2rem] object-cover shadow-[0_18px_45px_rgba(0,0,0,0.18)]"
           />
         </div>
@@ -718,7 +731,7 @@ export default function HomePage() {
           <div className="flex items-center justify-center p-6 lg:p-10">
             <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-2xl lg:max-w-lg">
               <Image
-                src="/consultation/color_consulation.png"
+                src="/consultation/color_consulation.webp"
                 alt="Gold Lion Painting color consultation design preview"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -731,7 +744,7 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden px-4 py-20 text-center text-white sm:px-6 lg:px-8">
         <Image
-          src="/luxury/luxury-home-lading.png"
+          src="/luxury/luxury-home-lading.webp"
           alt="Luxury and standard residential painting projects"
           fill
           sizes="100vw"
@@ -894,7 +907,7 @@ function CardGrid({
                 alt={item.alt}
                 width={700}
                 height={500}
-                loading="eager"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="h-56 w-full rounded-xl object-cover"
               />
               <h3 className="mt-4 font-heading text-2xl font-black text-[#e4ad42]">

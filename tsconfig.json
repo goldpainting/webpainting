@@ -47,10 +47,13 @@
     ".vercel",
     "coverage",
     ".agents",
+    ".claude",
     ".github",
     ".agents/**",
+    ".claude/**",
     ".github/**",
     "**/.agents/**",
+    "**/.claude/**",
     "**/.github/**"
   ]
 }

@@ -10,56 +10,11 @@ Before any Next.js work, find and read the relevant doc in `node_modules/next/di
 
 How AI coding agents must work in this repository. The user describes changes in plain natural language; the agent infers the workflow, keeps token usage minimal, and protects the repo.
 
-## Context Loading
+## Core Rules
 
-`CLAUDE.md` must contain only `@AGENTS.md`. Never `@`-import skills, docs, or other files into session context — they are read on demand, per task.
+Shared agent rules — work modes (DIRECT / SDD CONTROLLED / SDD STRICT), token budget, language contract, commits and integrity, Engram scope, GGA, and safety — live in the user-level global `~/.claude/CLAUDE.md` under "Shared Repo Rules — Next.js Projects (DEV)" and apply here without repetition. Repo-specific deltas:
 
-## Natural Language First
-
-The user says things like "make these titles fit on one line on desktop" — nothing more. From that, the agent infers the size and risk of the change, the relevant files, whether SDD/OpenSpec or Engram is needed, and the smallest sufficient validation. Never require the user to name modes, workflows, or tooling; this file controls that behavior.
-
-## Language Contract
-
-- Replies to the user: always Spanish.
-- Code, comments, UI copy, docs, commits, PRs, and all generated artifacts: English, unless the user explicitly requests otherwise or the existing project context requires it.
-
-## Token Budget (hard rules)
-
-- Use the smallest workflow that safely solves the task.
-- Read only files likely relevant to the change. Never crawl the repo or `node_modules`.
-- No web search unless the task needs current external information or the user asks.
-- No subagents for tiny or local changes.
-- No SDD/OpenSpec artifacts for tiny direct changes.
-- Do not read skills or documentation for small copy, typography, spacing, color, or Tailwind-class edits.
-- Engram: at most ~3 calls before implementation; only when continuing prior work or recording a real decision.
-- Never store screenshots, base64 images, logs, or large code dumps in Engram, specs, or prompts. If the user provides an image, summarize the visual issue in 1-2 sentences.
-- If a small task grows, stop and explain before escalating.
-
-## Automatic Work Mode Selection
-
-Classify every implementation request silently — the user never names the mode. There is no mode called "SDD Lite".
-
-| Mode | Use when | Behavior |
-| --- | --- | --- |
-| `DIRECT` | Tiny, low-risk change in 1 file or a small local area: copy, typography, spacing, color, Tailwind classes, a label, a typo, an isolated bug fix | No SDD, no subagents, no web, no broad reading; touch only the exact files |
-| `SDD CONTROLLED` (`strict_tdd: false`) | 1-3 related files; limited UI behavior, component structure, validation, data fetching, or tests; reversible; no new architecture | Short plan and traceability only when useful; no RED/GREEN/REFACTOR; at most 1 focused skill |
-| `SDD STRICT` (`strict_tdd: true`) | 4+ files; database schema/migrations, middleware, caching, routing, public APIs, server actions, security, CI; new features or integrations; ambiguous or high-risk work; user explicitly asks for SDD/TDD | Full SDD/OpenSpec discipline, Engram recovery, small batches, verification |
-
-Tie-breaks: DIRECT vs CONTROLLED → choose DIRECT and stop if scope grows. CONTROLLED vs STRICT → choose STRICT. If the user explicitly picks a mode, follow it unless unsafe. Never turn a tiny visual change into SDD STRICT.
-
-Escalation: DIRECT → CONTROLLED when more files or non-trivial behavior appear; CONTROLLED → STRICT when architecture, database, cache, routes, public APIs, or a 4th file appears. De-escalate only after explaining why.
-
-### Workflow per mode
-
-`DIRECT`: inspect only the exact relevant files → tell the user briefly in Spanish (small direct change, likely files, short plan) → wait for approval only if the user asked to approve first or the impact is not obvious → make the minimal change → run the smallest relevant validation only when it adds real signal → summarize in 1-3 lines.
-
-`SDD CONTROLLED`: check `git status` → inspect only relevant files → keep proposal/tasks short, and only when they truly help or the user asked → explain briefly in Spanish (workflow, files, plan, validation) → wait for approval unless risk is trivial → smallest coherent change → relevant checks only → save an Engram memory only for real decisions or non-trivial fixes → summarize.
-
-`SDD STRICT`: recover Engram context → check `git status` and OpenSpec state (initialize SDD context if missing; reuse an active relevant change) → proposal/design/tasks before implementing → explain in Spanish (change name, files, plan, validation strategy, risks) → wait for explicit approval → apply in small batches → verify against specs → run relevant checks → sync/archive after verification with approval → save an Engram session summary.
-
-## Next.js Documentation Rule
-
-Read the relevant installed doc under `node_modules/next/dist/docs/` only when the task depends on Next.js behavior (routing, Server Components, caching, metadata, route handlers, middleware/proxy, App Router conventions). Never for visual-only Tailwind, copy, typography, or spacing edits. Read only the exact relevant file; if it is missing, fall back to local skills and installed versions — do not fail the task.
+- No pre-commit hooks configured — before any authorized commit/push run `npm run check` (ESLint + tsc) manually; project-wide rule-offs only in the central ESLint config.
 
 ## Skills
 
@@ -137,30 +92,18 @@ For tiny visual or copy changes, run the smallest relevant validation only when 
 - No unnecessary `useEffect`; no `useMemo`/`useCallback` without a documented exception; use `React.ReactNode`.
 - Tailwind CSS 4 utilities and existing theme tokens; reuse shared components before creating new ones.
 
-## Commits and PRs
+## Model Routing
 
-Conventional commits without scope: `type: short specific summary` (feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert). Never add Co-Authored-By or AI attribution. Run relevant checks before committing; screenshots for visible UI changes; no unrelated formatting churn. Never commit, push, or open a PR without explicit user approval.
+Plan expensive, execute cheap. For medium/large changes (several files, new behavior, architecture, DB/auth): do the analysis and a written implementation plan with the strongest available model (Opus-class), hand implementation to a cheaper model (Sonnet-class; Haiku-class for mechanical edits), then review the diff against the plan on the strong model. Plans for a cheaper executor must be self-contained: exact file paths, current-state code excerpts, this repo's check-gate commands as verification steps, an explicit out-of-scope list, and STOP conditions. Tiny one-file changes skip the split — plan/delegate overhead costs more than it saves.
 
-## Commit & Push Integrity (MANDATORY)
+## Integrated Browser
 
-Two absolute anti-cheating rules — suppressing a problem is not fixing it.
+When a change affects visible UI, when debugging layout/hydration/console errors, or when the user asks, verify it in the agent's own integrated browser against the local dev server — `npm run dev`, default `http://localhost:3000` — instead of asking the user for screenshots. Integrated browser means the browser built into the agent's native app: Claude Code Browser pane (`mcp__Claude_Browser__*` tools), Codex app browser. NEVER use the Playwright MCP, chrome-devtools MCP, `playwright-cli`, or anything that opens an external Google Chrome window for this — those are only for explicit Playwright/E2E test requests. Reuse a running dev server; never start a second instance on another port without saying so. Skip for logic-only changes with no visual surface.
 
-1. **Never disable linters/formatters to force a pass.** Do NOT add `eslint-disable` / `eslint-disable-next-line`, `@ts-ignore`, `@ts-expect-error`, a `// prettier-ignore`, or blanket rule-offs just to silence a warning or error. Fix the real cause (refactor deprecated APIs, use proper types, mark decorative elements `aria-hidden`, etc.). A rule that genuinely does not apply project-wide may be turned off once in the central ESLint config with a justifying comment — never silenced inline per file or per line, and never the Prettier formatter.
-2. **Never bypass the commit/push gate.** This project currently has no pre-commit hooks configured, so before any authorized commit/push run `npm run check` (ESLint + tsc) and fix every reported error at its real cause; only then `git commit` and push. If Husky/lint-staged hooks are added later, never skip them with `git commit --no-verify` / `-n` or `HUSKY=0` — fix the errors instead.
+## Installed Plugins / Extensions
 
-## Engram Memory
+Use the tooling already installed instead of reinventing it or giving a generic answer. In Claude Code these are plugins (skills, agents, slash commands, MCP servers, hooks); in Codex they are complementos/extensiones. Before doing a task by hand, check whether an installed plugin/complemento already covers it — a dedicated MCP for a service, a domain skill, a review agent, a workflow command — and prefer the most specific installed tool. Do not install new ones or enable disabled ones on your own; only use what is installed, and if a clearly-relevant one is missing, say so and let the user decide.
 
-Use Engram only for: continuing prior work ("continúa", "retoma", "vengo de otro agente"), meaningful decisions, non-trivial bug fixes, architecture/DB/integration changes, end-of-session summaries, and cross-agent handoffs (objective, files changed, commands run, risks, next safe step). Never store secrets, `.env` values, base64, screenshots, logs, or code dumps. Not for tiny visual or copy edits.
+## Validation Timing
 
-## GGA Code Review
-
-GGA (Gentleman Guardian Angel) reviews staged files on pre-commit when `.gga` exists. Point its `RULES_FILE` to a short review file (e.g. `docs/CODE-REVIEW.md`), never this manual. Treat failures as real review feedback and fix the reported violations; never bypass with `git commit --no-verify` (see Commit & Push Integrity above).
-
-## Final Safety Rules
-
-- Never commit, push, deploy, or run migrations without explicit user approval.
-- Never expose secrets or `.env` values; keep `.env*` out of git.
-- Never overwrite or revert unrelated work.
-- Never run destructive database operations without explicit approval.
-- Never convert a tiny visual change into a full SDD STRICT workflow.
-- If unsure, ask one concise question in Spanish and stop.
+Do NOT run `npm run check`, lint, typecheck, build, format, `npm audit`, or test suites after ordinary small edits — they are slow and block the next change. Make the edit and hand it back with a short summary; rely on the editor to surface type/lint errors while iterating. Run the check gate ONLY when the user says to ship / deploy / "mandar todo a producción", when the user explicitly asks to run it, or immediately before an authorized commit/push. The single exception: a change to build config, dependencies, migrations, or CI where a broken build is likely — then name the one command you want to run and why, and run only that. This overrides any softer per-change validation wording above.
