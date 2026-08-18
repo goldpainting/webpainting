@@ -6,6 +6,15 @@ import prettierConfig from 'eslint-config-prettier/flat';
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // eslint-plugin-react cannot auto-detect the React version under ESLint 10
+  // (detectReactVersion throws). Pin it explicitly.
+  {
+    settings: {
+      react: {
+        version: '19.2',
+      },
+    },
+  },
   // Must be last: disables ESLint rules that conflict with Prettier formatting.
   prettierConfig,
   globalIgnores([

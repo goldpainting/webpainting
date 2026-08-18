@@ -7,10 +7,12 @@
     "build": "next build",
     "dev": "next dev",
     "check": "npm run lint && tsc --noEmit",
+    "check:ts6": "npm run lint && tsc6 --noEmit",
     "start": "next start",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --fix --cache",
     "typecheck": "tsc --noEmit",
+    "typecheck:ts6": "tsc6 --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,json,css,md,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mjs,json,css,md,mdx}\" --cache",
     "preview": "next build && next start"
@@ -45,6 +47,7 @@
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "drizzle-kit": "^0.31.10",
     "eslint": "^10.8.0",
     "eslint-config-next": "^16.2.12",
@@ -54,7 +57,7 @@
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2",
+    "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "^8.65.0"
   },
   "ct3aMetadata": {
