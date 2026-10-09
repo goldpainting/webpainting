@@ -1,9 +1,18 @@
 import { type MetadataRoute } from "next";
+import { cacheLife } from "next/cache";
 
 import { blogPosts, getPopulatedBlogCategories } from "./blog/blogData";
 import { indexedRoutes, siteUrl } from "./siteConfig";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getLastModified() {
+  "use cache";
+  cacheLife("days");
+
+  return new Date();
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const lastModified = await getLastModified();
   const dynamicBlogRoutes = [
     ...blogPosts.map((post) => `/blog/${post.slug}`),
     ...getPopulatedBlogCategories().map(
@@ -14,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: route === "/" ? "weekly" : "monthly",
     priority: route === "/" ? 1 : 0.8,
   }));

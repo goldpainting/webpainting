@@ -12,11 +12,6 @@ import { buildLocalBusinessSchema } from './schema';
 import { siteUrl } from './siteConfig';
 import { cn } from '~/lib/utils';
 
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
-
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {

@@ -6,11 +6,6 @@ import {
 } from '../content/markdownContent';
 import { buildPageImages, servicePageImages } from '../content/pageImages';
 
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
-
 const raw = readMarkdownContent('doc/infor_services/exterior.md');
 const heroImage = '/exterior/home-extrior-lading8.png';
 const heroAlt = 'Exterior painting project by Gold Lion Painting Inc';
