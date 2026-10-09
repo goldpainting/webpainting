@@ -9,7 +9,7 @@ const config: NextConfig = {
     root: projectRoot,
   },
   cacheComponents: true,
-  partialPrefetching: false,
+  partialPrefetching: true,
   typedRoutes: true,
   reactCompiler: true,
   agentRules: false,
