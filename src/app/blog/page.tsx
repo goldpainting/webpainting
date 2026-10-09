@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { type Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   FaArrowRight,
   FaCalendarAlt,
@@ -10,11 +11,6 @@ import {
 
 import { blogCategories, blogPosts, featuredBlogPost } from "./blogData";
 import { siteUrl } from "../siteConfig";
-
-// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
-// Remove this opt-out after verifying the segment passes validation without it.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-export const instant = false;
 
 const BLOG_POSTS_PER_PAGE = 6;
 
@@ -46,7 +42,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+async function BlogPostList({ searchParams }: BlogPageProps) {
   const { page } = await searchParams;
   const pageValue = Array.isArray(page) ? page[0] : page;
   const requestedPage = Number.parseInt(pageValue ?? "1", 10);
@@ -68,6 +64,140 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     (_, index) => index + 1,
   );
 
+  return (
+    <>
+      <div className="blog-card-grid-enter grid gap-8 md:grid-cols-2">
+        {visibleBlogPosts.map((post) => (
+          <article
+            key={post.slug}
+            className="blog-card-enter group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
+          >
+            <Link href={`/blog/${post.slug}`} className="block">
+              <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <div className="mb-4 flex flex-wrap gap-3 text-xs font-black text-[#0c0d0e] uppercase">
+                  <span className="inline-flex items-center gap-2">
+                    <FaCalendarAlt aria-hidden="true" />
+                    <time dateTime={post.dateTime}>{post.date}</time>
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <FaClock aria-hidden="true" />
+                    {post.readTime}
+                  </span>
+                </div>
+                <p className="font-heading text-sm font-black text-[#7a120f] uppercase">
+                  {post.category}
+                </p>
+                <h3 className="font-heading mt-3 text-2xl leading-tight font-black text-[#0c0d0e]">
+                  {post.title}
+                </h3>
+                <p className="mt-4 leading-7 text-[#1f2124]">{post.excerpt}</p>
+                <span className="font-heading mt-6 inline-flex items-center gap-2 text-sm font-black text-[#0c0d0e] uppercase">
+                  Read Blog
+                  <FaArrowRight aria-hidden="true" />
+                </span>
+              </div>
+            </Link>
+          </article>
+        ))}
+      </div>
+
+      {totalPages > 1 ? (
+        <nav
+          aria-label="Blog pagination"
+          className="blog-pagination-enter mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#e4ad42]/40 pt-8"
+        >
+          {currentPage === 1 ? (
+            <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
+              <FaArrowRight aria-hidden="true" className="rotate-180" />
+              Previous
+            </span>
+          ) : (
+            <Link
+              href={
+                currentPage > 2
+                  ? {
+                      pathname: "/blog",
+                      query: { page: currentPage - 1 },
+                    }
+                  : "/blog"
+              }
+              scroll={false}
+              className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
+            >
+              <FaArrowRight aria-hidden="true" className="rotate-180" />
+              Previous
+            </Link>
+          )}
+
+          <div className="flex flex-wrap justify-center gap-2">
+            {paginationPages.map((pageNumber) => (
+              <Link
+                key={pageNumber}
+                href={
+                  pageNumber === 1
+                    ? "/blog"
+                    : {
+                        pathname: "/blog",
+                        query: { page: pageNumber },
+                      }
+                }
+                aria-current={pageNumber === currentPage ? "page" : undefined}
+                scroll={false}
+                className={`font-heading flex size-11 items-center justify-center border text-sm font-black transition ${
+                  pageNumber === currentPage
+                    ? "border-[#0c0d0e] bg-[#0c0d0e] text-white"
+                    : "border-[#e4ad42] text-[#0c0d0e] hover:bg-[#e4ad42]"
+                }`}
+              >
+                {pageNumber}
+              </Link>
+            ))}
+          </div>
+
+          {currentPage === totalPages ? (
+            <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
+              Next
+              <FaArrowRight aria-hidden="true" />
+            </span>
+          ) : (
+            <Link
+              href={{
+                pathname: "/blog",
+                query: { page: currentPage + 1 },
+              }}
+              scroll={false}
+              className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
+            >
+              Next
+              <FaArrowRight aria-hidden="true" />
+            </Link>
+          )}
+        </nav>
+      ) : null}
+    </>
+  );
+}
+
+function BlogListSkeleton() {
+  return (
+    <div aria-hidden="true" className="grid gap-8 md:grid-cols-2">
+      {Array.from({ length: BLOG_POSTS_PER_PAGE }, (_, index) => (
+        <div key={index} className="h-[34rem] animate-pulse bg-[#e4ad42]/40" />
+      ))}
+    </div>
+  );
+}
+
+export default function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <main className="bg-white text-[#0c0d0e]">
       <section className="blog-hero-enter overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:px-6 sm:py-20 lg:px-8">
@@ -143,127 +273,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </div>
             </div>
 
-            <div className="blog-card-grid-enter grid gap-8 md:grid-cols-2">
-              {visibleBlogPosts.map((post) => (
-                <article
-                  key={post.slug}
-                  className="blog-card-enter group overflow-hidden bg-[#e4ad42] shadow-[1px_1px_16px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:shadow-[1px_12px_28px_rgba(0,0,0,0.32)]"
-                >
-                  <Link href={`/blog/${post.slug}`} className="block">
-                    <div className="relative h-64 overflow-hidden">
-                      <Image
-                        src={post.image}
-                        alt={post.imageAlt}
-                        fill
-                        sizes="(min-width: 1024px) 420px, (min-width: 768px) 50vw, 100vw"
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="mb-4 flex flex-wrap gap-3 text-xs font-black text-[#0c0d0e] uppercase">
-                        <span className="inline-flex items-center gap-2">
-                          <FaCalendarAlt aria-hidden="true" />
-                          <time dateTime={post.dateTime}>{post.date}</time>
-                        </span>
-                        <span className="inline-flex items-center gap-2">
-                          <FaClock aria-hidden="true" />
-                          {post.readTime}
-                        </span>
-                      </div>
-                      <p className="font-heading text-sm font-black text-[#7a120f] uppercase">
-                        {post.category}
-                      </p>
-                      <h3 className="font-heading mt-3 text-2xl leading-tight font-black text-[#0c0d0e]">
-                        {post.title}
-                      </h3>
-                      <p className="mt-4 leading-7 text-[#1f2124]">
-                        {post.excerpt}
-                      </p>
-                      <span className="font-heading mt-6 inline-flex items-center gap-2 text-sm font-black text-[#0c0d0e] uppercase">
-                        Read Blog
-                        <FaArrowRight aria-hidden="true" />
-                      </span>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-
-            {totalPages > 1 ? (
-              <nav
-                aria-label="Blog pagination"
-                className="blog-pagination-enter mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#e4ad42]/40 pt-8"
-              >
-                {currentPage === 1 ? (
-                  <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
-                    <FaArrowRight aria-hidden="true" className="rotate-180" />
-                    Previous
-                  </span>
-                ) : (
-                  <Link
-                    href={
-                      currentPage > 2
-                        ? {
-                            pathname: "/blog",
-                            query: { page: currentPage - 1 },
-                          }
-                        : "/blog"
-                    }
-                    scroll={false}
-                    className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
-                  >
-                    <FaArrowRight aria-hidden="true" className="rotate-180" />
-                    Previous
-                  </Link>
-                )}
-
-                <div className="flex flex-wrap justify-center gap-2">
-                  {paginationPages.map((pageNumber) => (
-                    <Link
-                      key={pageNumber}
-                      href={
-                        pageNumber === 1
-                          ? "/blog"
-                          : {
-                              pathname: "/blog",
-                              query: { page: pageNumber },
-                            }
-                      }
-                      aria-current={
-                        pageNumber === currentPage ? "page" : undefined
-                      }
-                      scroll={false}
-                      className={`font-heading flex size-11 items-center justify-center border text-sm font-black transition ${
-                        pageNumber === currentPage
-                          ? "border-[#0c0d0e] bg-[#0c0d0e] text-white"
-                          : "border-[#e4ad42] text-[#0c0d0e] hover:bg-[#e4ad42]"
-                      }`}
-                    >
-                      {pageNumber}
-                    </Link>
-                  ))}
-                </div>
-
-                {currentPage === totalPages ? (
-                  <span className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#d7d7d7] px-4 py-3 text-sm font-black text-[#8a8a8a] uppercase">
-                    Next
-                    <FaArrowRight aria-hidden="true" />
-                  </span>
-                ) : (
-                  <Link
-                    href={{
-                      pathname: "/blog",
-                      query: { page: currentPage + 1 },
-                    }}
-                    scroll={false}
-                    className="font-heading inline-flex min-h-11 items-center gap-2 border border-[#0c0d0e] px-4 py-3 text-sm font-black text-[#0c0d0e] uppercase transition hover:border-[#e4ad42] hover:bg-[#e4ad42]"
-                  >
-                    Next
-                    <FaArrowRight aria-hidden="true" />
-                  </Link>
-                )}
-              </nav>
-            ) : null}
+            <Suspense fallback={<BlogListSkeleton />}>
+              <BlogPostList searchParams={searchParams} />
+            </Suspense>
           </div>
         </div>
       </section>
