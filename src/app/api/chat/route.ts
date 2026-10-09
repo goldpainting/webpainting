@@ -118,7 +118,6 @@ const createServiceAppointmentDeclaration: FunctionDeclaration = {
   },
 };
 
-export const runtime = 'nodejs';
 export const maxDuration = 30;
 
 type ChatMessage = z.infer<typeof chatRequestSchema>['messages'][number];

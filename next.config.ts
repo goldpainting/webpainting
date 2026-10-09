@@ -8,6 +8,8 @@ const config: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  cacheComponents: true,
+  partialPrefetching: false,
   typedRoutes: true,
   reactCompiler: true,
   agentRules: false,

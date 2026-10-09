@@ -3,8 +3,6 @@ import { z } from "zod";
 
 import { sendEstimateEmail } from "~/server/email";
 
-export const runtime = "nodejs";
-
 const estimateRequestSchema = z.object({
   name: z.string().trim().min(2),
   phone: z.string().trim().min(7),
