@@ -20,6 +20,8 @@ const eslintConfig = defineConfig([
   globalIgnores([
     '.next/**',
     '.agents/**',
+    '.claude/**',
+    '.continue/**',
     'AppWeb-React/**',
     'doc/**',
     'docs/AppWeb-React/**',

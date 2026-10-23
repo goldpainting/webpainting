@@ -48,12 +48,15 @@
     "coverage",
     ".agents",
     ".claude",
+    ".continue",
     ".github",
     ".agents/**",
     ".claude/**",
+    ".continue/**",
     ".github/**",
     "**/.agents/**",
     "**/.claude/**",
+    "**/.continue/**",
     "**/.github/**"
   ]
 }
