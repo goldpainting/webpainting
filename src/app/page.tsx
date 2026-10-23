@@ -18,6 +18,7 @@ import FaqSchema from './components/FaqSchema';
 import GoogleReviewsCarousel from './components/GoogleReviewsCarousel';
 import ProcessStepImage from './components/ProcessStepImage';
 import { areaLinks, serviceAreaNames } from './components/navigationData';
+import { revealDirection } from '~/lib/utils';
 
 import {
   bbbProfileHref,
@@ -264,10 +265,7 @@ export default function HomePage() {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={faqs} id="home-faq-schema" />
 
-      <section
-        data-no-scroll-reveal
-        className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16"
-      >
+      <section className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16">
         <div className="relative h-[300px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src="/bradenton/professional-exterior-painters-bradenton-03-mobile.webp"
@@ -591,10 +589,10 @@ export default function HomePage() {
             {processSteps.map((step, index) => (
               <article
                 key={step.title}
+                data-reveal={revealDirection(index)}
                 className={`process-card group flex h-full flex-col overflow-hidden bg-[#d9d9d9] text-[#0c0d0e] shadow-[0_12px_28px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(0,0,0,0.18)] ${
                   index >= 3 ? 'lg:translate-x-[54%]' : ''
                 }`}
-                style={{ animationDelay: `${index * 90}ms` }}
               >
                 <ProcessStepImage
                   images={processGalleryImages}
@@ -899,9 +897,10 @@ function CardGrid({
   return (
     <section className="px-4 pb-16 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <article
             key={`${item.title ?? item.label}-${item.href}`}
+            data-reveal={revealDirection(index)}
             className="hover-lift relative border border-[#e4ad42]/55 bg-[#0c0d0e] p-4 shadow-[1px_1px_10px_rgba(0,0,0,0.65)]"
           >
             <Link href={item.href} className="group block">

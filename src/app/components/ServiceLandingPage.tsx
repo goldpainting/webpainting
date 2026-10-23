@@ -9,6 +9,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 
+import { revealDirection } from "~/lib/utils";
 import FaqSchema from "./FaqSchema";
 import { serviceLinks } from "./navigationData";
 import ServiceImageGallery, {
@@ -100,10 +101,7 @@ export default function ServiceLandingPage({
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={faqs} id={schemaId} />
 
-      <section
-        data-no-scroll-reveal
-        className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9"
-      >
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9">
         <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src={heroImage}
@@ -250,8 +248,8 @@ export default function ServiceLandingPage({
             {process.map((step, index) => (
               <article
                 key={step.title}
-                className="scroll-reveal group border-t-4 border-[#e4ad42] bg-white p-6 text-[#0c0d0e] shadow-[1px_1px_12px_rgba(0,0,0,0.4)] transition duration-300 hover:-translate-y-2"
-                style={{ animationDelay: `${index * 80}ms` }}
+                data-reveal={revealDirection(index)}
+                className="group border-t-4 border-[#e4ad42] bg-white p-6 text-[#0c0d0e] shadow-[1px_1px_12px_rgba(0,0,0,0.4)] transition duration-300 hover:-translate-y-2"
               >
                 <span className="font-heading text-5xl font-black text-[#e4ad42]">
                   {String(index + 1).padStart(2, "0")}
@@ -336,8 +334,8 @@ export default function ServiceLandingPage({
               {imageBriefs.map((brief, index) => (
                 <div
                   key={brief}
-                  className="scroll-reveal flex min-h-52 items-center justify-center border-2 border-dashed border-[#e4ad42]/70 bg-[#1f2124] p-6 text-center"
-                  style={{ animationDelay: `${index * 90}ms` }}
+                  data-reveal={revealDirection(index)}
+                  className="flex min-h-52 items-center justify-center border-2 border-dashed border-[#e4ad42]/70 bg-[#1f2124] p-6 text-center"
                 >
                   <div>
                     <p className="font-heading text-lg font-black text-[#e4ad42]">

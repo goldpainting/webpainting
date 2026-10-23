@@ -9,6 +9,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 
+import { revealDirection } from "~/lib/utils";
 import FaqSchema from "./FaqSchema";
 import GoogleReviewsCarousel from "./GoogleReviewsCarousel";
 import { type AreaLandingData } from "./areaLandingData";
@@ -44,10 +45,7 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={area.faqs} id={`${area.slug}-faq-schema`} />
 
-      <section
-        data-no-scroll-reveal
-        className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9"
-      >
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9">
         <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src={area.heroImage}
@@ -184,10 +182,11 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
         <div className="mx-auto max-w-6xl">
           <SectionTitle title={`Recent Painting Work In ${area.city}`} />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {area.gallery.map((item) => (
+            {area.gallery.map((item, index) => (
               <Link
                 key={item.src}
                 href={getServiceHref(item.label)}
+                data-reveal={revealDirection(index)}
                 className="hover-lift bg-[#e4ad42] p-4 shadow-[1px_1px_10px_rgba(0,0,0,0.65)]"
               >
                 <Image
@@ -269,10 +268,11 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
             title={`Residential Painting Services In ${area.city}`}
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {area.serviceCards.map((card) => (
+            {area.serviceCards.map((card, index) => (
               <Link
                 key={card.title}
                 href={getServiceHref(card.title)}
+                data-reveal={revealDirection(index)}
                 className="flex h-full flex-col bg-[#e4ad42] p-6 shadow-[1px_1px_10px_rgba(0,0,0,0.65)]"
               >
                 <h3 className="font-heading text-2xl font-black text-[#0c0d0e]">

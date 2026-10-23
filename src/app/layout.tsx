@@ -5,7 +5,6 @@ import { type Metadata, type Viewport } from 'next';
 
 import { Heebo, Inter, Montserrat, Geist } from 'next/font/google';
 import FloatingChatbot from './components/FloatingChatbot';
-import ScrollRevealRuntime from './components/ScrollRevealRuntime';
 import SiteFooter from './components/SiteFooter';
 import Topbar from './components/Topbar';
 import { buildLocalBusinessSchema } from './schema';
@@ -119,7 +118,6 @@ export default function RootLayout({
           }}
         />
         <Topbar />
-        <ScrollRevealRuntime />
         {children}
         <SiteFooter />
         <FloatingChatbot />

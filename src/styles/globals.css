@@ -185,64 +185,158 @@ iframe {
 }
 
 /* Scroll reveal.
-   .reveal-up and .scroll-reveal are selector hooks only: they carry no hidden
-   state, so content stays readable when scripting or motion is unavailable.
-   The runtime adds .reveal-ready to <html> before first paint and tags each
-   managed element with a data-reveal direction derived from its own position,
-   so a left column enters from the left and a right column from the right. */
-/* Side entrances start outside their final box. Clipping the horizontal axis
-   keeps that travel from extending the scrollable area; `clip` rather than
-   `hidden` creates no scroll container, so sticky positioning and vertical
-   overflow keep behaving as they did. */
-html.reveal-ready main {
-  overflow-x: clip;
-}
+   Each block declares where it travels from with data-reveal, written into the
+   HTML on the server. Nothing is added to the DOM afterwards, so React hydrates
+   exactly the markup it rendered and no block depends on a script to become
+   readable: without support the content simply sits in its final state.
 
-html.reveal-ready .js-reveal {
-  opacity: 0;
-  transition:
-    opacity 440ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 560ms cubic-bezier(0.16, 1, 0.3, 1),
-    clip-path 680ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--reveal-index, 0) * 70ms);
-  will-change: opacity, transform;
+   The timeline is the element's own passage through the scrollport, so a block
+   that is already on screen at load, or one that was scrolled past before the
+   page settled, is resolved at 100% and needs no catching up. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Side entrances begin outside their final box. Clipping the horizontal
+       axis keeps that travel from widening the page; `clip` rather than
+       `hidden` creates no scroll container, so sticky positioning and vertical
+       overflow keep behaving as they did. */
+    main {
+      overflow-x: clip;
+    }
+
+    main > section,
+    main article,
+    main figure,
+    .scroll-reveal,
+    .reveal-up,
+    [data-reveal] {
+      animation: revealRise both;
+      /* Firefox needs an explicit duration before it will apply the animation,
+         even though the timeline, not the clock, drives the progress. */
+      animation-duration: 1ms;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    /* A subtree marked data-no-scroll-reveal manages its own visibility — a
+       carousel, for instance, whose off-slide items never enter the scrollport
+       and would otherwise sit at opacity 0 until swiped into view. The opt-out
+       is written as its own rule rather than a :not() on the selectors above,
+       because folding it in there would outweigh the direction rules and leave
+       every block rising instead of entering from its own side. */
+    [data-no-scroll-reveal] section,
+    [data-no-scroll-reveal] article,
+    [data-no-scroll-reveal] figure,
+    [data-no-scroll-reveal] .scroll-reveal,
+    [data-no-scroll-reveal] .reveal-up,
+    [data-no-scroll-reveal] [data-reveal] {
+      animation-name: none;
+      animation-timeline: auto;
+    }
+
+    /* Blocks narrower than the page carry a taller lift than full-width ones. */
+    .scroll-reveal,
+    .reveal-up,
+    [data-reveal="up"] {
+      animation-name: revealUp;
+    }
+
+    main figure:not([data-reveal]) {
+      animation-name: revealScale;
+    }
+
+    [data-reveal="left"] {
+      animation-name: revealLeft;
+    }
+
+    [data-reveal="right"] {
+      animation-name: revealRight;
+    }
+
+    [data-reveal="scale"] {
+      animation-name: revealScale;
+    }
+
+    [data-reveal="wipe"] {
+      animation-name: revealWipe;
+    }
+
+    /* One column on a narrow screen: nothing has a side to come from, and a
+       48px slide reads as a lurch at that width. */
+    @media (width < 48rem) {
+      [data-reveal="left"],
+      [data-reveal="right"] {
+        animation-name: revealUp;
+      }
+    }
+  }
 }
 
 /* Full-width blocks: a short lift, since the gesture repeats down the page. */
-html.reveal-ready .js-reveal[data-reveal="rise"] {
-  transform: translate3d(0, 14px, 0);
+@keyframes revealRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-html.reveal-ready .js-reveal[data-reveal="up"] {
-  transform: translate3d(0, 28px, 0);
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-html.reveal-ready .js-reveal[data-reveal="left"] {
-  transform: translate3d(-48px, 12px, 0);
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-48px, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-html.reveal-ready .js-reveal[data-reveal="right"] {
-  transform: translate3d(48px, 12px, 0);
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translate3d(48px, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-html.reveal-ready .js-reveal[data-reveal="scale"] {
-  filter: blur(7px);
-  transform: scale(1.05);
+@keyframes revealScale {
+  from {
+    filter: blur(7px);
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* A roller pass: the block is uncovered left to right instead of faded in. */
-html.reveal-ready .js-reveal[data-reveal="wipe"] {
-  clip-path: inset(0 100% 0 0);
-  opacity: 1;
-}
-
-html.reveal-ready .js-reveal.is-visible {
-  clip-path: inset(0 0 0 0);
-  filter: blur(0);
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  will-change: auto;
+@keyframes revealWipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 .animate-float-slow {
@@ -490,9 +584,7 @@ html.reveal-ready .js-reveal.is-visible {
 @media (prefers-reduced-motion: reduce) {
   .hover-lift,
   .hover-lift:hover,
-  .reveal-up,
-  .scroll-reveal,
-  .js-reveal,
+  [data-reveal],
   .hero-enter,
   .hero-enter > *,
   .blog-hero-enter,

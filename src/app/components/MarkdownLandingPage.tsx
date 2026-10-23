@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, type ReactNode } from 'react';
+
+import { revealDirection } from '~/lib/utils';
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -100,10 +102,7 @@ export default function MarkdownLandingPage({
       />
       {faqs.length > 0 ? <FaqSchema faqs={faqs} id={schemaId} /> : null}
 
-      <section
-        data-no-scroll-reveal
-        className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[430px] sm:px-6 sm:py-8 lg:px-8 lg:py-10"
-      >
+      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[430px] sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         <div className="relative h-[260px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src={heroImage}
@@ -360,6 +359,7 @@ function SectionImageGrid({
             key={`${sectionHeading}-${image.src}`}
             image={image}
             priorityLayout={index === 0}
+            reveal={index === 0 ? 'wipe' : revealDirection(index)}
             className={index === 0 ? 'lg:row-span-3' : ''}
           />
         ))}
@@ -373,6 +373,7 @@ function SectionImageGrid({
         <SectionImageFigure
           key={`${sectionHeading}-${image.src}`}
           image={image}
+          reveal={revealDirection(index)}
           className={
             index === 0 && images.length % 3 === 1
               ? 'lg:col-span-2'
@@ -390,13 +391,16 @@ function SectionImageFigure({
   image,
   className = '',
   priorityLayout = false,
+  reveal,
 }: {
   image: PageImage;
   className?: string;
   priorityLayout?: boolean;
+  reveal?: string;
 }) {
   return (
     <figure
+      data-reveal={reveal}
       className={`hover-lift group relative overflow-hidden rounded-2xl border border-[#e4ad42]/35 bg-white shadow-[0_20px_42px_rgba(0,0,0,0.18)] ${className}`}
     >
       <div
