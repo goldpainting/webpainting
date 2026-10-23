@@ -19,15 +19,15 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
-    "@google/genai": "^2.30.0",
+    "@google/genai": "^2.31.0",
     "@t3-oss/env-nextjs": "^0.13.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.4",
     "embla-carousel-react": "^8.6.0",
-    "lucide-react": "^1.59.0",
-    "next": "^16.4.2",
-    "nodemailer": "^10.1.7",
+    "lucide-react": "^1.61.0",
+    "next": "^16.4.3",
+    "nodemailer": "^10.2.1",
     "postgres": "^3.4.9",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -50,7 +50,7 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "drizzle-kit": "^0.31.11",
     "eslint": "^10.13.0",
-    "eslint-config-next": "^16.4.2",
+    "eslint-config-next": "^16.4.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-drizzle": "^0.2.3",
     "postcss": "^8.5.31",
@@ -65,7 +65,7 @@
   },
   "overrides": {
     "@esbuild-kit/core-utils": {
-      "esbuild": "0.28.0"
+      "esbuild": "0.28.2"
     },
     "postcss": "$postcss"
   },
