@@ -140,6 +140,10 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
       ref={carouselRef}
       className="overflow-hidden"
       data-slot="carousel-content"
+      // The carousel clips its slides, so an off-slide item never intersects
+      // the viewport and a scroll reveal would leave it stuck at opacity 0
+      // until it is swiped into view. The carousel owns its own visibility.
+      data-no-scroll-reveal
     >
       <div
         className={cn(

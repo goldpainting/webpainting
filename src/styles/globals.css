@@ -131,6 +131,39 @@ iframe {
   }
 }
 
+@keyframes heroPanelEnter {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) scale(0.985);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes heroLineEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroRollerPass {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @keyframes shimmerSweep {
   0% {
     transform: translateX(-160%);
@@ -151,33 +184,117 @@ iframe {
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.2);
 }
 
-.reveal-up {
-  opacity: 0;
-  transform: translateY(10px) scale(0.995);
+/* Scroll reveal.
+   .reveal-up and .scroll-reveal are selector hooks only: they carry no hidden
+   state, so content stays readable when scripting or motion is unavailable.
+   The runtime adds .reveal-ready to <html> before first paint and tags each
+   managed element with a data-reveal direction derived from its own position,
+   so a left column enters from the left and a right column from the right. */
+/* Side entrances start outside their final box. Clipping the horizontal axis
+   keeps that travel from extending the scrollable area; `clip` rather than
+   `hidden` creates no scroll container, so sticky positioning and vertical
+   overflow keep behaving as they did. */
+html.reveal-ready main {
+  overflow-x: clip;
 }
 
-.scroll-reveal {
+html.reveal-ready .js-reveal {
   opacity: 0;
-  transform: translateY(10px) scale(0.995);
-}
-
-.js-reveal {
-  opacity: 0;
-  transform: translateY(10px) scale(0.995);
   transition:
-    opacity 340ms ease,
-    transform 340ms ease;
-  transition-delay: calc(var(--reveal-index, 0) * 28ms);
+    opacity 440ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 680ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--reveal-index, 0) * 70ms);
   will-change: opacity, transform;
 }
 
-.js-reveal.is-visible {
+/* Full-width blocks: a short lift, since the gesture repeats down the page. */
+html.reveal-ready .js-reveal[data-reveal="rise"] {
+  transform: translate3d(0, 14px, 0);
+}
+
+html.reveal-ready .js-reveal[data-reveal="up"] {
+  transform: translate3d(0, 28px, 0);
+}
+
+html.reveal-ready .js-reveal[data-reveal="left"] {
+  transform: translate3d(-48px, 12px, 0);
+}
+
+html.reveal-ready .js-reveal[data-reveal="right"] {
+  transform: translate3d(48px, 12px, 0);
+}
+
+html.reveal-ready .js-reveal[data-reveal="scale"] {
+  filter: blur(7px);
+  transform: scale(1.05);
+}
+
+/* A roller pass: the block is uncovered left to right instead of faded in. */
+html.reveal-ready .js-reveal[data-reveal="wipe"] {
+  clip-path: inset(0 100% 0 0);
   opacity: 1;
-  transform: translateY(0) scale(1);
+}
+
+html.reveal-ready .js-reveal.is-visible {
+  clip-path: inset(0 0 0 0);
+  filter: blur(0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
 }
 
 .animate-float-slow {
   animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* Hero entrance: one rehearsed sequence on first paint. The panel lifts and
+   sharpens, its children arrive in reading order, and the headline is rolled
+   on left to right like a fresh coat. CSS keyframes run before hydration, so
+   the sequence never waits on React, and every hero on the site shares it. */
+.hero-enter {
+  animation: heroPanelEnter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: filter, opacity, transform;
+}
+
+.hero-enter > * {
+  animation: heroLineEnter 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-enter > *:nth-child(1) {
+  animation-delay: 120ms;
+}
+
+.hero-enter > *:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.hero-enter > *:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.hero-enter > *:nth-child(4) {
+  animation-delay: 360ms;
+}
+
+.hero-enter > *:nth-child(5) {
+  animation-delay: 440ms;
+}
+
+.hero-enter > *:nth-child(6) {
+  animation-delay: 520ms;
+}
+
+.hero-enter > *:nth-child(n + 7) {
+  animation-delay: 600ms;
+}
+
+/* Declared last so it outranks the stagger above on the same element. */
+.hero-enter > .hero-enter-headline {
+  animation: heroRollerPass 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 140ms;
+  will-change: clip-path;
 }
 
 .blog-hero-enter {
@@ -376,6 +493,8 @@ iframe {
   .reveal-up,
   .scroll-reveal,
   .js-reveal,
+  .hero-enter,
+  .hero-enter > *,
   .blog-hero-enter,
   .blog-panel-enter,
   .blog-sidebar-enter,
@@ -385,11 +504,12 @@ iframe {
   .blog-pagination-enter,
   .animate-float-slow,
   .shimmer-panel::after {
-    filter: none !important;
     animation: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    opacity: 1 !important;
     transform: none !important;
     transition: none !important;
-    opacity: 1 !important;
   }
 }
 

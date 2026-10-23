@@ -264,7 +264,10 @@ export default function HomePage() {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={faqs} id="home-faq-schema" />
 
-      <section className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16">
+      <section
+        data-no-scroll-reveal
+        className="overflow-hidden bg-[#0c0d0e] sm:relative sm:min-h-[620px] sm:px-6 sm:py-8 lg:px-8 lg:py-16"
+      >
         <div className="relative h-[300px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src="/bradenton/professional-exterior-painters-bradenton-03-mobile.webp"
@@ -292,11 +295,11 @@ export default function HomePage() {
           </video>
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-6 sm:px-0 sm:pt-6 lg:pt-10">
-          <div className="reveal-up max-w-3xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
+          <div className="hero-enter max-w-3xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
             <p className="font-display text-base font-bold text-[#e4ad42] drop-shadow-[0_3px_12px_rgba(0,0,0,0.75)]">
               {businessName}
             </p>
-            <h1 className="mt-2 font-heading text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
+            <h1 className="hero-enter-headline mt-2 font-heading text-3xl leading-[1.04] font-black text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)] sm:text-4xl lg:text-5xl">
               Expert House Painters in Sarasota & Manatee County
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 font-semibold text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.75)]">

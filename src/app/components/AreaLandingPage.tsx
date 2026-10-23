@@ -44,7 +44,10 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
     <main className="bg-white text-[#0c0d0e]">
       <FaqSchema faqs={area.faqs} id={`${area.slug}-faq-schema`} />
 
-      <section className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9">
+      <section
+        data-no-scroll-reveal
+        className="overflow-hidden bg-[#0c0d0e] text-white sm:relative sm:min-h-[390px] sm:px-6 sm:py-7 lg:px-8 lg:py-9"
+      >
         <div className="relative h-[250px] sm:absolute sm:inset-0 sm:h-auto">
           <Image
             src={area.heroImage}
@@ -56,11 +59,11 @@ export default function AreaLandingPage({ area }: AreaLandingPageProps) {
           />
         </div>
         <div className="relative mx-auto flex max-w-6xl items-center px-4 py-6 sm:px-0 sm:py-4 lg:min-h-[310px]">
-          <div className="reveal-up max-w-4xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
+          <div className="hero-enter max-w-4xl bg-[#0c0d0e] p-5 shadow-[0_22px_55px_rgba(0,0,0,0.32)] sm:rounded-2xl sm:bg-[#0c0d0e]/58 sm:p-7">
             <p className="font-display text-xs font-black tracking-[0.18em] text-[#e4ad42] uppercase">
               {area.county} Residential Painting
             </p>
-            <h1 className="font-heading mt-2 max-w-3xl text-3xl leading-[1.02] font-black sm:text-4xl lg:text-5xl">
+            <h1 className="hero-enter-headline font-heading mt-2 max-w-3xl text-3xl leading-[1.02] font-black sm:text-4xl lg:text-5xl">
               {area.heroTitle}
             </h1>
             <h2 className="mt-3 max-w-2xl text-lg font-black text-[#e4ad42] sm:text-xl">
