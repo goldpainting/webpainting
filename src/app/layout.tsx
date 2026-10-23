@@ -5,6 +5,7 @@ import { type Metadata, type Viewport } from 'next';
 
 import { Heebo, Inter, Montserrat, Geist } from 'next/font/google';
 import FloatingChatbot from './components/FloatingChatbot';
+import { ScrollRevealDirection } from './components/ScrollRevealDirection';
 import SiteFooter from './components/SiteFooter';
 import Topbar from './components/Topbar';
 import { buildLocalBusinessSchema } from './schema';
@@ -121,6 +122,7 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <FloatingChatbot />
+        <ScrollRevealDirection />
       </body>
     </html>
   );

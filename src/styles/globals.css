@@ -203,14 +203,31 @@ iframe {
       overflow-x: clip;
     }
 
-    /* Content carries the entrance, not its container. Every section lifting
-       a little as it arrived read as one indistinct wash down the page and,
-       at that size, as nothing at all. */
-    main figure,
-    .scroll-reveal,
-    .reveal-up,
-    [data-reveal] {
-      animation: revealUp both;
+    /* `overflow: hidden` turns an element into a scroll container, and a view
+       timeline resolves against the nearest one. Measured on this page: 37 of
+       79 revealing blocks sat inside a clipped wrapper, so their timeline
+       tracked a box that never scrolls and their progress froze part-way — the
+       embedded map among them, stuck at 0.894 across 420px of scrolling.
+
+       `clip` clips the same pixels without creating a scroll container. It is
+       applied here rather than at the ~50 call sites so the rule cannot drift
+       out of sync, and only inside this block, so a browser without
+       scroll-driven animations keeps the original clipping. The carousel
+       genuinely scrolls and opts out through the attribute it already carries. */
+    main [class~="overflow-hidden"]:not([data-no-scroll-reveal], [data-no-scroll-reveal] *) {
+      overflow: clip;
+    }
+
+    /* Every block that arrives carries its own entrance: headings, paragraphs,
+       lists, images, the embedded map, the cards and the figures. Wrapper
+       elements are deliberately absent. A section and the contents inside it
+       both animating would multiply their opacities, and the page would read
+       as mud rather than as motion.
+
+       `:where()` holds this at the specificity of `main` alone, which leaves
+       every rule below free to redirect it without an arms race. */
+    main :where(h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video, iframe, article, figure, details, div:not(:has(h1, h2, h3, h4, p, img, iframe, article, figure, video, form, ul, ol, table, div, details)), .scroll-reveal, .reveal-up, [data-reveal]) {
+      animation: revealIn both;
       /* Firefox needs an explicit duration before it will apply the animation,
          even though the timeline, not the clock, drives the progress. */
       animation-duration: 1ms;
@@ -229,79 +246,106 @@ iframe {
       animation-range: cover 0% cover 55vh;
     }
 
-    /* A subtree marked data-no-scroll-reveal manages its own visibility — a
-       carousel, for instance, whose off-slide items never enter the scrollport
-       and would otherwise sit at opacity 0 until swiped into view. The opt-out
-       is written as its own rule rather than a :not() on the selectors above,
-       because folding it in there would outweigh the direction rules and leave
-       every block rising instead of entering from its own side. */
-    [data-no-scroll-reveal] section,
-    [data-no-scroll-reveal] article,
-    [data-no-scroll-reveal] figure,
-    [data-no-scroll-reveal] .scroll-reveal,
-    [data-no-scroll-reveal] .reveal-up,
-    [data-no-scroll-reveal] [data-reveal] {
+    /* Travel is carried by two custom properties rather than by a keyframe per
+       direction, so one rule can redirect a block without swapping animations.
+
+       Sibling parity is only the starting guess, used before scripting runs and
+       when it never does. The real rule is the block's position on screen, which
+       a stylesheet cannot ask about; ScrollRevealDirection measures it and
+       overrides these two values. */
+    main :where(h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video, iframe, article, figure, details, div:not(:has(h1, h2, h3, h4, p, img, iframe, article, figure, video, form, ul, ol, table, div, details))):nth-child(odd) {
+      --reveal-x: -72px;
+      --reveal-y: 16px;
+    }
+
+    main :where(h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video, iframe, article, figure, details, div:not(:has(h1, h2, h3, h4, p, img, iframe, article, figure, video, form, ul, ol, table, div, details))):nth-child(even) {
+      --reveal-x: 72px;
+      --reveal-y: 16px;
+    }
+
+    /* A server-rendered marker is a deliberate choice about one element, so it
+       outranks the positional rules above: it ties with them on specificity
+       and wins by order. */
+    main [data-reveal="up"] {
+      --reveal-x: 0px;
+      --reveal-y: 44px;
+    }
+
+    main [data-reveal="left"] {
+      --reveal-x: -72px;
+      --reveal-y: 16px;
+    }
+
+    main [data-reveal="right"] {
+      --reveal-x: 72px;
+      --reveal-y: 16px;
+    }
+
+    main [data-reveal="scale"] {
+      animation-name: revealScale;
+    }
+
+    main [data-reveal="wipe"] {
+      animation-name: revealWipe;
+    }
+
+    /* Text and images inside a card ride in with the card. Letting them travel
+       on their own would fade a heading in over its own panel and stack two
+       opacity curves on the same pixels. */
+    main
+      :is(
+        h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video,
+        iframe, article, figure, details, .scroll-reveal, .reveal-up,
+        [data-reveal]
+      )
+      :is(
+        h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video,
+        iframe, details, summary, div
+      ) {
       animation-name: none;
-      animation-timeline: auto;
+    }
+
+    /* Likewise a wrapper whose children already carry the entrance. */
+    main :is(.scroll-reveal, .reveal-up):has(article, figure, [data-reveal]) {
+      animation-name: none;
     }
 
     main figure:not([data-reveal]) {
       animation-name: revealScale;
     }
 
-    [data-reveal="left"] {
-      animation-name: revealLeft;
-    }
-
-    [data-reveal="right"] {
-      animation-name: revealRight;
-    }
-
-    [data-reveal="scale"] {
-      animation-name: revealScale;
-    }
-
-    [data-reveal="wipe"] {
-      animation-name: revealWipe;
-    }
-
     /* One column on a narrow screen: nothing has a side to come from, and a
-       72px slide reads as a lurch at that width. */
+       72px slide reads as a lurch at that width. Declared after the rules it
+       replaces, which it ties with on specificity. */
     @media (width < 48rem) {
-      [data-reveal="left"],
-      [data-reveal="right"] {
-        animation-name: revealUp;
+      main :where(h1, h2, h3, h4, p, ul, ol, blockquote, table, form, img, picture, video, iframe, article, figure, details, div:not(:has(h1, h2, h3, h4, p, img, iframe, article, figure, video, form, ul, ol, table, div, details))):nth-child(n),
+      main [data-reveal] {
+        --reveal-x: 0px;
+        --reveal-y: 44px;
       }
     }
+
+    /* A subtree marked data-no-scroll-reveal manages its own visibility — a
+       carousel, for instance, whose off-slide items never enter the scrollport
+       and would otherwise sit at opacity 0 until swiped into view. Written as
+       its own rule, and last, so it outranks every assignment above. */
+    main [data-no-scroll-reveal],
+    main [data-no-scroll-reveal] * {
+      animation-name: none;
+      animation-timeline: auto;
+    }
   }
 }
 
-@keyframes revealUp {
+/* One keyframe for every direction. The start offset is read from two custom
+   properties, so a block changes where it comes from by changing two values
+   rather than by switching to a different animation — which would restart it.
+   The fallbacks keep an unscripted page rising gently rather than standing
+   still. */
+@keyframes revealIn {
   from {
     opacity: 0;
-    transform: translate3d(0, 44px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes revealLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(-72px, 16px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes revealRight {
-  from {
-    opacity: 0;
-    transform: translate3d(72px, 16px, 0);
+    transform: translate3d(var(--reveal-x, 0px), var(--reveal-y, 44px), 0);
   }
   to {
     opacity: 1;
