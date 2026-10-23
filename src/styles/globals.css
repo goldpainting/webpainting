@@ -203,18 +203,30 @@ iframe {
       overflow-x: clip;
     }
 
-    main > section,
-    main article,
+    /* Content carries the entrance, not its container. Every section lifting
+       a little as it arrived read as one indistinct wash down the page and,
+       at that size, as nothing at all. */
     main figure,
     .scroll-reveal,
     .reveal-up,
     [data-reveal] {
-      animation: revealRise both;
+      animation: revealUp both;
       /* Firefox needs an explicit duration before it will apply the animation,
          even though the timeline, not the clock, drives the progress. */
       animation-duration: 1ms;
       animation-timeline: view();
-      animation-range: entry 0% entry 55%;
+      /* Both offsets sit on `cover`, which starts the moment the block's top
+         edge reaches the bottom of the scrollport.
+
+         The end is a length rather than a percentage on purpose: a percentage
+         is measured against the block's own pass through the scrollport, so a
+         tall section earned a proportionally longer window and was measured
+         here still fading in 846px later — text read at half opacity. A length
+         gives every block the same window whatever its height, and expressing
+         it in `vh` keeps that window the same fraction of the screen on a
+         phone as on a desktop. At 55vh a block finishes arriving once it sits
+         a little above the middle of the viewport. */
+      animation-range: cover 0% cover 55vh;
     }
 
     /* A subtree marked data-no-scroll-reveal manages its own visibility — a
@@ -231,13 +243,6 @@ iframe {
     [data-no-scroll-reveal] [data-reveal] {
       animation-name: none;
       animation-timeline: auto;
-    }
-
-    /* Blocks narrower than the page carry a taller lift than full-width ones. */
-    .scroll-reveal,
-    .reveal-up,
-    [data-reveal="up"] {
-      animation-name: revealUp;
     }
 
     main figure:not([data-reveal]) {
@@ -261,7 +266,7 @@ iframe {
     }
 
     /* One column on a narrow screen: nothing has a side to come from, and a
-       48px slide reads as a lurch at that width. */
+       72px slide reads as a lurch at that width. */
     @media (width < 48rem) {
       [data-reveal="left"],
       [data-reveal="right"] {
@@ -271,22 +276,10 @@ iframe {
   }
 }
 
-/* Full-width blocks: a short lift, since the gesture repeats down the page. */
-@keyframes revealRise {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes revealUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 44px, 0);
   }
   to {
     opacity: 1;
@@ -297,7 +290,7 @@ iframe {
 @keyframes revealLeft {
   from {
     opacity: 0;
-    transform: translate3d(-48px, 12px, 0);
+    transform: translate3d(-72px, 16px, 0);
   }
   to {
     opacity: 1;
@@ -308,7 +301,7 @@ iframe {
 @keyframes revealRight {
   from {
     opacity: 0;
-    transform: translate3d(48px, 12px, 0);
+    transform: translate3d(72px, 16px, 0);
   }
   to {
     opacity: 1;
@@ -318,9 +311,9 @@ iframe {
 
 @keyframes revealScale {
   from {
-    filter: blur(7px);
+    filter: blur(9px);
     opacity: 0;
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
   to {
     filter: blur(0);
